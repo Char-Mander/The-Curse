@@ -60,30 +60,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GameAssets\Scripts\Bar Stuff\Fuel.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Bar Stuff\FuelBar.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Bar Stuff\Health.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Bar Stuff\HealthBar.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Bar Stuff\SimpleHealthBar.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Bar Stuff\Stamina.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Bar Stuff\StaminaBar.cs" />
     <Compile Include="Assets\GameAssets\Scripts\BoxAnim.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\EnemyCanvasController.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\FixedElementCanvasController.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\InteractableObject.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\InteractWithObjects.cs" />
     <Compile Include="Assets\GameAssets\Scripts\ParticleWeapon.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\PickableObject.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\PickUpObjects.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\InteractableObject.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\InteractWithObjects.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\PickableObject.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\PickUpObjects.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Sounds\PlayerSoundsManager.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\Fuel.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\FuelBar.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\Health.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\HealthBar.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\SimpleHealthBar.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\Stamina.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\StaminaBar.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\EnemyCanvasController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\FixedElementCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\Bullet.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\IWeapon.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\ParticleShoot.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\SimpleShoot.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\WeaponController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon.cs" />
     <Compile Include="Assets\GameAssets\Scripts\WeaponBox.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\WeaponController.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_Translate.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\AsteroidController.cs" />
     <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\GameManager.cs" />
     <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\HealthPickupController.cs" />
@@ -91,6 +101,7 @@
     <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\PlayerHealth.cs" />
     <None Include="Assets\Simple Health Bar\README.txt" />
     <None Include="Assets\FreeMachineGun\Shader\BDCS.shader" />
+    <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Particle Add A8.shader" />
     <None Include="Assets\FreeMachineGun\documentation.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Users/Laura/Documents/GitHub/The-Curse/The curse/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

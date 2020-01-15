@@ -29,7 +29,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
     void Start()
     {
         aSource = GetComponent<AudioSource>();
-        fuel = GetComponentInChildren<Fuel>();
+        fuel = GetComponent<Fuel>();
         weaponParticle = GetComponentInChildren<ParticleSystem>();
     }
 
@@ -54,7 +54,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 1.3f, lm))
             {
-                if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Enemy Head") || hit.collider.CompareTag("Explosive Sphere"))
+                if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Enemy Head"))
                 {
                     //Partículas de sangre
                     CreateParticleAtPoint(enemyHitParticle, hit.point, Quaternion.LookRotation(hit.normal), 2);
@@ -138,7 +138,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
 
     private void OnTriggerStay(Collider collision)
     {
-        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Enemy Head") || collision.gameObject.CompareTag("Explosive Sphere")) && IsShooting())
+        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Enemy Head")) && IsShooting())
         {
             float auxConstantDamage = collision.gameObject.CompareTag("Enemy Head") ? constantDamage * 2 : constantDamage;
             if (collision.gameObject.GetComponent<Health>() != null) collision.gameObject.GetComponent<Health>().ReceiveConstantDamage(auxConstantDamage);
@@ -148,7 +148,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Enemy Head") || collision.gameObject.CompareTag("Explosive Sphere"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Enemy Head"))
         {
             if (collision.gameObject.GetComponent<Health>() != null) collision.gameObject.GetComponent<Health>().StopReceivingConstantDamage();
             else collision.gameObject.GetComponentInParent<Health>().StopReceivingConstantDamage();

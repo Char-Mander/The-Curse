@@ -11,6 +11,8 @@ TagManager:
   - PlayerInteractionZone
   - CrossHair
   - InteractionPanel
+  - Laser Weapon
+  - Enemy Head
   layers:
   - Default
   - TransparentFX
@@ -23,9 +25,9 @@ TagManager:
   - PostProcessing
   - PlayerBullet
   - Player
-  - 
-  - 
-  - 
+  - EnemyBullet
+  - WeaponBox
+  - Enemy
   - 
   - 
   - 
