@@ -27,7 +27,7 @@ public class InteractWithObjects : MonoBehaviour
             //Cogemos el objeto
             currentInteractionObject = objectToInteract;
             //Hacemos que se actualice el texto del objeto en el panel del canvas
-            GameObject.FindGameObjectWithTag("FixedCanvas").GetComponent<FixedElementCanvasController>().UpdateTextPanel(currentInteractionObject.GetComponent<InteractableObject>().GetObjectInteractionText());
+            GameObject.FindGameObjectWithTag("FixedCanvas").GetComponent<FixedElementCanvasController>().UpdateTextPanel(currentInteractionObject.GetComponent<InteractableObject>().GetObjectInteractionText(), false, null);
             //Decimos que ya no se puede interactuar con el durante un tiempo
             StartCoroutine(WaitForInteractAgain());
         }

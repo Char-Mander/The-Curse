@@ -7,6 +7,8 @@ public class FixedElementCanvasController : MonoBehaviour
 {   [SerializeField]
     GameObject interactionPanel;
     [SerializeField]
+    GameObject npcNamePanel;
+    [SerializeField]
     GameObject fuelBarUI;
 
     GameObject player;
@@ -31,6 +33,7 @@ public class FixedElementCanvasController : MonoBehaviour
         playerStaminaBar = GetComponentInChildren<StaminaBar>();
         playerStaminaBar.SetMaxStamina(playerStamina.GetMaxStamina());
         playerStaminaBar.SetCurrentStamina(playerStamina.GetMaxStamina());
+        npcNamePanel.SetActive(false);
         interactionPanel.SetActive(false);
         fuelBarUI.SetActive(false);
     }
@@ -47,11 +50,16 @@ public class FixedElementCanvasController : MonoBehaviour
         playerStaminaBar.UpdateStaminaBar();
     }
 
-    public void UpdateTextPanel(string text)
+    public void UpdateTextPanel(string text, bool isNpc, string name)
     {
         interactionPanel.SetActive(true);
         interactionPanel.GetComponentInChildren<Text>().text = text;
-        StartCoroutine(WaitForTextToBeShown((float)text.Length/10));
+        if (isNpc)
+        {
+            npcNamePanel.SetActive(true);
+            npcNamePanel.GetComponentInChildren<Text>().text = name;
+        }
+        StartCoroutine(WaitForTextToBeShown((float)text.Length / 20, isNpc));
     }
 
     public void EnableOrDisableFuelBar(bool enable)
@@ -73,10 +81,15 @@ public class FixedElementCanvasController : MonoBehaviour
         playerFuelBar.UpdateFuelBar();
     }
 
-    IEnumerator WaitForTextToBeShown(float time)
+    IEnumerator WaitForTextToBeShown(float time, bool isNpc)
     {
         yield return new WaitForSeconds(time);
         interactionPanel.GetComponentInChildren<Text>().text = "";
+        if (isNpc)
+        {
+            npcNamePanel.SetActive(false);
+            npcNamePanel.GetComponentInChildren<Text>().text = "";
+        }
         interactionPanel.SetActive(false);
     }
 }
