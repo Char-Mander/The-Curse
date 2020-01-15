@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private Stamina stamina;
     private PlayerSoundsManager soundsManager;
     private PickUpObjects pickobj;
+    private InteractWithObjects interactobj;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
         iniRotationY = transform.rotation.eulerAngles.y;
         soundsManager = GetComponent<PlayerSoundsManager>();
         pickobj = GetComponent<PickUpObjects>();
+        interactobj = GetComponent<InteractWithObjects>();
     }
 
     // Update is called once per frame
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             pickobj.PickOrDropObject();
+            interactobj.InteractWithObject();
         }
     }
 

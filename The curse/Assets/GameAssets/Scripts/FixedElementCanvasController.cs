@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FixedElementCanvasController : MonoBehaviour
-{
-   // GameObject player;
+{   [SerializeField]
+    GameObject interactionPanel;
+    // GameObject player;
     Health playerHealth;
     HealthBar playerHealthBar;
     Stamina playerStamina;
@@ -26,6 +28,7 @@ public class FixedElementCanvasController : MonoBehaviour
         playerStaminaBar = GetComponentInChildren<StaminaBar>();
         playerStaminaBar.SetMaxStamina(playerStamina.GetMaxStamina());
         playerStaminaBar.SetCurrentStamina(playerStamina.GetMaxStamina());
+        interactionPanel.SetActive(false);
         //Obtains the fuel atributes
         //playerWeaponFuel = player.GetComponent<Fuel>();
         //playerFuelBar = GetComponentInChildren<FuelBar>();
@@ -45,10 +48,25 @@ public class FixedElementCanvasController : MonoBehaviour
         playerStaminaBar.SetCurrentStamina(playerStamina.GetCurrentStamina());
         playerStaminaBar.UpdateStaminaBar();
     }
+
+    public void UpdateTextPanel(string text)
+    {
+        interactionPanel.SetActive(true);
+        interactionPanel.GetComponentInChildren<Text>().text = text;
+        StartCoroutine(WaitForTextToBeShown((float)text.Length/10));
+    }
+
     /*
     public void UpdateFuelBar()
     {
         playerFuelBar.SetCurrentFuel(playerWeaponFuel.GetCurrentFuel());
         playerFuelBar.UpdateFuelBar();
     }*/
+
+    IEnumerator WaitForTextToBeShown(float time)
+    {
+        yield return new WaitForSeconds(time);
+        interactionPanel.GetComponentInChildren<Text>().text = "";
+        interactionPanel.SetActive(false);
+    }
 }

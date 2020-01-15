@@ -70,6 +70,8 @@
     <Compile Include="Assets\GameAssets\Scripts\BoxAnim.cs" />
     <Compile Include="Assets\GameAssets\Scripts\EnemyCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\FixedElementCanvasController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\InteractableObject.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\InteractWithObjects.cs" />
     <Compile Include="Assets\GameAssets\Scripts\ParticleWeapon.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PickableObject.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PickUpObjects.cs" />
