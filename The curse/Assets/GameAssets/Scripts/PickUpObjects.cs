@@ -4,42 +4,15 @@ using UnityEngine;
 
 public class PickUpObjects : MonoBehaviour
 {
-	public GameObject ObjectToPickup;
-	public GameObject PickedObject;
-	public Transform interactionZone;
-    //private GameObject idleArms;
-    //private GameObject pickingUpArms;
-    //private GameObject[] arms;
+    [SerializeField]
+	private GameObject ObjectToPickup;
+    [SerializeField]
+    private GameObject PickedObject;
+    [SerializeField]
+    private Transform interactionZone;
 
-    private void Start()
-    {
-
-        /* arms = GameObject.FindGameObjectsWithTag("Arm");
-         if (arms.Length > 0)
-         {
-             Debug.Log("Encontrados los brazos");
-             //idleArms.position = new Vector3(0, -1.23f, 0.5f);
-             //idleArms.rotation = Quaternion.Euler(new Vector3(arms[0].transform.eulerAngles.x + 90f, 0, 0));
-             pickingUpArms = new GameObject();
-             pickingUpArms.transform.localPosition = new Vector3(0, 0, 0);
-             pickingUpArms.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-             idleArms = new GameObject();
-             idleArms.transform.position = arms[0].transform.localPosition;
-             idleArms.transform.rotation = arms[0].transform.localRotation;
-
-         */
-        /* for(int i=0; i<arms.Length; i++)
-         {
-             idleArms[i] = arms[i].transform;
-             pickingUpArms[i] = arms[i].transform;
-             pickingUpArms[i].position = new Vector3(arms[0].transform.position.x, arms[0].transform.position.y - 1.23f, arms[0].transform.position.z - 0.5f);
-             pickingUpArms[i].rotation = Quaternion.Euler(new Vector3(arms[0].transform.eulerAngles.x + 90f, 0f, 0f));
-         }*/
-
-        //}
-    }
-
-
+    private GameObject currentWeapon;
+    private GameObject crossHair;
     // Update is called once per frame
     public void PickOrDropObject()
     {
@@ -55,14 +28,10 @@ public class PickUpObjects : MonoBehaviour
                 //Quitamos las físicas de objeto para que no caiga ni cambie de posición
 				PickedObject.GetComponent<Rigidbody>().useGravity = false;
 				PickedObject.GetComponent<Rigidbody>().isKinematic = true;
-
-             /*  for(int i=0; i<arms.Length; i++)
-                {
-                    Debug.Log("Poniendo los brazos en alto");
-                    arms[i].transform.position = idleArms.transform.localPosition;
-                    arms[i].transform.rotation = idleArms.transform.localRotation;
-                }*/
-            
+                currentWeapon = GameObject.FindGameObjectWithTag("Weapon");
+                crossHair = GameObject.FindGameObjectWithTag("CrossHair");
+                EnableWeapon(false);
+                
 		}
         else if(PickedObject != null)
 		{
@@ -74,14 +43,19 @@ public class PickUpObjects : MonoBehaviour
 				PickedObject.GetComponent<Rigidbody>().useGravity = true;
 				PickedObject.GetComponent<Rigidbody>().isKinematic = false;
 				PickedObject = null;
+                EnableWeapon(true);
+        }
+    }
 
-                /*for (int i = 0; i < arms.Length; i++)
-                {
-                    Debug.Log("Poniendo los brazos abajo");
-                    arms[i].transform.position = pickingUpArms.transform.localPosition;
-                    arms[i].transform.rotation = pickingUpArms.transform.localRotation;
-                }*/
-            
-		}
+    //Función que desactiva o activa el arma y la mirilla
+    private void EnableWeapon(bool enable)
+    {
+        currentWeapon.SetActive(enable);
+        crossHair.SetActive(enable);
+    }
+
+    public void SetObjectToPickUp(GameObject obj)
+    {
+        this.ObjectToPickup = obj;
     }
 }

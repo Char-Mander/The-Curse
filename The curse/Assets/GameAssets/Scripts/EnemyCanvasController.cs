@@ -8,7 +8,7 @@ public class EnemyCanvasController : MonoBehaviour
     Health enemyHealth;
     HealthBar enemyHealthBar;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         enemyHealth = GetComponentInParent<Health>();
         enemyHealthBar = GetComponentInChildren<HealthBar>();

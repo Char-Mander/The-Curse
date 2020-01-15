@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6070409281730488961}
   - component: {fileID: 6186038222826530350}
   - component: {fileID: 7179084050397950317}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Normal Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  particleImpactColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 0}
 --- !u!82 &7179084050397950317
 AudioSource:
   m_ObjectHideFlags: 0
@@ -185,7 +184,7 @@ GameObject:
   - component: {fileID: 6183666347396579541}
   - component: {fileID: 6172412954698742861}
   - component: {fileID: 6163968352797547729}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pistol_45mm_bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

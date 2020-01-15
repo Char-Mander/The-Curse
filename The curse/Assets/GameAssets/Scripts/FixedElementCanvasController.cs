@@ -12,7 +12,7 @@ public class FixedElementCanvasController : MonoBehaviour
    /* Fuel playerWeaponFuel;
     FuelBar playerFuelBar;*/
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //Obtains the player
         //player = GameObject.FindGameObjectWithTag("Player");
@@ -31,8 +31,6 @@ public class FixedElementCanvasController : MonoBehaviour
         //playerFuelBar = GetComponentInChildren<FuelBar>();
         //playerFuelBar.SetMaxFuel(playerWeaponFuel.GetMaxFuel());
         //playerFuelBar.SetCurrentFuel(playerWeaponFuel.GetMaxFuel());
-        print("Health: " + playerHealth.GetCurrentHealth());
-        print("Stamina: " + playerStamina.GetCurrentStamina());
         //print("Fuelbar: " + playerFuelBar);
     }
 
