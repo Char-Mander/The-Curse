@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -288.3, y: 53.478}
-  m_SizeDelta: {x: -576.5, y: -16.955}
+  m_AnchoredPosition: {x: -288.3, y: 49.27}
+  m_SizeDelta: {x: -576.5, y: -25.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1448381151
 CanvasRenderer:
@@ -107,8 +107,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.2763, y: -0.00022626}
-  m_SizeDelta: {x: 253.75, y: 44.741}
+  m_AnchoredPosition: {x: -0.82, y: -0.43}
+  m_SizeDelta: {x: 222.88, y: 28.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2105571261
 CanvasRenderer:
@@ -256,8 +256,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0023499, y: -0.0035572}
-  m_SizeDelta: {x: 831.8, y: 62.221}
+  m_AnchoredPosition: {x: 2.3, y: -1.6}
+  m_SizeDelta: {x: 799.8, y: 45.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2198937272755579727
 CanvasRenderer:
@@ -292,7 +292,7 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 20
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -489,6 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionPanel: {fileID: 2198937272959518506}
+  npcNamePanel: {fileID: 1448381148}
   fuelBarUI: {fileID: 7335027606126681266}
 --- !u!1001 &2228378929152334735
 PrefabInstance:

@@ -10,7 +10,7 @@ public class InteractWithObjects : MonoBehaviour
     private GameObject currentInteractionObject;
     [SerializeField]
     private Transform interactionZone;
-
+    //Tiempo de espera para volver a interaccionar con un objeto
     private bool canInteract=true;
 
     // Start is called before the first frame update
@@ -22,7 +22,9 @@ public class InteractWithObjects : MonoBehaviour
     // Update is called once per frame
     public void InteractWithGameObject()
     {
-        if (objectToInteract != null && objectToInteract.GetComponent<InteractableObject>().isInteractable() && canInteract)
+        print("Está en un diálogo?" + FindObjectOfType<DialogueManager>().IsOnADialogue());
+        if (objectToInteract != null && objectToInteract.GetComponent<InteractableObject>().isInteractable() && canInteract 
+            && !FindObjectOfType<DialogueManager>().IsOnADialogue())
         {
             //Cogemos el objeto
             currentInteractionObject = objectToInteract;

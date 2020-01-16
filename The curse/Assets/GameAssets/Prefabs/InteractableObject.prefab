@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5100305111281885869}
   m_Layer: 0
   m_Name: InteractableObject
-  m_TagString: Pickable Object
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,5 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d5f6ce0f4b52c4fadee8449de8f599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectText: "Objeto extra\xF1o que puede desvelar misterios"
-  interactionTime: 2
+  objectText: "Objecto extra\xF1o. Se desconoce la fuente de su poder"
+  interactionTime: 1.5
+  isNpc: 0
+  complexNpc: 0
