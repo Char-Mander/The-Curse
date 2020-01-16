@@ -18,7 +18,8 @@ public class FixedElementCanvasController : MonoBehaviour
     StaminaBar playerStaminaBar;
     Fuel playerWeaponFuel;
     FuelBar playerFuelBar;
-    Coroutine panelTextCoroutine;
+    Coroutine panelTextCoroutine, textTyping;
+    float textTime;
     // Start is called before the first frame update
     void Awake()
     {
@@ -56,10 +57,11 @@ public class FixedElementCanvasController : MonoBehaviour
         if (panelTextCoroutine != null)
         {
             StopCoroutine(panelTextCoroutine);
+            if (textTyping != null) StopCoroutine(textTyping);
             ResetPanelText();
         }
         InitTextPanel(text, isNpc, name);
-        float textTime = text.Length > 30 ? (float)text.Length / 20 : 1f;
+        textTime = text.Length > 30 ? (float)text.Length / 20 : 1f;
         panelTextCoroutine = StartCoroutine(WaitForTextToBeShown(textTime, isNpc));
     }
 
@@ -84,19 +86,21 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void InitTextPanel(string text, bool isNpc, string name)
     {
+        interactionPanel.SetActive(true);
         if (isNpc)
         {
             npcNamePanel.SetActive(true);
             npcNamePanel.GetComponentInChildren<Text>().text = name;
+            textTyping = StartCoroutine(TypeText(text));
+
         }
-        interactionPanel.SetActive(true);
-        //interactionPanel.GetComponentInChildren<Text>().text = text;
-        StartCoroutine(TypeText(text));
-        
+        else interactionPanel.GetComponentInChildren<Text>().text = text;
+
     }
 
     public void ResetPanelText()
     {
+        textTime = 0;
         npcNamePanel.SetActive(false);
         npcNamePanel.GetComponentInChildren<Text>().text = "";
         interactionPanel.SetActive(false);
@@ -117,5 +121,10 @@ public class FixedElementCanvasController : MonoBehaviour
             interactionPanel.GetComponentInChildren<Text>().text += letter;
             yield return null;
         }
+    }
+
+    public float GetTextTime()
+    {
+        return textTime;
     }
 }
