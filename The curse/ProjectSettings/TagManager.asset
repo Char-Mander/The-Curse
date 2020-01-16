@@ -13,6 +13,7 @@ TagManager:
   - InteractionPanel
   - Laser Weapon
   - Enemy Head
+  - SimpleNpc
   layers:
   - Default
   - TransparentFX

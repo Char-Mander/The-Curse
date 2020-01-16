@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameAssets\Scripts\BoxAnim.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Dialogue.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\DialogueManager.cs" />
     <Compile Include="Assets\GameAssets\Scripts\ParticleWeapon.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\InteractableObject.cs" />

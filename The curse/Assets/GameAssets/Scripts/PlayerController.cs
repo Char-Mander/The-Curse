@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             pickobj.PickOrDropObject();
-            interactobj.InteractWithObject();
+            interactobj.InteractWithGameObject();
         }
     }
 

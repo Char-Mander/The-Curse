@@ -18,6 +18,7 @@ public class FixedElementCanvasController : MonoBehaviour
     StaminaBar playerStaminaBar;
     Fuel playerWeaponFuel;
     FuelBar playerFuelBar;
+    Coroutine panelTextCoroutine;
     // Start is called before the first frame update
     void Awake()
     {
@@ -52,14 +53,14 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void UpdateTextPanel(string text, bool isNpc, string name)
     {
-        interactionPanel.SetActive(true);
-        interactionPanel.GetComponentInChildren<Text>().text = text;
-        if (isNpc)
+        if (panelTextCoroutine != null)
         {
-            npcNamePanel.SetActive(true);
-            npcNamePanel.GetComponentInChildren<Text>().text = name;
+            StopCoroutine(panelTextCoroutine);
+            ResetPanelText();
         }
-        StartCoroutine(WaitForTextToBeShown((float)text.Length / 20, isNpc));
+        InitTextPanel(text, isNpc, name);
+        float textTime = text.Length > 30 ? (float)text.Length / 20 : 1f;
+        panelTextCoroutine = StartCoroutine(WaitForTextToBeShown(textTime, isNpc));
     }
 
     public void EnableOrDisableFuelBar(bool enable)
@@ -81,15 +82,40 @@ public class FixedElementCanvasController : MonoBehaviour
         playerFuelBar.UpdateFuelBar();
     }
 
+    public void InitTextPanel(string text, bool isNpc, string name)
+    {
+        if (isNpc)
+        {
+            npcNamePanel.SetActive(true);
+            npcNamePanel.GetComponentInChildren<Text>().text = name;
+        }
+        interactionPanel.SetActive(true);
+        //interactionPanel.GetComponentInChildren<Text>().text = text;
+        StartCoroutine(TypeText(text));
+        
+    }
+
+    public void ResetPanelText()
+    {
+        npcNamePanel.SetActive(false);
+        npcNamePanel.GetComponentInChildren<Text>().text = "";
+        interactionPanel.SetActive(false);
+        interactionPanel.GetComponentInChildren<Text>().text = "";
+    }
+
     IEnumerator WaitForTextToBeShown(float time, bool isNpc)
     {
         yield return new WaitForSeconds(time);
+        ResetPanelText();
+    }
+
+    IEnumerator TypeText(string text)
+    {
         interactionPanel.GetComponentInChildren<Text>().text = "";
-        if (isNpc)
+        foreach (char letter in text.ToCharArray())
         {
-            npcNamePanel.SetActive(false);
-            npcNamePanel.GetComponentInChildren<Text>().text = "";
+            interactionPanel.GetComponentInChildren<Text>().text += letter;
+            yield return null;
         }
-        interactionPanel.SetActive(false);
     }
 }

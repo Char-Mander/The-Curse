@@ -20,20 +20,30 @@ public class InteractWithObjects : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void InteractWithObject()
+    public void InteractWithGameObject()
     {
         if (objectToInteract != null && objectToInteract.GetComponent<InteractableObject>().isInteractable() && canInteract)
         {
             //Cogemos el objeto
             currentInteractionObject = objectToInteract;
+            InteractableObject interactableObj = objectToInteract.GetComponent<InteractableObject>();
+            Dialogue dialogue = interactableObj.GetDialogue();
             //Hacemos que se actualice el texto del objeto en el panel del canvas
-            GameObject.FindGameObjectWithTag("FixedCanvas").GetComponent<FixedElementCanvasController>().UpdateTextPanel(currentInteractionObject.GetComponent<InteractableObject>().GetObjectInteractionText(), false, null);
-            //Decimos que ya no se puede interactuar con el durante un tiempo
-            StartCoroutine(WaitForInteractAgain());
+            if (interactableObj.IsNpc() && interactableObj.IsComplexNpc())
+            {
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            }
+            else
+            {
+                string chosenText = (dialogue != null) ? dialogue.GetSentences()[(int)Random.Range(0, dialogue.GetSentences().Count - 1)]
+                                    : interactableObj.GetObjectText();
+                FindObjectOfType<FixedElementCanvasController>().UpdateTextPanel(chosenText, interactableObj.IsNpc(),
+                    (dialogue!=null) ? dialogue.GetName() : null);
+            }
         }
     }
 
-    public void SetObjectToInteract(GameObject obj)
+    public void SetGameObjectToInteract(GameObject obj)
     {
         this.objectToInteract = obj;
     }
