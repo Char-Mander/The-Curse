@@ -2439,6 +2439,27 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2198937272959518507, guid: 9c4a2108969384b418d0e998139f5f06,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2105571259, guid: 9c4a2108969384b418d0e998139f5f06, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 2105571259, guid: 9c4a2108969384b418d0e998139f5f06, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 222.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2105571259, guid: 9c4a2108969384b418d0e998139f5f06, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 31.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 2105571259, guid: 9c4a2108969384b418d0e998139f5f06, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.84
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c4a2108969384b418d0e998139f5f06, type: 3}
 --- !u!1001 &2886728434676828344
@@ -2770,13 +2791,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c014f8a4c73cbd14697c3d366e8bfac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Jimmy Jr
+  name: Tommy
   sentences:
   - Basta. No entres.
+  - '...'
+  - '...'
   - "\xBFTodav\xEDa sigues ah\xED?"
   - "Si est\xE1s dispuesta a escucharme... tengo una historia que contar."
-  - "Hace mucho, mucho tiempo, mi tatarabuelo me habl\xF3 de una persona muy sabia
-    en el pueblo, figura ejemplar: el or\xE1culo. "
+  - "Anta\xF1o viv\xEDa una figura destacable en el pueblo: el or\xE1culo"
   - "El or\xE1culo del pueblo anunci\xF3 la llegada de una maldici\xF3n que nos coger\xEDa
     desprevenidos."
   - "Y solo una persona lo suficientemente valiente y tenaz ser\xEDa capaz de deshacerla"

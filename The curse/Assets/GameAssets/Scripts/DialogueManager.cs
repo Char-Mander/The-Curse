@@ -29,7 +29,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     IEnumerator WaitForDisplay(int index)
-    {   if (index < sentences.Count)
+    {   if (index < dialogue.GetSentences().Count)
         {
             string sentence = sentences.Dequeue();
             float textTime = sentence.Length > 30 ? (float)sentence.Length / 20 : 1f;
