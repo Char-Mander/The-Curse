@@ -32,10 +32,13 @@ public class PlayerController : MonoBehaviour
     private bool isRunning = false;
     private bool canRunAgain = true;
     private bool isWalking = false;
+    private bool isOnAMount = false;
     private Stamina stamina;
     private PlayerSoundsManager soundsManager;
     private PickUpObjects pickobj;
     private InteractWithObjects interactobj;
+    private GameObject weapon;
+    private GameObject crossHair;
 
     // Start is called before the first frame update
     void Start()
@@ -102,7 +105,8 @@ public class PlayerController : MonoBehaviour
 
         ManagePlayerStates();
         ModifyStamina();
-        moveSpeed = isRunning ? runSpeed : walkSpeed;
+        if(!isOnAMount) moveSpeed = isRunning ? runSpeed : walkSpeed;
+        else moveSpeed = GetComponentInParent<Mount>().GetMountSpeed(); 
     }
 
     //Función que hace que el player y la cámara roten con el ratón
@@ -251,6 +255,26 @@ public class PlayerController : MonoBehaviour
          return res;
     }
 
+    //Función que desactiva o activa el arma y la mirilla
+    public void EnableWeapon(bool enable)
+    {
+        weapon.SetActive(enable);
+        crossHair.SetActive(enable);
+    }
+
     public bool CanRunAgain() { return this.canRunAgain; }
     
+    public bool IsOnAMount() { return isOnAMount; }
+
+    public void SetIsOnAMount(bool mount)
+    {
+        isOnAMount = mount;
+    }
+
+    public void GetActiveWeaponAndCrossHair()
+    {
+        this.weapon = checkTypeOfActiveWeapon()==1 ? GetComponentInChildren<SimpleShoot>().gameObject 
+                                                   : GetComponentInChildren<ParticleShoot>().gameObject;
+        this.crossHair = GameObject.FindGameObjectWithTag("CrossHair");
+    }
 }

@@ -86,6 +86,7 @@ public class WeaponController : MonoBehaviour
         {
             fixC.EnableOrDisableFuelBar(true);
         }
+
     }
 
     public void UnlockWeapon(int weaponIndex)

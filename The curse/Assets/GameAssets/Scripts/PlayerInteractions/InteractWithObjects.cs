@@ -12,7 +12,6 @@ public class InteractWithObjects : MonoBehaviour
     private Transform interactionZone;
     //Tiempo de espera para volver a interaccionar con un objeto
     private bool canInteract=true;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +33,11 @@ public class InteractWithObjects : MonoBehaviour
             if (interactableObj.IsNpc() && interactableObj.IsComplexNpc())
             {
                 FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            }
+            else if (interactableObj.CompareTag("Mount"))
+            {
+                if (!GetComponent<PlayerController>().IsOnAMount()) interactableObj.GetComponent<Mount>().PlayerClimbsOn();
+                else interactableObj.GetComponent<Mount>().PlayerGetsOff();
             }
             else
             {

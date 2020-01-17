@@ -10,9 +10,6 @@ public class PickUpObjects : MonoBehaviour
     private GameObject PickedObject;
     [SerializeField]
     private Transform interactionZone;
-
-    private GameObject currentWeapon;
-    private GameObject crossHair;
     // Update is called once per frame
     public void PickOrDropObject()
     {
@@ -28,9 +25,8 @@ public class PickUpObjects : MonoBehaviour
                 //Quitamos las físicas de objeto para que no caiga ni cambie de posición
 				PickedObject.GetComponent<Rigidbody>().useGravity = false;
 				PickedObject.GetComponent<Rigidbody>().isKinematic = true;
-                currentWeapon = GameObject.FindGameObjectWithTag("Weapon");
-                crossHair = GameObject.FindGameObjectWithTag("CrossHair");
-                EnableWeapon(false);
+                GetComponent<PlayerController>().GetActiveWeaponAndCrossHair();
+                GetComponent<PlayerController>().EnableWeapon(false);
                 
 		}
         else if(PickedObject != null)
@@ -43,15 +39,8 @@ public class PickUpObjects : MonoBehaviour
 				PickedObject.GetComponent<Rigidbody>().useGravity = true;
 				PickedObject.GetComponent<Rigidbody>().isKinematic = false;
 				PickedObject = null;
-                EnableWeapon(true);
+                GetComponent<PlayerController>().EnableWeapon(true);
         }
-    }
-
-    //Función que desactiva o activa el arma y la mirilla
-    private void EnableWeapon(bool enable)
-    {
-        currentWeapon.SetActive(enable);
-        crossHair.SetActive(enable);
     }
 
     public void SetObjectToPickUp(GameObject obj)

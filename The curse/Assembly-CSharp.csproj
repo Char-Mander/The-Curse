@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameAssets\Scripts\BoxAnim.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Mount.cs" />
     <Compile Include="Assets\GameAssets\Scripts\ParticleWeapon.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\Dialogue.cs" />
@@ -84,7 +85,6 @@
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\ParticleShoot.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\SimpleShoot.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\WeaponController.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Weapon.cs" />
     <Compile Include="Assets\GameAssets\Scripts\WeaponBox.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
