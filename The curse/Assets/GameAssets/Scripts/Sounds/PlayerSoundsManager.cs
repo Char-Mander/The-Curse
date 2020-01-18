@@ -34,6 +34,19 @@ public class PlayerSoundsManager : MonoBehaviour
         aSource.Play();
     }
 
+    public void ManageMountSound()
+    {
+        if (aSource.isPlaying) aSource.Stop();
+        aSource.clip = generalAudioClips[3];
+        aSource.loop = true;
+        aSource.Play();
+    }
+
+    public void ManageWhistleSound()
+    {
+        aSource.PlayOneShot(generalAudioClips[4]);
+    }
+
     public void StopSound()
     {
         aSource.Stop();

@@ -33,12 +33,16 @@ public class PlayerController : MonoBehaviour
     private bool canRunAgain = true;
     private bool isWalking = false;
     private bool isOnAMount = false;
+    private bool canWhistleAgain = true;
+    private bool mountWhistleCall = false;
     private Stamina stamina;
+
     private PlayerSoundsManager soundsManager;
     private PickUpObjects pickobj;
     private InteractWithObjects interactobj;
     private GameObject weapon;
     private GameObject crossHair;
+    private Mount mount;
 
     // Start is called before the first frame update
     void Start()
@@ -57,11 +61,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerVelocity();
-        JumpaAndMovePlayer();
-        RotatePlayer();
+        if (!isOnAMount)
+        {
+            PlayerVelocity();
+            JumpAndMovePlayer();
+            RotatePlayer();
+        }
         WeaponInputs();
         InteractionWithObjects();
+        CallTheMount();
     }
 
     //Función que gestiona cualquier interacción con objetos
@@ -74,8 +82,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void CallTheMount()
+    {
+        if (Input.GetKeyDown(KeyCode.X) && canWhistleAgain)
+        {
+            soundsManager.ManageWhistleSound();
+            mountWhistleCall = true;
+            StartCoroutine(WhistleAgain());
+        }
+    }
+
     //Función que hace que el player se mueva y salte con las ArrowKeys
-    private void JumpaAndMovePlayer()
+    private void JumpAndMovePlayer()
     {
         if (cController.isGrounded)
         {
@@ -96,17 +114,14 @@ public class PlayerController : MonoBehaviour
         }
         dirPos.y += gravity * Time.deltaTime;
         cController.Move(dirPos * moveSpeed * Time.deltaTime);
-
     }
 
     //Función que controla la velocidad del player al moverse
     private void PlayerVelocity()
     {
-
         ManagePlayerStates();
         ModifyStamina();
-        if(!isOnAMount) moveSpeed = isRunning ? runSpeed : walkSpeed;
-        else moveSpeed = GetComponentInParent<Mount>().GetMountSpeed(); 
+        moveSpeed = isRunning ? runSpeed : walkSpeed;
     }
 
     //Función que hace que el player y la cámara roten con el ratón
@@ -183,7 +198,7 @@ public class PlayerController : MonoBehaviour
     //Funciones que modifican la stamina del player
     void ModifyStamina()
     {
-        if (isRunning)
+        if (isRunning && !isOnAMount)
         {
             stamina.LoseStamina(Time.deltaTime * 10);
             if (stamina.hasNoStamina())
@@ -205,45 +220,47 @@ public class PlayerController : MonoBehaviour
 
     void ManagePlayerStates()
     {
-        //Cuando empieza a correr
-        if (cController.velocity.magnitude != 0 && Input.GetKey(KeyCode.LeftShift) && !stamina.hasNoStamina() && !isRunning && cController.isGrounded && canRunAgain)
-        {
-            isRunning = true;
-            soundsManager.ManageRunSound();
-        }
+            //Cuando empieza a correr
+            if (cController.velocity.magnitude != 0 && Input.GetKey(KeyCode.LeftShift) && !stamina.hasNoStamina() && !isRunning && cController.isGrounded && canRunAgain)
+            {
+                isRunning = true;
+                soundsManager.ManageRunSound();
+            }
 
-        //Cuando para de correr
-        if (((isRunning && Input.GetKeyUp(KeyCode.LeftShift)) || stamina.hasNoStamina()))
-        {
-            //Si pasa de correr a andar
-            if (isRunning && cController.velocity.magnitude != 0 && !isWalking && cController.isGrounded)
+            //Cuando para de correr
+            if (((isRunning && Input.GetKeyUp(KeyCode.LeftShift)) || stamina.hasNoStamina()))
             {
-                isWalking = true;
-                soundsManager.ManageWalkSound();
-            }
-            else if (cController.velocity.magnitude != 0)
-            {
-                isWalking = false;
-                soundsManager.StopSound();
-            }
-            isRunning = false;
-        }
-        else
-        {
-            //Cuando pasa de estar quieto a estar andando
-            if (!isWalking && cController.velocity.magnitude != 0 && cController.isGrounded)
-            {
-                isWalking = true;
-                soundsManager.ManageWalkSound();
-            }
-            //Cuando pasa de estar andando a estar completamente quieto
-            else if (cController.velocity.magnitude == 0 && isWalking)
-            {
-                isWalking = false;
+                //Si pasa de correr a andar
+                if (isRunning && cController.velocity.magnitude != 0 && !isWalking && cController.isGrounded)
+                {
+                    isWalking = true;
+                    soundsManager.ManageWalkSound();
+                }
+                else if (cController.velocity.magnitude != 0)
+                {
+                    isWalking = false;
+                    soundsManager.StopSound();
+                }
                 isRunning = false;
-                soundsManager.StopSound();
             }
-        }
+            else
+            {
+                //Cuando pasa de estar quieto a estar andando
+                if (!isWalking && cController.velocity.magnitude != 0 && cController.isGrounded)
+                {
+                    isWalking = true;
+                    soundsManager.ManageWalkSound();
+                }
+                //Cuando pasa de estar andando a estar completamente quieto
+                else if (cController.velocity.magnitude == 0 && isWalking)
+                {
+                    isWalking = false;
+                    isRunning = false;
+                    soundsManager.StopSound();
+                }
+            }
+        
+            
     }
 
     int checkTypeOfActiveWeapon()
@@ -253,6 +270,13 @@ public class PlayerController : MonoBehaviour
          if (transform.GetComponentInChildren<SimpleShoot>()) res = 1;
          else if (transform.GetComponentInChildren<ParticleShoot>()) res = 2;
          return res;
+    }
+
+    IEnumerator WhistleAgain()
+    {
+        canWhistleAgain = false;
+        yield return new WaitForSeconds(2);
+        canWhistleAgain = true;
     }
 
     //Función que desactiva o activa el arma y la mirilla
@@ -277,4 +301,19 @@ public class PlayerController : MonoBehaviour
                                                    : GetComponentInChildren<ParticleShoot>().gameObject;
         this.crossHair = GameObject.FindGameObjectWithTag("CrossHair");
     }
+    
+    public void EnableOrDisableCharacterController(bool enable)
+    {
+        cController.enabled = enable;
+    }
+
+    public bool HasCallTheMount() { return mountWhistleCall; }
+
+    public void SetMountWhistleCall(bool isActive)
+    {
+        mountWhistleCall = isActive;
+    }
+
+    public float GetRotationSpeed() { return rotationSpeed; }
+
 }

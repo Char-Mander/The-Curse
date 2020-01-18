@@ -21,7 +21,6 @@ public class InteractWithObjects : MonoBehaviour
     // Update is called once per frame
     public void InteractWithGameObject()
     {
-        print("Está en un diálogo?" + FindObjectOfType<DialogueManager>().IsOnADialogue());
         if (objectToInteract != null && objectToInteract.GetComponent<InteractableObject>().isInteractable() && canInteract 
             && !FindObjectOfType<DialogueManager>().IsOnADialogue())
         {
@@ -36,6 +35,7 @@ public class InteractWithObjects : MonoBehaviour
             }
             else if (interactableObj.CompareTag("Mount"))
             {
+                print("Detecta a la montura");
                 if (!GetComponent<PlayerController>().IsOnAMount()) interactableObj.GetComponent<Mount>().PlayerClimbsOn();
                 else interactableObj.GetComponent<Mount>().PlayerGetsOff();
             }
