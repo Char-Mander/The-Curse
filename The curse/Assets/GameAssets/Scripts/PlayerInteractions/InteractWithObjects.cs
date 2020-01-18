@@ -35,7 +35,6 @@ public class InteractWithObjects : MonoBehaviour
             }
             else if (interactableObj.CompareTag("Mount"))
             {
-                print("Detecta a la montura");
                 if (!GetComponent<PlayerController>().IsOnAMount()) interactableObj.GetComponent<Mount>().PlayerClimbsOn();
                 else interactableObj.GetComponent<Mount>().PlayerGetsOff();
             }

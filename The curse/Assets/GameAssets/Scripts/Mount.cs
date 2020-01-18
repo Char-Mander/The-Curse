@@ -17,8 +17,10 @@ public class Mount : MonoBehaviour
     [SerializeField]
     float mountRotationSpeed;
 
-    private GameObject player;
-    private CharacterController cController;
+    GameObject player;
+    CharacterController cController;
+    PlayerController playerController;
+    PlayerSoundsManager playerSoundsManager;
     private Vector3 dirPos;
     private bool isWalking = false;
     private bool iniRotateMouseY = false;
@@ -29,6 +31,8 @@ public class Mount : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
+        playerSoundsManager = player.GetComponent<PlayerSoundsManager>();
         cController = GetComponent<CharacterController>();
     }
 
@@ -41,21 +45,21 @@ public class Mount : MonoBehaviour
 
     private void ManageHorseStates()
     {
-        if (player.GetComponent<PlayerController>().IsOnAMount())
+        if (playerController.IsOnAMount())
         {
             if (!isWalking && cController.velocity.magnitude != 0 && cController.isGrounded)
             {
                 isWalking = true;
-                GetComponentInChildren<PlayerSoundsManager>().ManageMountSound();
+                playerSoundsManager.ManageMountSound();
             }
             //Cuando pasa de estar andando a estar completamente quieto
             else if (cController.velocity.magnitude == 0 && isWalking)
             {
                 isWalking = false;
-                GetComponentInChildren<PlayerSoundsManager>().StopSound();
+                playerSoundsManager.StopSound();
             }
         }
-        else if (player.GetComponent<PlayerController>().HasCallTheMount())
+        else if (playerController.HasCallTheMount())
         {
 
         }
@@ -63,7 +67,7 @@ public class Mount : MonoBehaviour
 
     private void JumpAndMoveHorse()
     {
-        if (player.GetComponent<PlayerController>().IsOnAMount())
+        if (playerController.IsOnAMount())
         {
             if (cController.isGrounded)
             {
@@ -74,10 +78,10 @@ public class Mount : MonoBehaviour
                     if (isWalking && cController.velocity.magnitude == 0)
                     {
                         isWalking = false;
-                        GetComponentInChildren<PlayerSoundsManager>().StopSound();
+                        playerSoundsManager.StopSound();
                     }
                     dirPos.y = mountJumpForce;
-                    GetComponentInChildren<PlayerSoundsManager>().ManageJumpSound();
+                    playerSoundsManager.ManageJumpSound();
                 }
 
             }
@@ -88,7 +92,7 @@ public class Mount : MonoBehaviour
 
     private void RotateHorse()
     {
-        if (player.GetComponent<PlayerController>().IsOnAMount())
+        if (playerController.IsOnAMount())
         {
             if (iniRotateMouseY)
             {
@@ -104,28 +108,28 @@ public class Mount : MonoBehaviour
                 iniMouseY = Input.GetAxis("Mouse Y");
                 iniRotateMouseY = true;
             }
-            player.GetComponent<PlayerController>().transform.localRotation = Quaternion.Euler(this.transform.localRotation.x, this.transform.localRotation.y, this.transform.localRotation.z);
+            playerController.transform.localRotation = Quaternion.Euler(this.transform.localRotation.x, this.transform.localRotation.y, this.transform.localRotation.z);
         }
     }
 
     public void PlayerClimbsOn()
     {
-        player.GetComponent<PlayerController>().SetIsOnAMount(true);
+        playerController.SetIsOnAMount(true);
         player.transform.position = new Vector3(playerMountPos.position.x, playerMountPos.position.y, playerMountPos.position.z);
         player.transform.rotation = Quaternion.Euler(playerMountPos.rotation.x, playerMountPos.rotation.y, playerMountPos.rotation.z);
         player.transform.parent = this.gameObject.transform;
-        player.GetComponent<PlayerController>().GetActiveWeaponAndCrossHair();
-        player.GetComponent<PlayerController>().EnableWeapon(false);
-        GetComponentInChildren<PlayerSoundsManager>().ManageJumpSound();
-        player.GetComponent<PlayerController>().EnableOrDisableCharacterController(false);
+        playerController.GetActiveWeaponAndCrossHair();
+        playerController.EnableWeapon(false);
+        playerSoundsManager.ManageJumpSound();
+        playerController.EnableOrDisableCharacterController(false);
     }
 
     public void PlayerGetsOff()
     {
-        player.GetComponent<PlayerSoundsManager>().ManageJumpSound();
-        player.GetComponent<PlayerController>().SetIsOnAMount(false);
-        player.GetComponent<PlayerController>().EnableWeapon(true);
-        player.GetComponent<PlayerController>().EnableOrDisableCharacterController(true);
+        playerSoundsManager.ManageJumpSound();
+        playerController.SetIsOnAMount(false);
+        playerController.EnableWeapon(true);
+        playerController.EnableOrDisableCharacterController(true);
         player.transform.position = new Vector3(playerGetOffMountPos.position.x, playerGetOffMountPos.position.y, playerGetOffMountPos.position.z);
         player.transform.rotation = Quaternion.Euler(playerGetOffMountPos.rotation.x, playerGetOffMountPos.rotation.y, playerGetOffMountPos.rotation.z);
         player.transform.parent = null;
