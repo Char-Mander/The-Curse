@@ -15,6 +15,7 @@ TagManager:
   - Enemy Head
   - Mount
   - Npc
+  - Terrain
   layers:
   - Default
   - TransparentFX

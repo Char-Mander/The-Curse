@@ -47,6 +47,11 @@ public class PlayerSoundsManager : MonoBehaviour
         aSource.PlayOneShot(generalAudioClips[4]);
     }
 
+    public void ManageMountSnort()
+    {
+        aSource.PlayOneShot(generalAudioClips[5]);
+    }
+
     public void StopSound()
     {
         aSource.Stop();
