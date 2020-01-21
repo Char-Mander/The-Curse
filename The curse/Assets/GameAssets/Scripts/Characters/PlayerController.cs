@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour, ICharacter
             JumpAndMoveCharacter();
             RotateCharacter();
         }
+        ModifyStamina();
         WeaponInputs();
         InteractionWithObjects();
         CallTheMount();
@@ -122,7 +123,6 @@ public class PlayerController : MonoBehaviour, ICharacter
     public void CharacterVelocity()
     {
         ManagePlayerStates();
-        ModifyStamina();
         moveSpeed = isRunning ? runSpeed : walkSpeed;
     }
 

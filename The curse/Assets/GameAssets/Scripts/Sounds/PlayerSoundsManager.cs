@@ -15,10 +15,14 @@ public class PlayerSoundsManager : MonoBehaviour
 
     public void ManageWalkSound()
     {
-        if (aSource.isPlaying) aSource.Stop();
-        aSource.clip = generalAudioClips[0];
-        aSource.loop = true;
-        aSource.Play();
+        if (aSource.isPlaying && aSource.name != generalAudioClips[0].name) aSource.Stop();
+
+        if (!aSource.isPlaying)
+        {
+            aSource.clip = generalAudioClips[0];
+            aSource.loop = true;
+            aSource.Play();
+        }
     }
 
     public void ManageJumpSound()
@@ -28,18 +32,26 @@ public class PlayerSoundsManager : MonoBehaviour
 
     public void ManageRunSound()
     {
-        if (aSource.isPlaying) aSource.Stop();
-        aSource.clip = generalAudioClips[2];
-        aSource.loop = true;
-        aSource.Play();
+        if (aSource.isPlaying && aSource.name != generalAudioClips[2].name)  aSource.Stop();
+
+        if (!aSource.isPlaying)
+        {
+            aSource.clip = generalAudioClips[2];
+            aSource.loop = true;
+            aSource.Play();
+        }
     }
 
     public void ManageMountSound()
     {
-        if (aSource.isPlaying) aSource.Stop();
-        aSource.clip = generalAudioClips[3];
-        aSource.loop = true;
-        aSource.Play();
+        if (aSource.isPlaying && aSource.name != generalAudioClips[3].name) aSource.Stop();
+
+        if (!aSource.isPlaying)
+        {
+            aSource.clip = generalAudioClips[3];
+            aSource.loop = true;
+            aSource.Play();
+        }
     }
 
     public void ManageWhistleSound()

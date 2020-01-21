@@ -95,6 +95,7 @@ public class Mount : MonoBehaviour, ICharacter
         }
         else if (playerController.HasCallTheMount())
         {
+            direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
             if (avoidObstacles)
             {
                 Vector3 direAux = direToPlayer;
@@ -106,7 +107,7 @@ public class Mount : MonoBehaviour, ICharacter
             }
             else
             {
-                direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
+                
                 float distToPlayer = direToPlayer.magnitude;
                 print("distancia del player: " + distToPlayer);
                 if (distToPlayer < 3)
@@ -156,12 +157,14 @@ public class Mount : MonoBehaviour, ICharacter
         player.transform.parent = this.gameObject.transform;
         playerController.GetActiveWeaponAndCrossHair();
         playerController.EnableWeapon(false);
+        playerSoundsManager.StopSound();
         playerSoundsManager.ManageJumpSound();
         playerController.EnableOrDisableCharacterController(false);
     }
 
     public void PlayerGetsOff()
     {
+        playerSoundsManager.StopSound();
         playerSoundsManager.ManageJumpSound();
         playerController.SetIsOnAMount(false);
         playerController.EnableWeapon(true);
