@@ -12,6 +12,7 @@ public class ExplosiveEnemy : MonoBehaviour
     private int damage;
     [SerializeField]
     private float detectDist;
+
     /*[SerializeField]
     private GameObject particle;*/
     [SerializeField]

@@ -373,9 +373,9 @@ GameObject:
   - component: {fileID: 525615365}
   - component: {fileID: 525615364}
   - component: {fileID: 525615363}
-  - component: {fileID: 525615362}
-  - component: {fileID: 525615366}
   - component: {fileID: 525615367}
+  - component: {fileID: 525615368}
+  - component: {fileID: 525615362}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -383,8 +383,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &525615362
-SphereCollider:
+--- !u!143 &525615362
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -394,7 +394,12 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
+  m_Height: 1
   m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &525615363
 MeshRenderer:
@@ -456,19 +461,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!135 &525615366
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525615361}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &525615367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,46 +474,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
---- !u!1 &860300696 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1812025607555631297, guid: fe0d89433818182499e652e554dfb08e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1812025608868167479}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &860300697
-CapsuleCollider:
+--- !u!114 &525615368
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860300696}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 525615361}
   m_Enabled: 1
-  m_Radius: 1.3448367
-  m_Height: 2.4020448
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.0000008518829, z: 0.48653725}
---- !u!1 &898567002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1812025608382558276, guid: fe0d89433818182499e652e554dfb08e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1812025608868167479}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &898567004
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 898567002}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2.0000002
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.0000019073486, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebbe3f8cbb56e1545a4ac23a674a3b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cControler: {fileID: 0}
+  player: {fileID: 0}
+  lm:
+    serializedVersion: 2
+    m_Bits: 0
+  direToPlayer: {x: 0, y: 0, z: 0}
+  endAttackDist: 0
+  endShootDist: 0
+  cadency: 0
+  damage: 0
+  moveSpeed: 0
+  weapon: {fileID: 0}
+  projectile: {fileID: 0}
+  posDisp: {fileID: 0}
 --- !u!1 &1065436694
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +662,7 @@ PrefabInstance:
     - target: {fileID: 1812025607796062695, guid: fe0d89433818182499e652e554dfb08e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 147.88
+      value: 147.78
       objectReference: {fileID: 0}
     - target: {fileID: 1812025607796062695, guid: fe0d89433818182499e652e554dfb08e,
         type: 3}
@@ -694,7 +672,7 @@ PrefabInstance:
     - target: {fileID: 1812025607796062695, guid: fe0d89433818182499e652e554dfb08e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.87
+      value: 22.33
       objectReference: {fileID: 0}
     - target: {fileID: 1812025607796062695, guid: fe0d89433818182499e652e554dfb08e,
         type: 3}
@@ -1239,7 +1217,7 @@ PrefabInstance:
     - target: {fileID: 6905477470247212100, guid: 81757756ddc455a42a93842a4bbd7f37,
         type: 3}
       propertyPath: mountMinDist
-      value: 15
+      value: 15.54
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81757756ddc455a42a93842a4bbd7f37, type: 3}

@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour, ICharacter
     private float rotationSpeed;
     [SerializeField]
     private float jumpForce;
-    [SerializeField]
-    private float mountMinDist;
 
 
     //Variables privadas
@@ -314,15 +312,5 @@ public class PlayerController : MonoBehaviour, ICharacter
     public void SetMountWhistleCall(bool isActive)
     {
         mountWhistleCall = isActive;
-    }
-
-    public float GetRotationSpeed() { return rotationSpeed; }
-
-    public float GetMountMinDist() { return mountMinDist; }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(this.transform.position, mountMinDist);
     }
 }

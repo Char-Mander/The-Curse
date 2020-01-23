@@ -535,6 +535,7 @@ GameObject:
   - component: {fileID: 1812025607555631296}
   - component: {fileID: 1812025607555631309}
   - component: {fileID: 1812025607555631310}
+  - component: {fileID: 860300697}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -606,6 +607,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &860300697
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812025607555631297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.3448367
+  m_Height: 2.4020448
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0000008518829, z: 0.48653725}
 --- !u!1 &1812025607796062712
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +710,7 @@ MonoBehaviour:
   mountSpeed: 20
   mountJumpForce: 3.5
   mountRotationSpeed: 20
+  timeAvoidingObstacles: 0
 --- !u!135 &5711720999777209944
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -966,6 +982,7 @@ GameObject:
   - component: {fileID: 1812025608382558275}
   - component: {fileID: 1812025608382558272}
   - component: {fileID: 1812025608382558273}
+  - component: {fileID: 898567004}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -1036,6 +1053,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &898567004
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812025608382558276}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2.0000002
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0000019073486, z: 0}
 --- !u!1 &1812025609046848227
 GameObject:
   m_ObjectHideFlags: 0

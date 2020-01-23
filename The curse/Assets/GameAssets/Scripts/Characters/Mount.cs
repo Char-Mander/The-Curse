@@ -24,7 +24,6 @@ public class Mount : MonoBehaviour, ICharacter
     PlayerController playerController;
     PlayerSoundsManager playerSoundsManager;
     private Vector3 dirPos;
-    private Vector3 direToPlayer;
     private bool isWalking = false;
     private bool iniRotateMouseY = false;
     private float iniMouseY;
@@ -95,35 +94,10 @@ public class Mount : MonoBehaviour, ICharacter
         }
         else if (playerController.HasCallTheMount())
         {
-            direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-            if (avoidObstacles)
-            {
-                Vector3 direAux = direToPlayer;
-                this.transform.rotation = Quaternion.LookRotation(direAux);
-                dirPos = this.transform.right * mountSpeed;
-                dirPos.y += gravity * Time.deltaTime;
-                this.transform.rotation = Quaternion.LookRotation(direAux);
-                cController.Move(dirPos * Time.deltaTime);
-            }
-            else
-            {
-                
-                float distToPlayer = direToPlayer.magnitude;
-                print("distancia del player: " + distToPlayer);
-                if (distToPlayer < 3)
-                {
-                    playerController.SetMountWhistleCall(false);
-                    hasSnorted = false;
-                }
-                else
-                {
-                    Vector3 direAux = direToPlayer;
-                    this.transform.rotation = Quaternion.LookRotation(direAux);
-                    dirPos = this.transform.forward * mountSpeed;
-                    dirPos.y += gravity * Time.deltaTime;
-                    cController.Move(dirPos * Time.deltaTime);
-                }
-            }
+            hasSnorted = false;
+            this.transform.position = new Vector3(player.transform.position.x + 4, player.transform.position.y, player.transform.position.z + 4);
+            playerController.SetMountWhistleCall(false);
+            this.transform.LookAt(player.transform);
         }
     }
 
@@ -172,27 +146,6 @@ public class Mount : MonoBehaviour, ICharacter
         player.transform.position = new Vector3(playerGetOffMountPos.position.x, playerGetOffMountPos.position.y, playerGetOffMountPos.position.z);
         player.transform.rotation = Quaternion.Euler(playerGetOffMountPos.rotation.x, playerGetOffMountPos.rotation.y, playerGetOffMountPos.rotation.z);
         player.transform.parent = null;
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Terrain"))
-        {
-            direToPlayer = hit.normal;
-            StartCoroutine(TimeAvoidingObstacles());
-        }
-        /*if (hit.collider.CompareTag("Player"))
-        {
-            playerController.SetIsOnAMount(false);
-            hasSnorted = false;
-        }*/
-    }
-
-    IEnumerator TimeAvoidingObstacles()
-    {
-        avoidObstacles = true;
-        yield return new WaitForSeconds(timeAvoidingObstacles);
-        avoidObstacles = false;
     }
 
 }
