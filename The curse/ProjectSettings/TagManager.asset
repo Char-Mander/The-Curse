@@ -31,12 +31,12 @@ TagManager:
   - EnemyBullet
   - WeaponBox
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Terrain
+  - Weapon
+  - IgnoreLayer
+  - Object
+  - NPC
+  - Mount
   - 
   - 
   - 

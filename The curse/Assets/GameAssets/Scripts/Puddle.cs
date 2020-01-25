@@ -32,7 +32,8 @@ public class Puddle : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Health>().LoseHealth(damage);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().LoseHealth(damage);
+            particles.Play();
         }
         else if (other.gameObject.CompareTag("Terrain"))
         {

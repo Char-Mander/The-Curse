@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosiveEnemy : MonoBehaviour
+public class ExplosiveEnemy : Enemy
 {
     private const float gravity = -9.8f;
 
@@ -29,9 +29,9 @@ public class ExplosiveEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        if (DetectPlayerInFront())
+        if (DetectPlayer())
         {
             isAtacking = true;
         }
@@ -43,33 +43,7 @@ public class ExplosiveEnemy : MonoBehaviour
         Patrol();
         Atack();
     }
-
-    bool DetectPlayerInFront()
-    {
-        direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-        float distToPlayer = direToPlayer.magnitude;
-
-        Debug.DrawRay(this.transform.position, direToPlayer.normalized, Color.white);
-        //Si está dentro de los límites
-        if(distToPlayer <= detectDist)
-        {
-            Debug.DrawLine(this.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, Color.green);
-            RaycastHit hit;
-            if (Physics.Raycast(this.transform.position, direToPlayer.normalized, out hit, detectDist, lm))
-            {
-                Debug.DrawLine(this.transform.position, hit.transform.position, Color.blue);
-                if (hit.collider.gameObject.tag == "Player")
-                {
-                    Debug.DrawLine(this.transform.position, hit.transform.position, Color.red);
-                    return true;
-                }
-
-            }
-        }
-
-        return false;
-    }
-
+    
     void Patrol()
     {
         if (!isAtacking)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 102068340}
   - component: {fileID: 102068343}
   - component: {fileID: 102068342}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Right ear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 413437022}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PlayerGetOffMount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 437253078}
   - component: {fileID: 437253081}
   - component: {fileID: 437253080}
-  m_Layer: 10
+  m_Layer: 19
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 607159934}
   - component: {fileID: 607159937}
   - component: {fileID: 607159936}
-  m_Layer: 10
+  m_Layer: 19
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 674707187}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PlayerMountPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 1058657901}
   - component: {fileID: 1058657900}
   - component: {fileID: 1058657899}
-  m_Layer: 10
+  m_Layer: 19
   m_Name: Right Eye (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 1609087951}
   - component: {fileID: 1609087954}
   - component: {fileID: 1609087953}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Left ear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 2079560125}
   - component: {fileID: 2079560124}
   - component: {fileID: 2079560123}
-  m_Layer: 10
+  m_Layer: 19
   m_Name: Left Eye (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,9 +536,9 @@ GameObject:
   - component: {fileID: 1812025607555631309}
   - component: {fileID: 1812025607555631310}
   - component: {fileID: 860300697}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Mount
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 273485985264956924}
   - component: {fileID: 5711720999777209944}
   - component: {fileID: 1179948007681343966}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Mount
   m_TagString: Mount
   m_Icon: {fileID: 0}
@@ -751,7 +751,7 @@ GameObject:
   - component: {fileID: 1812025608023891755}
   - component: {fileID: 1812025608023891752}
   - component: {fileID: 1812025608023891753}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Back left leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -828,7 +828,7 @@ GameObject:
   - component: {fileID: 1812025608088321556}
   - component: {fileID: 1812025608088321553}
   - component: {fileID: 1812025608088321554}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Back right leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -905,7 +905,7 @@ GameObject:
   - component: {fileID: 1812025608176350981}
   - component: {fileID: 1812025608176350978}
   - component: {fileID: 1812025608176350979}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Front right leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -983,7 +983,7 @@ GameObject:
   - component: {fileID: 1812025608382558272}
   - component: {fileID: 1812025608382558273}
   - component: {fileID: 898567004}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1078,7 +1078,7 @@ GameObject:
   - component: {fileID: 1812025609046848226}
   - component: {fileID: 1812025609046848239}
   - component: {fileID: 1812025609046848224}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Front left leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1155,7 @@ GameObject:
   - component: {fileID: 1812025609409544711}
   - component: {fileID: 1812025609409544708}
   - component: {fileID: 1812025609409544709}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

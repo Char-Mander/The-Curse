@@ -18,7 +18,7 @@ public class EnemyCanvasController : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
+        this.gameObject.transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
     }
 
     public void UpdateHealthBar()

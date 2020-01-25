@@ -22,7 +22,8 @@ public class SimpleShoot : MonoBehaviour, IWeapon
     private float zoomSpeed;
     [SerializeField]
     private List<AudioClip> shotAudioClips = new List<AudioClip>();
-
+    [SerializeField]
+    private Transform target;
     private bool isZooming = false;
     private AudioSource aSource;
 
@@ -45,11 +46,7 @@ public class SimpleShoot : MonoBehaviour, IWeapon
         {
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, zoomSpeed * 2);
         }
-
-        /*if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.E))
-        {
-            GetComponent<Animator>().SetTrigger("Fire");
-        }*/
+        
     }
 
     public void StartShootAnimation()
@@ -63,7 +60,17 @@ public class SimpleShoot : MonoBehaviour, IWeapon
        aSource.PlayOneShot(shotAudioClips[0]);
        GameObject tempFlash;
        GameObject bullet = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
-       bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
+       Vector3 dire = new Vector3();
+        if (target != null)
+        {
+            dire = target.position - barrelLocation.transform.position;
+            dire.y += 0.25f;
+        }
+        else
+        {
+            dire = barrelLocation.forward;
+        }
+       bullet.GetComponent<Rigidbody>().AddForce(dire * shotPower);
        Destroy(bullet, 10);
        tempFlash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
        Destroy(tempFlash, 0.5f);

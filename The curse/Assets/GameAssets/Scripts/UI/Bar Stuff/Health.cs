@@ -49,7 +49,8 @@ public class Health : MonoBehaviour
             }
             else if (this.gameObject.tag == "Player")
             {
-                SceneManager.LoadScene("GameOver");
+                print("Has perdido");
+              //  SceneManager.LoadScene("GameOver");
             }
         }
        if(GetComponentInChildren<EnemyCanvasController>() != null) GetComponentInChildren<EnemyCanvasController>().UpdateHealthBar();

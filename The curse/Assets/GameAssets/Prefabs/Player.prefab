@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6900738700547698514}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: CasingExitLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 6907339888055172984}
   - component: {fileID: 6890734358072541526}
   - component: {fileID: 6883585089155652052}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: CasingExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 6906978730800641034}
   - component: {fileID: 6894311098730435756}
   - component: {fileID: 6883388723073893552}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 6907327774617368716}
   - component: {fileID: 6890648721328658058}
   - component: {fileID: 6883727343660884846}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: M1911A_Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6900780620398636306}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: M1911A_Magazine_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6906857354702699326}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: PosDisp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 6810798721719342298}
   - component: {fileID: 6791642147861779882}
   - component: {fileID: 5911191680219621704}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Gun
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -404,6 +404,7 @@ MonoBehaviour:
   shotAudioClips:
   - {fileID: 8300000, guid: 6f4c0de39504d8645895c8bc890b1f33, type: 3}
   - {fileID: 8300000, guid: 8081ed6bca40acf48a7c8f5d12a125e2, type: 3}
+  target: {fileID: 0}
 --- !u!82 &5911191680219621704
 AudioSource:
   m_ObjectHideFlags: 0
@@ -511,7 +512,7 @@ GameObject:
   - component: {fileID: 6900844295126332060}
   - component: {fileID: 6890740162620593150}
   - component: {fileID: 6882031080947909094}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Handgun_M1911A (Model)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +593,7 @@ GameObject:
   - component: {fileID: 6907025356601070584}
   - component: {fileID: 6890713443631866858}
   - component: {fileID: 6882847873992740876}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -668,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6905477469776966720}
   - component: {fileID: 6905477469773751664}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: MachineGun_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -751,7 +752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905477469776966722}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: WeaponBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905477469776966724}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: WeaponBone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -813,7 +814,7 @@ GameObject:
   - component: {fileID: 6905477469776966736}
   - component: {fileID: 6905477469796364560}
   - component: {fileID: 6905477469796386992}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Particle System 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5510,7 +5511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6905477469776966738}
   - component: {fileID: 6905477469770753360}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5580,7 +5581,7 @@ GameObject:
   - component: {fileID: 6905477469776966740}
   - component: {fileID: 6905477469796364562}
   - component: {fileID: 6905477469796386994}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Particle System 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10278,7 +10279,7 @@ GameObject:
   - component: {fileID: 6905477469776966742}
   - component: {fileID: 6905477469796364564}
   - component: {fileID: 6905477469796386996}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14979,7 +14980,7 @@ GameObject:
   - component: {fileID: 6905477469776966744}
   - component: {fileID: 6905477469771116976}
   - component: {fileID: 6905477469769440176}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: MachineGun_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15047,7 +15048,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905477469776966746}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: WeaponRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15082,7 +15083,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905477469776966748}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: WeaponBone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15112,7 +15113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905477469776966750}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Dummy002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15149,7 +15150,7 @@ GameObject:
   - component: {fileID: 6905477469837115779}
   m_Layer: 10
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15245,7 +15246,7 @@ GameObject:
   - component: {fileID: 6905477469895889483}
   m_Layer: 10
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15332,7 +15333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905477470041612022}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PosDisp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15362,9 +15363,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905477470155314285}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: MachineGun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15398,7 +15399,7 @@ GameObject:
   - component: {fileID: 6905477470201905044}
   m_Layer: 10
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15771,7 +15772,7 @@ GameObject:
   - component: {fileID: 6905477470636769269}
   m_Layer: 10
   m_Name: Left Eye
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15859,7 +15860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6905477470664221287}
   - component: {fileID: 6905477470664221286}
-  m_Layer: 10
+  m_Layer: 16
   m_Name: OnHandPos
   m_TagString: PlayerInteractionZone
   m_Icon: {fileID: 0}
@@ -15907,7 +15908,7 @@ GameObject:
   - component: {fileID: 6905477470685093174}
   m_Layer: 10
   m_Name: Mouth
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15993,9 +15994,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905477470691383796}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Weapons
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16117,9 +16118,9 @@ GameObject:
   - component: {fileID: 6905477470215504303}
   - component: {fileID: 6905477470215504300}
   - component: {fileID: 6905477470215504302}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Flamethrower
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16353,7 +16354,7 @@ GameObject:
   - component: {fileID: 6905477471017724961}
   m_Layer: 10
   m_Name: Right Eye
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16445,7 +16446,7 @@ GameObject:
   - component: {fileID: 6905477471357526429}
   m_Layer: 10
   m_Name: Sphere (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16717,7 +16718,7 @@ GameObject:
   - component: {fileID: 6906970035085685392}
   - component: {fileID: 6891122057773044910}
   - component: {fileID: 6883503567851840936}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16794,7 +16795,7 @@ GameObject:
   - component: {fileID: 8696982059006252592}
   - component: {fileID: 8696982058992096112}
   - component: {fileID: 8696982058992069328}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Flames
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21285,7 +21286,7 @@ GameObject:
   - component: {fileID: 8696982059006252594}
   - component: {fileID: 8696982058992096114}
   - component: {fileID: 8696982058992069330}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: FlamethrowerParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25868,7 +25869,7 @@ GameObject:
   - component: {fileID: 8696982059006252598}
   - component: {fileID: 8696982058992096118}
   - component: {fileID: 8696982058992069334}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

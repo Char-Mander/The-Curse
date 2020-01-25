@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         GameObject go = Instantiate(obj, point, rotate);
         Destroy(go, 2);
     }
-
+    
     private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Player"))
@@ -36,7 +36,6 @@ public class Bullet : MonoBehaviour
             aSource.PlayOneShot(aSource.clip);
             //CreateParticleAtPoint(bloodParticle, col.transform.position, Quaternion rotate)
             col.gameObject.GetComponentInParent<Health>().LoseHealth(damage);
-            print("Ha chocado contra un enemigo");
         }
         else
         {

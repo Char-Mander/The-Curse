@@ -11,7 +11,7 @@ public class PoisonedZone : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponentInChildren<Health>().ReceiveConstantDamage(damagePerFrame*Time.deltaTime);
+            GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Health>().ReceiveConstantDamage(damagePerFrame*Time.deltaTime);
         }
     }
 
@@ -19,7 +19,7 @@ public class PoisonedZone : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponentInChildren<Health>().StopReceivingConstantDamage();
+            GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Health>().StopReceivingConstantDamage();
         }
     }
 }

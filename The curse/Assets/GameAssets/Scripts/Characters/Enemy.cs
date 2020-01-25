@@ -5,16 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public const float gravity = -9.8f;
-    public CharacterController cControler;
-    public GameObject player;
-    public LayerMask lm;
-    [HideInInspector]
-    public Vector3 direToPlayer;
+
+    [SerializeField]
     private float detectDist;
     [SerializeField]
     private float endAttackDist;
-    [SerializeField]
-    private float endShootDist;
     [SerializeField]
     private float cadency;
     [SerializeField]
@@ -27,23 +22,36 @@ public class Enemy : MonoBehaviour
     private GameObject projectile;
     [SerializeField]
     private Transform posDisp;
+    [SerializeField]
+    private float rotationSpeed = 0.5f;
+    [HideInInspector]
+    public CharacterController cController;
+    public GameObject player;
+    public LayerMask lm;
+    [HideInInspector]
+    public Vector3 direToPlayer;
+
     private bool isAttacking = false;
     private bool canAttack = true;
+    private bool canRotateToPlayer = true;
     private float distToPlayer;
     // Start is called before the first frame update
-    public void Start()
+    public virtual void Start()
     {
-        GetComponent<CharacterController>();
+        cController = GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(Rotate());
     }
 
     // Update is called once per frame
-    public void Update()
+    public virtual void Update()
     {
         if (DetectPlayer())
         {
             isAttacking = true;
             Attack();
+            //Que el enemigo esté mirando al player en cuanto lo detecte
+            AimPlayer();
         }
         else
         {
@@ -52,7 +60,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public bool DetectPlayer()
+    public virtual bool DetectPlayer()
     {
         direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
         distToPlayer = direToPlayer.magnitude;
@@ -74,18 +82,19 @@ public class Enemy : MonoBehaviour
 
             }
         }
-
         return false;
     }
 
     public void Patrol()
     {
-        if (!isAttacking)
-        {
-            Vector3 auxDir = this.transform.forward;
-            auxDir.y += gravity;
-            cControler.Move(auxDir * moveSpeed * Time.deltaTime);
-        }
+        EnemyMovement(moveSpeed, transform.forward);
+    }
+
+    void EnemyMovement(float speed, Vector3 dire)
+    {
+        Vector3 auxDir = dire;
+        auxDir.y += gravity;
+        cController.Move(auxDir * Time.deltaTime);
     }
 
     IEnumerator Rotate()
@@ -102,6 +111,60 @@ public class Enemy : MonoBehaviour
     {
         if (canAttack)
         {
+            //Se mueve en función del área donde esté
+            DetectPlayerInArea();
+            //Instancia balas en dirección al player con cadencia
+            Action();
+        }
+           
+        
+    }
+
+    void DetectPlayerInArea()
+    {
+        if (distToPlayer > endAttackDist)
+        {
+            EnemyMovement(moveSpeed, transform.forward);
+        }
+    }
+
+    public void AimPlayer()
+    {
+        if (canRotateToPlayer)
+        {
+
+            canRotateToPlayer = false;
+            Vector3 aux = direToPlayer;
+            aux.y = 0;
+            transform.rotation = Quaternion.LookRotation(aux, Vector3.up);
+            if(weapon!=null) weapon.rotation = Quaternion.LookRotation(direToPlayer);
+            Vector3 playerHead = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, player.transform.position.z);
+            posDisp.transform.LookAt(playerHead);
+            StartCoroutine(RotateAgain());
+        }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Terrain"))
+        {
+            Vector3 direVec = hit.normal;
+            direVec.y = 0;
+            this.transform.rotation = Quaternion.LookRotation(direVec);
+            //Mover hacia el player
+        }
+        if (hit.collider.CompareTag("Player"))
+        {
+            hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
+            //Para inmolar al enemigo
+            GetComponent<Health>().LoseHealth(GetComponent<Health>().GetMaxHealth()); 
+        }
+    }
+
+    public virtual void Action()
+    {
+        if (canAttack)
+        {
             Instantiate(projectile, posDisp.position, posDisp.rotation);
             canAttack = false;
             StartCoroutine(Reload());
@@ -114,53 +177,21 @@ public class Enemy : MonoBehaviour
         canAttack = true;
     }
 
-    public void AimPlayer()
+    IEnumerator RotateAgain()
     {
-        Vector3 aux = direToPlayer;
-        aux.y = 0;
-        transform.rotation = Quaternion.LookRotation(aux, Vector3.up);
-        if(weapon!=null) weapon.rotation = Quaternion.LookRotation(direToPlayer);
-        Vector3 playerHead = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, player.transform.position.z);
-        posDisp.transform.LookAt(playerHead);
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Terrain"))
-        {
-            Vector3 direVec = hit.normal;
-            direVec.y = 0;
-            this.transform.rotation = Quaternion.LookRotation(direVec);
-
-            //Mover hacia el player
-        }
-        if (hit.collider.CompareTag("Player"))
-        {
-            hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
-
-           /* //Si el enemigo es una babosa
-            if (hit.collider.gameObject.CompareTag("Explosive Sphere"))
-            {
-                FinalBoss boss = FindObjectOfType<FinalBoss>();
-                boss.SetCanSpawn(false);
-                float velSpawn = boss.GetSpawnVelocity();
-                if (boss.GetPhase() == 2) velSpawn = 2 * velSpawn / 3;
-                StartCoroutine(boss.BabosaCoolDown(velSpawn));
-            }
-            //Para inmolar al enemigo
-            GetComponent<Health>().LoseHealth(GetComponent<Health>().GetMaxHealth());*/
-        }
-
-        /* Para generar enemigos con la puerta
-         * if (hit.collider.CompareTag("Puerta"))
-        {
-            hit.collider.GetComponent<Rigidbody>().AddForce(hit.moveDirection * 10, ForceMode.Impulse);
-        }*/
+        yield return new WaitForSeconds(rotationSpeed);
+        canRotateToPlayer = true;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        //Detect
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(this.transform.position, detectDist);
+        //End área
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position, endAttackDist);
     }
+
+   
 }

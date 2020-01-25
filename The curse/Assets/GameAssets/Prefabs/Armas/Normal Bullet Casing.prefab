@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4137283909276729649}
   - component: {fileID: 4111721081829779951}
   - component: {fileID: 4118550053027616079}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pistol_45mm_Case
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4137144741037513599}
   - component: {fileID: 4078494212187590135}
   - component: {fileID: 4159194820740524427}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Normal Bullet Casing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

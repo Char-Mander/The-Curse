@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 1030899063517429542}
   - component: {fileID: 1030899063517429543}
   - component: {fileID: 1030899063517429539}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: SimpleNpc
-  m_TagString: Pickable Object
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

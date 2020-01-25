@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 997046204298737528}
   - component: {fileID: 985843685076226374}
   - component: {fileID: 975973377894080576}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 997417109523151504}
   - component: {fileID: 985315217822074046}
   - component: {fileID: 975922885059173436}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: CasingExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 997195559924199906}
   - component: {fileID: 982286032226505028}
   - component: {fileID: 975857291877400920}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 997413830838320484}
   - component: {fileID: 985378040654025570}
   - component: {fileID: 976064061267568262}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: M1911A_Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 993076509331925690}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: CasingExitLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 997075283598458582}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: PosDisp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 993109628532205818}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: M1911A_Magazine_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 903136384211489074}
   - component: {fileID: 886230661247225922}
   - component: {fileID: 1267840570109088}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Gun
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -428,7 +428,7 @@ Transform:
   m_GameObject: {fileID: 999212732002904278}
   m_LocalRotation: {x: 0, y: -0.0506278, z: 0, w: 0.9987176}
   m_LocalPosition: {x: -0.049911484, y: 0.012182698, z: 0.37127897}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 993322759530821492}
   - {fileID: 993109628532205818}
@@ -481,6 +481,7 @@ MonoBehaviour:
   shotAudioClips:
   - {fileID: 8300000, guid: 6f4c0de39504d8645895c8bc890b1f33, type: 3}
   - {fileID: 8300000, guid: 8081ed6bca40acf48a7c8f5d12a125e2, type: 3}
+  target: {fileID: 0}
 --- !u!82 &1267840570109088
 AudioSource:
   m_ObjectHideFlags: 0
@@ -588,7 +589,7 @@ GameObject:
   - component: {fileID: 993322759530821492}
   - component: {fileID: 985328654540641814}
   - component: {fileID: 976619581188932622}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Handgun_M1911A (Model)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +670,7 @@ GameObject:
   - component: {fileID: 997242117266773520}
   - component: {fileID: 985443643697636866}
   - component: {fileID: 975184587293447652}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

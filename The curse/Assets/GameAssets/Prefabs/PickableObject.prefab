@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7617702969994537903}
   - component: {fileID: 7617702969994537899}
   - component: {fileID: 7617702969994537898}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: PickableObject
   m_TagString: Pickable Object
   m_Icon: {fileID: 0}

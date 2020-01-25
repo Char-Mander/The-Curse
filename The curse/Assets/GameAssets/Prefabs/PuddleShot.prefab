@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1209563936}
   - component: {fileID: 1655685698}
   - component: {fileID: 1819973047}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PuddleShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,8 +214,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1
+      scalar: 5
+      minScalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -267,7 +267,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 7
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -383,8 +383,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.1
+      scalar: 0.7
+      minScalar: 0.6
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -699,7 +699,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 20
+    maxNumParticles: 30
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -4839,5 +4839,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puddle: {fileID: 2420759010115409682, guid: b3d593e48cd413f4e96632d0dd592c32, type: 3}
-  damage: 30
-  force: 50
+  damage: 20
+  force: 10
