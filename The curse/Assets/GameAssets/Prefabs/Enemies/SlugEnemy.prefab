@@ -451,9 +451,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectDist: 20
-  endAttackDist: 15
+  endAttackDist: 13.5
   cadency: 2
-  damage: 10
+  damage: 0
   moveSpeed: 8
   weapon: {fileID: 0}
   projectile: {fileID: 6630457299727349818, guid: 3084021cab599f1499022197daafe9d5,

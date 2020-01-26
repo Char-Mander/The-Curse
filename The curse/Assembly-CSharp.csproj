@@ -69,6 +69,7 @@
     <Compile Include="Assets\GameAssets\Scripts\Characters\NPC.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\PlayerController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\RangedEnemy.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Characters\SimpleNPC.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\SlugEnemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\Spawner.cs" />
     <Compile Include="Assets\GameAssets\Scripts\ParticleWeapon.cs" />
