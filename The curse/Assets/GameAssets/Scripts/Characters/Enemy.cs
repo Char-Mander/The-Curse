@@ -6,16 +6,13 @@ public class Enemy : MonoBehaviour
 {
     public const float gravity = -9.8f;
 
-    [SerializeField]
-    private float detectDist;
-    [SerializeField]
-    private float endAttackDist;
+    public float detectDist;
+    public float endAttackDist;
     [SerializeField]
     private float cadency;
     [SerializeField]
     private int damage;
-    [SerializeField]
-    private float moveSpeed;
+    public float moveSpeed;
     [SerializeField]
     private Transform weapon;
     [SerializeField]
@@ -34,7 +31,8 @@ public class Enemy : MonoBehaviour
     private bool isAttacking = false;
     private bool canAttack = true;
     private bool canRotateToPlayer = true;
-    private float distToPlayer;
+    [HideInInspector]
+    public float distToPlayer;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -90,7 +88,7 @@ public class Enemy : MonoBehaviour
         EnemyMovement(moveSpeed, transform.forward);
     }
 
-    void EnemyMovement(float speed, Vector3 dire)
+    public virtual void EnemyMovement(float speed, Vector3 dire)
     {
         Vector3 auxDir = dire;
         auxDir.y += gravity;
@@ -109,10 +107,10 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
+        //Se mueve en función del área donde esté
+        DetectPlayerInArea();
         if (canAttack)
         {
-            //Se mueve en función del área donde esté
-            DetectPlayerInArea();
             //Instancia balas en dirección al player con cadencia
             Action();
         }
@@ -120,7 +118,7 @@ public class Enemy : MonoBehaviour
         
     }
 
-    void DetectPlayerInArea()
+    public virtual void DetectPlayerInArea()
     {
         if (distToPlayer > endAttackDist)
         {
@@ -132,7 +130,6 @@ public class Enemy : MonoBehaviour
     {
         if (canRotateToPlayer)
         {
-
             canRotateToPlayer = false;
             Vector3 aux = direToPlayer;
             aux.y = 0;
@@ -183,7 +180,7 @@ public class Enemy : MonoBehaviour
         canRotateToPlayer = true;
     }
 
-    private void OnDrawGizmos()
+    public virtual void OnDrawGizmos()
     {
         //Detect
         Gizmos.color = Color.green;

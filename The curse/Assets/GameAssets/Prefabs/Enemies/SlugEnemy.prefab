@@ -466,6 +466,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1847
   direToPlayer: {x: 0, y: 0, z: 0}
+  distToPlayer: 0
+  iniAttackDist: 7
 --- !u!143 &4040896063663955138
 CharacterController:
   m_ObjectHideFlags: 0

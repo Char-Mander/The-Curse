@@ -72,7 +72,7 @@
     <Compile Include="Assets\GameAssets\Scripts\Characters\SimpleNPC.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\SlugEnemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\Spawner.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\ParticleWeapon.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\CheckPoint.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\Dialogue.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\DialogueManager.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\InteractableObject.cs" />
@@ -81,6 +81,8 @@
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\PickUpObjects.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PoisonedZone.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Puddle.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Quest.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\QuestController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Sounds\PlayerSoundsManager.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\Fuel.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\FuelBar.cs" />
