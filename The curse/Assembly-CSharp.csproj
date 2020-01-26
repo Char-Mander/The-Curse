@@ -91,6 +91,8 @@
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\StaminaBar.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\EnemyCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\FixedElementCanvasController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\InteractableObjectCanvasController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\WorldSpaceCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\Bullet.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\IWeapon.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\ParticleShoot.cs" />

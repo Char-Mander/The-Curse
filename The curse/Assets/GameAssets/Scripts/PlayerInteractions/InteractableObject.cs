@@ -22,19 +22,12 @@ public class InteractableObject : MonoBehaviour
         dialogue = isNpc ? GetComponent<Dialogue>() : null;
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PlayerInteractionZone"))
         {
             other.GetComponentInParent<InteractWithObjects>().SetGameObjectToInteract(this.gameObject);
-        }
-    }*/
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("PlayerInteractionZone"))
-        {
-            other.GetComponentInParent<InteractWithObjects>().SetGameObjectToInteract(this.gameObject);
+            GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(true);
         }
     }
 
@@ -43,6 +36,7 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("PlayerInteractionZone"))
         {
             other.GetComponentInParent<InteractWithObjects>().SetGameObjectToInteract(null);
+            GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(false);
         }
     }
 

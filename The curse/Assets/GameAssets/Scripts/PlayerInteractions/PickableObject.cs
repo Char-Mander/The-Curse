@@ -11,7 +11,8 @@ public class PickableObject : MonoBehaviour
 		if (other.CompareTag("PlayerInteractionZone"))
         {
             other.GetComponentInParent<PickUpObjects>().SetObjectToPickUp(this.gameObject);
-		}
+            GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(true);
+        }
 	}
 
     private void OnTriggerExit(Collider other)
@@ -19,7 +20,8 @@ public class PickableObject : MonoBehaviour
         if (other.CompareTag("PlayerInteractionZone"))
 		{
 			other.GetComponentInParent<PickUpObjects>().SetObjectToPickUp(null);
-		}
+            GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(false);
+        }
 	}
 
     public bool isPickable() { return pickable; }

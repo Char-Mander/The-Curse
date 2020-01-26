@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCanvasController : MonoBehaviour
+public class EnemyCanvasController : WorldSpaceCanvasController
 {
     GameObject enemy;
     Health enemyHealth;
@@ -14,11 +14,6 @@ public class EnemyCanvasController : MonoBehaviour
         enemyHealthBar = GetComponentInChildren<HealthBar>();
         enemyHealthBar.SetMaxHealth(enemyHealth.GetMaxHealth());
         enemyHealthBar.SetCurrentHealth(enemyHealth.GetMaxHealth());
-    }
-
-    private void Update()
-    {
-        this.gameObject.transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
     }
 
     public void UpdateHealthBar()
