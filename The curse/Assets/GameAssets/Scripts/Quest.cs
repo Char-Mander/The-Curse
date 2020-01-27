@@ -17,4 +17,10 @@ public class Quest : MonoBehaviour
     {
         
     }
+
+    public void InitQuest(string texto, CheckPoint cP)
+    {
+        this.texto = texto;
+        this.cP = cP;
+    }
 }
