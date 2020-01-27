@@ -10,8 +10,7 @@ public class Enemy : MonoBehaviour
     public float endAttackDist;
     [SerializeField]
     private float cadency;
-    [SerializeField]
-    private int damage;
+    public int damage;
     public float moveSpeed;
     [SerializeField]
     private Transform weapon;
@@ -29,7 +28,8 @@ public class Enemy : MonoBehaviour
     public Vector3 direToPlayer;
 
     private bool isAttacking = false;
-    private bool canAttack = true;
+    [HideInInspector]
+    public bool canAttack = true;
     private bool canRotateToPlayer = true;
     [HideInInspector]
     public float distToPlayer;
@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Rotate());
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         //Se mueve en función del área donde esté
         DetectPlayerInArea();
@@ -114,8 +114,6 @@ public class Enemy : MonoBehaviour
             //Instancia balas en dirección al player con cadencia
             Action();
         }
-           
-        
     }
 
     public virtual void DetectPlayerInArea()
@@ -136,25 +134,22 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(aux, Vector3.up);
             if(weapon!=null) weapon.rotation = Quaternion.LookRotation(direToPlayer);
             Vector3 playerHead = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, player.transform.position.z);
-            posDisp.transform.LookAt(playerHead);
+            if(posDisp != null) posDisp.transform.LookAt(playerHead);
             StartCoroutine(RotateAgain());
         }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    public virtual void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Terrain"))
         {
             Vector3 direVec = hit.normal;
             direVec.y = 0;
             this.transform.rotation = Quaternion.LookRotation(direVec);
-            //Mover hacia el player
         }
         if (hit.collider.CompareTag("Player"))
-        {
+        {  
             hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
-            //Para inmolar al enemigo
-            GetComponent<Health>().LoseHealth(GetComponent<Health>().GetMaxHealth()); 
         }
     }
 
@@ -164,8 +159,13 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(projectile, posDisp.position, posDisp.rotation);
             canAttack = false;
-            StartCoroutine(Reload());
+            ReloadCoroutine();
         }
+    }
+
+    public virtual void ReloadCoroutine()
+    {
+        StartCoroutine(Reload());
     }
 
     IEnumerator Reload()

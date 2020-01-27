@@ -13,8 +13,7 @@ public class SlugEnemy : Enemy
        {
            base.EnemyMovement(moveSpeed, -transform.forward);
        }
-       else 
-        if (distToPlayer > endAttackDist)
+       else  if (distToPlayer > endAttackDist)
         {
             base.EnemyMovement(moveSpeed, transform.forward);
         }

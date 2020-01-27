@@ -65,6 +65,7 @@
     <Compile Include="Assets\GameAssets\Scripts\Characters\ExplosiveEnemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\FinalBoss.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\ICharacter.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Characters\InfectedMonster.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\Mount.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\NPC.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\PlayerController.cs" />

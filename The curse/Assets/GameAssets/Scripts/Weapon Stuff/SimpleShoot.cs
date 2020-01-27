@@ -19,12 +19,15 @@ public class SimpleShoot : MonoBehaviour, IWeapon
     [SerializeField]
     private float zoomMaxValue;
     [SerializeField]
+    private float cadency;
+    [SerializeField]
     private float zoomSpeed;
     [SerializeField]
     private List<AudioClip> shotAudioClips = new List<AudioClip>();
     [SerializeField]
     private Transform target;
     private bool isZooming = false;
+    private bool canShoot = true;
     private AudioSource aSource;
 
 
@@ -51,7 +54,12 @@ public class SimpleShoot : MonoBehaviour, IWeapon
 
     public void StartShootAnimation()
     {
-        GetComponent<Animator>().SetTrigger("Fire");
+        if (canShoot)
+        {
+            canShoot = false;
+            GetComponent<Animator>().SetTrigger("Fire");
+            StartCoroutine(Reload());
+        }
     }
 
     public void Shoot()
@@ -88,6 +96,11 @@ public class SimpleShoot : MonoBehaviour, IWeapon
         Destroy(casing, 5);
     }
 
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(cadency);
+        canShoot = true;
+    }
 
     public void Zoom(bool isZoom)
     {
