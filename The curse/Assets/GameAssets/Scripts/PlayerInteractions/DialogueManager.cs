@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (!isOnADialogue)
         {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().EnableOrDisableCharacterController(false);
             isOnADialogue = true;
             sentences.Clear();
             this.dialogue = dialogue;
@@ -40,7 +41,13 @@ public class DialogueManager : MonoBehaviour
             float textTime = sentence.Length > 30 ? (float)sentence.Length / 20 : 1f;
             canvasC.UpdateTextPanel(sentence, true, dialogue.GetName());
             yield return new WaitForSeconds(canvasC.GetTextTime());
-            StartCoroutine(WaitForDisplay(index + 1));
+            /*if (dialogue.CanPlayerChoose() && dialogue.GetIndexOfSentence(sentence) == dialogue.GetInteractableSentenceIndex())
+            {
+                dialogue.NextCurrentSentenceIndex();
+                //Lo muestra y hace sus cosas 
+                StartCoroutine(WaitForDisplay(index + 1));
+            }
+            else */ StartCoroutine(WaitForDisplay(index + 1));
         }
         else
         {
@@ -52,6 +59,7 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         isOnADialogue = false;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().EnableOrDisableCharacterController(true);
     }
 
     public bool IsOnADialogue() { return isOnADialogue; }

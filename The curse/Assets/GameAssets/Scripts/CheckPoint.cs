@@ -7,11 +7,11 @@ public class CheckPoint : MonoBehaviour
     [SerializeField]
     private Transform spawnPoint;
     bool isActive;
-    QuestController questController;
+    CheckPointController checkPointController;
 
     private void Start()
     {
-        questController = FindObjectOfType<QuestController>();
+        checkPointController = FindObjectOfType<CheckPointController>();
     }
 
 
@@ -26,7 +26,7 @@ public class CheckPoint : MonoBehaviour
     {
         if(other.CompareTag("Player") && !isActive)
         {
-            questController.ActiveCP(this);
+            checkPointController.ActiveCP(this);
         }
     }
 

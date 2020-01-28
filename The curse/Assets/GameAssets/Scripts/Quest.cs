@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
-    string texto;
-    CheckPoint cP;
+    string text;
+    Transform iniQuest;
+    Transform endQuest;
+    bool isActive;
+    QuestController questController;
     // Start is called before the first frame update
     void Start()
     {
-        
+        questController = FindObjectOfType<QuestController>();
+    }
+    
+    public void SetAsCurrentQuest(bool value)
+    {
+        isActive = value;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void InitQuest(string texto, CheckPoint cP)
-    {
-        this.texto = texto;
-        this.cP = cP;
-    }
+    public bool IsActive() { return isActive; }
 }

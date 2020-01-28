@@ -61,19 +61,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameAssets\Scripts\BoxAnim.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Characters\Enemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\ExplosiveEnemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\FinalBoss.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\ICharacter.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Characters\InfectedMonster.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\Mount.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\NPC.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\PlayerController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\RangedEnemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\SimpleNPC.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Characters\SlugEnemy.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Characters\Spawner.cs" />
     <Compile Include="Assets\GameAssets\Scripts\CheckPoint.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\CheckPointController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Enemies\CursedGirlEnemy.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Enemies\InfectedMonster.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Enemies\SlugEnemy.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Enemies\Spawner.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\Dialogue.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\DialogueManager.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\InteractableObject.cs" />
