@@ -854,6 +854,16 @@ PrefabInstance:
       propertyPath: sentencesList.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8884730424618027515, guid: 2ce050d1ae1afb34fb12c7496c45dca5,
+        type: 3}
+      propertyPath: sentencesList.Array.data[0].sentence
+      value: asdasda
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884730424618027515, guid: 2ce050d1ae1afb34fb12c7496c45dca5,
+        type: 3}
+      propertyPath: sentencesList.Array.data[1].sentence
+      value: gggggggg
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ce050d1ae1afb34fb12c7496c45dca5, type: 3}
 --- !u!1 &825188746
@@ -1292,6 +1302,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68226138411527041, guid: b4067bb315e7901419b817511d6c9fd5,
+        type: 3}
+      propertyPath: sentencesList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 68226138411527041, guid: b4067bb315e7901419b817511d6c9fd5,
+        type: 3}
+      propertyPath: sentencesList.Array.data[0].sentence
+      value: esto es una secuencia
+      objectReference: {fileID: 0}
+    - target: {fileID: 68226138411527041, guid: b4067bb315e7901419b817511d6c9fd5,
+        type: 3}
+      propertyPath: sentencesList.Array.data[1].sentence
+      value: De frases supuestamente
+      objectReference: {fileID: 0}
+    - target: {fileID: 68226138411527041, guid: b4067bb315e7901419b817511d6c9fd5,
+        type: 3}
+      propertyPath: sentencesList.Array.data[2].sentence
+      value: Con mucha relevancia
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4067bb315e7901419b817511d6c9fd5, type: 3}
@@ -2676,7 +2706,7 @@ PrefabInstance:
     - target: {fileID: 10323927231753843, guid: b2a60389758f26c498388c667659b7ee,
         type: 3}
       propertyPath: sentencesList.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 10323927231753843, guid: b2a60389758f26c498388c667659b7ee,
         type: 3}
@@ -2687,6 +2717,21 @@ PrefabInstance:
         type: 3}
       propertyPath: hasInteraction
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10323927231753843, guid: b2a60389758f26c498388c667659b7ee,
+        type: 3}
+      propertyPath: sentencesList.Array.data[0].sentence
+      value: "Ahora mismo deber\xEDa pararsse"
+      objectReference: {fileID: 0}
+    - target: {fileID: 10323927231753843, guid: b2a60389758f26c498388c667659b7ee,
+        type: 3}
+      propertyPath: sentencesList.Array.data[1].sentence
+      value: aaaaaaaa
+      objectReference: {fileID: 0}
+    - target: {fileID: 10323927231753843, guid: b2a60389758f26c498388c667659b7ee,
+        type: 3}
+      propertyPath: sentencesList.Array.data[2].sentence
+      value: "ca\xEDste wey"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2a60389758f26c498388c667659b7ee, type: 3}

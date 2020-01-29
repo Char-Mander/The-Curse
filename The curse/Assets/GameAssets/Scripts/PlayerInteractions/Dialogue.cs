@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Sentence
 {
-    public string sentence { get; set;}
+    public string sentence;
     public List<string> options = new List<string>();
 }
 

@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
         if (!isOnADialogue)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().EnableOrDisableCharacterController(false);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSoundsManager>().StopSound();
             isOnADialogue = true;
             sentences.Clear();
             this.dialogue = dialogue;
