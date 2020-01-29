@@ -11,30 +11,34 @@ public class CursedGirlEnemy : Enemy
     [SerializeField]
     GameObject canvas;
 
+    private bool activatePhase2 = false;
+
     public override void Start()
     {
-        base.Start();
+        cController = GetComponent<CharacterController>();
+        player = GameObject.FindGameObjectWithTag("Player");
         canvas.SetActive(false);
     }
 
     public override void Update()
     {
+        
         if (hasSpoken)
         {
-            if(!canvas.active)
+            direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
+            AimPlayer();
+            if (!canvas.active)
                 canvas.SetActive(true);
             if(!isAttacking) isAttacking = true;
-            AimPlayer();
-            Attack();
 
-            if (GetPhase() == 1)
+            if(GetPhase() == 1) Attack();
+            
+            if (GetPhase() == 2)
             {
-            }
-            else if (GetPhase() == 2)
-            {
+
                 //Lanza objetos, los cuales se instancian y se aplican una fuerza
             }
-            else
+            else if(GetPhase() == 3)
             {
                 //Ataca cuerpo a cuerpo
             }
@@ -44,7 +48,7 @@ public class CursedGirlEnemy : Enemy
     public override void Attack()
     {
         DetectPlayerInArea();
-        if(GetPhase() != 3 && canAttack)
+        if(canAttack)
         {
             Action();
         }

@@ -20,7 +20,6 @@ public class Puddle : MonoBehaviour
         particles = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
         dir = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
-        print("1 puddleshot");
     }
 
     // Update is called once per frame
@@ -33,7 +32,6 @@ public class Puddle : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            print("Ha impactado en el player y le hace " + damage + " de daño");
             GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().LoseHealth(damage);
             particles.Play();
         }

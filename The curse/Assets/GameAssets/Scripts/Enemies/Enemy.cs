@@ -8,8 +8,7 @@ public class Enemy : MonoBehaviour
 
     public float detectDist;
     public float endAttackDist;
-    [SerializeField]
-    private float cadency;
+    public float cadency;
     public int damage;
     public float moveSpeed;
     [SerializeField]
@@ -102,6 +101,7 @@ public class Enemy : MonoBehaviour
         {
             this.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
         }
+
         StartCoroutine(Rotate());
     }
 
@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour
             canRotateToPlayer = false;
             Vector3 aux = direToPlayer;
             aux.y = 0;
-            transform.rotation = Quaternion.LookRotation(aux, Vector3.up);
+            transform.rotation = Quaternion.LookRotation(aux);
             if(weapon!=null) weapon.rotation = Quaternion.LookRotation(direToPlayer);
             Vector3 playerHead = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, player.transform.position.z);
             if(posDisp != null) posDisp.transform.LookAt(playerHead);

@@ -14,6 +14,7 @@ public class NPC : MonoBehaviour
 
     GameObject player;
     Vector3 direToPlayer;
+    Quaternion iniRotation;
     bool detected = false;
     [HideInInspector]
     public bool canRotate = true;
@@ -58,7 +59,6 @@ public class NPC : MonoBehaviour
     {
         if (!hit.collider.CompareTag("Terrain") && !hit.collider.CompareTag("Player"))
         {
-            if(!detected) detected = true;
             Vector3 direVec = hit.normal;
             direVec.y = 0;
             this.transform.rotation = Quaternion.LookRotation(direVec);
@@ -69,13 +69,14 @@ public class NPC : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if(!detected) detected = true;
-            //direToPlayer = player.transform.position - this.transform.position;
-            //Vector3 aux = direToPlayer;
-            //aux.y = 0;
-           // transform.rotation = Quaternion.LookRotation(aux, Vector3.up);
-            Vector3 playerHead = new Vector3(player.gameObject.transform.position.x, player.transform.position.y + 0.5f, player.transform.position.z);
-            head.LookAt(playerHead);
+            if (!detected)
+            {
+                detected = true;
+            }
+            direToPlayer = player.transform.position - this.transform.position;
+            Vector3 aux = direToPlayer;
+            aux.y = 0;
+            head.transform.rotation = Quaternion.LookRotation(direToPlayer);
         }
 
     }
