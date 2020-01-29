@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     Dialogue dialogue;
     bool isOnADialogue = false;
 
-    private Queue<string> sentences = new Queue<string>();
+    private Queue<Sentence> sentences = new Queue<Sentence>();
     
 
     public void StartDialogue(Dialogue dialogue)
@@ -21,33 +21,33 @@ public class DialogueManager : MonoBehaviour
             isOnADialogue = true;
             sentences.Clear();
             this.dialogue = dialogue;
-            foreach (string sentence in dialogue.GetSentences())
+            foreach (Sentence sentence in dialogue.GetSentences())
             {
                 sentences.Enqueue(sentence);
             }
-            DisplayNextSentence();
+            DisplayNextSentence(0);
         }
     }
 
-    private void DisplayNextSentence()
+    public void DisplayNextSentence(int index)
     {
-        StartCoroutine(WaitForDisplay(0));
+        StartCoroutine(WaitForDisplay(index));
     }
 
     IEnumerator WaitForDisplay(int index)
     {   if (index < dialogue.GetSentences().Count)
         {
-            string sentence = sentences.Dequeue();
-            float textTime = sentence.Length > 30 ? (float)sentence.Length / 20 : 1f;
-            canvasC.UpdateTextPanel(sentence, true, dialogue.GetName());
-            yield return new WaitForSeconds(canvasC.GetTextTime());
-            /*if (dialogue.CanPlayerChoose() && dialogue.GetIndexOfSentence(sentence) == dialogue.GetInteractableSentenceIndex())
+            Sentence s = sentences.Dequeue();
+            float textTime = s.sentence.Length > 30 ? (float)s.sentence.Length / 20 : 1f;
+            canvasC.UpdateTextPanel(s.sentence, true, dialogue.GetName());
+            if (dialogue.CanPlayerChoose(index))
             {
-                dialogue.NextCurrentSentenceIndex();
-                //Lo muestra y hace sus cosas 
-                StartCoroutine(WaitForDisplay(index + 1));
+                canvasC.UpdateSentenceOptionsPanel(s, index);
             }
-            else */ StartCoroutine(WaitForDisplay(index + 1));
+            else {
+                yield return new WaitForSeconds(canvasC.GetTextTime());
+                DisplayNextSentence(index + 1);
+            }
         }
         else
         {

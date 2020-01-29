@@ -115,9 +115,6 @@ public class InfectedMonster : Enemy
         base.OnDrawGizmos();
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(this.transform.position, iniAttackDist);
-
-        Gizmos.color = Color.grey;
-        Gizmos.DrawWireSphere(this.transform.position, radius);
     }
 
 }

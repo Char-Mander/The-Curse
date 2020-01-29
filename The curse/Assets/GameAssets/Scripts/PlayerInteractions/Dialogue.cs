@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct InteractableSentences
+[System.Serializable]
+public class Sentence
 {
-
-    public InteractableSentences(int index, List<string> options)
-    {
-        this.index = index;
-        sentenceOptions = options;
-    }
-
-    public int index { get; set; }
-    public List<string> sentenceOptions { get; set; }
+    public string sentence { get; set;}
+    public List<string> options = new List<string>();
 }
 
 public class Dialogue : MonoBehaviour
@@ -22,37 +16,11 @@ public class Dialogue : MonoBehaviour
     [SerializeField]
     private bool canPlayerChoose;
     [SerializeField]
-    private List<InteractableSentences> answersToSentences;
-    [SerializeField]
-    private List<string> sentences;
-    
-    private int interactableSentenceIndex=0;
-
-    //TODO
-    private void Start()
-    {
-        LoadAnswers();
-    }
-
-    private void LoadAnswers()
-    {
-
-    }
-
+    private List<Sentence> sentencesList;
+        
     public string GetName() { return name; }
 
-    public List<string> GetSentences(){ return sentences; }
+    public List<Sentence> GetSentences(){ return sentencesList; }
 
-    public int GetIndexOfSentence(string sentence) { return sentences.IndexOf(sentence); }
-
-    public bool CanPlayerChoose() { return canPlayerChoose; }
-
-    public int GetInteractableSentenceIndex() { return answersToSentences[interactableSentenceIndex].index; }
-
-    public void NextInteractableSentenceIndex()
-    {
-        if (interactableSentenceIndex < answersToSentences.Count - 1)
-            interactableSentenceIndex++;
-        else canPlayerChoose = false;
-    }
+    public bool CanPlayerChoose(int index) { return sentencesList[index].options.Count>0; }
 }

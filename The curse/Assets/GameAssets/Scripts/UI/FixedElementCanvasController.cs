@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class FixedElementCanvasController : MonoBehaviour
 {   [SerializeField]
-    GameObject interactionPanel;
+    GameObject textPanel;
+    [SerializeField]
+    GameObject sentenceOptionsPanel;
+    [SerializeField]
+    GameObject optionButton;
     [SerializeField]
     GameObject npcNamePanel;
     [SerializeField]
@@ -20,6 +24,7 @@ public class FixedElementCanvasController : MonoBehaviour
     FuelBar playerFuelBar;
     Coroutine panelTextCoroutine, textTyping;
     float textTime;
+    int sentenceIndex;
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,7 +41,8 @@ public class FixedElementCanvasController : MonoBehaviour
         playerStaminaBar.SetMaxStamina(playerStamina.GetMaxStamina());
         playerStaminaBar.SetCurrentStamina(playerStamina.GetMaxStamina());
         npcNamePanel.SetActive(false);
-        interactionPanel.SetActive(false);
+        textPanel.SetActive(false);
+        sentenceOptionsPanel.SetActive(false);
         fuelBarUI.SetActive(false);
     }
 
@@ -65,6 +71,18 @@ public class FixedElementCanvasController : MonoBehaviour
         panelTextCoroutine = StartCoroutine(WaitForTextToBeShown(textTime, isNpc));
     }
 
+    public void UpdateSentenceOptionsPanel(Sentence s, int index)
+    {
+        sentenceIndex = index;
+        //Update de visual panel
+    }
+
+    public void ChooseAnOption(int index)
+    {
+        //guarda la opción
+        StartCoroutine(WaitForCleanSentencesOptions(1, index));
+    }
+
     public void EnableOrDisableFuelBar(bool enable)
     {
         fuelBarUI.SetActive(enable);
@@ -86,7 +104,8 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void InitTextPanel(string text, bool isNpc, string name)
     {
-        interactionPanel.SetActive(true);
+        print("Pone en active el textpanel");
+        textPanel.SetActive(true);
         if (isNpc)
         {
             npcNamePanel.SetActive(true);
@@ -94,7 +113,7 @@ public class FixedElementCanvasController : MonoBehaviour
             textTyping = StartCoroutine(TypeText(text));
 
         }
-        else interactionPanel.GetComponentInChildren<Text>().text = text;
+        else textPanel.GetComponentInChildren<Text>().text = text;
 
     }
 
@@ -103,8 +122,14 @@ public class FixedElementCanvasController : MonoBehaviour
         textTime = 0;
         npcNamePanel.SetActive(false);
         npcNamePanel.GetComponentInChildren<Text>().text = "";
-        interactionPanel.SetActive(false);
-        interactionPanel.GetComponentInChildren<Text>().text = "";
+        textPanel.SetActive(false);
+        textPanel.GetComponentInChildren<Text>().text = "";
+    }
+
+    IEnumerator WaitForCleanSentencesOptions(float time, int index)
+    {
+        yield return new WaitForSeconds(time);
+        FindObjectOfType<DialogueManager>().DisplayNextSentence(index + 1);
     }
 
     IEnumerator WaitForTextToBeShown(float time, bool isNpc)
@@ -115,10 +140,10 @@ public class FixedElementCanvasController : MonoBehaviour
 
     IEnumerator TypeText(string text)
     {
-        interactionPanel.GetComponentInChildren<Text>().text = "";
+        textPanel.GetComponentInChildren<Text>().text = "";
         foreach (char letter in text.ToCharArray())
         {
-            interactionPanel.GetComponentInChildren<Text>().text += letter;
+            textPanel.GetComponentInChildren<Text>().text += letter;
             yield return null;
         }
     }

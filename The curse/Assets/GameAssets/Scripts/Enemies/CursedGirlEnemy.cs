@@ -10,21 +10,25 @@ public class CursedGirlEnemy : Enemy
     private float iniAttackDist;
     [SerializeField]
     GameObject canvas;
-    // Start is called before the first frame update
-    void Start()
+
+    public override void Start()
     {
+        base.Start();
+        canvas.SetActive(false);
     }
 
     public override void Update()
     {
         if (hasSpoken)
         {
-            isAttacking = true;
+            if(!canvas.active)
+                canvas.SetActive(true);
+            if(!isAttacking) isAttacking = true;
             AimPlayer();
+            Attack();
+
             if (GetPhase() == 1)
             {
-                Attack();
-                //Lanza el puddle shot con otro color 
             }
             else if (GetPhase() == 2)
             {
@@ -40,16 +44,21 @@ public class CursedGirlEnemy : Enemy
     public override void Attack()
     {
         DetectPlayerInArea();
+        if(GetPhase() != 3 && canAttack)
+        {
+            Action();
+        }
     }
 
 
     public override void DetectPlayerInArea()
     {
-        if (distToPlayer < iniAttackDist && !canAttack)
+        if (distToPlayer < iniAttackDist)
         {
+            if (GetPhase() == 3  && !canAttack)
             base.EnemyMovement(moveSpeed, -transform.forward);
         }
-        else
+        else if (distToPlayer > endAttackDist)
         {
             base.EnemyMovement(moveSpeed, transform.forward);
         }
@@ -64,12 +73,11 @@ public class CursedGirlEnemy : Enemy
             this.transform.rotation = Quaternion.LookRotation(direVec);
             //Mover hacia el player
         }
-        if (hit.collider.CompareTag("Player") && canAttack )
+        else if (hit.collider.CompareTag("Player") && canAttack)
         {
             canAttack = false;
             hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
             base.ReloadCoroutine();
-            
         }
     }
 
@@ -77,8 +85,7 @@ public class CursedGirlEnemy : Enemy
     {
         if (other.CompareTag("Player"))
         {
-            //empieza el diálogo
-            //cuando termine el diálogo, activa el hasSpoken
+            if(!hasSpoken)
             hasSpoken = true;
         }
     }

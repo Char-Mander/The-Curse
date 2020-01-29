@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2420759010115409680}
   - component: {fileID: 2420759010115409681}
   - component: {fileID: 2420759010115409773}
-  - component: {fileID: 2420759010115409772}
   - component: {fileID: 2420759010115409771}
   m_Layer: 0
   m_Name: PoisonedSphere
@@ -110,19 +109,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2420759010115409772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2420759010115409682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8f4c2379962b934381d3b87183dcc63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerFrame: 0
 --- !u!114 &2420759010115409771
 MonoBehaviour:
   m_ObjectHideFlags: 0
