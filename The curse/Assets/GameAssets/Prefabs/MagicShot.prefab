@@ -4743,5 +4743,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puddle: {fileID: 2420759010115409682, guid: 1871518069b53d74c8b7320091aa76fe, type: 3}
-  damage: 8
+  damage: 6
   force: 8

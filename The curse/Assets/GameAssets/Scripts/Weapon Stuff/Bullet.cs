@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviour
     
     private void OnTriggerEnter(Collider col)
     {
+        print("La bala impacta con " + col.name);
         if (col.CompareTag("Player"))
         {
             //CreateParticleAtPoint(bloodParticle, col.transform.position, Quaternion rotate)
