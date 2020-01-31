@@ -370,7 +370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4040896063663955137}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 125.7, y: -9.44, z: 31.87}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4040896063911058207}
@@ -466,6 +466,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1847
   direToPlayer: {x: 0, y: 0, z: 0}
+  isAttacking: 0
   canAttack: 1
   distToPlayer: 0
   iniAttackDist: 7

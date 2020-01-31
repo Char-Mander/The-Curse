@@ -13,19 +13,29 @@ public class CursedGirlEnemy : Enemy
     [SerializeField]
     private float thirdPhaseSpeed;
     [SerializeField]
-    GameObject canvas;
-    
+    private float monstersCoolDown;
+    [SerializeField]
+    GameObject enemyCanvas;
+    [SerializeField]
+    GameObject interactableCanvas;
+    [SerializeField]
+    Transform instantiateMonstersPos;
+    [SerializeField]
+    List<GameObject> monsters = new List<GameObject>();
+
     private int currentPhase = 1;
     private bool hasSpoken = false;
     private bool canTeleport = true;
     private bool playerCanKillHer = true;
+    private bool canCreateMonsters = true;
 
     public override void Start()
     {
         cController = GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player");
         thirdPhaseSpeed = moveSpeed * 3;
-        canvas.SetActive(false);
+        enemyCanvas.SetActive(false);
+        interactableCanvas.SetActive(true);
     }
 
     public override void Update()
@@ -36,36 +46,36 @@ public class CursedGirlEnemy : Enemy
         if (distToPlayer < detectDist && !hasSpoken)
         {
             //Suelta el diálogo 
-
             hasSpoken = true;
-            canvas.SetActive(true);
+            enemyCanvas.SetActive(true);
+            interactableCanvas.SetActive(false);
             isAttacking = true;
         }
-
-        if (hasSpoken)
+        else if (hasSpoken)
         {
             AimPlayer();
-            if (GetPhase() == 1)
+
+            switch (GetPhase())
             {
-                Attack();
-            }
-            
-            if (GetPhase() == 2)
-            {
-                Attack();
-                Teleport();
-            }
-            else if(GetPhase() == 3 )
-            {
-                if (playerCanKillHer)
-                {
-                    moveSpeed = thirdPhaseSpeed;
-                    DetectPlayerInArea();
-                }
-                else
-                {
-                    //Diálogo
-                }
+                case 1:
+                    Attack();
+                    break;
+                case 2:
+                    Attack();
+                    Teleport();
+                    break;
+                case 3:
+                    if (playerCanKillHer)
+                    {
+                        moveSpeed = thirdPhaseSpeed;
+                        Attack();
+                    }
+                    else
+                    {
+                        interactableCanvas.SetActive(true);
+                        //Diálogo
+                    }
+                    break;
             }
         }
     }
@@ -73,14 +83,18 @@ public class CursedGirlEnemy : Enemy
     public override void Attack()
     {
         DetectPlayerInArea();
-        if(canAttack)
+        if(canAttack && GetPhase() != 3)
         {
             Action();
+        }
+        else if (canCreateMonsters && GetPhase() == 3)
+        {
+            CreateMonster();
         }
     }
     
 
-    public void Teleport()
+    private void Teleport()
     {
         if (canTeleport)
         {
@@ -91,6 +105,12 @@ public class CursedGirlEnemy : Enemy
         }
     }
 
+    private void CreateMonster()
+    {
+        canCreateMonsters = false;
+        Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos);
+        StartCoroutine(MonstersCadency());
+    }
 
     public override void DetectPlayerInArea()
     {
@@ -152,6 +172,13 @@ public class CursedGirlEnemy : Enemy
         yield return new WaitForSeconds(teleportCoolDown);
         canTeleport = true;
     }
+
+    IEnumerator MonstersCadency()
+    {
+        yield return new WaitForSeconds(monstersCoolDown);
+        canCreateMonsters = true;
+    }
+
 
     public override void OnDrawGizmos()
     {

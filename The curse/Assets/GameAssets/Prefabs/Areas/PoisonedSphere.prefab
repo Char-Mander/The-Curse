@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2420759010115409681}
   - component: {fileID: 2420759010115409773}
   - component: {fileID: 2420759010115409771}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PoisonedSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
