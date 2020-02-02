@@ -77,9 +77,10 @@ public class WeaponController : MonoBehaviour
     {
         for (int i = 0; i < weaponList.Count; i++)
         {
-            if (weaponList[weaponIndex].GetWeapon().GetComponent<ParticleShoot>() != null)
+            weaponList[i].enableWeapon();
+            if (weaponList[i].GetWeapon().GetComponent<ParticleShoot>() != null)
             {
-               // weaponList[weaponIndex].GetWeapon().GetComponent<ParticleShoot>().setShooting(false);
+                weaponList[i].GetWeapon().GetComponent<ParticleShoot>().setShooting(false);
             }
             weaponList[i].disableWeapon();
         }

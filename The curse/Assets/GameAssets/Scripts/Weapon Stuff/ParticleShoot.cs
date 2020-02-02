@@ -23,7 +23,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
     private AudioSource aSource;
     private Fuel fuel;
     private ParticleSystem weaponParticle;
-
+    private GameObject lastEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -110,6 +110,17 @@ public class ParticleShoot : MonoBehaviour, IWeapon
         {
             StopSound();
             StopParticles();
+            if(lastEnemy != null)
+            {
+                if (lastEnemy.GetComponent<Health>() != null)
+                {
+                    lastEnemy.GetComponent<Health>().StopReceivingConstantDamage();
+                }
+                else if(lastEnemy.GetComponentInParent<Health>() != null)
+                {
+                    lastEnemy.GetComponentInParent<Health>().StopReceivingConstantDamage();
+                }
+            }
         }
         isShooting = shoot;
     }
@@ -121,7 +132,13 @@ public class ParticleShoot : MonoBehaviour, IWeapon
 
     private void StopSound()
     {
-        if(aSource.isPlaying) aSource.Stop();
+        print("Entra al stopSound");
+        print("asource: " + aSource);
+        if (aSource != null && aSource.isPlaying)
+        {
+            print("para el sonido");
+            aSource.Stop();
+        }
     }
 
     private void PlayingParticles()
@@ -131,7 +148,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
 
     private void StopParticles()
     {
-        if (weaponParticle.isEmitting) weaponParticle.Stop();
+        if (weaponParticle != null && weaponParticle.isEmitting) weaponParticle.Stop();
     }
 
     public bool IsShooting() { return isShooting; }
@@ -143,6 +160,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
             float auxConstantDamage = collision.gameObject.CompareTag("Enemy Head") ? constantDamage * 2 : constantDamage;
             if (collision.gameObject.GetComponent<Health>() != null) collision.gameObject.GetComponent<Health>().ReceiveConstantDamage(auxConstantDamage);
             else collision.gameObject.GetComponentInParent<Health>().ReceiveConstantDamage(auxConstantDamage);
+            lastEnemy = collision.gameObject;
         }
     }
 
@@ -152,6 +170,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
         {
             if (collision.gameObject.GetComponent<Health>() != null) collision.gameObject.GetComponent<Health>().StopReceivingConstantDamage();
             else collision.gameObject.GetComponentInParent<Health>().StopReceivingConstantDamage();
+            lastEnemy = null;
         }
     }
 }
