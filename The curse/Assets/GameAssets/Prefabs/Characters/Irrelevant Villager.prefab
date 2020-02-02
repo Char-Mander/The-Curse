@@ -313,11 +313,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Villager
-  sentences:
-  - "Parece que hoy no har\xE1 un buen d\xEDa"
-  - "\xBFQu\xE9 tal?"
-  - "Todo el d\xEDa trabajando y ganando una miseria"
-  - "Ya no s\xE9 ni desde cu\xE1ndo aparecieron esas bestias."
+  canPlayerChoose: 0
+  sentencesList:
+  - sentence: "\xBFQu\xE9 tal?"
+    options: []
+  - sentence: "Todo el d\xEDa trabajando y ganando una miseria."
+    options: []
+  - sentence: Hace tiempo que en el valle solo hay oscuridad.
+    options: []
 --- !u!143 &53275080527733715
 CharacterController:
   m_ObjectHideFlags: 0

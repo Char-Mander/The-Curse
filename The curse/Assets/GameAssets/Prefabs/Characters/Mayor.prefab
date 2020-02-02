@@ -1,5 +1,96 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &32832293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 32832294}
+  - component: {fileID: 32832297}
+  - component: {fileID: 32832296}
+  - component: {fileID: 32832295}
+  m_Layer: 18
+  m_Name: Moustache
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &32832294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32832293}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.197, z: 0.345}
+  m_LocalScale: {x: 0.47678, y: 0.07263927, z: 0.2949}
+  m_Children: []
+  m_Father: {fileID: 68226138703833119}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &32832297
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32832293}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &32832296
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32832293}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d1fa2682793ab154dabbea62951658a3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &32832295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32832293}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &460561862
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +192,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797192612}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 460561863}
@@ -757,12 +848,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Mayor
-  sentences:
-  - "\xBFMi hija? Fue una tragedia... Desapareci\xF3 hace dos lunas, y no pude hacer
-    nada..."
-  - Ya no hay esperanza para ninguno de nosotros.
-  - "Si alguien puede saber algo sobre el tema, es el sabio del pueblo. Buena suerte
-    intentando hablar con \xE9l..."
+  canPlayerChoose: 0
+  sentencesList:
+  - sentence: "Hace unas semanas desapareci\xF3 mi hija... Desde entonces, el valle
+      no ha vuelto a ser el mismo."
+    options: []
+  - sentence: Todos en la aldea estamos preocupados. No dejan de aparecer monstruos.
+    options: []
+  - sentence: "Si informaci\xF3n es lo que buscas, el sabio podr\xEDa serte de ayuda,
+      aunque lleva semanas sin salir de casa. Buena suerte intentando hablar con \xE9l..."
+    options: []
 --- !u!143 &68226138411527040
 CharacterController:
   m_ObjectHideFlags: 0
@@ -809,6 +904,7 @@ MonoBehaviour:
   moveSpeed: 0
   head: {fileID: 68226138703833119}
   canRotate: 1
+  characterCanRotate: 0
 --- !u!1 &68226138703833116
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,6 +937,7 @@ Transform:
   m_Children:
   - {fileID: 68226138332171560}
   - {fileID: 68226137779703387}
+  - {fileID: 32832294}
   m_Father: {fileID: 68226138411527103}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
