@@ -26,7 +26,6 @@ public class Bullet : MonoBehaviour
     
     private void OnTriggerEnter(Collider col)
     {
-        print("La bala impacta con " + col.name);
         if (col.CompareTag("Player"))
         {
             //CreateParticleAtPoint(bloodParticle, col.transform.position, Quaternion rotate)
@@ -37,6 +36,7 @@ public class Bullet : MonoBehaviour
             aSource.PlayOneShot(aSource.clip);
             //CreateParticleAtPoint(bloodParticle, col.transform.position, Quaternion rotate)
             col.gameObject.GetComponentInParent<Health>().LoseHealth(damage);
+            Destroy(this.gameObject);
         }
         else
         {
@@ -44,6 +44,5 @@ public class Bullet : MonoBehaviour
         }
 
         //Destroy(Instantiate(hitParticle, transform.position, Quaternion.identity), 3);
-        Destroy(this.gameObject);
     }
 }

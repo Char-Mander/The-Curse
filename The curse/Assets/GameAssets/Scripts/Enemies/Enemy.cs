@@ -89,7 +89,6 @@ public class Enemy : MonoBehaviour
 
     public virtual void EnemyMovement(float speed, Vector3 dire)
     {
-        print("Se mueve");
         Vector3 auxDir = dire;
         auxDir.y += gravity;
         cController.Move(auxDir * Time.deltaTime);

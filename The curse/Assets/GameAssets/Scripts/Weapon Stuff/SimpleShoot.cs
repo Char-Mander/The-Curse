@@ -107,5 +107,9 @@ public class SimpleShoot : MonoBehaviour, IWeapon
         isZooming = isZoom;
     }
 
+    public void SetCanShoot(bool shoot)
+    {
+        canShoot = shoot;
+    }
 
 }

@@ -9,7 +9,7 @@ public class ArmaClass
     private GameObject weapon;
     [SerializeField]
     private bool isUnlocked;
-
+    
     public void enableWeapon() { weapon.SetActive(true); }
 
     public void disableWeapon() { weapon.SetActive(false); }
@@ -77,11 +77,17 @@ public class WeaponController : MonoBehaviour
     {
         for (int i = 0; i < weaponList.Count; i++)
         {
+            if (weaponList[weaponIndex].GetWeapon().GetComponent<ParticleShoot>() != null)
+            {
+               // weaponList[weaponIndex].GetWeapon().GetComponent<ParticleShoot>().setShooting(false);
+            }
             weaponList[i].disableWeapon();
         }
         FixedElementCanvasController fixC = GameObject.FindGameObjectWithTag("FixedCanvas").GetComponent<FixedElementCanvasController>();
         fixC.EnableOrDisableFuelBar(false);
         weaponList[weaponIndex].enableWeapon();
+        if(weaponList[weaponIndex].GetWeapon().GetComponent<SimpleShoot>() != null)
+            weaponList[weaponIndex].GetWeapon().GetComponent<SimpleShoot>().SetCanShoot(true);
         if (weaponList[weaponIndex].GetWeapon().GetComponent<Fuel>())
         {
             fixC.EnableOrDisableFuelBar(true);

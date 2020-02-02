@@ -19,7 +19,7 @@ public class CursedGirlEnemy : Enemy
     [SerializeField]
     GameObject interactableCanvas;
     [SerializeField]
-    Transform instantiateMonstersPos;
+    List<Transform> instantiateMonstersPos = new List<Transform>();
     [SerializeField]
     List<GameObject> monsters = new List<GameObject>();
 
@@ -65,16 +65,23 @@ public class CursedGirlEnemy : Enemy
                     Teleport();
                     break;
                 case 3:
-                    if (playerCanKillHer)
-                    {
                         moveSpeed = thirdPhaseSpeed;
                         Attack();
-                    }
-                    else
-                    {
+                    break;
+                case 4:
+
+                        Enemy[] enemies = FindObjectsOfType<Enemy>();
+                        foreach (Enemy enemy in enemies)
+                        {
+                            if (enemy.name != "CursedGirl")
+                                Destroy(enemy.gameObject);
+                        }
+                        enemyCanvas.SetActive(false);
                         interactableCanvas.SetActive(true);
-                        //Diálogo
-                    }
+                        interactableCanvas.GetComponent<InteractableObjectCanvasController>().ShowOrHidePanel(true);
+                        player.GetComponent<PlayerController>().EnableWeapon(false);
+                        player.GetComponent<PlayerController>().EnableOrDisableCharacterController(false);
+                        GetComponent<Health>().StopReceivingConstantDamage();
                     break;
             }
         }
@@ -108,7 +115,7 @@ public class CursedGirlEnemy : Enemy
     private void CreateMonster()
     {
         canCreateMonsters = false;
-        Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos);
+        Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos[Random.Range(0, instantiateMonstersPos.Count)]);
         StartCoroutine(MonstersCadency());
     }
 
@@ -163,7 +170,8 @@ public class CursedGirlEnemy : Enemy
         int phase = -1;
         if (GetComponent<Health>().GetCurrentHealth() > 2 * GetComponent<Health>().GetMaxHealth() / 3) phase = 1;
         else if (GetComponent<Health>().GetCurrentHealth() > GetComponent<Health>().GetMaxHealth() / 3) phase = 2;
-        else phase = 3;
+        else if (GetComponent<Health>().GetCurrentHealth() > 0.04 * GetComponent<Health>().GetMaxHealth()) phase = 3;
+        else phase = 4;
         return phase;
     }
 

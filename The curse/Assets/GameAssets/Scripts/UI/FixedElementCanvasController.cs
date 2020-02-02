@@ -98,13 +98,15 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void UpdateFuelBar()
     {
-        playerFuelBar.SetCurrentFuel(playerWeaponFuel.GetCurrentFuel());
-        playerFuelBar.UpdateFuelBar();
+        if (playerFuelBar.enabled)
+        {
+            playerFuelBar.SetCurrentFuel(playerWeaponFuel.GetCurrentFuel());
+            playerFuelBar.UpdateFuelBar();
+        }
     }
 
     public void InitTextPanel(string text, bool isNpc, string name)
     {
-        print("Pone en active el textpanel");
         textPanel.SetActive(true);
         if (isNpc)
         {

@@ -121,7 +121,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
 
     private void StopSound()
     {
-        aSource.Stop();
+        if(aSource.isPlaying) aSource.Stop();
     }
 
     private void PlayingParticles()
