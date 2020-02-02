@@ -22,6 +22,8 @@ public class CursedGirlEnemy : Enemy
     List<Transform> instantiateMonstersPos = new List<Transform>();
     [SerializeField]
     List<GameObject> monsters = new List<GameObject>();
+    [SerializeField]
+    List<Dialogue> dialogues = new List<Dialogue>();
 
     private int currentPhase = 1;
     private bool hasSpoken = false;
@@ -34,8 +36,7 @@ public class CursedGirlEnemy : Enemy
         cController = GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player");
         thirdPhaseSpeed = moveSpeed * 3;
-        enemyCanvas.SetActive(false);
-        interactableCanvas.SetActive(true);
+        SetDialogueMode();
     }
 
     public override void Update()
@@ -46,10 +47,8 @@ public class CursedGirlEnemy : Enemy
         if (distToPlayer < detectDist && !hasSpoken)
         {
             //Suelta el diálogo 
-            hasSpoken = true;
-            enemyCanvas.SetActive(true);
-            interactableCanvas.SetActive(false);
-            isAttacking = true;
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogues[0]);
+           
         }
         else if (hasSpoken)
         {
@@ -76,12 +75,9 @@ public class CursedGirlEnemy : Enemy
                             if (enemy.name != "CursedGirl")
                                 Destroy(enemy.gameObject);
                         }
-                        enemyCanvas.SetActive(false);
-                        interactableCanvas.SetActive(true);
-                        interactableCanvas.GetComponent<InteractableObjectCanvasController>().ShowOrHidePanel(true);
-                        player.GetComponent<PlayerController>().EnableWeapon(false);
-                        player.GetComponent<PlayerController>().EnableOrDisableCharacterController(false);
-                        GetComponent<Health>().StopReceivingConstantDamage();
+                        //Suelta el diálogo 
+                        SetDialogueMode();
+                        FindObjectOfType<DialogueManager>().StartDialogue(dialogues[1]);
                     break;
             }
         }
@@ -170,7 +166,7 @@ public class CursedGirlEnemy : Enemy
         int phase = -1;
         if (GetComponent<Health>().GetCurrentHealth() > 2 * GetComponent<Health>().GetMaxHealth() / 3) phase = 1;
         else if (GetComponent<Health>().GetCurrentHealth() > GetComponent<Health>().GetMaxHealth() / 3) phase = 2;
-        else if (GetComponent<Health>().GetCurrentHealth() > 0.04 * GetComponent<Health>().GetMaxHealth()) phase = 3;
+        else if (GetComponent<Health>().GetCurrentHealth() > 0.06 * GetComponent<Health>().GetMaxHealth()) phase = 3;
         else phase = 4;
         return phase;
     }
@@ -194,4 +190,23 @@ public class CursedGirlEnemy : Enemy
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(this.transform.position, iniAttackDist);
     }
+
+    public void StartAttacking()
+    {
+        hasSpoken = true;
+        GetComponent<Health>().SetGodMode(false);
+        enemyCanvas.SetActive(true);
+        interactableCanvas.SetActive(false);
+        isAttacking = true;
+    }
+
+    public void SetDialogueMode()
+    {
+        GetComponent<Health>().SetGodMode(true);
+        enemyCanvas.SetActive(false);
+        interactableCanvas.SetActive(true);
+        GetComponent<Health>().StopReceivingConstantDamage();
+    }
+
+    public bool GetHasSpoken() { return hasSpoken; }
 }

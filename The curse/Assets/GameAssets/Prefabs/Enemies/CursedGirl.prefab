@@ -161,7 +161,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8175893154937117117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8175893154061661662}
@@ -549,9 +549,11 @@ GameObject:
   - component: {fileID: 8179936387437249444}
   - component: {fileID: 8179936387437249433}
   - component: {fileID: 8179936387437249447}
-  - component: {fileID: 8179936387437249432}
   - component: {fileID: 8179936387437249443}
+  - component: {fileID: 369962593}
   - component: {fileID: 8179936387437249468}
+  - component: {fileID: 8179936387437249432}
+  - component: {fileID: 369962594}
   m_Layer: 13
   m_Name: CursedGirl
   m_TagString: Enemy
@@ -658,21 +660,6 @@ MonoBehaviour:
   interactionTime: 1.5
   isNpc: 1
   complexNpc: 1
---- !u!114 &8179936387437249432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8179936387437249442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c014f8a4c73cbd14697c3d366e8bfac4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Cursed Girl
-  canPlayerChoose: 1
-  sentencesList: []
 --- !u!114 &8179936387437249443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,6 +673,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 500
+--- !u!114 &369962593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179936387437249442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201a16e0d5d4e8041b21c65171ec3342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  head: {fileID: 0}
+  canRotate: 1
+  characterCanRotate: 0
 --- !u!114 &8179936387437249468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,10 +727,55 @@ MonoBehaviour:
   monstersCoolDown: 3
   enemyCanvas: {fileID: 6447223610395354746}
   interactableCanvas: {fileID: 8175893154937117117}
-  instantiateMonstersPos: {fileID: 1685173021}
+  instantiateMonstersPos:
+  - {fileID: 1685173021}
+  - {fileID: 4596978363976481171}
   monsters:
   - {fileID: 2315047032030480941, guid: a815494b9c133aa478430f94b7fa5c9f, type: 3}
   - {fileID: 4040896063663955137, guid: 0b6bcf52813f2b746b07af703c516c6c, type: 3}
+  dialogues:
+  - {fileID: 8179936387437249432}
+  - {fileID: 369962594}
+--- !u!114 &8179936387437249432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179936387437249442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c014f8a4c73cbd14697c3d366e8bfac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Cursed Girl
+  canPlayerChoose: 1
+  sentencesList:
+  - sentence: "\xBFQui\xE9n osa perturbar mi tranquilidad?"
+    options: []
+  - sentence: Oh, ya veo... una incauta.
+    options: []
+  - sentence: "Has venido buscando una muerte segura, y yo te la dar\xE9."
+    options: []
+--- !u!114 &369962594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179936387437249442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c014f8a4c73cbd14697c3d366e8bfac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Cursed Girl
+  canPlayerChoose: 0
+  sentencesList:
+  - sentence: "Ay\xFAdame...    Por favor...                             "
+    options:
+    - Matar
+    - Salvar
 --- !u!1 &8179936387558581552
 GameObject:
   m_ObjectHideFlags: 0

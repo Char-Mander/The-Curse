@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
     private bool isHealingConstantly = false;
     private float constantDamage;
     private float constantHeal;
+    private bool godMode;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class Health : MonoBehaviour
 
     public void Update()
     {
-        if (isSufferingConstantDamage)
+        if (isSufferingConstantDamage && !godMode)
         {
             LoseHealth(constantDamage);
         }
@@ -35,26 +36,30 @@ public class Health : MonoBehaviour
 
     public void LoseHealth(float value)
     {
-        currentHealth -= value;
-        if (currentHealth <= 0)
+        if (!godMode)
         {
-            if (this.gameObject.tag == "Enemy" || this.gameObject.tag == "Explosive Sphere")
+            currentHealth -= value;
+            if (currentHealth <= 0)
             {
-               // Destroy(Instantiate(enemyDeadParticle, transform.position, Quaternion.identity), 3);
-               if (this.gameObject.name == "Final Boss")
+                if (this.gameObject.tag == "Enemy" || this.gameObject.tag == "Explosive Sphere")
                 {
-                    //Instantiate(this.gameObject.GetComponent<FinalBoss>().GetGoal(), this.gameObject.transform.position, this.gameObject.transform.rotation);
+                    // Destroy(Instantiate(enemyDeadParticle, transform.position, Quaternion.identity), 3);
+                    if (this.gameObject.name == "Final Boss")
+                    {
+                        //Instantiate(this.gameObject.GetComponent<FinalBoss>().GetGoal(), this.gameObject.transform.position, this.gameObject.transform.rotation);
+                    }
+                    Destroy(this.gameObject);
                 }
-                Destroy(this.gameObject);
+                else if (this.gameObject.tag == "Player")
+                {
+                    print("Has perdido");
+                    //  SceneManager.LoadScene("GameOver");
+                }
             }
-            else if (this.gameObject.tag == "Player")
-            {
-                print("Has perdido");
-              //  SceneManager.LoadScene("GameOver");
-            }
+            if (GetComponentInChildren<EnemyCanvasController>() != null) GetComponentInChildren<EnemyCanvasController>().UpdateHealthBar();
+            else GameObject.FindGameObjectWithTag("FixedCanvas").GetComponent<FixedElementCanvasController>().UpdateHealthBar();
         }
-       if(GetComponentInChildren<EnemyCanvasController>() != null) GetComponentInChildren<EnemyCanvasController>().UpdateHealthBar();
-       else GameObject.FindGameObjectWithTag("FixedCanvas").GetComponent<FixedElementCanvasController>().UpdateHealthBar();
+        
     }
 
     public void GainHealth(float value)
@@ -74,8 +79,11 @@ public class Health : MonoBehaviour
 
     public void ReceiveConstantDamage(float damage)
     {
-        isSufferingConstantDamage = true;
-        this.constantDamage = damage;
+        if (!godMode)
+        {
+            isSufferingConstantDamage = true;
+            this.constantDamage = damage;
+        }
     }
 
     public void StopReceivingConstantDamage()
@@ -99,5 +107,12 @@ public class Health : MonoBehaviour
     IEnumerator Wait(float time)
     {
         yield return new WaitForSeconds(time);
+    }
+
+    public bool GetGodMode() { return godMode; }
+
+    public void SetGodMode(bool active)
+    {
+        godMode = active;
     }
 }

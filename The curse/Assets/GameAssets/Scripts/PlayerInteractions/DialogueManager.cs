@@ -60,6 +60,10 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         isOnADialogue = false;
+        if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && !dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
+        {
+            dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttacking();
+        }
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().EnableOrDisableCharacterController(true);
     }
 
