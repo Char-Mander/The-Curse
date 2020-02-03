@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     private bool isOnAMount = false;
     private bool canWhistleAgain = true;
     private bool mountWhistleCall = false;
+    private bool locked = false;
     private Stamina stamina;
 
     private PlayerSoundsManager soundsManager;
@@ -61,16 +62,19 @@ public class PlayerController : MonoBehaviour, ICharacter
     // Update is called once per frame
     void Update()
     {
-        if (!isOnAMount)
+        if (!locked)
         {
-            CharacterVelocity();
-            JumpAndMoveCharacter();
-            RotateCharacter();
+            if (!isOnAMount)
+            {
+                CharacterVelocity();
+                JumpAndMoveCharacter();
+                RotateCharacter();
+            }
+            ModifyStamina();
+            WeaponInputs();
+            InteractionWithObjects();
+            CallTheMount();
         }
-        ModifyStamina();
-        WeaponInputs();
-        InteractionWithObjects();
-        CallTheMount();
     }
 
     //Función que gestiona cualquier interacción con objetos
@@ -312,5 +316,10 @@ public class PlayerController : MonoBehaviour, ICharacter
     public void SetMountWhistleCall(bool isActive)
     {
         mountWhistleCall = isActive;
+    }
+
+    public void SetIsLocked(bool value)
+    {
+        locked = value;
     }
 }
