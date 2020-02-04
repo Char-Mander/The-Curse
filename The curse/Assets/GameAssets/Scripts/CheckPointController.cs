@@ -38,6 +38,10 @@ public class CheckPointController : MonoBehaviour
             checkPoint.SetAsCurrentCP(false);
         }
         cp.SetAsCurrentCP(true);
+        int index = GetIndexOfCP(cp);
+        GameManager.instance.data.SaveData(index, 
+            FindObjectOfType<QuestController>().GetIndexOfCurrentQuest(), 
+            FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth());
     }
 
     public void Respawn()
@@ -51,5 +55,17 @@ public class CheckPointController : MonoBehaviour
                 player.transform.position = checkPoint.GetSpawnPoint().position;
             }
         }
+    }
+
+    int GetIndexOfCP(CheckPoint cp)
+    {
+        int index = 0;
+        bool found = false;
+        while (!found)
+        {
+            if (cpList[index] == cp) found = true;
+            else index++;
+        }
+        return index;
     }
 }

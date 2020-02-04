@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -18,7 +17,12 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        if (this.CompareTag("Player"))
+            GameManager.instance.SetPlayerMaxHealth(maxHealth);
+
+        if((this.CompareTag("Player") && !GameManager.instance.data.HasPreviousData()) || !this.CompareTag("player"))
+            currentHealth = maxHealth;
+        else currentHealth = GameManager.instance.GetCurrentPlayerHealth();
     }
 
     public void Update()
@@ -52,8 +56,7 @@ public class Health : MonoBehaviour
                 }
                 else if (this.gameObject.tag == "Player")
                 {
-                    print("Has perdido");
-                    //  SceneManager.LoadScene("GameOver");
+                    GameManager.instance.sceneC.LoadGameOver();
                 }
             }
             if (GetComponentInChildren<EnemyCanvasController>() != null) GetComponentInChildren<EnemyCanvasController>().UpdateHealthBar();

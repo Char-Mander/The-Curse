@@ -48,5 +48,7 @@ public class QuestController : MonoBehaviour
             currentQuest.SetAsCurrentQuest(true);
             FindObjectOfType<FixedElementCanvasController>().UpdateQuestPanel(currentQuest.GetText());
     }
+
+    public int GetIndexOfCurrentQuest() { return questList.IndexOf(currentQuest); }
  
 }

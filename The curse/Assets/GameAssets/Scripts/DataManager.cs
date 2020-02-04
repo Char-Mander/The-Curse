@@ -7,7 +7,7 @@ public class DataManager : MonoBehaviour
 {
     private string currentCheckPointKey = "Current CheckPoint";
     private string currentQuestKey = "Current Quest";
-    
+    private string currentPlayerHealthKey = "Current Player Health";
     public void LoadData()
     {
         //Carga el punto en el que se quedó
@@ -16,14 +16,19 @@ public class DataManager : MonoBehaviour
         //Carga la misión actual
         if (PlayerPrefs.HasKey(currentQuestKey))
             GameManager.instance.SetCurrentQuest(PlayerPrefs.GetInt(currentQuestKey));
+        //Carga la vida actual del player
+        if (PlayerPrefs.HasKey(currentPlayerHealthKey))
+            GameManager.instance.SetCurrentPlayerHealth(PlayerPrefs.GetFloat(currentPlayerHealthKey));
     }
     
-    public void SaveData(int currentWayPoint, int currentQuest)
+    public void SaveData(int currentWayPoint, int currentQuest, float currentHealth)
     {
         //Guarda el punto en el que se quedó
         PlayerPrefs.SetInt(currentCheckPointKey, currentWayPoint);
         //Guarda la misión actual
         PlayerPrefs.SetInt(currentQuestKey, currentQuest);
+        //Guarda la vida del player
+        PlayerPrefs.SetFloat(currentPlayerHealthKey, currentHealth);
         PlayerPrefs.Save();
     }
 
@@ -40,6 +45,6 @@ public class DataManager : MonoBehaviour
 
     public bool HasPreviousData()
     {
-        return PlayerPrefs.HasKey(currentCheckPointKey) && PlayerPrefs.HasKey(currentQuestKey);
+        return PlayerPrefs.HasKey(currentCheckPointKey) && PlayerPrefs.HasKey(currentQuestKey) && PlayerPrefs.HasKey(currentPlayerHealthKey);
     }
 }

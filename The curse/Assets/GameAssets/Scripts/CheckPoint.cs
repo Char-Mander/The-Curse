@@ -7,6 +7,7 @@ public class CheckPoint : MonoBehaviour
     [SerializeField]
     private Transform spawnPoint;
     bool isActive;
+    bool hasBeenActivated = false;
     CheckPointController checkPointController;
 
     private void Start()
@@ -24,8 +25,9 @@ public class CheckPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") && !isActive)
+        if(other.CompareTag("Player") && !isActive && !hasBeenActivated)
         {
+            hasBeenActivated = true;
             checkPointController.ActiveCP(this);
         }
     }

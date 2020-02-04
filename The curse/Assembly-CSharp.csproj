@@ -87,10 +87,10 @@
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\InteractWithObjects.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\PickableObject.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\PickUpObjects.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\Quest.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\QuestController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PoisonedZone.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Puddle.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Quest.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\QuestController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\SceneController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Sounds\PlayerSoundsManager.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\Fuel.cs" />

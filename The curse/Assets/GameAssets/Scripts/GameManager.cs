@@ -11,13 +11,15 @@ public class GameManager : MonoBehaviour
     public OptionsController optionsC;
     [HideInInspector]
     public SceneController sceneC;
+    private int maxCheckPoints=6;
     [SerializeField]
-    private int maxCheckPoints=1;
-    [SerializeField]
-    private int maxQuests = 1;
+    private int maxQuests = 5;
 
     private int currentWayPoint=0;
     private int currentQuest = 0;
+    private float maxPlayerHealth=-1;
+    private float currentPlayerHealth=-1;
+
 
     private void Awake()
     {
@@ -52,4 +54,16 @@ public class GameManager : MonoBehaviour
     {
         currentQuest = index;
     }
+
+    public void SetPlayerMaxHealth(float health)
+    {
+        maxPlayerHealth = health;
+    }
+
+    public void SetCurrentPlayerHealth(float health)
+    {
+        currentPlayerHealth = health;
+    }
+
+    public float GetCurrentPlayerHealth() { return currentPlayerHealth; }
 }
