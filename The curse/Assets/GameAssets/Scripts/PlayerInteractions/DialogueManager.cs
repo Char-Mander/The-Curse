@@ -64,6 +64,15 @@ public class DialogueManager : MonoBehaviour
         {
             dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttacking();
         }
+        else if(dialogue.gameObject.GetComponent<CursedGirlEnemy>() && dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
+        {
+            //Activa el panel de opciones
+        }
+        else if (GetComponentInChildren<Quest>())
+        {
+            GetComponentInChildren<Quest>().ActivateQuest();
+        }
+
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().EnableOrDisableCharacterController(true);
     }
 

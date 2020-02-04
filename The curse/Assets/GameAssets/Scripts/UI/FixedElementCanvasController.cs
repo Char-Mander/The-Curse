@@ -7,6 +7,8 @@ public class FixedElementCanvasController : MonoBehaviour
 {   [SerializeField]
     GameObject textPanel;
     [SerializeField]
+    Text questText;
+    [SerializeField]
     GameObject sentenceOptionsPanel;
     [SerializeField]
     GameObject optionButton;
@@ -71,6 +73,11 @@ public class FixedElementCanvasController : MonoBehaviour
         panelTextCoroutine = StartCoroutine(WaitForTextToBeShown(textTime, isNpc));
     }
 
+    public void UpdateQuestPanel(string text)
+    {
+        StartCoroutine(QuestChangeWait(text));
+    }
+
     public void UpdateSentenceOptionsPanel(Sentence s, int index)
     {
         sentenceIndex = index;
@@ -126,6 +133,13 @@ public class FixedElementCanvasController : MonoBehaviour
         npcNamePanel.GetComponentInChildren<Text>().text = "";
         textPanel.SetActive(false);
         textPanel.GetComponentInChildren<Text>().text = "";
+    }
+
+    IEnumerator QuestChangeWait(string text)
+    {
+        if(questText.text.Length > 0) questText.text = "¡MISIÓN COMPLETADA!";
+        yield return new WaitForSeconds(2f);
+        questText.text = text;
     }
 
     IEnumerator WaitForCleanSentencesOptions(float time, int index)

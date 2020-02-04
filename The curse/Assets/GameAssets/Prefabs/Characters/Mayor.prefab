@@ -277,6 +277,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionPanel: {fileID: 460561862}
+--- !u!1 &1597841689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1597841690}
+  - component: {fileID: 1597841691}
+  m_Layer: 0
+  m_Name: Quest3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1597841690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597841689}
+  m_LocalRotation: {x: -0, y: -0.99678785, z: -0, w: 0.08008761}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 68226138411527103}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1597841691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597841689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f6a392cd16d534ea4fd1f64ee13965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Busca al sabio
 --- !u!1 &1692210813
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +801,7 @@ Transform:
   m_Children:
   - {fileID: 68226138703833119}
   - {fileID: 797192613}
+  - {fileID: 1597841690}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -851,9 +896,11 @@ MonoBehaviour:
   canPlayerChoose: 0
   sentencesList:
   - sentence: "Hace unas semanas desapareci\xF3 mi hija... Desde entonces, el valle
-      no ha vuelto a ser el mismo."
+      no ha vuelto a ser el mismo. Todos en la aldea estamos preocupados. No dejan
+      de aparecer monstruos."
     options: []
-  - sentence: Todos en la aldea estamos preocupados. No dejan de aparecer monstruos.
+  - sentence: "Si informaci\xF3n es lo que buscas, el sabio podr\xEDa serte de ayuda,
+      aunque lleva semanas sin salir de casa. Buena suerte intentando hablar con \xE9l..."
     options: []
   - sentence: "Si informaci\xF3n es lo que buscas, el sabio podr\xEDa serte de ayuda,
       aunque lleva semanas sin salir de casa. Buena suerte intentando hablar con \xE9l..."

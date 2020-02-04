@@ -8,6 +8,7 @@ public class Quest : MonoBehaviour
     string text;
     bool isActive = false;
     bool completed = false;
+    bool triggered = false;
     QuestController questController;
     // Start is called before the first frame update
     void Start()
@@ -27,11 +28,19 @@ public class Quest : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!completed && other.CompareTag("Player"))
+        if(!completed && !triggered && other.CompareTag("Player"))
         {
-            questController.ActiveQuest();
+            ActivateQuest();
         }
     }
+    
+    public void ActivateQuest()
+    {
+        triggered = true;
+        questController.ActiveQuest();
+    }
+
+    public string GetText() { return text; }
 
     public bool IsActive() { return isActive; }
 

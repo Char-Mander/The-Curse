@@ -10,6 +10,7 @@ public class CheckPointController : MonoBehaviour
     {
         cpList = FindObjectsOfType<CheckPoint>();
         OrderCheckPoints();
+        Respawn();
     }
 
     private void OrderCheckPoints()
@@ -27,6 +28,7 @@ public class CheckPointController : MonoBehaviour
                 }
             }
         }
+        cpList[0].SetAsCurrentCP(true);
     }
 
     public void ActiveCP(CheckPoint cp)

@@ -44,6 +44,9 @@ public class InteractWithObjects : MonoBehaviour
                                     : interactableObj.GetObjectText();
                 FindObjectOfType<FixedElementCanvasController>().UpdateTextPanel(chosenText, interactableObj.IsNpc(),
                     (dialogue!=null) ? dialogue.GetName() : null);
+
+                if (currentInteractionObject.GetComponentInChildren<Quest>() != null)
+                    StartCoroutine(WaitForActivateQuest());
             }
         }
     }
@@ -51,6 +54,12 @@ public class InteractWithObjects : MonoBehaviour
     public void SetGameObjectToInteract(GameObject obj)
     {
         this.objectToInteract = obj;
+    }
+
+    IEnumerator WaitForActivateQuest()
+    {
+        yield return new WaitForSeconds(1);
+        currentInteractionObject.GetComponentInChildren<Quest>().ActivateQuest();
     }
 
     IEnumerator WaitForInteractAgain()
