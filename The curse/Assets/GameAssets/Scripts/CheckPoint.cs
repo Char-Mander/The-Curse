@@ -27,6 +27,7 @@ public class CheckPoint : MonoBehaviour
     {
         if(other.CompareTag("Player") && !isActive && !hasBeenActivated)
         {
+            print("Entra al checkpoint " + this.gameObject.name);
             hasBeenActivated = true;
             checkPointController.ActiveCP(this);
         }

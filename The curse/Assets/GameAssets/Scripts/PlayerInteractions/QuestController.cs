@@ -12,6 +12,8 @@ public class QuestController : MonoBehaviour
     {
         auxList = FindObjectsOfType<Quest>();
         OrderQuests();
+        currentQuest = GameManager.instance.data.HasPreviousData() ? questList[GameManager.instance.GetCurrentQuest()] : null;
+        if(currentQuest!=null) FindObjectOfType<FixedElementCanvasController>().UpdateQuestPanel(currentQuest.GetText());
     }
 
     private void OrderQuests()

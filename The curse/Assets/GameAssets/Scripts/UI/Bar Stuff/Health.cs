@@ -20,9 +20,14 @@ public class Health : MonoBehaviour
         if (this.CompareTag("Player"))
             GameManager.instance.SetPlayerMaxHealth(maxHealth);
 
-        if((this.CompareTag("Player") && !GameManager.instance.data.HasPreviousData()) || !this.CompareTag("player"))
+        if ((this.CompareTag("Player") && !GameManager.instance.data.HasPreviousData()) || !this.CompareTag("Player"))
             currentHealth = maxHealth;
-        else currentHealth = GameManager.instance.GetCurrentPlayerHealth();
+        else
+        {
+            currentHealth = GameManager.instance.GetCurrentPlayerHealth();
+            print("Current health : " + currentHealth);
+            FindObjectOfType<FixedElementCanvasController>().UpdateHealthBar();
+        }
     }
 
     public void Update()

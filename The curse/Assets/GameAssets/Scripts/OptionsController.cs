@@ -21,13 +21,23 @@ public class OptionsController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) SwitchPause();
     }
 
+    public void BackToMenuBtn()
+    {
+        GameManager.instance.data.LoadData();
+        if(Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+        GameManager.instance.sceneC.LoadMenu();
+    }
+
     public void SwitchPause()
     {
         isPaused = !isPaused;
         if (isPaused && Cursor.lockState == CursorLockMode.Locked)
         {
             Cursor.lockState = CursorLockMode.None;
-            if (GameManager.instance.sceneC.IsALvlScene()) FindObjectOfType<PlayerController>().SetIsLocked(true);
+            if (GameManager.instance.sceneC.IsALvlScene()) {
+                FindObjectOfType<PlayerController>().SetIsLocked(true);
+                FindObjectOfType<PlayerSoundsManager>().StopSound();
+            }
         }
         else if (!isPaused && Cursor.lockState != CursorLockMode.Locked && GameManager.instance.sceneC.IsALvlScene())
         {

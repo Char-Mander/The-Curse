@@ -10,6 +10,7 @@ public class CheckPointController : MonoBehaviour
     {
         cpList = FindObjectsOfType<CheckPoint>();
         OrderCheckPoints();
+        ActiveCP(GameManager.instance.data.HasPreviousData() ? cpList[GameManager.instance.GetCurrentCheckPoint()] : cpList[0]);
         Respawn();
     }
 
@@ -28,7 +29,6 @@ public class CheckPointController : MonoBehaviour
                 }
             }
         }
-        cpList[0].SetAsCurrentCP(true);
     }
 
     public void ActiveCP(CheckPoint cp)
@@ -39,6 +39,7 @@ public class CheckPointController : MonoBehaviour
         }
         cp.SetAsCurrentCP(true);
         int index = GetIndexOfCP(cp);
+        print("Guarda los datos con el player con " + FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth() + " de salud");
         GameManager.instance.data.SaveData(index, 
             FindObjectOfType<QuestController>().GetIndexOfCurrentQuest(), 
             FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth());
