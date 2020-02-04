@@ -62,10 +62,11 @@ public class DialogueManager : MonoBehaviour
         isOnADialogue = false;
         if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && !dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
         {
-            dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttacking();
+            dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
         }
         else if(dialogue.gameObject.GetComponent<CursedGirlEnemy>() && dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
         {
+            //FindObjectOfType<FixedElementCanvasController>().UpdateSentenceOptionsPanel(dialogue, index);
             //Activa el panel de opciones
         }
         else if (GetComponentInChildren<Quest>())

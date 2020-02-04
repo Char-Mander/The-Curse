@@ -61,7 +61,7 @@ public class Health : MonoBehaviour
                 }
                 else if (this.gameObject.tag == "Player")
                 {
-                    GameManager.instance.sceneC.LoadGameOver();
+                    //GameManager.instance.sceneC.LoadGameOver();
                 }
             }
             if (GetComponentInChildren<EnemyCanvasController>() != null) GetComponentInChildren<EnemyCanvasController>().UpdateHealthBar();

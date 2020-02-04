@@ -554,6 +554,7 @@ GameObject:
   - component: {fileID: 8179936387437249468}
   - component: {fileID: 8179936387437249432}
   - component: {fileID: 369962594}
+  - component: {fileID: 1701174504}
   m_Layer: 13
   m_Name: CursedGirl
   m_TagString: Enemy
@@ -749,7 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Cursed Girl
-  canPlayerChoose: 1
+  canPlayerChoose: 0
   sentencesList:
   - sentence: "\xBFQui\xE9n osa perturbar mi tranquilidad?"
     options: []
@@ -770,12 +771,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Cursed Girl
-  canPlayerChoose: 0
+  canPlayerChoose: 1
   sentencesList:
   - sentence: "Ay\xFAdame...    Por favor...                             "
     options:
-    - Matar
-    - Salvar
+    - optionTxt: Matar
+      decisionBalance: -100
+    - optionTxt: Salvar
+      decisionBalance: 100
+--- !u!114 &1701174504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179936387437249442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c014f8a4c73cbd14697c3d366e8bfac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Cursed Girl
+  canPlayerChoose: 0
+  sentencesList:
+  - sentence: Gracias...
+    options: []
 --- !u!1 &8179936387558581552
 GameObject:
   m_ObjectHideFlags: 0

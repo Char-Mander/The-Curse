@@ -11,6 +11,8 @@ public class FixedElementCanvasController : MonoBehaviour
     [SerializeField]
     GameObject sentenceOptionsPanel;
     [SerializeField]
+    Transform optionsContent;
+    [SerializeField]
     GameObject optionButton;
     [SerializeField]
     GameObject npcNamePanel;
@@ -27,6 +29,7 @@ public class FixedElementCanvasController : MonoBehaviour
     Coroutine panelTextCoroutine, textTyping;
     float textTime;
     int sentenceIndex;
+    Sentence sAux;
     // Start is called before the first frame update
     void Awake()
     {
@@ -80,14 +83,25 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void UpdateSentenceOptionsPanel(Sentence s, int index)
     {
+        sAux = s;
         sentenceIndex = index;
-        //Update de visual panel
+        sentenceOptionsPanel.SetActive(true);
+        for(int i = 0; i < s.options.Count; i++)
+        {
+            GameObject btn = Instantiate(optionButton, optionsContent);
+            btn.name = index.ToString();
+            btn.GetComponentInChildren<Text>().text = s.options[i].optionTxt;
+        }
+        FindObjectOfType<PlayerController>().SetIsLocked(true);
     }
+
 
     public void ChooseAnOption(int index)
     {
-        //guarda la opción
-        StartCoroutine(WaitForCleanSentencesOptions(1, index));
+        print("Entra al chooseAnOption");
+        FindObjectOfType<PlayerController>().SetIsLocked(false);
+        FindObjectOfType<DecisionState>().AddOrSubtractToBalance(sAux.options[index].decisionBalance);
+        StartCoroutine(WaitForCleanSentencesOptions(1, sentenceIndex));
     }
 
     public void EnableOrDisableFuelBar(bool enable)
@@ -144,6 +158,8 @@ public class FixedElementCanvasController : MonoBehaviour
 
     IEnumerator WaitForCleanSentencesOptions(float time, int index)
     {
+        yield return new WaitForSeconds(time / 2);
+        sentenceOptionsPanel.SetActive(false);
         yield return new WaitForSeconds(time);
         FindObjectOfType<DialogueManager>().DisplayNextSentence(index + 1);
     }

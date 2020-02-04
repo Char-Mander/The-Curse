@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class SentenceOptions
+{
+    public string optionTxt;
+    public int decisionBalance;
+}
+
+[System.Serializable]
 public class Sentence
 {
     public string sentence;
-    public List<string> options = new List<string>();
+    public List<SentenceOptions> options = new List<SentenceOptions>();
 }
 
 public class Dialogue : MonoBehaviour

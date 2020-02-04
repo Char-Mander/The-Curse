@@ -39,7 +39,7 @@ public class OptionsController : MonoBehaviour
                 FindObjectOfType<PlayerSoundsManager>().StopSound();
             }
         }
-        else if (!isPaused && Cursor.lockState != CursorLockMode.Locked && GameManager.instance.sceneC.IsALvlScene())
+        else if (!isPaused && Cursor.lockState != CursorLockMode.Locked && GameManager.instance.sceneC.IsALvlScene() && !FindObjectOfType<CursedGirlEnemy>().IsOnFinalDecisionPhase())
         {
             Cursor.lockState = CursorLockMode.Locked;
             FindObjectOfType<PlayerController>().SetIsLocked(false);

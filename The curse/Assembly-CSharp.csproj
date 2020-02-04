@@ -72,7 +72,6 @@
     <Compile Include="Assets\GameAssets\Scripts\CheckPoint.cs" />
     <Compile Include="Assets\GameAssets\Scripts\CheckPointController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\DataManager.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\EndGameCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Enemies\CursedGirlEnemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Enemies\InfectedMonster.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Assets\GameAssets\Scripts\GameManager.cs" />
     <Compile Include="Assets\GameAssets\Scripts\MenuController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\OptionsController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\DecisionState.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\Dialogue.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\DialogueManager.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\InteractableObject.cs" />
@@ -100,6 +100,7 @@
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\SimpleHealthBar.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\Stamina.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\StaminaBar.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\EndGameCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\EnemyCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\FixedElementCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\InteractableObjectCanvasController.cs" />

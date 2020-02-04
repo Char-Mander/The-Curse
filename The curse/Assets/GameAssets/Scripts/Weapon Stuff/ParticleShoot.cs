@@ -132,11 +132,8 @@ public class ParticleShoot : MonoBehaviour, IWeapon
 
     private void StopSound()
     {
-        print("Entra al stopSound");
-        print("asource: " + aSource);
         if (aSource != null && aSource.isPlaying)
         {
-            print("para el sonido");
             aSource.Stop();
         }
     }

@@ -27,6 +27,7 @@ public class CursedGirlEnemy : Enemy
 
     private int currentPhase = 1;
     private bool hasSpoken = false;
+    private bool finalDecision = false;
     private bool canTeleport = true;
     private bool playerCanKillHer = true;
     private bool canCreateMonsters = true;
@@ -50,7 +51,7 @@ public class CursedGirlEnemy : Enemy
             FindObjectOfType<DialogueManager>().StartDialogue(dialogues[0]);
            
         }
-        else if (hasSpoken)
+        else if (hasSpoken && !finalDecision)
         {
             AimPlayer();
 
@@ -79,6 +80,18 @@ public class CursedGirlEnemy : Enemy
                         SetDialogueMode();
                         FindObjectOfType<DialogueManager>().StartDialogue(dialogues[1]);
                     break;
+            }
+        }
+        else if (finalDecision)
+        {
+            if(FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
+            {
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
+            }
+            else
+            {
+                StartAttackingMode();
+                AimPlayer();
             }
         }
     }
@@ -190,10 +203,11 @@ public class CursedGirlEnemy : Enemy
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(this.transform.position, iniAttackDist);
     }
+    
 
-    public void StartAttacking()
+    public void StartAttackingMode()
     {
-        hasSpoken = true;
+        if(!hasSpoken) hasSpoken = true;
         GetComponent<Health>().SetGodMode(false);
         enemyCanvas.SetActive(true);
         interactableCanvas.SetActive(false);
@@ -207,6 +221,13 @@ public class CursedGirlEnemy : Enemy
         interactableCanvas.SetActive(true);
         GetComponent<Health>().StopReceivingConstantDamage();
     }
+
+    public void ApplyDecisionState()
+    {
+        finalDecision = true;
+    }
+
+    public bool IsOnFinalDecisionPhase() { return finalDecision; }
 
     public bool GetHasSpoken() { return hasSpoken; }
 }

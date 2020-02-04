@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour, ICharacter
             {
                 CharacterVelocity();
                 JumpAndMoveCharacter();
+                print("Entra en el update");
                 RotateCharacter();
             }
             ModifyStamina();
@@ -131,6 +132,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     //Función que hace que el player y la cámara roten con el ratón
     public void RotateCharacter()
     {
+        print("Lo sigue rotando");
         if (iniRotateMouseY)
         {
             pitch -= rotationSpeed * Input.GetAxis("Mouse Y");
@@ -321,5 +323,6 @@ public class PlayerController : MonoBehaviour, ICharacter
     public void SetIsLocked(bool value)
     {
         locked = value;
+        print("Locked: " + locked);
     }
 }
