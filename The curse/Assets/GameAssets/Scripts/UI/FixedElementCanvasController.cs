@@ -89,7 +89,7 @@ public class FixedElementCanvasController : MonoBehaviour
         for(int i = 0; i < s.options.Count; i++)
         {
             GameObject btn = Instantiate(optionButton, optionsContent);
-            btn.name = index.ToString();
+            btn.name = i.ToString();
             btn.GetComponentInChildren<Text>().text = s.options[i].optionTxt;
         }
         FindObjectOfType<PlayerController>().SetIsLocked(true);
@@ -98,10 +98,11 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void ChooseAnOption(int index)
     {
-        print("Entra al chooseAnOption");
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         FindObjectOfType<DecisionState>().AddOrSubtractToBalance(sAux.options[index].decisionBalance);
-        StartCoroutine(WaitForCleanSentencesOptions(1, sentenceIndex));
+        sentenceOptionsPanel.SetActive(false);
+        FindObjectOfType<DialogueManager>().DisplayNextSentence(index + 1);
+        FindObjectOfType<CursedGirlEnemy>().ApplyDecisionState();
     }
 
     public void EnableOrDisableFuelBar(bool enable)
@@ -154,14 +155,6 @@ public class FixedElementCanvasController : MonoBehaviour
         if(questText.text.Length > 0) questText.text = "¡MISIÓN COMPLETADA!";
         yield return new WaitForSeconds(2f);
         questText.text = text;
-    }
-
-    IEnumerator WaitForCleanSentencesOptions(float time, int index)
-    {
-        yield return new WaitForSeconds(time / 2);
-        sentenceOptionsPanel.SetActive(false);
-        yield return new WaitForSeconds(time);
-        FindObjectOfType<DialogueManager>().DisplayNextSentence(index + 1);
     }
 
     IEnumerator WaitForTextToBeShown(float time, bool isNpc)

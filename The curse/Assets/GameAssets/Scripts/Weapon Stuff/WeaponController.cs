@@ -49,7 +49,7 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canChangeWeapon)
+        if (canChangeWeapon && !FindObjectOfType<PlayerController>().IsLocked())
         {
             DetectWeaponInput();
         }

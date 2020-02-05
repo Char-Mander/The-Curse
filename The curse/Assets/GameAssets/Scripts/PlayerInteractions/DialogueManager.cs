@@ -17,8 +17,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (!isOnADialogue)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().EnableOrDisableCharacterController(false);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSoundsManager>().StopSound();
+            FindObjectOfType<PlayerController>().SetIsLocked(true);
             isOnADialogue = true;
             sentences.Clear();
             this.dialogue = dialogue;
@@ -60,14 +59,14 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         isOnADialogue = false;
+        FindObjectOfType<PlayerController>().SetIsLocked(false);
+        if (Cursor.lockState != CursorLockMode.Locked) Cursor.lockState = CursorLockMode.Locked;
         if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && !dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
         {
             dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
         }
-        else if(dialogue.gameObject.GetComponent<CursedGirlEnemy>() && dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
+        else if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
         {
-            //FindObjectOfType<FixedElementCanvasController>().UpdateSentenceOptionsPanel(dialogue, index);
-            //Activa el panel de opciones
         }
         else if (GetComponentInChildren<Quest>())
         {
@@ -75,6 +74,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().EnableOrDisableCharacterController(true);
+
     }
 
     public bool IsOnADialogue() { return isOnADialogue; }

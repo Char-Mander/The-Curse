@@ -78,8 +78,6 @@
     <Compile Include="Assets\GameAssets\Scripts\Enemies\SlugEnemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Enemies\Spawner.cs" />
     <Compile Include="Assets\GameAssets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\MenuController.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\OptionsController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\DecisionState.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\Dialogue.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\DialogueManager.cs" />
@@ -100,10 +98,13 @@
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\SimpleHealthBar.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\Stamina.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\StaminaBar.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\DecisionOptionButton.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\EndGameCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\EnemyCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\FixedElementCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\InteractableObjectCanvasController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\MenuController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\UI\OptionsController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\WorldSpaceCanvasController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\Bullet.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\IWeapon.cs" />

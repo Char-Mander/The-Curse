@@ -84,7 +84,7 @@ public class CursedGirlEnemy : Enemy
         }
         else if (finalDecision)
         {
-            if(FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
+            if (FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
             {
                 FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
             }
