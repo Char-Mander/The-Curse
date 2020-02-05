@@ -31,6 +31,7 @@ public class CursedGirlEnemy : Enemy
     private bool canTeleport = true;
     private bool playerCanKillHer = true;
     private bool canCreateMonsters = true;
+    private bool end = false;
 
     public override void Start()
     {
@@ -86,12 +87,18 @@ public class CursedGirlEnemy : Enemy
         {
             if (FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
             {
-                FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
+                if (!end)
+                {
+                    FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
+                    end = true;
+                }
+                AimPlayer();
             }
             else
             {
                 StartAttackingMode();
                 AimPlayer();
+                StartCoroutine(WaitForDie());
             }
         }
     }
@@ -230,4 +237,10 @@ public class CursedGirlEnemy : Enemy
     public bool IsOnFinalDecisionPhase() { return finalDecision; }
 
     public bool GetHasSpoken() { return hasSpoken; }
+
+    IEnumerator WaitForDie()
+    {
+        yield return new WaitForSeconds(1f);
+        GetComponent<Health>().LoseHealth(1000);
+    }
 }
