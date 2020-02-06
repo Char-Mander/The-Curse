@@ -86,6 +86,8 @@
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\InteractWithObjects.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\PickableObject.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\PickUpObjects.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\Puzzle.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\PuzzleObject.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\Quest.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\QuestController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PoisonedZone.cs" />

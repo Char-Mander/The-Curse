@@ -1437,7 +1437,7 @@ PrefabInstance:
     - target: {fileID: 2198937273758660527, guid: 9c4a2108969384b418d0e998139f5f06,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2198937273758660527, guid: 9c4a2108969384b418d0e998139f5f06,
         type: 3}
@@ -1596,6 +1596,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InteractableObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100305111281885866, guid: 06ac68bd32f8e1d42847e34b72dc7de5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5100305111281885872, guid: 06ac68bd32f8e1d42847e34b72dc7de5,
         type: 3}
