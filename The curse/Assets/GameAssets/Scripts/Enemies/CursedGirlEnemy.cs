@@ -19,6 +19,10 @@ public class CursedGirlEnemy : Enemy
     [SerializeField]
     GameObject interactableCanvas;
     [SerializeField]
+    GameObject goal;
+    [SerializeField]
+    Transform goalPos;
+    [SerializeField]
     List<Transform> instantiateMonstersPos = new List<Transform>();
     [SerializeField]
     List<GameObject> monsters = new List<GameObject>();
@@ -90,6 +94,7 @@ public class CursedGirlEnemy : Enemy
                 if (!end)
                 {
                     FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
+                    Instantiate(goal, goalPos);
                     end = true;
                 }
                 AimPlayer();
@@ -131,7 +136,8 @@ public class CursedGirlEnemy : Enemy
     private void CreateMonster()
     {
         canCreateMonsters = false;
-        Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos[Random.Range(0, instantiateMonstersPos.Count)]);
+        GameObject monster = Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos[Random.Range(0, instantiateMonstersPos.Count)]);
+        monster.transform.parent = null;
         StartCoroutine(MonstersCadency());
     }
 
@@ -240,6 +246,7 @@ public class CursedGirlEnemy : Enemy
 
     IEnumerator WaitForDie()
     {
+        Instantiate(goal, goalPos);
         yield return new WaitForSeconds(1f);
         GetComponent<Health>().LoseHealth(1000);
     }

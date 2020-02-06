@@ -15,6 +15,8 @@ public class SimpleShoot : MonoBehaviour, IWeapon
     [SerializeField]
     private Transform casingExitLocation;
     [SerializeField]
+    private LayerMask lm;
+    [SerializeField]
     private float shotPower = 100f;
     [SerializeField]
     private float zoomMaxValue;
@@ -78,7 +80,32 @@ public class SimpleShoot : MonoBehaviour, IWeapon
         {
             dire = barrelLocation.forward;
         }
-       bullet.GetComponent<Rigidbody>().AddForce(dire * shotPower);
+        /*
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, lm))
+        {
+            //Dibuja la línea en el punto de impacto
+            dire = hit.point;
+            */
+            /*if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Enemy Head") || hit.collider.CompareTag("Explosive Sphere"))
+            {
+                //Partículas de sangre
+                CreateParticleAtPoint(enemyHitParticle, hit.point, false, Quaternion.LookRotation(hit.normal));
+                float auxDamage = hit.collider.CompareTag("Enemy Head") ? damage * 2 : damage;
+                hit.collider.GetComponentInParent<Health>().LoseHealth(auxDamage);
+            }
+            else
+            {
+                //Partículas del láser
+                CreateParticleAtPoint(endParticle, hit.point, true, Quaternion.identity);
+            }*/
+
+        /*}
+        else
+        {
+            dire = Camera.main.transform.position + Camera.main.transform.forward * 100;
+        }*/
+        bullet.GetComponent<Rigidbody>().AddForce(dire * shotPower);
        Destroy(bullet, 10);
        tempFlash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
        Destroy(tempFlash, 0.5f);

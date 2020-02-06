@@ -5,6 +5,7 @@ using UnityEngine;
 public class CheckPointController : MonoBehaviour
 {
     CheckPoint[] cpList;
+    CheckPoint currentCP;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class CheckPointController : MonoBehaviour
             checkPoint.SetAsCurrentCP(false);
         }
         cp.SetAsCurrentCP(true);
+        currentCP = cp;
         int index = GetIndexOfCP(cp);
         print("Guarda los datos con el player con " + FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth() + " de salud");
         GameManager.instance.data.SaveData(index, 
@@ -52,13 +54,13 @@ public class CheckPointController : MonoBehaviour
             if (checkPoint.IsActive())
             {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
-                player.GetComponent<Health>().GainHealth(100000000);
+                player.GetComponent<Health>().GainHealth(0);
                 player.transform.position = checkPoint.GetSpawnPoint().position;
             }
         }
     }
 
-    int GetIndexOfCP(CheckPoint cp)
+    public int GetIndexOfCP(CheckPoint cp)
     {
         int index = 0;
         bool found = false;
@@ -69,4 +71,6 @@ public class CheckPointController : MonoBehaviour
         }
         return index;
     }
+
+    public int GetIndexOfCurrentCheckPoint(){ return GetIndexOfCP(currentCP); }
 }

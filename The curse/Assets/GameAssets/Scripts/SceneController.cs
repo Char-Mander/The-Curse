@@ -5,17 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+
     public void LoadSceneLvl()
     {
-        SceneManager.LoadScene("Lvl");
-    }
-
-    public void LoadSceneLvl(bool reset)
-    {
-        if (reset)
-        {
-            GameManager.instance.data.ResetData();
-        }
         SceneManager.LoadScene("Lvl");
     }
 
@@ -26,6 +18,9 @@ public class SceneController : MonoBehaviour
 
     public void LoadGameOver()
     {
+        //Guarda la información antes de cargar la pantalla del GameOver
+        GameManager.instance.SetCurrentPlayerHealth(FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth());
+        GameManager.instance.data.SaveData(GameManager.instance.GetCurrentCheckPoint(), GameManager.instance.GetCurrentQuest(), GameManager.instance.GetCurrentPlayerHealth());
         SceneManager.LoadScene("GameOver");
     }
 

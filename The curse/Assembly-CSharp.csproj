@@ -78,6 +78,7 @@
     <Compile Include="Assets\GameAssets\Scripts\Enemies\SlugEnemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Enemies\Spawner.cs" />
     <Compile Include="Assets\GameAssets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Goal.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\DecisionState.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\Dialogue.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\DialogueManager.cs" />

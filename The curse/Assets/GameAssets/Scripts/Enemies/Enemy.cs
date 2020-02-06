@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     private float rotationSpeed = 0.5f;
     [HideInInspector]
     public CharacterController cController;
+    [HideInInspector]
     public GameObject player;
     public LayerMask lm;
     [HideInInspector]

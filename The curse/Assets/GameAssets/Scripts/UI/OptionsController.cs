@@ -22,7 +22,7 @@ public class OptionsController : MonoBehaviour
     }
 
     public void BackToMenuBtn()
-    {
+    {   if(GameManager.instance.sceneC.IsALvlScene())
         GameManager.instance.data.LoadData();
         if(Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
         GameManager.instance.sceneC.LoadMenu();
@@ -40,7 +40,7 @@ public class OptionsController : MonoBehaviour
         }
         else if (!isPaused && Cursor.lockState != CursorLockMode.Locked && GameManager.instance.sceneC.IsALvlScene())
         {
-            if (!FindObjectOfType<CursedGirlEnemy>().IsOnFinalDecisionPhase())
+            if (FindObjectOfType<CursedGirlEnemy>() == null || !FindObjectOfType<CursedGirlEnemy>().IsOnFinalDecisionPhase())
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 if(!FindObjectOfType<DialogueManager>().IsOnADialogue())

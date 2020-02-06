@@ -60,6 +60,36 @@ Transform:
   m_Father: {fileID: 8179936387437249446}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2545866870943294479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6133613136411702589}
+  m_Layer: 13
+  m_Name: goalPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6133613136411702589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2545866870943294479}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.53, y: -0.38, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8179936387437249446}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8175893154061661663
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +609,7 @@ Transform:
   - {fileID: 8175893155526568814}
   - {fileID: 1685173021}
   - {fileID: 4596978363976481171}
+  - {fileID: 6133613136411702589}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -673,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eca6eb8df3a346448135487d33850d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
+  maxHealth: 100
 --- !u!114 &369962593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,6 +759,8 @@ MonoBehaviour:
   monstersCoolDown: 3
   enemyCanvas: {fileID: 6447223610395354746}
   interactableCanvas: {fileID: 8175893154937117117}
+  goal: {fileID: 2472788759387061859, guid: b5442a2190f753143acac42621ebcc5f, type: 3}
+  goalPos: {fileID: 6133613136411702589}
   instantiateMonstersPos:
   - {fileID: 1685173021}
   - {fileID: 4596978363976481171}
@@ -737,6 +770,7 @@ MonoBehaviour:
   dialogues:
   - {fileID: 8179936387437249432}
   - {fileID: 369962594}
+  - {fileID: 1701174504}
 --- !u!114 &8179936387437249432
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,17 +17,25 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
-        if (this.CompareTag("Player"))
+        if (this.gameObject.CompareTag("Player") && !GameManager.instance.data.HasPreviousData())
             GameManager.instance.SetPlayerMaxHealth(maxHealth);
 
-        if ((this.CompareTag("Player") && !GameManager.instance.data.HasPreviousData()) || !this.CompareTag("Player"))
-            currentHealth = maxHealth;
-        else
+        currentHealth = (this.gameObject.CompareTag("Player") && !GameManager.instance.data.HasPreviousData()) || !this.CompareTag("Player") ?
+              maxHealth : GameManager.instance.GetCurrentPlayerHealth();
+    }
+
+    private void Start()
+    {
+        
+       /* if (this.gameObject.CompareTag("Player"))
         {
-            currentHealth = GameManager.instance.GetCurrentPlayerHealth();
-            print("Current health : " + currentHealth);
+            print("Objeto: " + this.gameObject.name);
+            print("Max health before: " + maxHealth);
+            print("Current health before: " + currentHealth);
             FindObjectOfType<FixedElementCanvasController>().UpdateHealthBar();
-        }
+            print("Max health after update: " + maxHealth);
+            print("Current health after update: " + currentHealth);
+        }*/
     }
 
     public void Update()
@@ -65,20 +73,21 @@ public class Health : MonoBehaviour
                 }
             }
             if (GetComponentInChildren<EnemyCanvasController>() != null) GetComponentInChildren<EnemyCanvasController>().UpdateHealthBar();
-            else GameObject.FindGameObjectWithTag("FixedCanvas").GetComponent<FixedElementCanvasController>().UpdateHealthBar();
+            else FindObjectOfType<FixedElementCanvasController>().UpdateHealthBar();
         }
         
     }
 
     public void GainHealth(float value)
     {
+        print("Se le suma " + value + " de vida");
         currentHealth += value;
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
         }
         if (GetComponentInChildren<EnemyCanvasController>() != null) GetComponentInChildren<EnemyCanvasController>().UpdateHealthBar();
-        else GameObject.FindGameObjectWithTag("FixedCanvas").GetComponent<FixedElementCanvasController>().UpdateHealthBar();
+        else FindObjectOfType<FixedElementCanvasController>().UpdateHealthBar();
     }
 
     public float GetMaxHealth() { return maxHealth; }

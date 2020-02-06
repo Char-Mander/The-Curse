@@ -39,7 +39,7 @@ public class FixedElementCanvasController : MonoBehaviour
         playerHealth = player.GetComponent<Health>();
         playerHealthBar = GetComponentInChildren<HealthBar>();
         playerHealthBar.SetMaxHealth(playerHealth.GetMaxHealth());
-        playerHealthBar.SetCurrentHealth(playerHealth.GetMaxHealth());
+        playerHealthBar.SetCurrentHealth(GameManager.instance.data.HasPreviousData() ? GameManager.instance.GetCurrentPlayerHealth() : playerHealth.GetMaxHealth());
         //Obtains the stamina atributes
         playerStamina = player.GetComponent<Stamina>();
         playerStaminaBar = GetComponentInChildren<StaminaBar>();
@@ -50,7 +50,7 @@ public class FixedElementCanvasController : MonoBehaviour
         sentenceOptionsPanel.SetActive(false);
         fuelBarUI.SetActive(false);
     }
-
+    
     public void UpdateHealthBar()
     {
         playerHealthBar.SetCurrentHealth(playerHealth.GetCurrentHealth());
