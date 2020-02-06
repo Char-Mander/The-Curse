@@ -24,6 +24,7 @@ public class DataManager : MonoBehaviour
     
     public void SaveData(int currentCheckPoint, int currentQuest, float currentHealth)
     {
+        FindObjectOfType<FixedElementCanvasController>().ShowSavePanel();
         //Guarda el punto en el que se quedó
         PlayerPrefs.SetInt(currentCheckPointKey, currentCheckPoint);
         //Guarda la misión actual

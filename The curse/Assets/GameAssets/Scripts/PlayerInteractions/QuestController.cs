@@ -44,11 +44,12 @@ public class QuestController : MonoBehaviour
             {
                 currentQuest.CompleteQuest();
                 currentQuest.SetAsCurrentQuest(false);
-                index = questList.IndexOf(currentQuest) + 1;
+                if (index < questList.Count - 1) index = questList.IndexOf(currentQuest) + 1;
+                else index = -1;
             }
-            currentQuest = questList[index];
-            currentQuest.SetAsCurrentQuest(true);
-            FindObjectOfType<FixedElementCanvasController>().UpdateQuestPanel(currentQuest.GetText());
+            currentQuest = index >= 0 ? questList[index] : null;
+            if(currentQuest != null ) currentQuest.SetAsCurrentQuest(true);
+            FindObjectOfType<FixedElementCanvasController>().UpdateQuestPanel(currentQuest != null ? currentQuest.GetText() : "");
     }
 
     public int GetIndexOfCurrentQuest() { return questList.IndexOf(currentQuest); }

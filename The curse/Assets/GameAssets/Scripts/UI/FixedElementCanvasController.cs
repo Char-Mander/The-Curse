@@ -7,6 +7,8 @@ public class FixedElementCanvasController : MonoBehaviour
 {   [SerializeField]
     GameObject textPanel;
     [SerializeField]
+    GameObject savePanel;
+    [SerializeField]
     Text questText;
     [SerializeField]
     GameObject sentenceOptionsPanel;
@@ -47,6 +49,7 @@ public class FixedElementCanvasController : MonoBehaviour
         playerStaminaBar.SetCurrentStamina(playerStamina.GetMaxStamina());
         npcNamePanel.SetActive(false);
         textPanel.SetActive(false);
+        savePanel.SetActive(false);
         sentenceOptionsPanel.SetActive(false);
         fuelBarUI.SetActive(false);
     }
@@ -74,6 +77,12 @@ public class FixedElementCanvasController : MonoBehaviour
         InitTextPanel(text, isNpc, name);
         textTime = text.Length > 30 ? (float)text.Length / 20 : 1f;
         panelTextCoroutine = StartCoroutine(WaitForTextToBeShown(textTime, isNpc));
+    }
+
+    public void ShowSavePanel()
+    {
+        savePanel.SetActive(true);
+        StartCoroutine(HideSavePanel());
     }
 
     public void UpdateQuestPanel(string text)
@@ -171,6 +180,12 @@ public class FixedElementCanvasController : MonoBehaviour
             textPanel.GetComponentInChildren<Text>().text += letter;
             yield return null;
         }
+    }
+
+    IEnumerator HideSavePanel()
+    {
+        yield return new WaitForSeconds(0.5f);
+        savePanel.SetActive(false);
     }
 
     public float GetTextTime()
