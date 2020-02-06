@@ -7,13 +7,14 @@ public class Quest : MonoBehaviour
 {   [SerializeField]
     string text;
     bool isActive = false;
-    bool completed = false;
+    bool completed;
     bool triggered = false;
     QuestController questController;
     // Start is called before the first frame update
     void Start()
     {
         questController = FindObjectOfType<QuestController>();
+        completed = !((GameManager.instance.GetCurrentQuest()) <= int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
     }
     
     public void SetAsCurrentQuest(bool value)

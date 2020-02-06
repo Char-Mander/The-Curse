@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int maxQuests = 5;
 
-    private int currentWayPoint=0;
+    private int currentCheckPoint=0;
     private int currentQuest = 0;
     private float maxPlayerHealth=-1;
     private float currentPlayerHealth=-1;
@@ -39,11 +39,11 @@ public class GameManager : MonoBehaviour
 
     public int GetMaxCheckPoints() { return maxCheckPoints; }
 
-    public int GetCurrentCheckPoint() { return currentWayPoint; }
+    public int GetCurrentCheckPoint() { return currentCheckPoint; }
 
     public void SetCurrentWayPoint(int index)
     {
-        currentWayPoint = index;
+        currentCheckPoint = index;
     }
 
     public int GetMaxQuests() { return maxQuests; }

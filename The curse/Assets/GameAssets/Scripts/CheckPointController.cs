@@ -41,7 +41,6 @@ public class CheckPointController : MonoBehaviour
         cp.SetAsCurrentCP(true);
         currentCP = cp;
         int index = GetIndexOfCP(cp);
-        print("Guarda los datos con el player con " + FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth() + " de salud");
         GameManager.instance.data.SaveData(index, 
             FindObjectOfType<QuestController>().GetIndexOfCurrentQuest(), 
             FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth());

@@ -7,12 +7,13 @@ public class CheckPoint : MonoBehaviour
     [SerializeField]
     private Transform spawnPoint;
     bool isActive;
-    bool hasBeenActivated = false;
+    bool hasBeenActivated;
     CheckPointController checkPointController;
 
     private void Start()
     {
         checkPointController = FindObjectOfType<CheckPointController>();
+        hasBeenActivated = !((GameManager.instance.GetCurrentCheckPoint() + 1) <= int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
     }
 
 
@@ -27,7 +28,6 @@ public class CheckPoint : MonoBehaviour
     {
         if(other.CompareTag("Player") && !isActive && !hasBeenActivated)
         {
-            print("Entra al checkpoint " + this.gameObject.name);
             hasBeenActivated = true;
             checkPointController.ActiveCP(this);
         }

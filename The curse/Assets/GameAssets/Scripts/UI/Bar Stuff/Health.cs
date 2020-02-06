@@ -80,7 +80,6 @@ public class Health : MonoBehaviour
 
     public void GainHealth(float value)
     {
-        print("Se le suma " + value + " de vida");
         currentHealth += value;
         if (currentHealth > maxHealth)
         {
