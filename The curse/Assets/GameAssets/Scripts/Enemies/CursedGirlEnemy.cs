@@ -11,8 +11,6 @@ public class CursedGirlEnemy : Enemy
     [SerializeField]
     private float iniAttackDist;
     [SerializeField]
-    private float thirdPhaseSpeed;
-    [SerializeField]
     private float monstersCoolDown;
     [SerializeField]
     GameObject enemyCanvas;
@@ -41,7 +39,9 @@ public class CursedGirlEnemy : Enemy
     {
         cController = GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player");
-        thirdPhaseSpeed = moveSpeed * 3;
+        patrolSpeed = moveSpeed * 0.75f;
+        attackSpeed = moveSpeed * 1.5f;
+        moveSpeed = patrolSpeed;
         SetDialogueMode();
     }
 
@@ -70,7 +70,7 @@ public class CursedGirlEnemy : Enemy
                     Teleport();
                     break;
                 case 3:
-                        moveSpeed = thirdPhaseSpeed;
+                        moveSpeed = attackSpeed;
                         Attack();
                     break;
                 case 4:

@@ -28,7 +28,7 @@ public class InfectedMonster : Enemy
             if (!explosionActivated)
             {
                 explosionActivated = true;
-                moveSpeed = moveSpeed/2;
+                moveSpeed = patrolSpeed;
                 explosion = StartCoroutine(Explosion());
             }
             direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;

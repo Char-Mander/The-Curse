@@ -99,7 +99,7 @@ MonoBehaviour:
   endAttackDist: 15.18
   cadency: 1.5
   damage: 20
-  moveSpeed: 20
+  moveSpeed: 16
   weapon: {fileID: 0}
   projectile: {fileID: 0}
   posDisp: {fileID: 0}

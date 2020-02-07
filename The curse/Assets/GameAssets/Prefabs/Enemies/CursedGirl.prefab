@@ -737,7 +737,7 @@ MonoBehaviour:
   endAttackDist: 15
   cadency: 2
   damage: 30
-  moveSpeed: 100
+  moveSpeed: 20
   weapon: {fileID: 0}
   projectile: {fileID: 6630457299727349818, guid: 5249ec8b0d7d6454ebbc81c38d65bf39,
     type: 3}
@@ -755,7 +755,6 @@ MonoBehaviour:
   teleportDistance: 5
   teleportCoolDown: 4
   iniAttackDist: 7
-  thirdPhaseSpeed: 90
   monstersCoolDown: 3
   enemyCanvas: {fileID: 6447223610395354746}
   interactableCanvas: {fileID: 8175893154937117117}

@@ -34,12 +34,18 @@ public class Enemy : MonoBehaviour
     private bool canRotateToPlayer = true;
     [HideInInspector]
     public float distToPlayer;
+    [HideInInspector]
+    public float patrolSpeed { get; set; }
+    [HideInInspector]
+    public float attackSpeed { get; set; }
     // Start is called before the first frame update
     public virtual void Start()
     {
         cController = GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(Rotate());
+        patrolSpeed = moveSpeed * 0.5f;
+        attackSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -47,6 +53,7 @@ public class Enemy : MonoBehaviour
     {
         if (DetectPlayer())
         {
+            moveSpeed = attackSpeed;
             isAttacking = true;
             Attack();
             //Que el enemigo esté mirando al player en cuanto lo detecte
@@ -54,6 +61,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            moveSpeed = patrolSpeed;
             isAttacking = false;
             Patrol();
         }
@@ -93,7 +101,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3 auxDir = dire;
         auxDir.y += gravity;
-        cController.Move(auxDir * Time.deltaTime);
+        cController.Move(auxDir * Time.deltaTime * speed);
     }
 
     IEnumerator Rotate()
