@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     public bool isAttacking = false;
     [HideInInspector]
     public bool canAttack = true;
+    private bool canDealDamage = true;
     private bool canRotateToPlayer = true;
     [HideInInspector]
     public float distToPlayer;
@@ -148,9 +149,11 @@ public class Enemy : MonoBehaviour
             direVec.y = 0;
             this.transform.rotation = Quaternion.LookRotation(direVec);
         }
-        if (hit.collider.CompareTag("Player"))
-        {  
+        if (hit.collider.CompareTag("Player") && canDealDamage)
+        {
+            canDealDamage = false;
             hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
+            StartCoroutine(ReloadBodyAttack());
         }
     }
 
@@ -173,6 +176,12 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(cadency);
         canAttack = true;
+    }
+
+    IEnumerator ReloadBodyAttack()
+    {
+        yield return new WaitForSeconds(cadency);
+        canDealDamage = true;
     }
 
     IEnumerator RotateAgain()
