@@ -89,6 +89,7 @@ public class CursedGirlEnemy : Enemy
         }
         else if (finalDecision)
         {
+            print("Decision " + GameManager.instance.GetDecision());
             if (FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
             {
                 if (!end)
