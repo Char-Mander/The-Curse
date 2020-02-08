@@ -61,15 +61,13 @@ public class Health : MonoBehaviour
                 if (this.gameObject.tag == "Enemy" || this.gameObject.tag == "Explosive Sphere")
                 {
                     // Destroy(Instantiate(enemyDeadParticle, transform.position, Quaternion.identity), 3);
-                    if (this.gameObject.name == "Final Boss")
-                    {
-                        //Instantiate(this.gameObject.GetComponent<FinalBoss>().GetGoal(), this.gameObject.transform.position, this.gameObject.transform.rotation);
-                    }
+                    GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
                     Destroy(this.gameObject);
                 }
                 else if (this.gameObject.tag == "Player")
                 {
-                    //GameManager.instance.sceneC.LoadGameOver();
+                    GameManager.instance.SetDeaths(GameManager.instance.GetDeaths() + 1);
+                    GameManager.instance.sceneC.LoadGameOver();
                 }
             }
             if (GetComponentInChildren<EnemyCanvasController>() != null) GetComponentInChildren<EnemyCanvasController>().UpdateHealthBar();

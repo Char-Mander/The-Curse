@@ -12,5 +12,6 @@ public class DecisionState : MonoBehaviour
     public void AddOrSubtractToBalance(int value)
     {
         balance += value;
+        GameManager.instance.SetDecision(balance);
     }
 }

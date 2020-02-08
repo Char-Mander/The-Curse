@@ -41,9 +41,9 @@ public class CheckPointController : MonoBehaviour
         cp.SetAsCurrentCP(true);
         currentCP = cp;
         int index = GetIndexOfCP(cp);
-        GameManager.instance.data.SaveData(index, 
-            FindObjectOfType<QuestController>().GetIndexOfCurrentQuest(), 
-            FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth());
+        GameManager.instance.data.SaveData(index, FindObjectOfType<QuestController>().GetIndexOfCurrentQuest(), 
+            FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth(),  GameManager.instance.GetDeaths(), 
+            GameManager.instance.GetDefeatedEnemies(), GameManager.instance.GetDecision());
     }
 
     public void Respawn()

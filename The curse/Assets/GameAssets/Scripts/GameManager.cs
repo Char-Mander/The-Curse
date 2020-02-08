@@ -15,10 +15,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int maxQuests = 5;
 
-    private int currentCheckPoint=0;
+    private int currentCheckPoint = 0;
     private int currentQuest = 0;
-    private float maxPlayerHealth=-1;
-    private float currentPlayerHealth=-1;
+    private float maxPlayerHealth = -1;
+    private float currentPlayerHealth = -1;
+    private int deaths = 0;
+    private int defeatedEnemies = 0;
+    private int decisionState = 0;
 
 
     private void Awake()
@@ -66,4 +69,25 @@ public class GameManager : MonoBehaviour
     }
 
     public float GetCurrentPlayerHealth() { return currentPlayerHealth; }
+
+    public int GetDeaths() { return deaths; }
+
+    public void SetDeaths(int value)
+    {
+        deaths = value;
+    }
+
+    public int GetDefeatedEnemies() { return defeatedEnemies; }
+
+    public void SetDefeatedEnemies(int value)
+    {
+        defeatedEnemies = value;
+    }
+
+    public int GetDecision() { return decisionState; }
+
+    public void SetDecision(int value)
+    {
+        decisionState = value;
+    }
 }

@@ -27,7 +27,9 @@ public class SceneController : MonoBehaviour
         {
             //Guarda la información antes de cargar la pantalla del GameOver
             GameManager.instance.SetCurrentPlayerHealth(FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth());
-            GameManager.instance.data.SaveData(GameManager.instance.GetCurrentCheckPoint(), GameManager.instance.GetCurrentQuest(), GameManager.instance.GetCurrentPlayerHealth());
+            GameManager.instance.data.SaveData(GameManager.instance.GetCurrentCheckPoint(), GameManager.instance.GetCurrentQuest(), 
+                                                GameManager.instance.GetCurrentPlayerHealth(), GameManager.instance.GetDeaths(),
+                                                GameManager.instance.GetDefeatedEnemies(), GameManager.instance.GetDecision());
             StartCoroutine(LoadGameOverWait());
         }
     }
