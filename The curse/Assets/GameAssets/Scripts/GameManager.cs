@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
         maxPlayerHealth = health;
     }
 
+    public float GetPlayerMaxHealth() { return maxPlayerHealth; }
+
     public void SetCurrentPlayerHealth(float health)
     {
         currentPlayerHealth = health;

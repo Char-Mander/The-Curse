@@ -25,9 +25,12 @@ public class EndGameCanvasController : MonoBehaviour
 
     private void Start()
     {
-        LoadWinLoseSetUp(/*(GameManager.instance.GetMaxCheckPoints() == GameManager.instance.GetCurrentCheckPoint() - 1) 
-            && (GameManager.instance.GetMaxQuests() == GameManager.instance.GetCurrentQuest() - 1) && */GameManager.instance.GetCurrentPlayerHealth() > 0);
-        print("Muertes: " + GameManager.instance.GetDeaths());
+        LoadWinLoseSetUp(GameManager.instance.GetCurrentPlayerHealth() > 0);
+        if (GameManager.instance.GetCurrentPlayerHealth() <= 0)
+        {
+            GameManager.instance.SetCurrentPlayerHealth(GameManager.instance.GetPlayerMaxHealth());
+            GameManager.instance.data.SaveHealth(GameManager.instance.GetCurrentPlayerHealth());
+        }
     }
 
     public void LoadWinLoseSetUp(bool win)

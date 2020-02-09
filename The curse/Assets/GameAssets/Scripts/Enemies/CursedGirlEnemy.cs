@@ -89,7 +89,6 @@ public class CursedGirlEnemy : Enemy
         }
         else if (finalDecision)
         {
-            print("Decision " + GameManager.instance.GetDecision());
             if (FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
             {
                 if (!end)
@@ -97,6 +96,7 @@ public class CursedGirlEnemy : Enemy
                     FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
                     Instantiate(goal, goalPos);
                     end = true;
+                    GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
                 }
                 AimPlayer();
             }

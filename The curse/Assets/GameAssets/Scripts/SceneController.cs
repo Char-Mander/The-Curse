@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [SerializeField]
-    float timeBetweenScene = 0.75f;
+    float timeBetweenScene = 0.5f;
     bool lockSelection = false;
 
     public void LoadSceneLvl()

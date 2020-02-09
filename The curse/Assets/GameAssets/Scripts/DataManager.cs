@@ -33,6 +33,13 @@ public class DataManager : MonoBehaviour
         if (PlayerPrefs.HasKey(decisionStateKey))
             GameManager.instance.SetDecision(PlayerPrefs.GetInt(decisionStateKey));
     }
+
+    public void SaveHealth(float currentHealth)
+    {
+        //Guarda la vida del player
+        PlayerPrefs.SetFloat(currentPlayerHealthKey, currentHealth);
+        PlayerPrefs.Save();
+    }
     
     public void SaveData(int currentCheckPoint, int currentQuest, float currentHealth, int deaths, int defeatedEnemies, int decisionState)
     {
