@@ -57,8 +57,6 @@ public class PlayerController : MonoBehaviour, ICharacter
         soundsManager = GetComponent<PlayerSoundsManager>();
         pickobj = GetComponent<PickUpObjects>();
         interactobj = GetComponent<InteractWithObjects>();
-
-        print("Muertes: " + GameManager.instance.GetDeaths());
     }
 
     // Update is called once per frame

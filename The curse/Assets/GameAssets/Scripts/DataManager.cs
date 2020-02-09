@@ -63,6 +63,7 @@ public class DataManager : MonoBehaviour
     public void ResetData()
     {
         DeletePrefs();
+        GameManager.instance.ResetData();
     }
 
     [MenuItem("Utilidades/DeletePlayerPrefs")]

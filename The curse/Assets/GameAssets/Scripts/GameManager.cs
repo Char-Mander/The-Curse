@@ -40,6 +40,16 @@ public class GameManager : MonoBehaviour
         //InitData();
     }
 
+    public void ResetData()
+    {
+        currentCheckPoint = 0;
+        currentQuest = 0;
+        currentPlayerHealth = maxPlayerHealth;
+        deaths = 0;
+        defeatedEnemies = 0;
+        decisionState = 0;
+    }
+
     public int GetMaxCheckPoints() { return maxCheckPoints; }
 
     public int GetCurrentCheckPoint() { return currentCheckPoint; }
