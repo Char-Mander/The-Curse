@@ -22,29 +22,29 @@ public class OptionsController : MonoBehaviour
     }
 
     public void BackToMenuBtn()
-    {   if(GameManager.instance.sceneC.IsALvlScene())
-        GameManager.instance.data.LoadData();
-        if(Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+    {   if(GameManager.instance.sceneC.IsALvlScene()) GameManager.instance.data.LoadData();
         GameManager.instance.sceneC.LoadMenu();
     }
 
     public void SwitchPause()
     {
         isPaused = !isPaused;
-        if (isPaused && Cursor.lockState == CursorLockMode.Locked)
+        if (isPaused)
         {
-            Cursor.lockState = CursorLockMode.None;
-            if (GameManager.instance.sceneC.IsALvlScene()) {
-                FindObjectOfType<PlayerController>().SetIsLocked(true);
-            }
+            if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+            if (GameManager.instance.sceneC.IsALvlScene()) FindObjectOfType<PlayerController>().SetIsLocked(true);
         }
-        else if (!isPaused && Cursor.lockState != CursorLockMode.Locked && GameManager.instance.sceneC.IsALvlScene())
+        else if (!isPaused)
         {
-            if (FindObjectOfType<CursedGirlEnemy>() == null || !FindObjectOfType<CursedGirlEnemy>().IsOnFinalDecisionPhase())
+            if (GameManager.instance.sceneC.IsALvlScene())
             {
-                Cursor.lockState = CursorLockMode.Locked;
-                if(!FindObjectOfType<DialogueManager>().IsOnADialogue())
-                FindObjectOfType<PlayerController>().SetIsLocked(false);
+                if (!FindObjectOfType<CursedGirlEnemy>().IsOnFinalDecisionPhase()) Cursor.lockState = CursorLockMode.Locked;
+                if (!FindObjectOfType<DialogueManager>().IsOnADialogue()) FindObjectOfType<PlayerController>().SetIsLocked(false);
+            }
+            else if(Cursor.lockState == CursorLockMode.Locked)
+            {
+                print("Debería desactivar el cursor");
+                Cursor.lockState = CursorLockMode.None;
             }
         }
         optionPanel.SetActive(isPaused);

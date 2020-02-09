@@ -287,6 +287,10 @@ public class PlayerController : MonoBehaviour, ICharacter
     public void EnableWeapon(bool enable)
     {
         weapon.SetActive(enable);
+        if (enable && weapon.GetComponent<SimpleShoot>())
+        {
+            weapon.GetComponent<SimpleShoot>().SetCanShoot(true);
+        }
         crossHair.SetActive(enable);
     }
 
@@ -323,8 +327,11 @@ public class PlayerController : MonoBehaviour, ICharacter
     public void SetIsLocked(bool value)
     {
         locked = value;
-        if (locked) GetActiveWeaponAndCrossHair();
+        if (locked)
+        {
+            GetActiveWeaponAndCrossHair();
+            soundsManager.StopSound();
+        }
         EnableWeapon(!value);
-        soundsManager.StopSound();
     }
 }

@@ -56,8 +56,10 @@ public class SimpleShoot : MonoBehaviour, IWeapon
 
     public void StartShootAnimation()
     {
+        print("Entra en el startshootAnimation");
         if (canShoot)
         {
+            print("Dispara");
             canShoot = false;
             GetComponent<Animator>().SetTrigger("Fire");
             StartCoroutine(Reload());
@@ -129,14 +131,14 @@ public class SimpleShoot : MonoBehaviour, IWeapon
         canShoot = true;
     }
 
+    public void SetCanShoot(bool value)
+    {
+        canShoot = true;
+    }
+
     public void Zoom(bool isZoom)
     {
         isZooming = isZoom;
-    }
-
-    public void SetCanShoot(bool shoot)
-    {
-        canShoot = shoot;
     }
 
 }

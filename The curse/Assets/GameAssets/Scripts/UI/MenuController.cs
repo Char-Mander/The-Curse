@@ -11,6 +11,8 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
         btnLoadGame.enabled = GameManager.instance.data.HasPreviousData();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void BtnStartNewGame()

@@ -40,6 +40,18 @@ public class GameManager : MonoBehaviour
         //InitData();
     }
 
+
+    private void Update()
+    {
+        if(Cursor.lockState == CursorLockMode.None)
+        {
+            print("El cursor no está locked");
+        }
+        else if(Cursor.lockState == CursorLockMode.Locked)
+        {
+            print("El cursor está locked");
+        }
+    }
     public void ResetData()
     {
         currentCheckPoint = 0;

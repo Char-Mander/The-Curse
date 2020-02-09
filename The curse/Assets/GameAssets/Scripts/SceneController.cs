@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [SerializeField]
-    float timeBetweenScene = 0.5f;
+    float timeBetweenScene = 0.25f;
     bool lockSelection = false;
 
     public void LoadSceneLvl()
@@ -17,8 +17,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadMenu()
     {
-        if (!lockSelection)
-            StartCoroutine(LoadMenuWait());
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void LoadGameOver()
