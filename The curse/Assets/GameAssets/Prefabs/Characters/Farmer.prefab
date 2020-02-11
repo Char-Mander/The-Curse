@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 8884730424618027515}
   - component: {fileID: 8884730424618027514}
   - component: {fileID: 8884730424618027512}
-  - component: {fileID: 8884730424618027513}
+  - component: {fileID: 3058765028241387309}
   m_Layer: 18
   m_Name: Farmer
   m_TagString: Npc
@@ -885,7 +885,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5.155591
   m_Center: {x: 0, y: 0, z: 5.1923933}
---- !u!114 &8884730424618027513
+--- !u!114 &3058765028241387309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -894,13 +894,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8884730424618027457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 201a16e0d5d4e8041b21c65171ec3342, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a32eb09a6b6ef74aa72751d37c545de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 5
   head: {fileID: 8884730422761245285}
   canRotate: 1
-  characterCanRotate: 1
 --- !u!1 &8884730424806567763
 GameObject:
   m_ObjectHideFlags: 0

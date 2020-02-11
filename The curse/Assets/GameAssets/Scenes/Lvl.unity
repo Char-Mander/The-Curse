@@ -2493,6 +2493,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Irrelevant Villager
       objectReference: {fileID: 0}
+    - target: {fileID: 53275080527733736, guid: 045c4f55267279341a9505a06044bc57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 53275080527733740, guid: 045c4f55267279341a9505a06044bc57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3461,6 +3466,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Irrelevant Villager
+      objectReference: {fileID: 0}
+    - target: {fileID: 53275080527733736, guid: 045c4f55267279341a9505a06044bc57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 53275080527733740, guid: 045c4f55267279341a9505a06044bc57,
         type: 3}
