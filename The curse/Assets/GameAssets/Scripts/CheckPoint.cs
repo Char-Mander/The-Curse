@@ -13,7 +13,7 @@ public class CheckPoint : MonoBehaviour
     private void Start()
     {
         checkPointController = FindObjectOfType<CheckPointController>();
-        hasBeenActivated = !((GameManager.instance.GetCurrentCheckPoint() + 1) <= int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
+        hasBeenActivated = !((GameManager.instance.GetCurrentCheckPoint()) < int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
     }
 
 

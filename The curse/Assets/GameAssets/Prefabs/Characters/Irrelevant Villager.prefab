@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 53275080280547404}
   - component: {fileID: 53275080280548275}
   - component: {fileID: 53275080280548274}
-  - component: {fileID: 53275080280547405}
   m_Layer: 18
   m_Name: Head
   m_TagString: Npc
@@ -80,19 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &53275080280547405
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53275080280547407}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &53275080389133690
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +90,6 @@ GameObject:
   - component: {fileID: 53275080389133691}
   - component: {fileID: 53275080389133694}
   - component: {fileID: 53275080389133689}
-  - component: {fileID: 53275080389133688}
   m_Layer: 18
   m_Name: Right Eye (1)
   m_TagString: Npc
@@ -172,19 +157,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &53275080389133688
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53275080389133690}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &53275080527733736
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +168,6 @@ GameObject:
   - component: {fileID: 53275080527733740}
   - component: {fileID: 53275080527733743}
   - component: {fileID: 53275080527733742}
-  - component: {fileID: 53275080527733737}
   - component: {fileID: 53275080527733741}
   - component: {fileID: 53275080527733714}
   - component: {fileID: 53275080527733715}
@@ -270,20 +241,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &53275080527733737
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53275080527733736}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &53275080527733741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +335,6 @@ GameObject:
   - component: {fileID: 53275080769510883}
   - component: {fileID: 53275080769510886}
   - component: {fileID: 53275080769510881}
-  - component: {fileID: 53275080769510880}
   m_Layer: 18
   m_Name: Sphere
   m_TagString: Npc
@@ -445,19 +401,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &53275080769510880
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53275080769510882}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &53275080902805003
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +412,6 @@ GameObject:
   - component: {fileID: 53275080902805000}
   - component: {fileID: 53275080902805007}
   - component: {fileID: 53275080902805006}
-  - component: {fileID: 53275080902805001}
   m_Layer: 18
   m_Name: Left Eye (1)
   m_TagString: Npc
@@ -537,19 +479,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &53275080902805001
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53275080902805003}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &53275080919410612
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +490,6 @@ GameObject:
   - component: {fileID: 53275080919410613}
   - component: {fileID: 53275080919410616}
   - component: {fileID: 53275080919410619}
-  - component: {fileID: 53275080919410618}
   m_Layer: 18
   m_Name: Sphere (1)
   m_TagString: Npc
@@ -628,19 +556,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &53275080919410618
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53275080919410612}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &9114614159532767792
 PrefabInstance:
   m_ObjectHideFlags: 0

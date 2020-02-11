@@ -45,7 +45,7 @@ public class InteractWithObjects : MonoBehaviour
                 FindObjectOfType<FixedElementCanvasController>().UpdateTextPanel(chosenText, interactableObj.IsNpc(),
                     (dialogue!=null) ? dialogue.GetName() : null);
 
-                if (currentInteractionObject.GetComponentInChildren<Quest>() != null)
+                if (currentInteractionObject.GetComponentInChildren<Quest>() != null && !currentInteractionObject.GetComponentInChildren<Quest>().HasBeenTriggered())
                     StartCoroutine(WaitForActivateQuest());
             }
         }

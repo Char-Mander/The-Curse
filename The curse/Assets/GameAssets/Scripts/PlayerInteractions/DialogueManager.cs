@@ -65,7 +65,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
         }
-        else if (GetComponentInChildren<Quest>())
+        else if (GetComponentInChildren<Quest>() && !GetComponentInChildren<Quest>().HasBeenTriggered())
         {
             GetComponentInChildren<Quest>().ActivateQuest();
         }

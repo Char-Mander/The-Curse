@@ -40,6 +40,8 @@ public class NPC : MonoBehaviour
     {
         Vector3 auxDir = dire;
         auxDir.y += gravity;
+
+        print("Se mueve el npc a una velocidad de " + speed + " en la dirección " + "( " + auxDir.x + ", " + auxDir.y + ", " + auxDir.z + ")");
         cController.Move(auxDir * Time.deltaTime);
     }
 

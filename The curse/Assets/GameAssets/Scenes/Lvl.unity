@@ -3401,6 +3401,11 @@ PrefabInstance:
       propertyPath: sentencesList.Array.data[2].sentence
       value: "Buenos d\xEDas. Para quien los tenga..."
       objectReference: {fileID: 0}
+    - target: {fileID: 8884730424618027513, guid: 2ce050d1ae1afb34fb12c7496c45dca5,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ce050d1ae1afb34fb12c7496c45dca5, type: 3}
 --- !u!4 &815396152 stripped
@@ -5788,6 +5793,11 @@ PrefabInstance:
       propertyPath: sentencesList.Array.data[1].sentence
       value: "\xBFQu\xE9 hay?"
       objectReference: {fileID: 0}
+    - target: {fileID: 8884730424618027513, guid: 2ce050d1ae1afb34fb12c7496c45dca5,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ce050d1ae1afb34fb12c7496c45dca5, type: 3}
 --- !u!4 &1653287510 stripped
@@ -6151,6 +6161,11 @@ PrefabInstance:
       propertyPath: sentencesList.Array.data[2].sentence
       value: Me toca ir a trabajar de nuevo.
       objectReference: {fileID: 0}
+    - target: {fileID: 8884730424618027513, guid: 2ce050d1ae1afb34fb12c7496c45dca5,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ce050d1ae1afb34fb12c7496c45dca5, type: 3}
 --- !u!4 &1699358408 stripped
@@ -6501,6 +6516,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8884730424618027513, guid: 2ce050d1ae1afb34fb12c7496c45dca5,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ce050d1ae1afb34fb12c7496c45dca5, type: 3}
 --- !u!4 &1828238201 stripped
@@ -6659,6 +6679,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sentencesList.Array.data[1].sentence
       value: "Siempre viene bien ver caras nuevas por aqu\xED."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884730424618027513, guid: 2ce050d1ae1afb34fb12c7496c45dca5,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ce050d1ae1afb34fb12c7496c45dca5, type: 3}
