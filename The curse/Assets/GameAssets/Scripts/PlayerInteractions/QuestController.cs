@@ -39,6 +39,7 @@ public class QuestController : MonoBehaviour
 
     public void ActiveQuest()
     {
+        print("Ahora pasa a la siguiente quest.");
             int index = 0;
             if (currentQuest != null)
             {
@@ -48,7 +49,7 @@ public class QuestController : MonoBehaviour
                 else index = -1;
             }
             currentQuest = index >= 0 ? questList[index] : null;
-            print("Index de la currentQuest: " + index);
+            print("Quest index: " + index);
             if(currentQuest != null ) currentQuest.SetAsCurrentQuest(true);
             GameManager.instance.SetCurrentQuest(index);
             FindObjectOfType<FixedElementCanvasController>().UpdateQuestPanel(currentQuest != null ? currentQuest.GetText() : "");

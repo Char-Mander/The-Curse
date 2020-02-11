@@ -61,16 +61,16 @@ public class DialogueManager : MonoBehaviour
         isOnADialogue = false;
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         if (Cursor.lockState != CursorLockMode.Locked) Cursor.lockState = CursorLockMode.Locked;
+
         if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && !dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
         {
             dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
         }
-        else if (GetComponentInChildren<Quest>() && !GetComponentInChildren<Quest>().HasBeenTriggered())
+        else if (dialogue.gameObject.GetComponentInChildren<Quest>() != null && !dialogue.gameObject.GetComponentInChildren<Quest>().HasBeenTriggered())
         {
-            GetComponentInChildren<Quest>().ActivateQuest();
+            dialogue.gameObject.GetComponentInChildren<Quest>().ActivateQuest();
         }
-
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().EnableOrDisableCharacterController(true);
+        FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
 
     }
 

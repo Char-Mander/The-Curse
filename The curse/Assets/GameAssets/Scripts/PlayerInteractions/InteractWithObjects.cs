@@ -21,15 +21,17 @@ public class InteractWithObjects : MonoBehaviour
     // Update is called once per frame
     public void InteractWithGameObject()
     {
-        if (objectToInteract != null && objectToInteract.GetComponent<InteractableObject>().isInteractable() && canInteract 
-            && !FindObjectOfType<DialogueManager>().IsOnADialogue())
+        print("Tag del objecttointeract: " + objectToInteract.tag);
+        if (objectToInteract != null /*&& 
+            ((!FindObjectOfType<PlayerController>().IsOnAMount() && !objectToInteract.CompareTag("Mount")) || (FindObjectOfType<PlayerController>().IsOnAMount() && objectToInteract.CompareTag("Mount"))) 
+            */&& objectToInteract.GetComponent<InteractableObject>().isInteractable() && canInteract && !FindObjectOfType<DialogueManager>().IsOnADialogue())
         {
             //Cogemos el objeto
             currentInteractionObject = objectToInteract;
             InteractableObject interactableObj = objectToInteract.GetComponent<InteractableObject>();
             Dialogue dialogue = interactableObj.GetDialogue();
             //Hacemos que se actualice el texto del objeto en el panel del canvas
-            if (interactableObj.IsNpc() && interactableObj.IsComplexNpc())
+            if (interactableObj.IsNpc() && interactableObj.IsComplexNpc() && !FindObjectOfType<PlayerController>().IsOnAMount())
             {
                 FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             }
@@ -38,7 +40,7 @@ public class InteractWithObjects : MonoBehaviour
                 if (!GetComponent<PlayerController>().IsOnAMount()) interactableObj.GetComponent<Mount>().PlayerClimbsOn();
                 else interactableObj.GetComponent<Mount>().PlayerGetsOff();
             }
-            else
+            else if(!FindObjectOfType<PlayerController>().IsOnAMount())
             {
                 string chosenText = (dialogue != null) ? dialogue.GetSentences()[(int)Random.Range(0, dialogue.GetSentences().Count)].sentence
                                     : interactableObj.GetObjectText();
@@ -46,7 +48,14 @@ public class InteractWithObjects : MonoBehaviour
                     (dialogue!=null) ? dialogue.GetName() : null);
 
                 if (currentInteractionObject.GetComponentInChildren<Quest>() != null && !currentInteractionObject.GetComponentInChildren<Quest>().HasBeenTriggered())
+                {
+                    print("Empieza la coroutina para activar la quest");
                     StartCoroutine(WaitForActivateQuest());
+                }
+            }
+            else if (FindObjectOfType<PlayerController>().IsOnAMount() && !objectToInteract.CompareTag("Mount"))
+            {
+                objectToInteract = FindObjectOfType<Mount>().gameObject;
             }
         }
     }

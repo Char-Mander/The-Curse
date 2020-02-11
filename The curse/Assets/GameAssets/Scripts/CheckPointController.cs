@@ -42,7 +42,6 @@ public class CheckPointController : MonoBehaviour
         currentCP = cp;
         int index = GetIndexOfCP(cp);
         GameManager.instance.SetCurrentCheckPoint(index);
-        print("En el checkpoint " + cp.name + " el índice de la quest es: " + GameManager.instance.GetCurrentQuest());
         GameManager.instance.data.SaveData(index, FindObjectOfType<QuestController>().GetIndexOfCurrentQuest(), 
             FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth(),  GameManager.instance.GetDeaths(), 
             GameManager.instance.GetDefeatedEnemies(), GameManager.instance.GetDecision());

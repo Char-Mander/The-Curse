@@ -7,7 +7,7 @@ public class Quest : MonoBehaviour
 {   [SerializeField]
     string text;
     bool isActive = false;
-    bool completed;
+    bool completed = false;
     bool triggered = false;
     QuestController questController;
     // Start is called before the first frame update
@@ -16,6 +16,10 @@ public class Quest : MonoBehaviour
         questController = FindObjectOfType<QuestController>();
         completed = !((GameManager.instance.GetCurrentQuest()+1) < int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
         triggered = !((GameManager.instance.GetCurrentQuest()+1) < int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
+        if(this.gameObject.name == "Quest4")
+        {
+            print("Valores de la quest4: triggered - " + triggered + "   completed - " + completed);
+        }
     }
     
     public void SetAsCurrentQuest(bool value)
@@ -38,6 +42,7 @@ public class Quest : MonoBehaviour
     
     public void ActivateQuest()
     {
+        print("Entra al activateQuest");
         triggered = true;
         questController.ActiveQuest();
     }

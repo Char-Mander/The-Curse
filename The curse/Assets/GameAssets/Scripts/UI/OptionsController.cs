@@ -20,9 +20,7 @@ public class OptionsController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            print("Entra por el escp");
             SwitchPause();
-
         }
     }
 
@@ -40,7 +38,6 @@ public class OptionsController : MonoBehaviour
             if (GameManager.instance.sceneC.IsALvlScene())
             {
                 FindObjectOfType<PlayerController>().SetIsLocked(true);
-                print("Pone a true el locked del mount");
                 FindObjectOfType<Mount>().SetIsLocked(true);
             }
         }
