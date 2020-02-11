@@ -162,7 +162,7 @@ public class FixedElementCanvasController : MonoBehaviour
     IEnumerator QuestChangeWait(string text)
     {
         if(questText.text.Length > 0) questText.text = "¡MISIÓN COMPLETADA!";
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.25f);
         questText.text = text;
     }
 
