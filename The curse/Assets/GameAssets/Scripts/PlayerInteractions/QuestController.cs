@@ -12,7 +12,7 @@ public class QuestController : MonoBehaviour
     {
         auxList = FindObjectsOfType<Quest>();
         OrderQuests();
-        currentQuest = GameManager.instance.data.HasPreviousData() ? questList[GameManager.instance.GetCurrentQuest()] : null;
+        currentQuest = questList[GameManager.instance.GetCurrentQuest()];
         if(currentQuest!=null) FindObjectOfType<FixedElementCanvasController>().UpdateQuestPanel(currentQuest.GetText());
     }
 
@@ -48,7 +48,9 @@ public class QuestController : MonoBehaviour
                 else index = -1;
             }
             currentQuest = index >= 0 ? questList[index] : null;
+            print("Index de la currentQuest: " + index);
             if(currentQuest != null ) currentQuest.SetAsCurrentQuest(true);
+            GameManager.instance.SetCurrentQuest(index);
             FindObjectOfType<FixedElementCanvasController>().UpdateQuestPanel(currentQuest != null ? currentQuest.GetText() : "");
     }
 

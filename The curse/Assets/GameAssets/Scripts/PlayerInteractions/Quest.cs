@@ -14,7 +14,8 @@ public class Quest : MonoBehaviour
     void Start()
     {
         questController = FindObjectOfType<QuestController>();
-        completed = !((GameManager.instance.GetCurrentQuest()) < int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
+        completed = !((GameManager.instance.GetCurrentQuest()+1) < int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
+        triggered = !((GameManager.instance.GetCurrentQuest()+1) < int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
     }
     
     public void SetAsCurrentQuest(bool value)

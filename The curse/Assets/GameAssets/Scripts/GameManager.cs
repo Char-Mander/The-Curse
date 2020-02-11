@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     public int GetCurrentCheckPoint() { return currentCheckPoint; }
 
-    public void SetCurrentWayPoint(int index)
+    public void SetCurrentCheckPoint(int index)
     {
         currentCheckPoint = index;
     }

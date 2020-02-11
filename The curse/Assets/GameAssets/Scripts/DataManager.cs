@@ -16,7 +16,7 @@ public class DataManager : MonoBehaviour
     {
         //Carga el punto en el que se quedó
         if (PlayerPrefs.HasKey(currentCheckPointKey))
-            GameManager.instance.SetCurrentWayPoint(PlayerPrefs.GetInt(currentCheckPointKey));
+            GameManager.instance.SetCurrentCheckPoint(PlayerPrefs.GetInt(currentCheckPointKey));
         //Carga la misión actual
         if (PlayerPrefs.HasKey(currentQuestKey))
             GameManager.instance.SetCurrentQuest(PlayerPrefs.GetInt(currentQuestKey));
@@ -32,6 +32,7 @@ public class DataManager : MonoBehaviour
         //Carga la decisión del player
         if (PlayerPrefs.HasKey(decisionStateKey))
             GameManager.instance.SetDecision(PlayerPrefs.GetInt(decisionStateKey));
+        print("El index de la quest al hacer el load es: " + GameManager.instance.GetCurrentQuest());
     }
 
     public void SaveHealth(float currentHealth)
@@ -43,6 +44,7 @@ public class DataManager : MonoBehaviour
     
     public void SaveData(int currentCheckPoint, int currentQuest, float currentHealth, int deaths, int defeatedEnemies, int decisionState)
     {
+        print("Guarda el index de la quest: " + currentQuest);
         FindObjectOfType<FixedElementCanvasController>().ShowSavePanel();
         //Guarda el punto en el que se quedó
         PlayerPrefs.SetInt(currentCheckPointKey, currentCheckPoint);
