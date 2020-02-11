@@ -13,8 +13,6 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private Transform posSpawn;
     [SerializeField]
-    private Transform posSpawnRoof;
-    [SerializeField]
     private GameObject bomb;
     [SerializeField]
     private GameObject explosionParticle;
@@ -71,16 +69,7 @@ public class Spawner : MonoBehaviour
         {
             canSpawn = false;
             GameObject choosenEnemy = enemyToSpawn[Random.RandomRange(0,enemyToSpawn.Count)];
-            
-            if (choosenEnemy.GetComponent<RangedEnemy>() != null)
-            {
-                Transform auxPos = choosenEnemy.GetComponent<RangedEnemy>().IsRoofShooter() ? posSpawnRoof : posSpawn;
-                Instantiate(choosenEnemy, auxPos.position, auxPos.rotation);
-            }
-            else
-            {
-                Instantiate(choosenEnemy, posSpawn.position, posSpawn.rotation);
-            }
+            Instantiate(choosenEnemy, posSpawn.position, posSpawn.rotation);
             StartCoroutine(Reload());
         }
     }
@@ -119,8 +108,10 @@ public class Spawner : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            print("Detecta al player");
             if (Input.GetKeyDown(KeyCode.E) && !hasBomb)
             {
+                print("Activa el spawner");
                 DropBomb();
                 hasBomb = true;
             }

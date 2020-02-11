@@ -18,7 +18,12 @@ public class OptionsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) SwitchPause();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            print("Entra por el escp");
+            SwitchPause();
+
+        }
     }
 
     public void BackToMenuBtn()
@@ -32,18 +37,26 @@ public class OptionsController : MonoBehaviour
         if (isPaused)
         {
             if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
-            if (GameManager.instance.sceneC.IsALvlScene()) FindObjectOfType<PlayerController>().SetIsLocked(true);
+            if (GameManager.instance.sceneC.IsALvlScene())
+            {
+                FindObjectOfType<PlayerController>().SetIsLocked(true);
+                print("Pone a true el locked del mount");
+                FindObjectOfType<Mount>().SetIsLocked(true);
+            }
         }
         else if (!isPaused)
         {
             if (GameManager.instance.sceneC.IsALvlScene())
             {
                 if (!FindObjectOfType<CursedGirlEnemy>().IsOnFinalDecisionPhase()) Cursor.lockState = CursorLockMode.Locked;
-                if (!FindObjectOfType<DialogueManager>().IsOnADialogue()) FindObjectOfType<PlayerController>().SetIsLocked(false);
+                if (!FindObjectOfType<DialogueManager>().IsOnADialogue())
+                {
+                    FindObjectOfType<PlayerController>().SetIsLocked(false);
+                    FindObjectOfType<Mount>().SetIsLocked(false);
+                }
             }
             else if(Cursor.lockState == CursorLockMode.Locked)
             {
-                print("Debería desactivar el cursor");
                 Cursor.lockState = CursorLockMode.None;
             }
         }

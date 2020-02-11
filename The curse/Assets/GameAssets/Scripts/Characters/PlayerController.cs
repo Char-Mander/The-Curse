@@ -327,11 +327,12 @@ public class PlayerController : MonoBehaviour, ICharacter
     public void SetIsLocked(bool value)
     {
         locked = value;
-        if (locked)
+        if (locked && !isOnAMount)
         {
             GetActiveWeaponAndCrossHair();
             soundsManager.StopSound();
         }
+        if(!isOnAMount)
         EnableWeapon(!value);
     }
 }

@@ -56,10 +56,8 @@ public class SimpleShoot : MonoBehaviour, IWeapon
 
     public void StartShootAnimation()
     {
-        print("Entra en el startshootAnimation");
         if (canShoot)
         {
-            print("Dispara");
             canShoot = false;
             GetComponent<Animator>().SetTrigger("Fire");
             StartCoroutine(Reload());
@@ -73,7 +71,7 @@ public class SimpleShoot : MonoBehaviour, IWeapon
        GameObject tempFlash;
        GameObject bullet = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
        Vector3 dire = new Vector3();
-        if (target != null)
+        /*if (target != null)
         {
             dire = target.position - barrelLocation.transform.position;
             dire.y += 0.25f;
@@ -81,14 +79,14 @@ public class SimpleShoot : MonoBehaviour, IWeapon
         else
         {
             dire = barrelLocation.forward;
-        }
+        }*/
         
-       /* RaycastHit hit;
-        if (Physics.Raycast(barrelLocation.transform.position, Camera.main.transform.forward-barrelLocation.transform.position + Camera.main.transform.position, out hit, Mathf.Infinity, lm))
+        RaycastHit hit;
+        if (Physics.Raycast(barrelLocation.transform.position, Camera.main.transform.forward + (Camera.main.transform.position - barrelLocation.transform.position), out hit, Mathf.Infinity, lm))
         {
             //Dibuja la línea en el punto de impacto
             dire = hit.point;
-            */
+            
             /*if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Enemy Head") || hit.collider.CompareTag("Explosive Sphere"))
             {
                 //Partículas de sangre
@@ -102,11 +100,11 @@ public class SimpleShoot : MonoBehaviour, IWeapon
                 CreateParticleAtPoint(endParticle, hit.point, true, Quaternion.identity);
             }*/
 
-       /* }
+        }
         else
         {
-            dire = Camera.main.transform.forward - barrelLocation.transform.position + Camera.main.transform.position;
-        }*/
+            dire = Camera.main.transform.forward + (Camera.main.transform.position - barrelLocation.transform.position);
+        }
         bullet.GetComponent<Rigidbody>().AddForce(dire * shotPower);
         Destroy(bullet, 10);
         tempFlash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);

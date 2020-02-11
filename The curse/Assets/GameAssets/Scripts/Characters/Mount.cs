@@ -31,6 +31,7 @@ public class Mount : MonoBehaviour, ICharacter
     private float yaw;
     private bool hasSnorted = false;
     private bool avoidObstacles = true;
+    private bool isLocked;
 
     private void Start()
     {
@@ -42,9 +43,12 @@ public class Mount : MonoBehaviour, ICharacter
 
     private void Update()
     {
-        CharacterVelocity();
-        JumpAndMoveCharacter();
-        RotateCharacter();
+        if (!isLocked)
+        {
+            CharacterVelocity();
+            JumpAndMoveCharacter();
+            RotateCharacter();
+        }
     }
 
     public void CharacterVelocity()
@@ -148,4 +152,10 @@ public class Mount : MonoBehaviour, ICharacter
         player.transform.parent = null;
     }
 
+    public bool IsLocked() { return isLocked; }
+
+    public void SetIsLocked(bool value)
+    {
+        isLocked = value;
+    }
 }

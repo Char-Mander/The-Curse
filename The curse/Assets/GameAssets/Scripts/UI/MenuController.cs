@@ -23,11 +23,13 @@ public class MenuController : MonoBehaviour
 
     public void BtnLoadGame()
     {
+        GameManager.instance.data.LoadData();
         GameManager.instance.sceneC.LoadSceneLvl();
     }
 
     public void BtnOptions()
     {
+        print("Entra por btnOptions");
         GameManager.instance.optionsC.SwitchPause();
     }
 
