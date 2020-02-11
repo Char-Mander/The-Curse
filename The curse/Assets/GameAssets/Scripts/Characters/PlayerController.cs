@@ -208,6 +208,7 @@ public class PlayerController : MonoBehaviour, ICharacter
             if (stamina.hasNoStamina())
             {
                 isRunning = false;
+                canRunAgain = false;
                 StartCoroutine(RegenerationWaitTime());
             }
         }
@@ -220,6 +221,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     IEnumerator RegenerationWaitTime()
     {
         yield return new WaitForSeconds(2f);
+        canRunAgain = true;
     }
 
     void ManagePlayerStates()
