@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 106142432}
   - component: {fileID: 106142431}
   - component: {fileID: 106142430}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 123449330}
   - component: {fileID: 123449329}
   - component: {fileID: 123449328}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 197849466}
   - component: {fileID: 197849465}
   - component: {fileID: 197849464}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 341850030}
   - component: {fileID: 341850029}
   - component: {fileID: 341850028}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1494,7 +1494,7 @@ PrefabInstance:
     - target: {fileID: 7232755058083143787, guid: 88e733728c86a87449afd29a08e4ee72,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7232755058083143787, guid: 88e733728c86a87449afd29a08e4ee72,
         type: 3}
@@ -1652,7 +1652,7 @@ GameObject:
   - component: {fileID: 1084296946}
   - component: {fileID: 1084296945}
   - component: {fileID: 1084296944}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2170,6 +2170,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f82a5bdb9b16d044f9fe15957d9e0be1, type: 3}
+--- !u!4 &1647168376 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6906857354702699326, guid: 81757756ddc455a42a93842a4bbd7f37,
+    type: 3}
+  m_PrefabInstance: {fileID: 6905477470215504289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1694130000
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,7 +2883,7 @@ GameObject:
   - component: {fileID: 1969439846}
   - component: {fileID: 1969439845}
   - component: {fileID: 1969439844}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3280,6 +3286,11 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.5019608
       objectReference: {fileID: 0}
+    - target: {fileID: 2198937272691195349, guid: 9c4a2108969384b418d0e998139f5f06,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c4a2108969384b418d0e998139f5f06, type: 3}
 --- !u!1001 &4678854041748802205
@@ -3653,11 +3664,86 @@ PrefabInstance:
     - target: {fileID: 6791642147861779882, guid: 81757756ddc455a42a93842a4bbd7f37,
         type: 3}
       propertyPath: lm.m_Bits
-      value: 926007
+      value: 942391
       objectReference: {fileID: 0}
+    - target: {fileID: 6791642147861779882, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: shotPower
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791642147861779882, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: posDisp
+      value: 
+      objectReference: {fileID: 1647168376}
+    - target: {fileID: 6791642147861779882, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: enemyHitParticle
+      value: 
+      objectReference: {fileID: 100000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
     - target: {fileID: 6905477470247212111, guid: 81757756ddc455a42a93842a4bbd7f37,
         type: 3}
       propertyPath: weaponList.Array.data[1].isUnlocked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907241802286778248, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.784
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907241802286778248, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.036
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907241802286778248, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.019
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907241802286778248, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.10357022
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907241802286778248, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.15246761
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907241802286778248, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.015999388
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907241802286778248, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.98273647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907241802286778248, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 12.031
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907241802286778248, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -17.639
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905477470691383796, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905477470691383796, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905477470691383796, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

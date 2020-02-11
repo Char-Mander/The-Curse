@@ -11,7 +11,9 @@ public class SimpleShoot : MonoBehaviour, IWeapon
     [SerializeField]
     private GameObject muzzleFlashPrefab;
     [SerializeField]
-    private Transform barrelLocation;
+    private Transform posDisp;
+    [SerializeField]
+    private GameObject enemyHitParticle;
     [SerializeField]
     private Transform casingExitLocation;
     [SerializeField]
@@ -35,8 +37,8 @@ public class SimpleShoot : MonoBehaviour, IWeapon
 
     void Start()
     {
-        if (barrelLocation == null)
-            barrelLocation = transform;
+        if (posDisp == null)
+            posDisp = transform;
         aSource = GetComponent<AudioSource>();
     }
 
@@ -69,45 +71,28 @@ public class SimpleShoot : MonoBehaviour, IWeapon
        aSource.volume = 0.25f;
        aSource.PlayOneShot(shotAudioClips[0]);
        GameObject tempFlash;
-       GameObject bullet = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
+       GameObject bullet = Instantiate(bulletPrefab, posDisp.position, posDisp.rotation);
        Vector3 dire = new Vector3();
-        /*if (target != null)
-        {
-            dire = target.position - barrelLocation.transform.position;
-            dire.y += 0.25f;
-        }
-        else
-        {
-            dire = barrelLocation.forward;
-        }*/
-        
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(barrelLocation.transform.position, Camera.main.transform.forward + (Camera.main.transform.position - barrelLocation.transform.position), out hit, Mathf.Infinity, lm))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, lm))
         {
             //Dibuja la línea en el punto de impacto
-            dire = hit.point;
-            
-            /*if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Enemy Head") || hit.collider.CompareTag("Explosive Sphere"))
+            dire = hit.point - posDisp.transform.position;
+            if (hit.collider.CompareTag("Enemy"))
             {
                 //Partículas de sangre
                 CreateParticleAtPoint(enemyHitParticle, hit.point, false, Quaternion.LookRotation(hit.normal));
-                float auxDamage = hit.collider.CompareTag("Enemy Head") ? damage * 2 : damage;
-                hit.collider.GetComponentInParent<Health>().LoseHealth(auxDamage);
             }
-            else
-            {
-                //Partículas del láser
-                CreateParticleAtPoint(endParticle, hit.point, true, Quaternion.identity);
-            }*/
-
         }
         else
         {
-            dire = Camera.main.transform.forward + (Camera.main.transform.position - barrelLocation.transform.position);
+            dire = Camera.main.transform.forward  * 1000;
         }
-        bullet.GetComponent<Rigidbody>().AddForce(dire * shotPower);
+        bullet.transform.rotation = Quaternion.LookRotation(dire.normalized);
+        bullet.GetComponent<Rigidbody>().AddForce(dire.normalized * shotPower, ForceMode.Impulse);
         Destroy(bullet, 10);
-        tempFlash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
+        tempFlash = Instantiate(muzzleFlashPrefab, posDisp.position, posDisp.rotation);
         Destroy(tempFlash, 0.5f);
     }
 
@@ -121,6 +106,12 @@ public class SimpleShoot : MonoBehaviour, IWeapon
         aSource.clip = shotAudioClips[1];
         aSource.PlayDelayed(0.65f);
         Destroy(casing, 5);
+    }
+
+    void CreateParticleAtPoint(GameObject obj, Vector3 point, bool tint, Quaternion rotate)
+    {
+        GameObject go = Instantiate(obj, point, rotate);
+        Destroy(go, 2);
     }
 
     IEnumerator Reload()
