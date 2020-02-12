@@ -121,6 +121,7 @@ public class Enemy : MonoBehaviour
         DetectPlayerInArea();
         if (canAttack)
         {
+            if(this.gameObject.GetComponent<SlugEnemy>() != null)
             //Instancia balas en dirección al player con cadencia
             Action();
         }

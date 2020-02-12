@@ -21,7 +21,6 @@ public class InteractWithObjects : MonoBehaviour
     // Update is called once per frame
     public void InteractWithGameObject()
     {
-        print("Tag del objecttointeract: " + objectToInteract.tag);
         if (objectToInteract != null /*&& 
             ((!FindObjectOfType<PlayerController>().IsOnAMount() && !objectToInteract.CompareTag("Mount")) || (FindObjectOfType<PlayerController>().IsOnAMount() && objectToInteract.CompareTag("Mount"))) 
             */&& objectToInteract.GetComponent<InteractableObject>().isInteractable() && canInteract && !FindObjectOfType<DialogueManager>().IsOnADialogue())
@@ -49,7 +48,6 @@ public class InteractWithObjects : MonoBehaviour
 
                 if (currentInteractionObject.GetComponentInChildren<Quest>() != null && !currentInteractionObject.GetComponentInChildren<Quest>().HasBeenTriggered())
                 {
-                    print("Empieza la coroutina para activar la quest");
                     StartCoroutine(WaitForActivateQuest());
                 }
             }

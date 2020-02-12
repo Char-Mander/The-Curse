@@ -26,16 +26,15 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        
-       /* if (this.gameObject.CompareTag("Player"))
+        if (this.gameObject.CompareTag("Player"))
         {
-            print("Objeto: " + this.gameObject.name);
-            print("Max health before: " + maxHealth);
-            print("Current health before: " + currentHealth);
-            FindObjectOfType<FixedElementCanvasController>().UpdateHealthBar();
-            print("Max health after update: " + maxHealth);
-            print("Current health after update: " + currentHealth);
-        }*/
+            if (currentHealth <= 0)
+            {
+                GameManager.instance.SetCurrentPlayerHealth(GameManager.instance.GetPlayerMaxHealth());
+                GameManager.instance.data.SaveHealth(GameManager.instance.GetCurrentPlayerHealth());
+                currentHealth = maxHealth;
+            }
+        }
     }
 
     public void Update()

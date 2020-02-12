@@ -25,7 +25,6 @@ public class Puzzle : MonoBehaviour
     {
         if (!activated && activeObj == neededObjects)
         {
-            print("Se activa: " + neededObjects);
             activated = true;
             dir = targetDestPos.position - targetObj.transform.position;
             distance = dir.magnitude;

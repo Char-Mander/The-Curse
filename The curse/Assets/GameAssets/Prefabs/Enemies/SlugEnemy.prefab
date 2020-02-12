@@ -451,8 +451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectDist: 20
-  endAttackDist: 13.5
-  cadency: 2
+  endAttackDist: 10
+  cadency: 1.5
   damage: 10
   moveSpeed: 3
   weapon: {fileID: 0}
@@ -469,7 +469,7 @@ MonoBehaviour:
   isAttacking: 0
   canAttack: 1
   distToPlayer: 0
-  iniAttackDist: 7
+  iniAttackDist: 4.59
 --- !u!143 &4040896063663955138
 CharacterController:
   m_ObjectHideFlags: 0

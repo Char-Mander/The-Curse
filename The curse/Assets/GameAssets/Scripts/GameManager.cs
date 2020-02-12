@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
         //Init
         data.LoadData();
+        print("Salud en el awake: " + currentPlayerHealth);
         //InitData();
     }
     

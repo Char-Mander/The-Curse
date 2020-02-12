@@ -67,6 +67,7 @@ public class Spawner : MonoBehaviour
 
         if (canSpawn)
         {
+            print("Spawnea 1 enemigo");
             canSpawn = false;
             GameObject choosenEnemy = enemyToSpawn[Random.RandomRange(0,enemyToSpawn.Count)];
             Instantiate(choosenEnemy, posSpawn.position, posSpawn.rotation);
@@ -108,10 +109,8 @@ public class Spawner : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            print("Detecta al player");
             if (Input.GetKeyDown(KeyCode.E) && !hasBomb)
             {
-                print("Activa el spawner");
                 DropBomb();
                 hasBomb = true;
             }

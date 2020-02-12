@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameAssets\Scripts\Bar Stuff\HealthPack.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\BlockMecanism.cs" />
     <Compile Include="Assets\GameAssets\Scripts\BoxAnim.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\ExplosiveEnemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\FinalBoss.cs" />

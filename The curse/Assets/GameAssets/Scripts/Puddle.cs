@@ -35,7 +35,7 @@ public class Puddle : MonoBehaviour
             GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().LoseHealth(damage);
             particles.Play();
         }
-        else if (other.gameObject.CompareTag("Terrain"))
+        else if (other.gameObject.CompareTag("Terrain") || other.gameObject.CompareTag("Rocks"))
         {
             Destroy(Instantiate(puddle, this.transform.position, puddle.transform.rotation), 5);
         }

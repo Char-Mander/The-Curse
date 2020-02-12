@@ -17,6 +17,8 @@ TagManager:
   - Npc
   - Terrain
   - PlayerBullet
+  - FxTemporaire
+  - Rocks
   layers:
   - Default
   - TransparentFX

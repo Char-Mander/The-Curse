@@ -26,6 +26,8 @@ public class CursedGirlEnemy : Enemy
     List<GameObject> monsters = new List<GameObject>();
     [SerializeField]
     List<Dialogue> dialogues = new List<Dialogue>();
+    [SerializeField]
+    GameObject mechanismObj;
 
     private int currentPhase = 1;
     private bool hasSpoken = false;
@@ -54,7 +56,9 @@ public class CursedGirlEnemy : Enemy
         {
             //Suelta el diálogo 
             FindObjectOfType<DialogueManager>().StartDialogue(dialogues[0]);
-           
+            if (!mechanismObj.GetComponent<BlockMecanism>().GetActivated()) mechanismObj.GetComponent<BlockMecanism>().SetActivated(true);
+
+
         }
         else if (hasSpoken && !finalDecision)
         {
