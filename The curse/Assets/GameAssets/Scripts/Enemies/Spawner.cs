@@ -67,7 +67,6 @@ public class Spawner : MonoBehaviour
 
         if (canSpawn)
         {
-            print("Spawnea 1 enemigo");
             canSpawn = false;
             GameObject choosenEnemy = enemyToSpawn[Random.RandomRange(0,enemyToSpawn.Count)];
             Instantiate(choosenEnemy, posSpawn.position, posSpawn.rotation);
