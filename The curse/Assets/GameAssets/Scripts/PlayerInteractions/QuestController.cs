@@ -37,17 +37,29 @@ public class QuestController : MonoBehaviour
         }
     }
 
-    public void ActiveQuest()
+    public void ActiveQuest(Quest quest)
     {
             int index = 0;
             if (currentQuest != null)
             {
                 currentQuest.CompleteQuest();
                 currentQuest.SetAsCurrentQuest(false);
-                if (index < questList.Count - 1) index = questList.IndexOf(currentQuest) + 1;
+                if (index < questList.Count) index = questList.IndexOf(quest);
                 else index = -1;
             }
             currentQuest = index >= 0 ? questList[index] : null;
+            if (index >= 0)
+            {
+                for (int i = 0; i < index; i++)
+                {
+                    if (!questList[i].IsCompleted())
+                    {
+                        questList[i].CompleteQuest();
+                        questList[i].SetTriggered(true);
+                    }
+                }
+            }
+            
             if(currentQuest != null ) currentQuest.SetAsCurrentQuest(true);
             GameManager.instance.SetCurrentQuest(index);
             FindObjectOfType<FixedElementCanvasController>().UpdateQuestPanel(currentQuest != null ? currentQuest.GetText() : "");

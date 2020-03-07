@@ -39,7 +39,7 @@ public class Quest : MonoBehaviour
     public void ActivateQuest()
     {
         triggered = true;
-        questController.ActiveQuest();
+        questController.ActiveQuest(this);
     }
 
     public string GetText() { return text; }
@@ -49,4 +49,9 @@ public class Quest : MonoBehaviour
     public bool IsCompleted() { return completed; }
 
     public bool HasBeenTriggered() { return triggered; }
+
+    public void SetTriggered(bool value)
+    {
+        triggered = value;
+    }
 }
