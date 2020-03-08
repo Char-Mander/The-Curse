@@ -9,15 +9,9 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private float minSpawnTime;
     [SerializeField]
-    private float bombTime;
-    [SerializeField]
     private Transform posSpawn;
     [SerializeField]
-    private GameObject bomb;
-    [SerializeField]
-    private GameObject explosionParticle;
-    [SerializeField]
-    private Renderer indicator;
+    int maxEnemies = 5;
     [SerializeField]
     private List<GameObject> enemyToSpawn = new List<GameObject>();
 
@@ -25,6 +19,7 @@ public class Spawner : MonoBehaviour
     private bool isActive = false;
     private bool hasBomb = false;
     private bool canSpawn = true;
+    private int enemyCount = 0;
     private AudioSource aSource;
 
     Transform playerT;
@@ -33,7 +28,6 @@ public class Spawner : MonoBehaviour
     {
         playerT = GameObject.FindGameObjectWithTag("Player").transform;
         aSource = GetComponent<AudioSource>();
-        indicator.material.color = Color.yellow;
     }
 
     // Update is called once per frame
@@ -43,30 +37,14 @@ public class Spawner : MonoBehaviour
         {
             DetectPlayer();
         }
-        UpdateIndicator();
-    }
-
-    void UpdateIndicator()
-    {
-        if (isDestroyed)
-        {
-            indicator.material.color = Color.red;
-        }
-        else if (isActive)
-        {
-            indicator.material.color = Color.green;
-        }
-        else
-        {
-            indicator.material.color = Color.yellow;
-        }
     }
 
     void spawn()
     {
 
-        if (canSpawn)
+        if (canSpawn && enemyCount < maxEnemies)
         {
+            enemyCount++;
             canSpawn = false;
             GameObject choosenEnemy = enemyToSpawn[Random.RandomRange(0,enemyToSpawn.Count)];
             Instantiate(choosenEnemy, posSpawn.position, posSpawn.rotation);
@@ -86,33 +64,6 @@ public class Spawner : MonoBehaviour
         else
         {
             isActive = false;
-        }
-    }
-
-    void DropBomb()
-    {
-        GameObject goBomb = Instantiate(bomb, playerT.position, playerT.rotation);
-        StartCoroutine(DestroySpawner(goBomb));
-    }
-
-    IEnumerator DestroySpawner(GameObject goBomb)
-    {
-        yield return new WaitForSeconds(bombTime);
-        aSource.Play();
-        Destroy(Instantiate(explosionParticle, goBomb.transform.position, goBomb.transform.rotation), 5);
-        isDestroyed = true;
-        Destroy(goBomb);
-    }
-
-    private void OnTriggerStay(Collider col)
-    {
-        if (col.CompareTag("Player"))
-        {
-            if (Input.GetKeyDown(KeyCode.E) && !hasBomb)
-            {
-                DropBomb();
-                hasBomb = true;
-            }
         }
     }
 
