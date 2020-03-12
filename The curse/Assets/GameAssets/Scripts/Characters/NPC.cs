@@ -6,8 +6,7 @@ using UnityEngine.AI;
 public class NPC : MonoBehaviour
 {
     public const float gravity = -9.8f;
-
-    CharacterController cController;
+    
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
@@ -22,16 +21,16 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private List<Transform> wayPoints = new List<Transform>();
     NavMeshAgent agent;
+    Animator anim;
     bool isMoving = false;
     Coroutine wpStop;
-    float mosquedWaitingTime;
     int wpIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
-        cController = GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
         Init();
     }
     
@@ -50,6 +49,7 @@ public class NPC : MonoBehaviour
 
     void Patroll()
     {
+        anim.SetFloat("Speed", agent.speed);
         if (wpIndex < wayPoints.Count)
         {
             if (isMoving && agent.remainingDistance <= agent.stoppingDistance)
@@ -66,20 +66,10 @@ public class NPC : MonoBehaviour
 
     IEnumerator WaitOnWP()
     {
-        yield return new WaitForSeconds(mosquedWaitingTime);
+        yield return new WaitForSeconds(waitingTime);
         agent.SetDestination(wayPoints[wpIndex].position);
         wpIndex++;
         isMoving = true;
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (!hit.collider.CompareTag("Terrain") && !hit.collider.CompareTag("Player"))
-        {
-            Vector3 direVec = hit.normal;
-            direVec.y = 0;
-            this.transform.rotation = Quaternion.LookRotation(direVec);
-        }
     }
 
     private void OnTriggerStay(Collider other)
