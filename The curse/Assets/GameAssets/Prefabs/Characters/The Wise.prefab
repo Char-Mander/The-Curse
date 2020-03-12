@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 970091458}
   - component: {fileID: 970091459}
-  m_Layer: 18
+  m_Layer: 12
   m_Name: Quest4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &970091458
 Transform:
@@ -61,7 +61,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1977913027
 Transform:
@@ -151,7 +151,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1956720715670858522
 RectTransform:
@@ -229,7 +229,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1956720716155733570
 Transform:
@@ -319,7 +319,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1956720716264710307
 RectTransform:
@@ -394,7 +394,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1956720716597202113
 RectTransform:
@@ -506,7 +506,7 @@ GameObject:
   m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2005729455040763259
 Transform:
@@ -601,7 +601,7 @@ GameObject:
   m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2005729456465457983
 Transform:
@@ -693,7 +693,7 @@ GameObject:
   m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2005729456482308738
 Transform:
@@ -784,7 +784,7 @@ GameObject:
   m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2005729456598755540
 Transform:
@@ -869,18 +869,17 @@ GameObject:
   - component: {fileID: 2005729456907540187}
   - component: {fileID: 2005729456907540184}
   - component: {fileID: 2005729456907540185}
-  - component: {fileID: 2005729456907540190}
-  - component: {fileID: 2005729456907540198}
   - component: {fileID: 2005729456907540196}
   - component: {fileID: 2005729456907540186}
   - component: {fileID: 2005729456907540197}
-  - component: {fileID: 2005729456907540160}
+  - component: {fileID: 180892680927310557}
+  - component: {fileID: 1338724502}
   m_Layer: 18
   m_Name: The Wise
   m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2005729456907540187
 Transform:
@@ -944,33 +943,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &2005729456907540190
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005729456907540191}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &2005729456907540198
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005729456907540191}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5.155591
-  m_Center: {x: 0, y: 0, z: 5.1923933}
 --- !u!143 &2005729456907540196
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1061,7 +1033,7 @@ MonoBehaviour:
     options: []
   - sentence: '...'
     options: []
---- !u!114 &2005729456907540160
+--- !u!114 &180892680927310557
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1070,13 +1042,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 2005729456907540191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 201a16e0d5d4e8041b21c65171ec3342, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a32eb09a6b6ef74aa72751d37c545de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
   head: {fileID: 2005729455040763259}
   canRotate: 1
-  characterCanRotate: 0
+--- !u!195 &1338724502
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005729456907540191}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5000002
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.85
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2005729457021071437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,7 +1087,7 @@ GameObject:
   m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2005729457021071436
 Transform:

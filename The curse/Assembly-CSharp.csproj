@@ -70,7 +70,6 @@
     <Compile Include="Assets\GameAssets\Scripts\Characters\NPC.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\PlayerController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Characters\RangedEnemy.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Characters\SimpleNPC.cs" />
     <Compile Include="Assets\GameAssets\Scripts\CheckPoint.cs" />
     <Compile Include="Assets\GameAssets\Scripts\CheckPointController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\DataManager.cs" />

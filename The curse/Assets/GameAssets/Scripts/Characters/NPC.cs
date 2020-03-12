@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
@@ -14,45 +15,61 @@ public class NPC : MonoBehaviour
 
     GameObject player;
     Vector3 direToPlayer;
-    Quaternion iniRotation;
     bool detected = false;
-    [HideInInspector]
-    public bool canRotate = true;
+
+    [SerializeField]
+    public float waitingTime;
+    [SerializeField]
+    private List<Transform> wayPoints = new List<Transform>();
+    NavMeshAgent agent;
+    bool isMoving = false;
+    Coroutine wpStop;
+    float mosquedWaitingTime;
+    int wpIndex = 0;
     // Start is called before the first frame update
-    public virtual void Start()
+    void Start()
     {
         cController = GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
+        agent = GetComponent<NavMeshAgent>();
+        Init();
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        Patroll();
     }
 
-    // Update is called once per frame
-    public virtual void Update()
+    public void Init()
     {
-        Movement(moveSpeed, transform.forward);
-        if (canRotate)
+        isMoving = false;
+        wpStop = StartCoroutine(WaitOnWP());
+        agent.speed = moveSpeed;
+    }
+
+    void Patroll()
+    {
+        if (wpIndex < wayPoints.Count)
         {
-            canRotate = false;
-            CallRotateCoroutine();
+            if (isMoving && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                wpStop = StartCoroutine(WaitOnWP());
+                isMoving = false;
+            }
+        }
+        else
+        {
+            wpIndex = 0;
         }
     }
 
-    void Movement(float speed, Vector3 dire)
+    IEnumerator WaitOnWP()
     {
-        Vector3 auxDir = dire;
-        auxDir.y += gravity;
-        cController.Move(auxDir * Time.deltaTime);
-    }
-
-    public void CallRotateCoroutine()
-    {
-        StartCoroutine(Rotate());
-    }
-
-    IEnumerator Rotate()
-    {
-        yield return new WaitForSeconds(Random.Range(5, 10));
-        this.transform.rotation = Quaternion.Euler(0, 180, 0);
-        canRotate = true;
+        yield return new WaitForSeconds(mosquedWaitingTime);
+        agent.SetDestination(wayPoints[wpIndex].position);
+        wpIndex++;
+        isMoving = true;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -83,10 +100,12 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")/* && detected*/)
+        if (other.CompareTag("Player"))
         {
             detected = false;
             head.transform.rotation = this.transform.rotation;
         }
     }
+
+
 }
