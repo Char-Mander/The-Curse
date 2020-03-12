@@ -23,6 +23,7 @@ public class NPC : MonoBehaviour
     NavMeshAgent agent;
     Animator anim;
     bool isMoving = false;
+    bool isTalking = false;
     Coroutine wpStop;
     int wpIndex = 0;
     // Start is called before the first frame update
@@ -96,6 +97,24 @@ public class NPC : MonoBehaviour
             head.transform.rotation = this.transform.rotation;
         }
     }
+    
 
+    public void StartTalking()
+    {
+        if (!isTalking)
+        {
+            isTalking = true;
+            anim.SetLayerWeight(0, 0);
+            anim.SetLayerWeight(1, 1);
+            StartCoroutine(StopTalking());
+        }
+    }
 
+    IEnumerator StopTalking()
+    {
+        yield return new WaitForSeconds(2);
+        anim.SetLayerWeight(0, 0);
+        anim.SetLayerWeight(1, 1);
+        isTalking = false;
+    }
 }

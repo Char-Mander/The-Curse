@@ -31,6 +31,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence(int index)
     {
+        FindObjectOfType<NPC>().StartTalking();
         StartCoroutine(WaitForDisplay(index));
     }
 

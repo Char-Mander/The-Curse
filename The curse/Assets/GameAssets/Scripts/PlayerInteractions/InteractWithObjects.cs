@@ -43,6 +43,7 @@ public class InteractWithObjects : MonoBehaviour
             {
                 string chosenText = (dialogue != null) ? dialogue.GetSentences()[(int)Random.Range(0, dialogue.GetSentences().Count)].sentence
                                     : interactableObj.GetObjectText();
+                if (interactableObj.IsNpc()) interactableObj.GetComponent<NPC>().StartTalking();
                 FindObjectOfType<FixedElementCanvasController>().UpdateTextPanel(chosenText, interactableObj.IsNpc(),
                     (dialogue!=null) ? dialogue.GetName() : null);
 
