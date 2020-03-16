@@ -7,6 +7,7 @@ public class TeleportPoint : MonoBehaviour
     [SerializeField]
     string name;
     bool discovered = false;
+    bool usingTeleport = false;
 
     private void OnTriggerStay(Collider other)
     {
@@ -14,9 +15,10 @@ public class TeleportPoint : MonoBehaviour
         {
             if(!discovered) FindObjectOfType<TeleportController>().ActivateTP(this);
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && !usingTeleport)
             {
                 FindObjectOfType<TeleportController>().ShowTP();
+                usingTeleport = true;
             }
         }
     }
@@ -36,5 +38,10 @@ public class TeleportPoint : MonoBehaviour
     public void SetDiscovered(bool value)
     {
         discovered = value;
+    }
+
+    public void SetUsingTeleport(bool value)
+    {
+        usingTeleport = value;
     }
 }

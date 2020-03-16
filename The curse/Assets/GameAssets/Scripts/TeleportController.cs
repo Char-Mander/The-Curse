@@ -40,14 +40,14 @@ public class TeleportController : MonoBehaviour
     public void ShowTP()
     {
         FindObjectOfType<FixedElementCanvasController>().TeleportPointsDeployment(tpList);
+
     }
 
-    /*
-    public void HideTP()
+
+    public void HideTP(int index)
     {
-        FindObjectOfType<FixedElementCanvasController>().EnableOrDisableOptionsPanel(false);
+        tpList[index].SetUsingTeleport(false);
     }
-    */
 
     public void Teleport(int index)
     {

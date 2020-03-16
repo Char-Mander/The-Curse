@@ -17,6 +17,8 @@ public class FixedElementCanvasController : MonoBehaviour
     [SerializeField]
     GameObject optionButton;
     [SerializeField]
+    GameObject teleportButton;
+    [SerializeField]
     GameObject npcNamePanel;
     [SerializeField]
     GameObject fuelBarUI;
@@ -98,12 +100,12 @@ public class FixedElementCanvasController : MonoBehaviour
             if (list[i].HasBeenDiscovered())
             {
                 print(list[i].GetName() + " está descubierto y se va a mostrar");
-                GameObject btn = Instantiate(optionButton, optionsContent);
+                GameObject btn = Instantiate(teleportButton, optionsContent);
                 btn.name = i.ToString();
                 btn.GetComponentInChildren<Text>().text = list[i].GetName();
             }
         }
-        GameObject backBtn = Instantiate(optionButton, optionsContent);
+        GameObject backBtn = Instantiate(teleportButton, optionsContent);
         backBtn.name = list.Length.ToString();
         backBtn.GetComponentInChildren<Text>().text = "Atrás";
         if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
@@ -112,11 +114,11 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void TeleportOption(int index)
     {
-        if(FindObjectOfType<TeleportController>().GetTeleportPointListLength() > index)
-        FindObjectOfType<TeleportController>().Teleport(index);
         EnableOrDisableOptionsPanel(false);
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         Cursor.lockState = CursorLockMode.Locked;
+        if (FindObjectOfType<TeleportController>().GetTeleportPointListLength() > index) FindObjectOfType<TeleportController>().Teleport(index);
+        FindObjectOfType<TeleportController>().HideTP(index);
     }
 
     public void UpdateSentenceOptionsPanel(Sentence s, int index)
