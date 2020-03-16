@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     private int deaths = 0;
     private int defeatedEnemies = 0;
     private int decisionState = 0;
-
+    private List<int> teleportPointsDiscovered = new List<int>();
 
     private void Awake()
     {
@@ -101,5 +101,10 @@ public class GameManager : MonoBehaviour
     public void SetDecision(int value)
     {
         decisionState = value;
+    }
+
+    public void AddTeleportPoint(int index)
+    {
+        teleportPointsDiscovered.Add(index);
     }
 }

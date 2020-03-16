@@ -90,12 +90,41 @@ public class FixedElementCanvasController : MonoBehaviour
         StartCoroutine(QuestChangeWait(text));
     }
 
+    public void TeleportPointsDeployment(TeleportPoint[] list)
+    {
+        EnableOrDisableOptionsPanel(true);
+        for (int i = 0; i < list.Length; i++)
+        {
+            if (list[i].HasBeenDiscovered())
+            {
+                print(list[i].GetName() + " está descubierto y se va a mostrar");
+                GameObject btn = Instantiate(optionButton, optionsContent);
+                btn.name = i.ToString();
+                btn.GetComponentInChildren<Text>().text = list[i].GetName();
+            }
+        }
+        GameObject backBtn = Instantiate(optionButton, optionsContent);
+        backBtn.name = list.Length.ToString();
+        backBtn.GetComponentInChildren<Text>().text = "Atrás";
+        if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+        FindObjectOfType<PlayerController>().SetIsLocked(true);
+    }
+
+    public void TeleportOption(int index)
+    {
+        if(FindObjectOfType<TeleportController>().GetTeleportPointListLength() > index)
+        FindObjectOfType<TeleportController>().Teleport(index);
+        EnableOrDisableOptionsPanel(false);
+        FindObjectOfType<PlayerController>().SetIsLocked(false);
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     public void UpdateSentenceOptionsPanel(Sentence s, int index)
     {
         sAux = s;
         sentenceIndex = index;
-        sentenceOptionsPanel.SetActive(true);
-        for(int i = 0; i < s.options.Count; i++)
+        EnableOrDisableOptionsPanel(true);
+        for (int i = 0; i < s.options.Count; i++)
         {
             GameObject btn = Instantiate(optionButton, optionsContent);
             btn.name = i.ToString();
@@ -109,9 +138,14 @@ public class FixedElementCanvasController : MonoBehaviour
     {
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         FindObjectOfType<DecisionState>().AddOrSubtractToBalance(sAux.options[index].decisionBalance);
-        sentenceOptionsPanel.SetActive(false);
+        EnableOrDisableOptionsPanel(false);
         FindObjectOfType<DialogueManager>().DisplayNextSentence(index + 1);
         FindObjectOfType<CursedGirlEnemy>().ApplyDecisionState();
+    }
+
+    public void EnableOrDisableOptionsPanel(bool value)
+    {
+        sentenceOptionsPanel.SetActive(value);
     }
 
     public void EnableOrDisableFuelBar(bool enable)

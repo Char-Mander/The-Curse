@@ -25,7 +25,8 @@ public class OptionsController : MonoBehaviour
     }
 
     public void BackToMenuBtn()
-    {   if(GameManager.instance.sceneC.IsALvlScene()) GameManager.instance.data.LoadData();
+    {
+        if (GameManager.instance.sceneC.IsALvlScene()) GameManager.instance.data.LoadData();
         GameManager.instance.sceneC.LoadMenu();
     }
 

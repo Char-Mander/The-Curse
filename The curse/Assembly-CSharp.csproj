@@ -95,6 +95,8 @@
     <Compile Include="Assets\GameAssets\Scripts\Puddle.cs" />
     <Compile Include="Assets\GameAssets\Scripts\SceneController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Sounds\PlayerSoundsManager.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\TeleportController.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\TeleportPoint.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\Fuel.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\FuelBar.cs" />
     <Compile Include="Assets\GameAssets\Scripts\UI\Bar Stuff\Health.cs" />
