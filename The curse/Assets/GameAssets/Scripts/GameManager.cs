@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void AddTeleportPoint(int index)
     {
+        print("Añade el point " + index + " a la lista");
         teleportPointsDiscovered.Add(index);
     }
 }

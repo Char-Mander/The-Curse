@@ -13,7 +13,11 @@ public class TeleportPoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if(!discovered) FindObjectOfType<TeleportController>().ActivateTP(this);
+            if (!discovered)
+            {
+                FindObjectOfType<TeleportController>().ActivateTP(this);
+
+            }
 
             if (Input.GetKeyDown(KeyCode.E) && !usingTeleport)
             {
@@ -22,14 +26,6 @@ public class TeleportPoint : MonoBehaviour
             }
         }
     }
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            FindObjectOfType<TeleportController>().HideTP();
-        }
-    }*/
 
     public string GetName() { return name; }
 

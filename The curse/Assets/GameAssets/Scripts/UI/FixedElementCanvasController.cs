@@ -95,11 +95,11 @@ public class FixedElementCanvasController : MonoBehaviour
     public void TeleportPointsDeployment(TeleportPoint[] list)
     {
         EnableOrDisableOptionsPanel(true);
+        FindObjectOfType<TeleportController>().SetTeleportOptionsAvailable(true);
         for (int i = 0; i < list.Length; i++)
         {
             if (list[i].HasBeenDiscovered())
             {
-                print(list[i].GetName() + " está descubierto y se va a mostrar");
                 GameObject btn = Instantiate(teleportButton, optionsContent);
                 btn.name = i.ToString();
                 btn.GetComponentInChildren<Text>().text = list[i].GetName();
@@ -108,7 +108,7 @@ public class FixedElementCanvasController : MonoBehaviour
         GameObject backBtn = Instantiate(teleportButton, optionsContent);
         backBtn.name = list.Length.ToString();
         backBtn.GetComponentInChildren<Text>().text = "Atrás";
-        if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.None;
         FindObjectOfType<PlayerController>().SetIsLocked(true);
     }
 
@@ -117,8 +117,9 @@ public class FixedElementCanvasController : MonoBehaviour
         EnableOrDisableOptionsPanel(false);
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         Cursor.lockState = CursorLockMode.Locked;
+        FindObjectOfType<TeleportController>().HideTP();
         if (FindObjectOfType<TeleportController>().GetTeleportPointListLength() > index) FindObjectOfType<TeleportController>().Teleport(index);
-        FindObjectOfType<TeleportController>().HideTP(index);
+        FindObjectOfType<TeleportController>().SetTeleportOptionsAvailable(false);
     }
 
     public void UpdateSentenceOptionsPanel(Sentence s, int index)
@@ -147,6 +148,14 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void EnableOrDisableOptionsPanel(bool value)
     {
+        if (!value)
+        {
+            int childs = optionsContent.childCount;
+            for (int i = 0; i < childs; i++)
+            {
+                Destroy(optionsContent.GetChild(i).gameObject);
+            }
+        }
         sentenceOptionsPanel.SetActive(value);
     }
 
