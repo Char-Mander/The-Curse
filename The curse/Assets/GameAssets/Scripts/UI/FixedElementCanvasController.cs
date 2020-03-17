@@ -115,11 +115,11 @@ public class FixedElementCanvasController : MonoBehaviour
     public void TeleportOption(int index)
     {
         EnableOrDisableOptionsPanel(false);
-        FindObjectOfType<PlayerController>().SetIsLocked(false);
         Cursor.lockState = CursorLockMode.Locked;
         FindObjectOfType<TeleportController>().HideTP();
         if (FindObjectOfType<TeleportController>().GetTeleportPointListLength() > index) FindObjectOfType<TeleportController>().Teleport(index);
         FindObjectOfType<TeleportController>().SetTeleportOptionsAvailable(false);
+        StartCoroutine(WaitForUnlockPlayer());
     }
 
     public void UpdateSentenceOptionsPanel(Sentence s, int index)
@@ -236,5 +236,11 @@ public class FixedElementCanvasController : MonoBehaviour
     public float GetTextTime()
     {
         return textTime;
+    }
+
+    IEnumerator WaitForUnlockPlayer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        FindObjectOfType<PlayerController>().SetIsLocked(false);
     }
 }
