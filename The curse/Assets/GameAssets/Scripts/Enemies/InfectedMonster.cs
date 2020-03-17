@@ -28,11 +28,11 @@ public class InfectedMonster : Enemy
             if (!explosionActivated)
             {
                 explosionActivated = true;
-                moveSpeed = patrolSpeed;
+                attackSpeed = patrolSpeed;
                 explosion = StartCoroutine(Explosion());
             }
             direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-            base.EnemyMovement(moveSpeed, direToPlayer);
+            base.EnemyMovement(attackSpeed, direToPlayer);
         }
     }
 
@@ -46,11 +46,11 @@ public class InfectedMonster : Enemy
     {
         if (distToPlayer < iniAttackDist && !canAttack)
         {
-            base.EnemyMovement(moveSpeed, -transform.forward);
+            base.EnemyMovement(attackSpeed, -transform.forward);
         }
         else
         {
-            base.EnemyMovement(moveSpeed, transform.forward);
+            base.EnemyMovement(attackSpeed, transform.forward);
         }
     }
 

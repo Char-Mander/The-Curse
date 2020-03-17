@@ -11,11 +11,11 @@ public class SlugEnemy : Enemy
     {
         if(distToPlayer < iniAttackDist)
        {
-           base.EnemyMovement(moveSpeed, -transform.forward);
+           base.EnemyMovement(attackSpeed, -transform.forward);
        }
        else  if (distToPlayer > endAttackDist)
         {
-            base.EnemyMovement(moveSpeed, transform.forward);
+            base.EnemyMovement(attackSpeed, transform.forward);
         }
     }
 

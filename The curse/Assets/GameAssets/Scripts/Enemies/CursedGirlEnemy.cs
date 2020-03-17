@@ -41,9 +41,9 @@ public class CursedGirlEnemy : Enemy
     {
         cController = GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player");
-        patrolSpeed = moveSpeed * 0.75f;
-        attackSpeed = moveSpeed * 1.5f;
-        moveSpeed = patrolSpeed;
+        patrolSpeed = attackSpeed * 0.75f;
+        attackSpeed = attackSpeed * 1.5f;
+        attackSpeed = patrolSpeed;
         SetDialogueMode();
     }
 
@@ -74,7 +74,7 @@ public class CursedGirlEnemy : Enemy
                     Teleport();
                     break;
                 case 3:
-                        moveSpeed = attackSpeed;
+                        attackSpeed = attackSpeed;
                         Attack();
                     break;
                 case 4:
@@ -152,11 +152,11 @@ public class CursedGirlEnemy : Enemy
         {
             if (distToPlayer < iniAttackDist)
             {
-                base.EnemyMovement(moveSpeed, -transform.forward);
+                base.EnemyMovement(attackSpeed, -transform.forward);
             }
             else if (distToPlayer > endAttackDist)
             {
-                base.EnemyMovement(moveSpeed, transform.forward);
+                base.EnemyMovement(attackSpeed, transform.forward);
             }
 
         }
@@ -164,11 +164,11 @@ public class CursedGirlEnemy : Enemy
         {
             if (distToPlayer < iniAttackDist && !canAttack)
             {
-                base.EnemyMovement(moveSpeed, -transform.forward);
+                base.EnemyMovement(attackSpeed, -transform.forward);
             }
             else
             {
-                base.EnemyMovement(moveSpeed, transform.forward);
+                base.EnemyMovement(attackSpeed, transform.forward);
             }
         }
         

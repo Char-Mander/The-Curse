@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+public enum EnemyStates { PATROL, ATTACK}
 public class Enemy : MonoBehaviour
 {
     public const float gravity = -9.8f;
+    public EnemyStates state;
 
     public float detectDist;
     public float endAttackDist;
     public float cadency;
     public int damage;
-    public float moveSpeed;
+    public float attackSpeed;
+    public float patrolSpeed;
     [SerializeField]
     private Transform weapon;
     [SerializeField]
@@ -21,6 +25,8 @@ public class Enemy : MonoBehaviour
     private float rotationSpeed = 0.5f;
     [HideInInspector]
     public CharacterController cController;
+    [HideInInspector]
+    public NavMeshAgent agent;
     [HideInInspector]
     public GameObject player;
     public LayerMask lm;
@@ -34,18 +40,22 @@ public class Enemy : MonoBehaviour
     private bool canRotateToPlayer = true;
     [HideInInspector]
     public float distToPlayer;
-    [HideInInspector]
-    public float patrolSpeed { get; set; }
-    [HideInInspector]
-    public float attackSpeed { get; set; }
+    [SerializeField]
+    private float patrolWaitingTime = 0.5f;
+    [SerializeField]
+    private List<Transform> wayPoints = new List<Transform>();
+    int wpIndex = 0;
+    bool isMoving = false;
+    Coroutine wpStop;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
+        state = EnemyStates.PATROL;
         cController = GetComponent<CharacterController>();
+        agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(Rotate());
-        patrolSpeed = moveSpeed * 0.5f;
-        attackSpeed = moveSpeed;
+        wpStop = StartCoroutine(WaitOnWP());
     }
 
     // Update is called once per frame
@@ -53,17 +63,38 @@ public class Enemy : MonoBehaviour
     {
         if (DetectPlayer())
         {
-            moveSpeed = attackSpeed;
-            isAttacking = true;
-            Attack();
-            //Que el enemigo esté mirando al player en cuanto lo detecte
-            AimPlayer();
+            if(state == EnemyStates.PATROL)
+            {
+                StopCoroutine(wpStop);
+                isMoving = false;
+                agent.speed = 0;
+                state = EnemyStates.ATTACK;
+            }
         }
         else
         {
-            moveSpeed = patrolSpeed;
-            isAttacking = false;
-            Patrol();
+            if(state == EnemyStates.ATTACK)
+            {
+                isMoving = false;
+                wpStop = StartCoroutine(WaitOnWP());
+                agent.speed = patrolSpeed;
+                isAttacking = false;
+                state = EnemyStates.PATROL;
+            }
+        }
+
+        switch (state)
+        {
+            case EnemyStates.PATROL:
+                Patrol();
+                break;
+            case EnemyStates.ATTACK:
+                isAttacking = true;
+                Attack();
+                //Que el enemigo esté mirando al player en cuanto lo detecte
+                AimPlayer();
+                break;
+
         }
     }
 
@@ -94,7 +125,18 @@ public class Enemy : MonoBehaviour
 
     public void Patrol()
     {
-        EnemyMovement(moveSpeed, transform.forward);
+        if (wpIndex < wayPoints.Count)
+        {
+            if (isMoving && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                wpStop = StartCoroutine(WaitOnWP());
+                isMoving = false;
+            }
+        }
+        else
+        {
+            wpIndex = 0;
+        }
     }
 
     public virtual void EnemyMovement(float speed, Vector3 dire)
@@ -102,17 +144,6 @@ public class Enemy : MonoBehaviour
         Vector3 auxDir = dire;
         auxDir.y += gravity;
         cController.Move(auxDir * Time.deltaTime * speed);
-    }
-
-    IEnumerator Rotate()
-    {
-        yield return new WaitForSeconds(Random.Range(1, 5));
-        if (!isAttacking)
-        {
-            this.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-        }
-
-        StartCoroutine(Rotate());
     }
 
     public virtual void Attack()
@@ -131,7 +162,7 @@ public class Enemy : MonoBehaviour
     {
         if (distToPlayer > endAttackDist)
         {
-            EnemyMovement(moveSpeed, transform.forward);
+            EnemyMovement(attackSpeed, transform.forward);
         }
     }
 
@@ -197,6 +228,14 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(rotationSpeed);
         canRotateToPlayer = true;
+    }
+
+    IEnumerator WaitOnWP()
+    {
+        yield return new WaitForSeconds(patrolWaitingTime);
+        agent.SetDestination(wayPoints[wpIndex].position);
+        wpIndex++;
+        isMoving = true;
     }
 
     public virtual void OnDrawGizmos()
