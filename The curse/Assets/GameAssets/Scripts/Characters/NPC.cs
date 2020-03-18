@@ -30,6 +30,7 @@ public class NPC : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
+        StartCoroutine(WaitOnWP());
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         Init();
@@ -38,7 +39,7 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Patroll();
+        Patrol();
     }
 
     public void Init()
@@ -48,7 +49,7 @@ public class NPC : MonoBehaviour
         agent.speed = moveSpeed;
     }
 
-    void Patroll()
+    void Patrol()
     {
         anim.SetFloat("Speed", agent.speed);
         if (wpIndex < wayPoints.Count)
@@ -62,6 +63,7 @@ public class NPC : MonoBehaviour
         else
         {
             wpIndex = 0;
+            isMoving = true;
         }
     }
 
@@ -104,8 +106,9 @@ public class NPC : MonoBehaviour
         if (!isTalking)
         {
             isTalking = true;
-            anim.SetLayerWeight(0, 0);
-            anim.SetLayerWeight(1, 1);
+            anim.SetLayerWeight(0, 0.5f);
+            anim.SetLayerWeight(1, 0.5f);
+            print("Está hablando");
             StartCoroutine(StopTalking());
         }
     }
@@ -113,8 +116,9 @@ public class NPC : MonoBehaviour
     IEnumerator StopTalking()
     {
         yield return new WaitForSeconds(2);
-        anim.SetLayerWeight(0, 0);
-        anim.SetLayerWeight(1, 1);
+        print("Deja de hablar");
+        anim.SetLayerWeight(1, 0);
+        anim.SetLayerWeight(0, 1);
         isTalking = false;
     }
 }

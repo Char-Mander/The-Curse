@@ -8323,6 +8323,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FarmerFull
       objectReference: {fileID: 0}
+    - target: {fileID: 2449485588641894303, guid: b95c3926ae6e174448de5793105b84a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2449485588641894296, guid: b95c3926ae6e174448de5793105b84a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8376,6 +8381,11 @@ PrefabInstance:
     - target: {fileID: 2449485588641894296, guid: b95c3926ae6e174448de5793105b84a0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811481292678737903, guid: b95c3926ae6e174448de5793105b84a0,
+        type: 3}
+      propertyPath: waitingTime
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -8860,6 +8870,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Villager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143824663259236690, guid: 026ce28cb451ec543b7aea754e0572c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9143824663259236693, guid: 026ce28cb451ec543b7aea754e0572c5,
         type: 3}
