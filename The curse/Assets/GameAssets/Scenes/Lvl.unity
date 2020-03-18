@@ -10098,7 +10098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   detectDist: 55
-  endAttackDist: 60
+  endAttackDist: 34.6
   cadency: 2
   damage: 30
   attackSpeed: 12

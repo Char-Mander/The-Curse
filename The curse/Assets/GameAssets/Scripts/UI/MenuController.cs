@@ -15,6 +15,11 @@ public class MenuController : MonoBehaviour
         Cursor.visible = true;
     }
 
+    public void BtnLoadMenu()
+    {
+        GameManager.instance.sceneC.LoadMenu();
+    }
+
     public void BtnStartNewGame()
     {
         GameManager.instance.data.ResetData();
