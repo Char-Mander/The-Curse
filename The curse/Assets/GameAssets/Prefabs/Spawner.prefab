@@ -50,8 +50,8 @@ MonoBehaviour:
   posSpawn: {fileID: 7232755059780939820}
   maxEnemies: 5
   enemyToSpawn:
-  - {fileID: 2315047032030480941, guid: a815494b9c133aa478430f94b7fa5c9f, type: 3}
-  - {fileID: 4040896063663955137, guid: 0b6bcf52813f2b746b07af703c516c6c, type: 3}
+  - {fileID: 1739810695627483772, guid: 03f5a8e61b7fe2b47a2d295daaeebd72, type: 3}
+  - {fileID: 5939803446282136263, guid: ba40c6fed3b4fd448878807bb7d73cfc, type: 3}
 --- !u!65 &7232755058083143786
 BoxCollider:
   m_ObjectHideFlags: 0

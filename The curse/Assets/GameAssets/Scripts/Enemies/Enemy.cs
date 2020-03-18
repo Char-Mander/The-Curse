@@ -73,6 +73,7 @@ public class Enemy : MonoBehaviour
                 isMoving = false;
                 agent.speed = 0;
                 state = EnemyStates.ATTACK;
+                print("Detecta al player");
                 anim.SetBool("PlayerDetected", true);
             }
         }
@@ -85,6 +86,7 @@ public class Enemy : MonoBehaviour
                 agent.speed = patrolSpeed;
                 isAttacking = false;
                 state = EnemyStates.PATROL;
+                print("Deja de detectar al player");
                 anim.SetBool("PlayerDetected", false);
             }
         }
@@ -92,9 +94,11 @@ public class Enemy : MonoBehaviour
         switch (state)
         {
             case EnemyStates.PATROL:
+                anim.SetFloat("Speed", patrolSpeed);
                 Patrol();
                 break;
             case EnemyStates.ATTACK:
+                anim.SetFloat("Speed", attackSpeed);
                 isAttacking = true;
                 Attack();
                 //Que el enemigo esté mirando al player en cuanto lo detecte
@@ -208,6 +212,7 @@ public class Enemy : MonoBehaviour
     {
         if (canAttack)
         {
+            print("Ataca");
             anim.SetTrigger("Attack");
             Instantiate(projectile, posDisp.position, posDisp.rotation);
             canAttack = false;

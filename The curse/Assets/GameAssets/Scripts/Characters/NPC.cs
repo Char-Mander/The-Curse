@@ -11,8 +11,6 @@ public class NPC : MonoBehaviour
     private float moveSpeed;
     [SerializeField]
     Transform head;
-    [SerializeField]
-    private bool canPatrol = false;
 
     GameObject player;
     Vector3 direToPlayer;
@@ -41,7 +39,7 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(canPatrol) Patrol();
+       Patrol();
     }
 
     public void Init()
