@@ -44,9 +44,11 @@ public class Enemy : MonoBehaviour
     private float patrolWaitingTime = 0.5f;
     [SerializeField]
     private List<Transform> wayPoints = new List<Transform>();
+
     int wpIndex = 0;
     bool isMoving = false;
     Coroutine wpStop;
+    Animator anim;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -55,6 +57,8 @@ public class Enemy : MonoBehaviour
         cController = GetComponent<CharacterController>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+        anim = GetComponent<Animator>();
+        anim.SetBool("PlayerDetected", false);
         wpStop = StartCoroutine(WaitOnWP());
     }
 
@@ -69,6 +73,7 @@ public class Enemy : MonoBehaviour
                 isMoving = false;
                 agent.speed = 0;
                 state = EnemyStates.ATTACK;
+                anim.SetBool("PlayerDetected", true);
             }
         }
         else
@@ -80,6 +85,7 @@ public class Enemy : MonoBehaviour
                 agent.speed = patrolSpeed;
                 isAttacking = false;
                 state = EnemyStates.PATROL;
+                anim.SetBool("PlayerDetected", false);
             }
         }
 
@@ -202,6 +208,7 @@ public class Enemy : MonoBehaviour
     {
         if (canAttack)
         {
+            anim.SetTrigger("Attack");
             Instantiate(projectile, posDisp.position, posDisp.rotation);
             canAttack = false;
             ReloadCoroutine();

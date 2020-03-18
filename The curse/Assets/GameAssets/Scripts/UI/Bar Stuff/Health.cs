@@ -60,6 +60,7 @@ public class Health : MonoBehaviour
                 if (this.gameObject.tag == "Enemy" || this.gameObject.tag == "Explosive Sphere")
                 {
                     // Destroy(Instantiate(enemyDeadParticle, transform.position, Quaternion.identity), 3);
+                    GetComponent<Animator>().SetTrigger("Die");
                     GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
                     Destroy(this.gameObject);
                 }

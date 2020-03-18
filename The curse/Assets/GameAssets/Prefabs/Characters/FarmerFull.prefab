@@ -198,8 +198,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6371622603699605340, guid: 462c9b2e8543d9248add0cc155164cda,
         type: 3}
+      propertyPath: canPatrol
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371622603699605340, guid: 462c9b2e8543d9248add0cc155164cda,
+        type: 3}
       propertyPath: waitingTime
-      value: 0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6371622603699605340, guid: 462c9b2e8543d9248add0cc155164cda,
         type: 3}

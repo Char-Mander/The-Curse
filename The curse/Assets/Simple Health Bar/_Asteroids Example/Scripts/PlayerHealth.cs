@@ -110,7 +110,7 @@ namespace SimpleHealthBar_SpaceshipExample
 				currentHealth = 0;
 
 				// Run the Death function since the player has died.
-				Death();
+				//Death();
 			}
 
 			// Set canTakeDamage to false to make sure that the player cannot take damage for a brief moment.
@@ -130,6 +130,7 @@ namespace SimpleHealthBar_SpaceshipExample
 			regenShieldTimer = regenShieldTimerMax;
 		}
 
+        /*
 		public void Death ()
 		{
 			// Show the death screen, and disable the player's control.
@@ -145,7 +146,7 @@ namespace SimpleHealthBar_SpaceshipExample
 			// Destroy this game object.
 			Destroy( gameObject );
 		}
-
+        */
 		IEnumerator Invulnerablilty ()
 		{
 			// Wait for the invulnerability time variable.

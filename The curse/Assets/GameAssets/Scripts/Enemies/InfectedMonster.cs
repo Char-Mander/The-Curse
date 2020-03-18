@@ -28,11 +28,12 @@ public class InfectedMonster : Enemy
             if (!explosionActivated)
             {
                 explosionActivated = true;
-                attackSpeed = patrolSpeed;
+                attackSpeed = patrolSpeed*2;
                 explosion = StartCoroutine(Explosion());
             }
             direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-            base.EnemyMovement(attackSpeed, direToPlayer);
+            base.EnemyMovement(attackSpeed, direToPlayer.normalized); // base.EnemyMovement(attackSpeed, direToPlayer);
+            AimPlayer();
         }
     }
 

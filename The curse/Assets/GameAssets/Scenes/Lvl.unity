@@ -2392,6 +2392,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395459002}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &415928051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4036843329822042999, guid: 03f5a8e61b7fe2b47a2d295daaeebd72,
+    type: 3}
+  m_PrefabInstance: {fileID: 1739810695521559289}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &415928058
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415928051}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ec95e5f9a03388c4fa23c1c030124024, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &442910711
 GameObject:
   m_ObjectHideFlags: 0
@@ -3805,7 +3830,7 @@ Transform:
   m_Children:
   - {fileID: 8179936388051410752}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1027863550
 GameObject:
@@ -8323,11 +8348,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FarmerFull
       objectReference: {fileID: 0}
-    - target: {fileID: 2449485588641894303, guid: b95c3926ae6e174448de5793105b84a0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2449485588641894296, guid: b95c3926ae6e174448de5793105b84a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8383,11 +8403,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 811481292678737903, guid: b95c3926ae6e174448de5793105b84a0,
-        type: 3}
-      propertyPath: waitingTime
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b95c3926ae6e174448de5793105b84a0, type: 3}
 --- !u!1 &2545866871570659561
@@ -8426,6 +8441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0
   head: {fileID: 8179936387775356128}
+  canPatrol: 0
   waitingTime: 0
   wayPoints: []
 --- !u!4 &4596978363517412725
@@ -8871,11 +8887,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Villager
       objectReference: {fileID: 0}
-    - target: {fileID: 9143824663259236690, guid: 026ce28cb451ec543b7aea754e0572c5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9143824663259236693, guid: 026ce28cb451ec543b7aea754e0572c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8914,7 +8925,7 @@ PrefabInstance:
     - target: {fileID: 9143824663259236693, guid: 026ce28cb451ec543b7aea754e0572c5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9143824663259236693, guid: 026ce28cb451ec543b7aea754e0572c5,
         type: 3}
@@ -8983,7 +8994,7 @@ PrefabInstance:
     - target: {fileID: 6905477470247212101, guid: 81757756ddc455a42a93842a4bbd7f37,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6905477470247212101, guid: 81757756ddc455a42a93842a4bbd7f37,
         type: 3}

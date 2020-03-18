@@ -260,6 +260,11 @@ PrefabInstance:
       objectReference: {fileID: 6539900508600300505}
     - target: {fileID: 826875997206036983, guid: ecd36724629875545a46c0f94af44dc3,
         type: 3}
+      propertyPath: canPatrol
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 826875997206036983, guid: ecd36724629875545a46c0f94af44dc3,
+        type: 3}
       propertyPath: waitingTime
       value: 0
       objectReference: {fileID: 0}
