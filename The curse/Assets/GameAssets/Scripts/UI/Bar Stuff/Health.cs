@@ -57,12 +57,13 @@ public class Health : MonoBehaviour
             currentHealth -= value;
             if (currentHealth <= 0)
             {
+                currentHealth = 0;
                 if (this.gameObject.tag == "Enemy" || this.gameObject.tag == "Explosive Sphere")
                 {
                     // Destroy(Instantiate(enemyDeadParticle, transform.position, Quaternion.identity), 3);
-                    GetComponent<Animator>().SetTrigger("Die");
+                    this.gameObject.GetComponent<Enemy>().locked = true;
                     GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
-                    Destroy(this.gameObject);
+                    StartCoroutine(WaitForDie(2));
                 }
                 else if (this.gameObject.tag == "Player")
                 {
@@ -118,10 +119,14 @@ public class Health : MonoBehaviour
 
     public bool hasMaxHealth() { return maxHealth <= currentHealth; }
 
-    IEnumerator Wait(float time)
+    IEnumerator WaitForDie(float time)
     {
+        GetComponent<Animator>().SetTrigger("Die");
         yield return new WaitForSeconds(time);
+        Destroy(this.gameObject);
     }
+
+
 
     public bool GetGodMode() { return godMode; }
 

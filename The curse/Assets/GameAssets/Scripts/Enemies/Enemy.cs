@@ -36,8 +36,7 @@ public class Enemy : MonoBehaviour
     public bool isAttacking = false;
     [HideInInspector]
     public bool canAttack = true;
-    private bool canDealDamage = true;
-    private bool canRotateToPlayer = true;
+    public bool locked { get; set; }
     [HideInInspector]
     public float distToPlayer;
     [SerializeField]
@@ -45,6 +44,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private List<Transform> wayPoints = new List<Transform>();
 
+    private bool canDealDamage = true;
+    private bool canRotateToPlayer = true;
     int wpIndex = 0;
     bool isMoving = false;
     Coroutine wpStop;
@@ -59,53 +60,59 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         anim.SetBool("PlayerDetected", false);
+        locked = false;
         wpStop = StartCoroutine(WaitOnWP());
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        if (DetectPlayer())
+        if (!locked)
         {
-            if(state == EnemyStates.PATROL)
+
+            if (DetectPlayer())
             {
-                StopCoroutine(wpStop);
-                isMoving = false;
-                agent.speed = 0;
-                state = EnemyStates.ATTACK;
-                print("Detecta al player");
-                anim.SetBool("PlayerDetected", true);
+                if (state == EnemyStates.PATROL)
+                {
+                    StopCoroutine(wpStop);
+                    isMoving = false;
+                    agent.speed = 0;
+                    state = EnemyStates.ATTACK;
+                    print("Detecta al player");
+                    anim.SetBool("PlayerDetected", true);
+                }
+            }
+            else
+            {
+                if (state == EnemyStates.ATTACK)
+                {
+                    isMoving = false;
+                    wpStop = StartCoroutine(WaitOnWP());
+                    agent.speed = patrolSpeed;
+                    isAttacking = false;
+                    state = EnemyStates.PATROL;
+                    print("Deja de detectar al player");
+                    anim.SetBool("PlayerDetected", false);
+                }
+            }
+
+            switch (state)
+            {
+                case EnemyStates.PATROL:
+                    anim.SetFloat("Speed", patrolSpeed);
+                    Patrol();
+                    break;
+                case EnemyStates.ATTACK:
+                    anim.SetFloat("Speed", attackSpeed);
+                    isAttacking = true;
+                    Attack();
+                    //Que el enemigo esté mirando al player en cuanto lo detecte
+                    AimPlayer();
+                    break;
+
             }
         }
-        else
-        {
-            if(state == EnemyStates.ATTACK)
-            {
-                isMoving = false;
-                wpStop = StartCoroutine(WaitOnWP());
-                agent.speed = patrolSpeed;
-                isAttacking = false;
-                state = EnemyStates.PATROL;
-                print("Deja de detectar al player");
-                anim.SetBool("PlayerDetected", false);
-            }
-        }
-
-        switch (state)
-        {
-            case EnemyStates.PATROL:
-                anim.SetFloat("Speed", patrolSpeed);
-                Patrol();
-                break;
-            case EnemyStates.ATTACK:
-                anim.SetFloat("Speed", attackSpeed);
-                isAttacking = true;
-                Attack();
-                //Que el enemigo esté mirando al player en cuanto lo detecte
-                AimPlayer();
-                break;
-
-        }
+    
     }
 
     public virtual bool DetectPlayer()

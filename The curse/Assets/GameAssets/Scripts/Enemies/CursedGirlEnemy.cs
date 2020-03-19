@@ -49,68 +49,30 @@ public class CursedGirlEnemy : Enemy
 
     public override void Update()
     {
-        direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-        distToPlayer = direToPlayer.magnitude;
-
-        if (distToPlayer < detectDist && !hasSpoken)
+        if (!locked)
         {
-            //Suelta el diálogo 
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogues[0]);
-            if (!mechanismObj.GetComponent<BlockMecanism>().GetActivated()) mechanismObj.GetComponent<BlockMecanism>().SetActivated(true);
+            direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
+            distToPlayer = direToPlayer.magnitude;
 
-
-        }
-        else if (hasSpoken && !finalDecision)
-        {
-            AimPlayer();
-
-            switch (GetPhase())
+            if (distToPlayer < detectDist && !hasSpoken)
             {
-                case 1:
-                    Attack();
-                    break;
-                case 2:
-                    Attack();
-                    Teleport();
-                    break;
-                case 3:
-                        attackSpeed = attackSpeed;
-                        Attack();
-                    break;
-                case 4:
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogues[0]);
+                if (!mechanismObj.GetComponent<BlockMecanism>().GetActivated()) mechanismObj.GetComponent<BlockMecanism>().SetActivated(true);
 
-                        Enemy[] enemies = FindObjectsOfType<Enemy>();
-                        foreach (Enemy enemy in enemies)
-                        {
-                            if (enemy.name != "CursedGirl")
-                                Destroy(enemy.gameObject);
-                        }
-                        //Suelta el diálogo 
-                        SetDialogueMode();
-                        FindObjectOfType<DialogueManager>().StartDialogue(dialogues[1]);
-                    break;
+
             }
-        }
-        else if (finalDecision)
-        {
-            if (FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
+            else if (hasSpoken && !finalDecision)
             {
-                if (!end)
-                {
-                    FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
-                    Instantiate(goal, goalPos);
-                    end = true;
-                    GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
-                }
                 AimPlayer();
+                ManageAttackStates();
             }
-            else
+            else if (finalDecision)
             {
-                StartAttackingMode();
-                AimPlayer();
-                StartCoroutine(WaitForDie());
+                ManageDecisionStates();
             }
+
         }
+        
     }
 
     public override void Attack()
@@ -126,6 +88,56 @@ public class CursedGirlEnemy : Enemy
         }
     }
     
+    private void ManageAttackStates()
+    {
+        switch (GetPhase())
+        {
+            case 1:
+                Attack();
+                break;
+            case 2:
+                Attack();
+                Teleport();
+                break;
+            case 3:
+                attackSpeed = attackSpeed;
+                Attack();
+                break;
+            case 4:
+
+                Enemy[] enemies = FindObjectsOfType<Enemy>();
+                foreach (Enemy enemy in enemies)
+                {
+                    if (enemy.name != "CursedGirl")
+                        Destroy(enemy.gameObject);
+                }
+                //Suelta el diálogo 
+                SetDialogueMode();
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogues[1]);
+                break;
+        }
+    }
+
+    private void ManageDecisionStates()
+    {
+        if (FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
+        {
+            if (!end)
+            {
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
+                Instantiate(goal, goalPos);
+                end = true;
+                GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
+            }
+            AimPlayer();
+        }
+        else
+        {
+            StartAttackingMode();
+            AimPlayer();
+            StartCoroutine(WaitForDie());
+        }
+    }
 
     private void Teleport()
     {

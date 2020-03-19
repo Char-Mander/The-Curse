@@ -8243,6 +8243,11 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 21564314724479118, guid: 03f5a8e61b7fe2b47a2d295daaeebd72,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f5a8e61b7fe2b47a2d295daaeebd72, type: 3}
 --- !u!1 &1992834249229878594
@@ -9104,6 +9109,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905477470247212108, guid: 81757756ddc455a42a93842a4bbd7f37,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81757756ddc455a42a93842a4bbd7f37, type: 3}

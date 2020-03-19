@@ -13,27 +13,31 @@ public class InfectedMonster : Enemy
 
     private int phase=1;
     bool explosionActivated = false;
+    bool hasExploded = false;
     Coroutine explosion;
     // [SerializeField]
     // private GameObject explosionParticle;
 
     public override void Update()
     {
-        if (GetPhase() == 1)
+        if (!locked)
         {
-            base.Update();
-        }
-        else
-        {
-            if (!explosionActivated)
+            if (GetPhase() == 1)
             {
-                explosionActivated = true;
-                attackSpeed = patrolSpeed*2;
-                explosion = StartCoroutine(Explosion());
+                base.Update();
             }
-            direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-            base.EnemyMovement(attackSpeed, direToPlayer.normalized); // base.EnemyMovement(attackSpeed, direToPlayer);
-            AimPlayer();
+            else
+            {
+                if (!explosionActivated)
+                {
+                    explosionActivated = true;
+                    attackSpeed = patrolSpeed * 2;
+                    explosion = StartCoroutine(Explosion());
+                }
+                direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
+                base.EnemyMovement(attackSpeed, direToPlayer.normalized); // base.EnemyMovement(attackSpeed, direToPlayer);
+                AimPlayer();
+            }
         }
     }
 
@@ -66,16 +70,17 @@ public class InfectedMonster : Enemy
         }
         if (hit.collider.CompareTag("Player") && (canAttack || explosionActivated))
         {
-            if (explosionActivated)
+            if (explosionActivated && !hasExploded)
             {
+                hasExploded = true;
                 StopCoroutine(explosion);
                 Explode();
             }
             else{
-                canAttack = false;
                 hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
                 base.ReloadCoroutine();
             }
+            canAttack = false;
         }
     }
 
@@ -106,6 +111,7 @@ public class InfectedMonster : Enemy
     IEnumerator Explosion()
     {
         yield return new WaitForSeconds(timer);
+        hasExploded = true;
         Explode();
         GetComponent<Health>().LoseHealth(GetComponent<Health>().GetMaxHealth());
     }
