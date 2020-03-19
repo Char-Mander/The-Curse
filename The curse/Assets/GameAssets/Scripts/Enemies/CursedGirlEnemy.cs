@@ -5,6 +5,10 @@ using UnityEngine;
 public class CursedGirlEnemy : Enemy
 {
     [SerializeField]
+    private GameObject attackModel;
+    [SerializeField]
+    private GameObject peacefulModel;
+    [SerializeField]
     private float teleportDistance;
     [SerializeField]
     private float teleportCoolDown;
