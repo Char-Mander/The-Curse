@@ -49,7 +49,8 @@ public class Enemy : MonoBehaviour
     int wpIndex = 0;
     bool isMoving = false;
     Coroutine wpStop;
-    Animator anim;
+    [HideInInspector]
+    public Animator anim;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -219,10 +220,9 @@ public class Enemy : MonoBehaviour
     {
         if (canAttack)
         {
-            print("Ataca");
+            canAttack = false;
             anim.SetTrigger("Attack");
             Instantiate(projectile, posDisp.position, posDisp.rotation);
-            canAttack = false;
             ReloadCoroutine();
         }
     }

@@ -63,7 +63,7 @@ public class Health : MonoBehaviour
                     // Destroy(Instantiate(enemyDeadParticle, transform.position, Quaternion.identity), 3);
                     this.gameObject.GetComponent<Enemy>().locked = true;
                     GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
-                    StartCoroutine(WaitForDie(2));
+                    StartCoroutine(WaitForDie(3.25f));
                 }
                 else if (this.gameObject.tag == "Player")
                 {

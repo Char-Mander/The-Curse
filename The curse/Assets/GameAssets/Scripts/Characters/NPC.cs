@@ -100,7 +100,7 @@ public class NPC : MonoBehaviour
         }
     }
     
-
+    /*
     public void StartTalking()
     {
         if (!isTalking)
@@ -108,7 +108,6 @@ public class NPC : MonoBehaviour
             isTalking = true;
             anim.SetLayerWeight(0, 0.5f);
             anim.SetLayerWeight(1, 0.5f);
-            print("Está hablando");
             StartCoroutine(StopTalking());
         }
     }
@@ -120,5 +119,5 @@ public class NPC : MonoBehaviour
         anim.SetLayerWeight(1, 0);
         anim.SetLayerWeight(0, 1);
         isTalking = false;
-    }
+    }*/
 }

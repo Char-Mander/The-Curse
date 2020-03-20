@@ -19,8 +19,6 @@ public class CursedGirlEnemy : Enemy
     [SerializeField]
     GameObject enemyCanvas;
     [SerializeField]
-    GameObject interactableCanvas;
-    [SerializeField]
     GameObject goal;
     [SerializeField]
     Transform goalPos;
@@ -35,15 +33,19 @@ public class CursedGirlEnemy : Enemy
 
     private int currentPhase = 1;
     private bool hasSpoken = false;
+    private bool activation = false;
     private bool finalDecision = false;
     private bool canTeleport = true;
     private bool playerCanKillHer = true;
     private bool canCreateMonsters = true;
     private bool end = false;
+    private bool spellAttackInCurse = false;
 
     public override void Start()
     {
+        peacefulModel.SetActive(false);
         cController = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         patrolSpeed = attackSpeed * 0.75f;
         attackSpeed = attackSpeed * 1.5f;
@@ -57,16 +59,22 @@ public class CursedGirlEnemy : Enemy
         {
             direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
             distToPlayer = direToPlayer.magnitude;
-
+            print("Hasspoken: " + hasSpoken);
             if (distToPlayer < detectDist && !hasSpoken)
             {
-                FindObjectOfType<DialogueManager>().StartDialogue(dialogues[0]);
-                if (!mechanismObj.GetComponent<BlockMecanism>().GetActivated()) mechanismObj.GetComponent<BlockMecanism>().SetActivated(true);
+                print("Empieza el diálogo");
+                if (!activation)
+                {
+                    activation = true;
+                    FindObjectOfType<DialogueManager>().StartDialogue(dialogues[0]);
+                    if (!mechanismObj.GetComponent<BlockMecanism>().GetActivated()) mechanismObj.GetComponent<BlockMecanism>().SetActivated(true);
+                }
 
 
             }
             else if (hasSpoken && !finalDecision)
             {
+                print("Empieza a atacar");
                 AimPlayer();
                 ManageAttackStates();
             }
@@ -76,7 +84,7 @@ public class CursedGirlEnemy : Enemy
             }
 
         }
-        
+        anim.SetFloat("Speed", cController.velocity.magnitude);
     }
 
     public override void Attack()
@@ -84,7 +92,12 @@ public class CursedGirlEnemy : Enemy
         DetectPlayerInArea();
         if(canAttack && GetPhase() != 3)
         {
-            Action();
+            if (!spellAttackInCurse)
+            {
+                spellAttackInCurse = true;
+                anim.SetTrigger("Attack");
+                StartCoroutine(WaitForSpellAttack());
+            }
         }
         else if (canCreateMonsters && GetPhase() == 3)
         {
@@ -94,6 +107,7 @@ public class CursedGirlEnemy : Enemy
     
     private void ManageAttackStates()
     {
+        print("Phase: " + GetPhase());
         switch (GetPhase())
         {
             case 1:
@@ -128,10 +142,10 @@ public class CursedGirlEnemy : Enemy
         {
             if (!end)
             {
-                FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
-                Instantiate(goal, goalPos);
                 end = true;
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
                 GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
+                StartCoroutine(Transformation());
             }
             AimPlayer();
         }
@@ -157,9 +171,8 @@ public class CursedGirlEnemy : Enemy
     private void CreateMonster()
     {
         canCreateMonsters = false;
-        GameObject monster = Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos[Random.Range(0, instantiateMonstersPos.Count)]);
-        monster.transform.parent = null;
-        StartCoroutine(MonstersCadency());
+        anim.SetTrigger("Attack");
+        StartCoroutine(WaitForSpawnAttack());
     }
 
     public override void DetectPlayerInArea()
@@ -201,10 +214,9 @@ public class CursedGirlEnemy : Enemy
         }
         else if (hit.collider.CompareTag("Player") && (GetPhase() == 3 && canAttack))
         {
-            Teleport();
             canAttack = false;
-            hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
-            base.ReloadCoroutine();
+            anim.SetTrigger("Attack");
+            StartCoroutine(WaitForBodyAttack(hit));
         }
     }
     
@@ -216,6 +228,41 @@ public class CursedGirlEnemy : Enemy
         else if (GetComponent<Health>().GetCurrentHealth() > 0.06 * GetComponent<Health>().GetMaxHealth()) phase = 3;
         else phase = 4;
         return phase;
+    }
+
+    IEnumerator Transformation()
+    {
+        yield return new WaitForSeconds(1);
+        peacefulModel.SetActive(true);
+        Instantiate(goal, goalPos);
+        yield return new WaitForSeconds(0.5f);
+        attackModel.SetActive(false);
+    }
+
+    IEnumerator WaitForSpellAttack()
+    {
+        anim.SetTrigger("SpellAttack");
+        yield return new WaitForSeconds(2.15f);
+        spellAttackInCurse = false;
+        Action();
+    }
+
+    IEnumerator WaitForBodyAttack(ControllerColliderHit hit)
+    {
+        anim.SetTrigger("BodyAttack");
+        yield return new WaitForSeconds(2f);
+        Teleport();
+        hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
+        base.ReloadCoroutine();
+    }
+
+    IEnumerator WaitForSpawnAttack()
+    {
+        anim.SetTrigger("SpawnAttack");
+        yield return new WaitForSeconds(1.17f);
+        GameObject monster = Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos[Random.Range(0, instantiateMonstersPos.Count)]);
+        monster.transform.parent = null;
+        StartCoroutine(MonstersCadency());
     }
 
     IEnumerator WaitForTeleport()
@@ -241,10 +288,11 @@ public class CursedGirlEnemy : Enemy
 
     public void StartAttackingMode()
     {
-        if(!hasSpoken) hasSpoken = true;
+        hasSpoken = true;
+        print("Entra al startAttackingMode");
+        // if(!hasSpoken) hasSpoken = true;
         GetComponent<Health>().SetGodMode(false);
         enemyCanvas.SetActive(true);
-        interactableCanvas.SetActive(false);
         isAttacking = true;
     }
 
@@ -252,7 +300,6 @@ public class CursedGirlEnemy : Enemy
     {
         GetComponent<Health>().SetGodMode(true);
         enemyCanvas.SetActive(false);
-        interactableCanvas.SetActive(true);
         GetComponent<Health>().StopReceivingConstantDamage();
     }
 
