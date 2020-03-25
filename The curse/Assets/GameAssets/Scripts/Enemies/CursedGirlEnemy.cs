@@ -74,12 +74,12 @@ public class CursedGirlEnemy : Enemy
             }
             else if (finalDecision)
             {
-                print("Activa la decisión final");
                 ManageDecisionStates();
             }
 
         }
-        anim.SetFloat("Speed", cController.velocity.magnitude);
+        if(!finalDecision) anim.SetFloat("Speed", cController.velocity.magnitude);
+        else anim.SetFloat("Speed", 0);
     }
 
     public override void Attack()
@@ -102,7 +102,6 @@ public class CursedGirlEnemy : Enemy
     
     private void ManageAttackStates()
     {
-        print("Phase: " + GetPhase());
         switch (GetPhase())
         {
             case 1:
@@ -121,8 +120,11 @@ public class CursedGirlEnemy : Enemy
                 Enemy[] enemies = FindObjectsOfType<Enemy>();
                 foreach (Enemy enemy in enemies)
                 {
-                    if (enemy.name != "CursedGirl")
-                        Destroy(enemy.gameObject);
+                    if (enemy.GetComponent<CursedGirlEnemy>() == null)
+                    {
+
+                        Destroy(enemy.GetComponentInParent<Transform>().gameObject);
+                    }
                 }
                 //Suelta el diálogo 
                 SetDialogueMode();
@@ -135,10 +137,8 @@ public class CursedGirlEnemy : Enemy
     {
         if (FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
         {
-            print("Balance positivo");
             if (!end)
             {
-                print("Entra a la función donde suelta el diálogo");
                 end = true;
                 FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
                 GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
@@ -148,12 +148,15 @@ public class CursedGirlEnemy : Enemy
         }
         else
         {
-            print("Balance negativo");
-            StartAttackingMode();
-            AimPlayer();
-            StartCoroutine(WaitForDie());
+
+            if (!end)
+            {
+                end = true;
+                StartAttackingMode();
+                AimPlayer();
+                StartCoroutine(WaitForDie());
+            }
         }
-        GameManager.instance.sceneC.LoadGameOver();
     }
 
     private void Teleport()
@@ -232,13 +235,10 @@ public class CursedGirlEnemy : Enemy
     IEnumerator Transformation()
     {
         yield return new WaitForSeconds(1);
-        print("Se transforma");
         peacefulModel.SetActive(true);
         Instantiate(goal, goalPos);
-        print("En un segundo deja de verse el attackmodel");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
-        //Destroy(this.gameObject,1);
     }
 
     IEnumerator WaitForSpellAttack()
@@ -295,8 +295,6 @@ public class CursedGirlEnemy : Enemy
         if (!hasSpoken)
         {
             hasSpoken = true;
-            print("Entra al startAttackingMode con el hasSpoken a " + hasSpoken);
-            // if(!hasSpoken) hasSpoken = true;
             GetComponent<Health>().SetGodMode(false);
             enemyCanvas.SetActive(true);
             isAttacking = true;
@@ -323,6 +321,8 @@ public class CursedGirlEnemy : Enemy
     {
         Instantiate(goal, goalPos);
         yield return new WaitForSeconds(1f);
+        GetComponent<Health>().SetGodMode(false);
         GetComponent<Health>().LoseHealth(1000);
     }
+
 }

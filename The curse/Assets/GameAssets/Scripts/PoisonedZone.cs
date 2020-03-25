@@ -7,6 +7,11 @@ public class PoisonedZone : MonoBehaviour
     [SerializeField]
     float damagePerFrame;
 
+    private void Start()
+    {
+        StartCoroutine(WaitForStopDoingDamage());
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -19,7 +24,18 @@ public class PoisonedZone : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Health>().StopReceivingConstantDamage();
+            StopDoingDamage();
         }
+    }
+
+    IEnumerator WaitForStopDoingDamage()
+    {
+        yield return new WaitForSeconds(4.8f);
+        StopDoingDamage();
+    }
+
+    private void StopDoingDamage()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Health>().StopReceivingConstantDamage();
     }
 }

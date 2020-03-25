@@ -58,8 +58,9 @@ public class Health : MonoBehaviour
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
-                if (this.gameObject.tag == "Enemy" || this.gameObject.tag == "Explosive Sphere")
+                if (this.gameObject.CompareTag("Enemy"))
                 {
+                    print("Entra a la parte del enemigo");
                     // Destroy(Instantiate(enemyDeadParticle, transform.position, Quaternion.identity), 3);
                     this.gameObject.GetComponent<Enemy>().locked = true;
                     GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
@@ -121,7 +122,9 @@ public class Health : MonoBehaviour
 
     IEnumerator WaitForDie(float time)
     {
+        print("Entra al waitfordie");
         GetComponent<Animator>().SetTrigger("Die");
+        print("Hace la animación de la muerte");
         yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
     }

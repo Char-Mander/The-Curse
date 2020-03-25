@@ -65,7 +65,6 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && !dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
         {
-            print("Debería empezar a atacar");
             dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
         }
         else if (dialogue.gameObject.GetComponentInChildren<Quest>() != null && !dialogue.gameObject.GetComponentInChildren<Quest>().HasBeenTriggered())
