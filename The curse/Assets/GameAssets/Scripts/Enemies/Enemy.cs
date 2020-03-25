@@ -154,7 +154,6 @@ public class Enemy : MonoBehaviour
         else
         {
             wpIndex = 0;
-            isMoving = true;
         }
     }
 

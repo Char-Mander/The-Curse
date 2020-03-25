@@ -135,8 +135,10 @@ public class CursedGirlEnemy : Enemy
     {
         if (FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
         {
+            print("Balance positivo");
             if (!end)
             {
+                print("Entra a la función donde suelta el diálogo");
                 end = true;
                 FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
                 GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
@@ -146,10 +148,12 @@ public class CursedGirlEnemy : Enemy
         }
         else
         {
+            print("Balance negativo");
             StartAttackingMode();
             AimPlayer();
             StartCoroutine(WaitForDie());
         }
+        GameManager.instance.sceneC.LoadGameOver();
     }
 
     private void Teleport()
@@ -228,10 +232,13 @@ public class CursedGirlEnemy : Enemy
     IEnumerator Transformation()
     {
         yield return new WaitForSeconds(1);
+        print("Se transforma");
         peacefulModel.SetActive(true);
         Instantiate(goal, goalPos);
-        yield return new WaitForSeconds(0.5f);
-        this.gameObject.SetActive(false);
+        print("En un segundo deja de verse el attackmodel");
+        yield return new WaitForSeconds(1);
+        GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+        //Destroy(this.gameObject,1);
     }
 
     IEnumerator WaitForSpellAttack()

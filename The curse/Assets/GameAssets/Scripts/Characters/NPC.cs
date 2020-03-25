@@ -63,7 +63,6 @@ public class NPC : MonoBehaviour
         else
         {
             wpIndex = 0;
-            isMoving = true;
         }
     }
 
