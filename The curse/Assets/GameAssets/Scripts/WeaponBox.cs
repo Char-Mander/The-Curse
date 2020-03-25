@@ -11,7 +11,7 @@ public class WeaponBox : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<WeaponController>().UnlockWeapon(numWeapon);
+            col.GetComponentInParent<WeaponController>().UnlockWeapon(numWeapon);
             Destroy(this.gameObject);
         }
     }

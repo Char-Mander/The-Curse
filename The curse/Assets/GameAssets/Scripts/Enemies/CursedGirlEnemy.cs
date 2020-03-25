@@ -5,8 +5,6 @@ using UnityEngine;
 public class CursedGirlEnemy : Enemy
 {
     [SerializeField]
-    private GameObject attackModel;
-    [SerializeField]
     private GameObject peacefulModel;
     [SerializeField]
     private float teleportDistance;
@@ -40,6 +38,7 @@ public class CursedGirlEnemy : Enemy
     private bool canCreateMonsters = true;
     private bool end = false;
     private bool spellAttackInCurse = false;
+    private bool bodyAttackAnim = false;
 
     public override void Start()
     {
@@ -59,27 +58,23 @@ public class CursedGirlEnemy : Enemy
         {
             direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
             distToPlayer = direToPlayer.magnitude;
-            print("Hasspoken: " + hasSpoken);
             if (distToPlayer < detectDist && !hasSpoken)
             {
-                print("Empieza el diálogo");
                 if (!activation)
                 {
                     activation = true;
                     FindObjectOfType<DialogueManager>().StartDialogue(dialogues[0]);
                     if (!mechanismObj.GetComponent<BlockMecanism>().GetActivated()) mechanismObj.GetComponent<BlockMecanism>().SetActivated(true);
                 }
-
-
             }
             else if (hasSpoken && !finalDecision)
             {
-                print("Empieza a atacar");
                 AimPlayer();
                 ManageAttackStates();
             }
             else if (finalDecision)
             {
+                print("Activa la decisión final");
                 ManageDecisionStates();
             }
 
@@ -179,7 +174,7 @@ public class CursedGirlEnemy : Enemy
     {
         if (GetPhase() != 3)
         {
-            if (distToPlayer < iniAttackDist)
+            if (distToPlayer < iniAttackDist && !bodyAttackAnim)
             {
                 base.EnemyMovement(attackSpeed, -transform.forward);
             }
@@ -191,7 +186,7 @@ public class CursedGirlEnemy : Enemy
         }
         else
         {
-            if (distToPlayer < iniAttackDist && !canAttack)
+            if (distToPlayer < iniAttackDist && !canAttack && !bodyAttackAnim)
             {
                 base.EnemyMovement(attackSpeed, -transform.forward);
             }
@@ -236,7 +231,7 @@ public class CursedGirlEnemy : Enemy
         peacefulModel.SetActive(true);
         Instantiate(goal, goalPos);
         yield return new WaitForSeconds(0.5f);
-        attackModel.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     IEnumerator WaitForSpellAttack()
@@ -250,7 +245,9 @@ public class CursedGirlEnemy : Enemy
     IEnumerator WaitForBodyAttack(ControllerColliderHit hit)
     {
         anim.SetTrigger("BodyAttack");
+        bodyAttackAnim = true;
         yield return new WaitForSeconds(2f);
+        bodyAttackAnim = true;
         Teleport();
         hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
         base.ReloadCoroutine();
@@ -259,7 +256,7 @@ public class CursedGirlEnemy : Enemy
     IEnumerator WaitForSpawnAttack()
     {
         anim.SetTrigger("SpawnAttack");
-        yield return new WaitForSeconds(1.17f);
+        yield return new WaitForSeconds(2f);
         GameObject monster = Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos[Random.Range(0, instantiateMonstersPos.Count)]);
         monster.transform.parent = null;
         StartCoroutine(MonstersCadency());
@@ -277,7 +274,7 @@ public class CursedGirlEnemy : Enemy
         canCreateMonsters = true;
     }
 
-
+    
     public override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
@@ -288,12 +285,15 @@ public class CursedGirlEnemy : Enemy
 
     public void StartAttackingMode()
     {
-        hasSpoken = true;
-        print("Entra al startAttackingMode");
-        // if(!hasSpoken) hasSpoken = true;
-        GetComponent<Health>().SetGodMode(false);
-        enemyCanvas.SetActive(true);
-        isAttacking = true;
+        if (!hasSpoken)
+        {
+            hasSpoken = true;
+            print("Entra al startAttackingMode con el hasSpoken a " + hasSpoken);
+            // if(!hasSpoken) hasSpoken = true;
+            GetComponent<Health>().SetGodMode(false);
+            enemyCanvas.SetActive(true);
+            isAttacking = true;
+        }
     }
 
     public void SetDialogueMode()
