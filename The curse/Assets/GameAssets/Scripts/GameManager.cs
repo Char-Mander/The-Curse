@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         deaths = 0;
         defeatedEnemies = 0;
         decisionState = 0;
+        teleportPointsDiscovered.Clear();
     }
 
     public int GetMaxCheckPoints() { return maxCheckPoints; }
@@ -105,7 +106,12 @@ public class GameManager : MonoBehaviour
 
     public void AddTeleportPoint(int index)
     {
-        print("Añade el point " + index + " a la lista");
         teleportPointsDiscovered.Add(index);
     }
+
+    public int GetDiscoveredTeleportPointIndex(int index) { return teleportPointsDiscovered[index]; }
+
+    public int GetDiscoveredTeleportPointLenght() { return teleportPointsDiscovered.Count; }
+
+    public bool ContainsDiscoveredTeleportPoint(int tpIndex) { return teleportPointsDiscovered.Contains(tpIndex); }
 }

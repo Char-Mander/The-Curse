@@ -11,6 +11,14 @@ public class TeleportController : MonoBehaviour
     {
         tpList = FindObjectsOfType<TeleportPoint>();
         OrderTeleportPoints();
+        //Carga los teleportpoints en el gamemanager
+        GameManager.instance.data.LoadTeleportPoints();
+        //Los activa
+        for (int i=0; i< GameManager.instance.GetDiscoveredTeleportPointLenght(); i++)
+        {
+            int tpIndex = GameManager.instance.GetDiscoveredTeleportPointIndex(i);
+            tpList[tpIndex].SetDiscovered(true);
+        }
     }
 
     private void OrderTeleportPoints()
@@ -34,8 +42,11 @@ public class TeleportController : MonoBehaviour
     {
         tp.SetDiscovered(true);
         int index = GetIndexOfTP(tp);
-        GameManager.instance.AddTeleportPoint(index);
-        //GameManager.instance.data.SaveData();
+        if (!GameManager.instance.ContainsDiscoveredTeleportPoint(index))
+        {
+            GameManager.instance.AddTeleportPoint(index);
+            GameManager.instance.data.SaveTeleportPoints(index);
+        }
     }
 
     public void ShowTP()
@@ -56,7 +67,6 @@ public class TeleportController : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         print("Posición antes de teleportarlo: (" + player.transform.position.x + ", " + player.transform.position.y + ", " + player.transform.position.z + ")");
         Vector3 finalPos = new Vector3(tpList[index].transform.position.x, tpList[index].transform.position.y, tpList[index].transform.position.z-2);
-        // player.transform.position = tpList[index].transform.position;
         player.transform.position = finalPos;
         print("Posición después de teleportarlo: (" + player.transform.position.x + ", " + player.transform.position.y + ", " + player.transform.position.z + ")");
     }
