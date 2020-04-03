@@ -1105,6 +1105,7 @@ GameObject:
   - component: {fileID: 1485503992232889230}
   - component: {fileID: 1485503992232889225}
   - component: {fileID: 1485503992232889224}
+  - component: {fileID: 1485503993393249400}
   m_Layer: 0
   m_Name: The wise 1
   m_TagString: Untagged
@@ -1260,6 +1261,19 @@ MonoBehaviour:
   waitingTime: 0
   wayPoints:
   - {fileID: 1485503993260671410}
+--- !u!135 &1485503993393249400
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485503993260907986}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.471218
+  m_Center: {x: 0, y: 2.26, z: 2.36}
 --- !u!1 &1485503993260907988
 GameObject:
   m_ObjectHideFlags: 0
