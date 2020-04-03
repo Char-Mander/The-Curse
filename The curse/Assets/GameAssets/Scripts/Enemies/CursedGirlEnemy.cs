@@ -37,6 +37,7 @@ public class CursedGirlEnemy : Enemy
     private bool playerCanKillHer = true;
     private bool canCreateMonsters = true;
     private bool end = false;
+    private bool idle = false;
     private bool spellAttackInCurse = false;
     private bool bodyAttackAnim = false;
 
@@ -78,7 +79,9 @@ public class CursedGirlEnemy : Enemy
             }
 
         }
-        if(!finalDecision) anim.SetFloat("Speed", cController.velocity.magnitude);
+
+        if(idle) anim.SetFloat("Speed", 0);
+        else if (!finalDecision || GetPhase() != 4) anim.SetFloat("Speed", cController.velocity.magnitude);
         else anim.SetFloat("Speed", 0);
     }
 
@@ -90,7 +93,7 @@ public class CursedGirlEnemy : Enemy
             if (!spellAttackInCurse)
             {
                 spellAttackInCurse = true;
-                anim.SetTrigger("Attack");
+                ChangeLayerWeight(true);
                 StartCoroutine(WaitForSpellAttack());
             }
         }
@@ -126,7 +129,7 @@ public class CursedGirlEnemy : Enemy
                         Destroy(enemy.GetComponentInParent<Transform>().gameObject);
                     }
                 }
-                //Suelta el diálogo 
+                //Suelta el diálogo
                 SetDialogueMode();
                 FindObjectOfType<DialogueManager>().StartDialogue(dialogues[1]);
                 break;
@@ -173,7 +176,7 @@ public class CursedGirlEnemy : Enemy
     private void CreateMonster()
     {
         canCreateMonsters = false;
-        anim.SetTrigger("Attack");
+        ChangeLayerWeight(true);
         StartCoroutine(WaitForSpawnAttack());
     }
 
@@ -183,12 +186,15 @@ public class CursedGirlEnemy : Enemy
         {
             if (distToPlayer < iniAttackDist && !bodyAttackAnim)
             {
+                idle = false;
                 base.EnemyMovement(attackSpeed, -transform.forward);
             }
             else if (distToPlayer > endAttackDist)
             {
+                idle = false;
                 base.EnemyMovement(attackSpeed, transform.forward);
             }
+            else idle = true;
 
         }
         else
@@ -217,7 +223,7 @@ public class CursedGirlEnemy : Enemy
         else if (hit.collider.CompareTag("Player") && (GetPhase() == 3 && canAttack))
         {
             canAttack = false;
-            anim.SetTrigger("Attack");
+            ChangeLayerWeight(true);
             StartCoroutine(WaitForBodyAttack(hit));
         }
     }
@@ -232,10 +238,26 @@ public class CursedGirlEnemy : Enemy
         return phase;
     }
 
+    void ChangeLayerWeight(bool isAttacking)
+    {
+        if (isAttacking)
+        {
+            anim.SetLayerWeight(0, 0);
+            anim.SetLayerWeight(1, 1);
+        }
+        else
+        {
+            anim.SetLayerWeight(0, 1);
+            anim.SetLayerWeight(1, 0);
+        }
+    }
+
     IEnumerator Transformation()
     {
         yield return new WaitForSeconds(1);
         peacefulModel.SetActive(true);
+        peacefulModel.transform.position = this.transform.position;
+        peacefulModel.transform.rotation = this.transform.rotation;
         Instantiate(goal, goalPos);
         yield return new WaitForSeconds(0.2f);
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
@@ -243,18 +265,20 @@ public class CursedGirlEnemy : Enemy
 
     IEnumerator WaitForSpellAttack()
     {
-        anim.SetTrigger("SpellAttack");
+        anim.SetInteger("AttackType", 0);
         yield return new WaitForSeconds(2.15f);
         spellAttackInCurse = false;
+        ChangeLayerWeight(false);
         Action();
     }
 
     IEnumerator WaitForBodyAttack(ControllerColliderHit hit)
     {
-        anim.SetTrigger("BodyAttack");
+        anim.SetInteger("AttackType", 1);
         bodyAttackAnim = true;
         yield return new WaitForSeconds(2f);
         bodyAttackAnim = true;
+        ChangeLayerWeight(false);
         Teleport();
         hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
         base.ReloadCoroutine();
@@ -262,8 +286,9 @@ public class CursedGirlEnemy : Enemy
 
     IEnumerator WaitForSpawnAttack()
     {
-        anim.SetTrigger("SpawnAttack");
+        anim.SetInteger("AttackType", 2);
         yield return new WaitForSeconds(2f);
+        ChangeLayerWeight(false);
         GameObject monster = Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos[Random.Range(0, instantiateMonstersPos.Count)]);
         monster.transform.parent = null;
         StartCoroutine(MonstersCadency());
