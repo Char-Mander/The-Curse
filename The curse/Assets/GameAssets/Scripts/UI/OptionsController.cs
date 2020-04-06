@@ -46,7 +46,7 @@ public class OptionsController : MonoBehaviour
         {
             if (GameManager.instance.sceneC.IsALvlScene())
             {
-                if (FindObjectOfType<CursedGirlEnemy>() != null && !FindObjectOfType<CursedGirlEnemy>().IsOnFinalDecisionPhase()) Cursor.lockState = CursorLockMode.Locked;
+                if (FindObjectOfType<CursedGirlEnemy>() != null) Cursor.lockState = CursorLockMode.Locked;
                 if (!FindObjectOfType<DialogueManager>().IsOnADialogue() && !FindObjectOfType<TeleportController>().GetTeleportOptionsAvailable())
                 {
                     FindObjectOfType<PlayerController>().SetIsLocked(false);

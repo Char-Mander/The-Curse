@@ -143,7 +143,7 @@ public class FixedElementCanvasController : MonoBehaviour
         FindObjectOfType<DecisionState>().AddOrSubtractToBalance(sAux.options[index].decisionBalance);
         EnableOrDisableOptionsPanel(false);
         FindObjectOfType<DialogueManager>().DisplayNextSentence(index + 1);
-        FindObjectOfType<CursedGirlEnemy>().ApplyDecisionState();
+        FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.DECISION;
     }
 
     public void EnableOrDisableOptionsPanel(bool value)
