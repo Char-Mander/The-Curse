@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     private GameObject weapon;
     private GameObject crossHair;
     private Mount mount;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour, ICharacter
         soundsManager = GetComponent<PlayerSoundsManager>();
         pickobj = GetComponent<PickUpObjects>();
         interactobj = GetComponent<InteractWithObjects>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -74,7 +76,9 @@ public class PlayerController : MonoBehaviour, ICharacter
             WeaponInputs();
             InteractionWithObjects();
             CallTheMount();
+            anim.SetFloat("Speed", moveSpeed);
         }
+        else anim.SetFloat("Speed", 0);
     }
 
     //Función que gestiona cualquier interacción con objetos
@@ -289,6 +293,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     public void EnableWeapon(bool enable)
     {
         weapon.SetActive(enable);
+        anim.SetBool("Locked", !enable);
         if (enable && weapon.GetComponent<SimpleShoot>())
         {
             weapon.GetComponent<SimpleShoot>().SetCanShoot(true);
@@ -302,6 +307,7 @@ public class PlayerController : MonoBehaviour, ICharacter
 
     public void SetIsOnAMount(bool mount)
     {
+        anim.SetBool("OnAMount", mount);
         isOnAMount = mount;
     }
 
