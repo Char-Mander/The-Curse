@@ -12,7 +12,7 @@ public class TeleportController : MonoBehaviour
         tpList = FindObjectsOfType<TeleportPoint>();
         OrderTeleportPoints();
         //Carga los teleportpoints en el gamemanager
-        GameManager.instance.data.LoadTeleportPoints();
+        GameManager.instance.data.LoadTeleportPoints(tpList.Length);
         //Los activa
         for (int i=0; i< GameManager.instance.GetDiscoveredTeleportPointLenght(); i++)
         {

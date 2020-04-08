@@ -9,7 +9,6 @@ public class DialogueManager : MonoBehaviour
     FixedElementCanvasController canvasC;
     Dialogue dialogue;
     bool isOnADialogue = false;
-    int index;
 
     private Queue<Sentence> sentences = new Queue<Sentence>();
     
@@ -64,16 +63,15 @@ public class DialogueManager : MonoBehaviour
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         if (Cursor.lockState != CursorLockMode.Locked) Cursor.lockState = CursorLockMode.Locked;
 
-        /*if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && !dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
-         {
-             dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
-         }
-         else*/
-        if (dialogue.gameObject.GetComponentInChildren<Quest>() != null && !dialogue.gameObject.GetComponentInChildren<Quest>().HasBeenTriggered())
+        if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && !dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
+        {
+            dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
+        }
+        else if (dialogue.gameObject.GetComponentInChildren<Quest>() != null && !dialogue.gameObject.GetComponentInChildren<Quest>().HasBeenTriggered())
         {
             dialogue.gameObject.GetComponentInChildren<Quest>().ActivateQuest();
         }
-        if(dialogue.gameObject.GetComponent<CursedGirlEnemy>() == null || dialogue.CanPlayerChoose()) FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
+        FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
 
     }
 

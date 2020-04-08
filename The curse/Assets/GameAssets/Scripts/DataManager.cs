@@ -12,6 +12,7 @@ public class DataManager : MonoBehaviour
     private string defeatedEnemiesKey = "Defeated Enemies";
     private string decisionStateKey = "Decision State";
     private string teleportPointKey = "Teleport Point";
+    private string weaponUnlockedKey = "Weapon";
 
     public void LoadData()
     {
@@ -35,16 +36,23 @@ public class DataManager : MonoBehaviour
             GameManager.instance.SetDecision(PlayerPrefs.GetInt(decisionStateKey));
     }
 
-    public void LoadTeleportPoints()
+    public void LoadTeleportPoints(int size)
     {
-       int length = FindObjectOfType<TeleportController>().GetTeleportPointListLength();
-        for(int i = 0; i < length; i++)
+        for(int i = 0; i < size; i++)
         {
             if (PlayerPrefs.HasKey(teleportPointKey + (i + 1).ToString()) && 
                 !GameManager.instance.ContainsDiscoveredTeleportPoint(PlayerPrefs.GetInt(teleportPointKey + (i + 1).ToString())))
             {
                 GameManager.instance.AddTeleportPoint(PlayerPrefs.GetInt(teleportPointKey + (i+1).ToString()));
             }
+        }
+    }
+
+    public void LoadWeaponsUnlocked(int size)
+    {
+        for(int i=0; i<size; i++)
+        {
+            if (PlayerPrefs.HasKey(weaponUnlockedKey + i.ToString())) FindObjectOfType<WeaponController>().UnlockWeapon(i);
         }
     }
 
@@ -59,6 +67,14 @@ public class DataManager : MonoBehaviour
     {
         //Guarda como clave el "Teleport Point + index"
         PlayerPrefs.SetInt(teleportPointKey + (index+1).ToString(), index);
+        PlayerPrefs.Save();
+    }
+
+    public void SaveWeaponUnlocked(int index)
+    {
+        if (!PlayerPrefs.HasKey(weaponUnlockedKey+index.ToString()))
+            PlayerPrefs.SetInt(weaponUnlockedKey + (index).ToString(), index);
+        PlayerPrefs.Save();
     }
 
     public void SaveData(int currentCheckPoint, int currentQuest, float currentHealth, int deaths, int defeatedEnemies, int decisionState)

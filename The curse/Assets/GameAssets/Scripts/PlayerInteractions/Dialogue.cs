@@ -30,6 +30,4 @@ public class Dialogue : MonoBehaviour
     public List<Sentence> GetSentences(){ return sentencesList; }
 
     public bool CanPlayerChoose(int index) { return sentencesList[index].options.Count>0; }
-
-    public bool CanPlayerChoose() { return canPlayerChoose; }
 }

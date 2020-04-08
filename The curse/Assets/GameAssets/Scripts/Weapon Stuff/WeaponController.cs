@@ -36,7 +36,7 @@ public class WeaponController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GameManager.instance.data.LoadWeaponsUnlocked(weaponList.Count);
     }
 
     IEnumerator Reload()
@@ -101,6 +101,7 @@ public class WeaponController : MonoBehaviour
         if (weaponIndex >= 0 && weaponIndex < weaponList.Count)
         {
             weaponList[weaponIndex].setIsUnlocked(true);
+            GameManager.instance.data.SaveWeaponUnlocked(weaponIndex);
         }
     }
 }
