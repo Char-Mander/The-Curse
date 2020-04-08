@@ -96,6 +96,11 @@ ModelImporter:
     13700000: Peasant_Man
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Peasant_Man_02
+    second: {fileID: 2100000, guid: 9d824e881f014814597dfb4edeb86408, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Peasant_Man_diffuse
