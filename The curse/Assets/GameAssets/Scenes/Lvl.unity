@@ -8601,10 +8601,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1035638221, guid: fbaa843de0a1ce24c8b891d2be8a0420, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 74ced98fce89d964faa34aea8fe92762, type: 2}
+    - target: {fileID: 1035638220, guid: fbaa843de0a1ce24c8b891d2be8a0420, type: 3}
+      propertyPath: zoomMaxValue
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035638220, guid: fbaa843de0a1ce24c8b891d2be8a0420, type: 3}
+      propertyPath: cadency
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbaa843de0a1ce24c8b891d2be8a0420, type: 3}
 --- !u!1001 &5100305111137846305
