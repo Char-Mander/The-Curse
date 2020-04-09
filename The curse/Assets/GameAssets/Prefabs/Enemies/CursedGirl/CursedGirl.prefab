@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4869298706536735458}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1069,7 +1069,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 910078ab8aa1833458b7dd7e58544d60, type: 3}
+  - {fileID: 2100000, guid: d109f42bed742f44a9bc2d9fa894dd58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1323,7 +1323,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 910078ab8aa1833458b7dd7e58544d60, type: 3}
+  - {fileID: 2100000, guid: d109f42bed742f44a9bc2d9fa894dd58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1413,7 +1413,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: 910078ab8aa1833458b7dd7e58544d60, type: 3}
+  - {fileID: 2100000, guid: d109f42bed742f44a9bc2d9fa894dd58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1499,7 +1499,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: 910078ab8aa1833458b7dd7e58544d60, type: 3}
+  - {fileID: 2100000, guid: ae2375c13b4b0864a836840a7b6e4d15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1585,7 +1585,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 910078ab8aa1833458b7dd7e58544d60, type: 3}
+  - {fileID: 2100000, guid: d109f42bed742f44a9bc2d9fa894dd58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1730,7 +1730,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 910078ab8aa1833458b7dd7e58544d60, type: 3}
+  - {fileID: 2100000, guid: d109f42bed742f44a9bc2d9fa894dd58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2829,7 +2829,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9050437347145255279}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: InstantiateGoalPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2859,7 +2859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3602768649290973343}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: InstantiateEnemyPos (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2919,7 +2919,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8248082285580216808}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: InstantiateEnemyPos (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3367,9 +3367,9 @@ GameObject:
   - component: {fileID: 1949697572282399504}
   - component: {fileID: 1761063400929318310}
   - component: {fileID: 7130433536913477832}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CursedGirl Attack Model
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3591,7 +3591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7770690082721356348}
   - component: {fileID: 7770690082726923102}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Nightshade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3629,7 +3629,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ae2fbf27ab3ba7846971eac7466247a4, type: 3}
+  - {fileID: 2100000, guid: 007343a9424fd1949ae04b63c4f2f9ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5363,6 +5363,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractableCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 9114614158212365426, guid: 86cb9944f7eb1e448a28b934d9c627d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9114614158212365427, guid: 86cb9944f7eb1e448a28b934d9c627d1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5468,6 +5473,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 9114614158822536659, guid: 86cb9944f7eb1e448a28b934d9c627d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114614158235626298, guid: 86cb9944f7eb1e448a28b934d9c627d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86cb9944f7eb1e448a28b934d9c627d1, type: 3}
 --- !u!224 &5533300828428531651 stripped
@@ -5491,7 +5506,7 @@ PrefabInstance:
     - target: {fileID: 2886728434409360998, guid: 148a00e03bbebf64d8ed899c95d26dfc,
         type: 3}
       propertyPath: m_Layer
-      value: 16
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2886728434409360999, guid: 148a00e03bbebf64d8ed899c95d26dfc,
         type: 3}
@@ -5631,17 +5646,17 @@ PrefabInstance:
     - target: {fileID: 2886728433205348163, guid: 148a00e03bbebf64d8ed899c95d26dfc,
         type: 3}
       propertyPath: m_Layer
-      value: 16
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2886728433205455143, guid: 148a00e03bbebf64d8ed899c95d26dfc,
         type: 3}
       propertyPath: m_Layer
-      value: 16
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2886728432923501032, guid: 148a00e03bbebf64d8ed899c95d26dfc,
         type: 3}
       propertyPath: m_Layer
-      value: 16
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 148a00e03bbebf64d8ed899c95d26dfc, type: 3}

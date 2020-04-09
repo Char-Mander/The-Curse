@@ -243,12 +243,12 @@ public class CursedGirlEnemy : Enemy
         if (isAttacking)
         {
             anim.SetLayerWeight(0, 0);
-            anim.SetLayerWeight(1, 1);
+            anim.SetLayerWeight(2, 1);
         }
         else
         {
             anim.SetLayerWeight(0, 1);
-            anim.SetLayerWeight(1, 0);
+            anim.SetLayerWeight(2, 0);
         }
     }
 

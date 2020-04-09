@@ -301,6 +301,46 @@ PrefabInstance:
       propertyPath: wayPoints.Array.data[3]
       value: 
       objectReference: {fileID: 6539900507482033850}
+    - target: {fileID: 826875997194538362, guid: ecd36724629875545a46c0f94af44dc3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a282c766efcb3340849761bdf9463c4, type: 2}
+    - target: {fileID: 826875997194538360, guid: ecd36724629875545a46c0f94af44dc3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a282c766efcb3340849761bdf9463c4, type: 2}
+    - target: {fileID: 826875997194538366, guid: ecd36724629875545a46c0f94af44dc3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a282c766efcb3340849761bdf9463c4, type: 2}
+    - target: {fileID: 826875997194538364, guid: ecd36724629875545a46c0f94af44dc3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 22d648eaa7891e941873edd286801145, type: 2}
+    - target: {fileID: 826875997194538354, guid: ecd36724629875545a46c0f94af44dc3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d464be68ace63c54eafea4ea6651373c, type: 2}
+    - target: {fileID: 826875997194538352, guid: ecd36724629875545a46c0f94af44dc3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d8d3de8cc086224583a6533e73c047e, type: 2}
+    - target: {fileID: 826875997194538358, guid: ecd36724629875545a46c0f94af44dc3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 669db54e3f5c3e54c9e3e0bed99b4084, type: 2}
+    - target: {fileID: 826875997194538356, guid: ecd36724629875545a46c0f94af44dc3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c94651b927954f419959c4ad70913f9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecd36724629875545a46c0f94af44dc3, type: 3}
 --- !u!1 &6539900508600266343 stripped
