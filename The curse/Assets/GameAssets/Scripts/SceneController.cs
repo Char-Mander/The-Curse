@@ -17,6 +17,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadMenu()
     {
+        if(IsALvlScene()) GameManager.instance.data.SaveWeaponsAmmo(FindObjectOfType<WeaponController>().GetWeaponListLenght());
         SceneManager.LoadScene("MainMenu");
     }
 

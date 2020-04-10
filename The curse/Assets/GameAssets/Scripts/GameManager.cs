@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private int defeatedEnemies = 0;
     private int decisionState = 0;
     private List<int> teleportPointsDiscovered = new List<int>();
+    private List<int> weaponAmmo = new List<int>();
 
     private void Awake()
     {

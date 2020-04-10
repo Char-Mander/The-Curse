@@ -42,6 +42,7 @@ public class CheckPointController : MonoBehaviour
         currentCP = cp;
         int index = GetIndexOfCP(cp);
         GameManager.instance.SetCurrentCheckPoint(index);
+        GameManager.instance.data.SaveWeaponsAmmo(FindObjectOfType<WeaponController>().GetWeaponListLenght());
         GameManager.instance.data.SaveData(index, FindObjectOfType<QuestController>().GetIndexOfCurrentQuest(), 
             FindObjectOfType<PlayerController>().GetComponent<Health>().GetCurrentHealth(),  GameManager.instance.GetDeaths(), 
             GameManager.instance.GetDefeatedEnemies(), GameManager.instance.GetDecision());
@@ -53,6 +54,7 @@ public class CheckPointController : MonoBehaviour
         {
             if (checkPoint.IsActive())
             {
+                GameManager.instance.data.LoadWeaponsAmmo(FindObjectOfType<WeaponController>().GetWeaponListLenght());
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 player.GetComponent<Health>().GainHealth(0);
                 player.transform.position = checkPoint.GetSpawnPoint().position;

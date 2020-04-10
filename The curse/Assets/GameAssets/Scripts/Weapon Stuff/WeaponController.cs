@@ -49,6 +49,7 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         GameManager.instance.data.LoadWeaponsUnlocked(weaponList.Count);
+        GameManager.instance.data.LoadWeaponsAmmo(weaponList.Count);
         if (!weaponList[0].getIsUnlocked()) UnlockWeapon(0);
         Selectweapon(0);
     }
@@ -121,5 +122,13 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    public int GetWeaponListLenght() { return weaponList.Count; }
+
     public int GetCurrentWeaponIndex() { return currentWeaponIndex; }
+
+    public void SetWeaponAmmo(int index, int ammo) { weaponList[index].SetCurrentAmmo(ammo); }
+
+    public ArmaClass GetWeaponByIndex(int index) { return weaponList[index]; }
+
+    public bool HasAmmo(int index) { return weaponList[index].GetWeapon().GetComponent<SimpleShoot>() != null; }
 }

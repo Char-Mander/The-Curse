@@ -13,6 +13,7 @@ public class DataManager : MonoBehaviour
     private string decisionStateKey = "Decision State";
     private string teleportPointKey = "Teleport Point";
     private string weaponUnlockedKey = "Weapon";
+    private string weaponAmmo = "Ammo";
 
     public void LoadData()
     {
@@ -53,6 +54,26 @@ public class DataManager : MonoBehaviour
         for(int i=0; i<size; i++)
         {
             if (PlayerPrefs.HasKey(weaponUnlockedKey + i.ToString())) FindObjectOfType<WeaponController>().UnlockWeapon(i);
+        }
+    }
+
+    public void LoadWeaponsAmmo(int size)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (FindObjectOfType<WeaponController>().HasAmmo(i))
+            {
+                if (PlayerPrefs.HasKey(weaponAmmo + i.ToString())) FindObjectOfType<WeaponController>().SetWeaponAmmo(i, PlayerPrefs.GetInt(weaponAmmo + i.ToString()));
+                else FindObjectOfType<WeaponController>().SetWeaponAmmo(i, FindObjectOfType<WeaponController>().GetWeaponByIndex(i).GetMaxAmmo());
+            }
+        }
+    }
+
+    public void SaveWeaponsAmmo(int size)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (FindObjectOfType<WeaponController>().HasAmmo(i)) PlayerPrefs.SetInt(weaponAmmo + i.ToString(), FindObjectOfType<WeaponController>().GetWeaponByIndex(i).GetCurrentAmmo());
         }
     }
 
