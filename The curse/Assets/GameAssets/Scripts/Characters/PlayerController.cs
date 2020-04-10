@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour, ICharacter
         
         if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.T))
         {
-            if (checkTypeOfActiveWeapon() == 1) 
+            if (checkTypeOfActiveWeapon() == 1 && FindObjectOfType<WeaponController>().currentWeapon.GetCurrentAmmo() > 0) 
             {
                 transform.GetComponentInChildren<SimpleShoot>().StartShootAnimation();
             }

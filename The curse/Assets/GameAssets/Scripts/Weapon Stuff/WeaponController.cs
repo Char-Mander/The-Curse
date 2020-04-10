@@ -38,6 +38,9 @@ public class WeaponController : MonoBehaviour
     private List<ArmaClass> weaponList = new List<ArmaClass>();
     [SerializeField]
     private float changeWeaponTime;
+    [HideInInspector]
+    public ArmaClass currentWeapon;
+    private int currentWeaponIndex;
 
     //Variales privadas
     private bool canChangeWeapon = true;
@@ -105,7 +108,8 @@ public class WeaponController : MonoBehaviour
         {
             fixC.EnableOrDisableFuelBar(true);
         }
-
+        currentWeapon = weaponList[weaponIndex];
+        currentWeaponIndex = weaponIndex;
     }
 
     public void UnlockWeapon(int weaponIndex)
@@ -116,4 +120,6 @@ public class WeaponController : MonoBehaviour
             GameManager.instance.data.SaveWeaponUnlocked(weaponIndex);
         }
     }
+
+    public int GetCurrentWeaponIndex() { return currentWeaponIndex; }
 }
