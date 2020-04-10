@@ -97,6 +97,7 @@ public class SimpleShoot : MonoBehaviour, IWeapon
             tempFlash = Instantiate(muzzleFlashPrefab, posDisp.position, posDisp.rotation);
             Destroy(tempFlash, 0.5f);
         FindObjectOfType<WeaponController>().currentWeapon.SetCurrentAmmo(FindObjectOfType<WeaponController>().currentWeapon.GetCurrentAmmo() - 1);
+        FindObjectOfType<FixedElementCanvasController>().UpdateBulletPanel(FindObjectOfType<WeaponController>().currentWeapon.GetCurrentAmmo());
     }
 
     void CasingRelease()

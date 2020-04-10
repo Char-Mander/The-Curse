@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FixedElementCanvasController : MonoBehaviour
 {   [SerializeField]
     GameObject textPanel;
     [SerializeField]
     GameObject savePanel;
+    [SerializeField]
+    GameObject bulletPanel;
+    [SerializeField]
+    TextMeshProUGUI bulletText;
     [SerializeField]
     Text questText;
     [SerializeField]
@@ -52,6 +57,7 @@ public class FixedElementCanvasController : MonoBehaviour
         npcNamePanel.SetActive(false);
         textPanel.SetActive(false);
         savePanel.SetActive(false);
+        bulletPanel.SetActive(false);
         sentenceOptionsPanel.SetActive(false);
         fuelBarUI.SetActive(false);
     }
@@ -66,6 +72,16 @@ public class FixedElementCanvasController : MonoBehaviour
     {
         playerStaminaBar.SetCurrentStamina(playerStamina.GetCurrentStamina());
         playerStaminaBar.UpdateStaminaBar();
+    }
+
+    public void EnableBulletPanel(bool enable)
+    {
+        bulletPanel.SetActive(enable);
+    }
+
+    public void UpdateBulletPanel(int ammo)
+    {
+        bulletText.text = "x " + ammo.ToString();
     }
 
     public void UpdateTextPanel(string text, bool isNpc, string name)

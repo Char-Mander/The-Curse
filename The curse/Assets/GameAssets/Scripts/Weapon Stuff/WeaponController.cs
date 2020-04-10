@@ -48,6 +48,11 @@ public class WeaponController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Init();
+    }
+
+    private void Init()
+    {
         GameManager.instance.data.LoadWeaponsUnlocked(weaponList.Count);
         GameManager.instance.data.LoadWeaponsAmmo(weaponList.Count);
         if (!weaponList[0].getIsUnlocked()) UnlockWeapon(0);
@@ -104,13 +109,17 @@ public class WeaponController : MonoBehaviour
         fixC.EnableOrDisableFuelBar(false);
         weaponList[weaponIndex].enableWeapon();
         if(weaponList[weaponIndex].GetWeapon().GetComponent<SimpleShoot>() != null)
+        {
             weaponList[weaponIndex].GetWeapon().GetComponent<SimpleShoot>().SetCanShoot(true);
+        }
         if (weaponList[weaponIndex].GetWeapon().GetComponent<Fuel>())
         {
             fixC.EnableOrDisableFuelBar(true);
         }
         currentWeapon = weaponList[weaponIndex];
         currentWeaponIndex = weaponIndex;
+        FindObjectOfType<FixedElementCanvasController>().EnableBulletPanel(currentWeapon.GetWeapon().GetComponent<SimpleShoot>() != null);
+        FindObjectOfType<FixedElementCanvasController>().UpdateBulletPanel(currentWeapon.GetCurrentAmmo());
     }
 
     public void UnlockWeapon(int weaponIndex)
