@@ -76,9 +76,12 @@ public class PlayerController : MonoBehaviour, ICharacter
             WeaponInputs();
             InteractionWithObjects();
             CallTheMount();
-            anim.SetFloat("Speed", moveSpeed);
+            anim.SetFloat("Speed", cController.velocity.magnitude);
         }
-        else anim.SetFloat("Speed", 0);
+        else
+        {
+            anim.SetFloat("Speed", 0);
+        }
     }
 
     //Función que gestiona cualquier interacción con objetos
@@ -340,7 +343,21 @@ public class PlayerController : MonoBehaviour, ICharacter
             GetActiveWeaponAndCrossHair();
             soundsManager.StopSound();
         }
-        if(!isOnAMount)
-        EnableWeapon(!value);
+        if (!isOnAMount)
+        {
+           EnableWeapon(!value);
+            if (!value)
+            {
+                anim.SetLayerWeight(0, 1);
+                anim.SetLayerWeight(1, 0);
+                anim.SetLayerWeight(2, 0);
+            }
+            else
+            {
+                anim.SetLayerWeight(0, 0);
+                anim.SetLayerWeight(1, 0);
+                anim.SetLayerWeight(2, 1);
+            }
+        }
     }
 }
