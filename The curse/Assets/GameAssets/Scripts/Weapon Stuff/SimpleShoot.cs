@@ -60,7 +60,6 @@ public class SimpleShoot : MonoBehaviour, IWeapon
     {
         if (canShoot)
         {
-            print("Dispara");
             //GetComponent<Animator>().SetTrigger("Fire");
             canShoot = false;
             Shoot();
@@ -71,9 +70,6 @@ public class SimpleShoot : MonoBehaviour, IWeapon
 
     public void Shoot()
     {
-        if (!canShoot)
-        {
-            print("Dispara");
             aSource.volume = 0.25f;
             aSource.PlayOneShot(shotAudioClips[0]);
             GameObject tempFlash;
@@ -100,13 +96,10 @@ public class SimpleShoot : MonoBehaviour, IWeapon
             Destroy(bullet, 10);
             tempFlash = Instantiate(muzzleFlashPrefab, posDisp.position, posDisp.rotation);
             Destroy(tempFlash, 0.5f);
-        }
     }
 
     void CasingRelease()
     {
-        if (!canShoot)
-        {
             GameObject casing;
             casing = Instantiate(casingPrefab, casingExitLocation.position, casingExitLocation.rotation) as GameObject;
             casing.GetComponent<Rigidbody>().AddExplosionForce(550f, (casingExitLocation.position - casingExitLocation.right * 0.3f - casingExitLocation.up * 0.6f), 1f);
@@ -115,7 +108,7 @@ public class SimpleShoot : MonoBehaviour, IWeapon
             aSource.clip = shotAudioClips[1];
             aSource.PlayDelayed(0.65f);
             Destroy(casing, 5);
-        }
+        
     }
 
     void CreateParticleAtPoint(GameObject obj, Vector3 point, bool tint, Quaternion rotate)

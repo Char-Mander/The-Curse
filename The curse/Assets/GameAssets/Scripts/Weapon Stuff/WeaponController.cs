@@ -6,6 +6,9 @@ using UnityEngine;
 public class ArmaClass
 {
     [SerializeField]
+    int maxAmmo;
+    int currentAmmo;
+    [SerializeField]
     private GameObject weapon;
     [SerializeField]
     private bool isUnlocked;
@@ -19,6 +22,12 @@ public class ArmaClass
     public void setIsUnlocked(bool unlock) { isUnlocked = unlock; }
 
     public GameObject GetWeapon() { return weapon; }
+
+    public int GetMaxAmmo() { return maxAmmo; }
+
+    public int GetCurrentAmmo() { return currentAmmo; }
+
+    public void SetCurrentAmmo(int ammo) { currentAmmo = ammo; }
 }
 
 public class WeaponController : MonoBehaviour
@@ -37,7 +46,10 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         GameManager.instance.data.LoadWeaponsUnlocked(weaponList.Count);
+        if (!weaponList[0].getIsUnlocked()) UnlockWeapon(0);
+        Selectweapon(0);
     }
+
 
     IEnumerator Reload()
     {

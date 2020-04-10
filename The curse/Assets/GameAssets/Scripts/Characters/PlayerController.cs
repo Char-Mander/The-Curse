@@ -158,10 +158,8 @@ public class PlayerController : MonoBehaviour, ICharacter
         
         if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.T))
         {
-            print("Presiona el botón de disparar");
-            if (checkTypeOfActiveWeapon() == 1)
+            if (checkTypeOfActiveWeapon() == 1) 
             {
-                print("Detecta que es un simpleshoot");
                 transform.GetComponentInChildren<SimpleShoot>().StartShootAnimation();
             }
             else if (checkTypeOfActiveWeapon() == 2)
