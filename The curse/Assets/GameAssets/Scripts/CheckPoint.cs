@@ -26,7 +26,7 @@ public class CheckPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") && !isActive && !hasBeenActivated)
+        if(other.GetComponentInParent<PlayerController>() != null && !isActive && !hasBeenActivated)
         {
             hasBeenActivated = true;
             checkPointController.ActiveCP(this);

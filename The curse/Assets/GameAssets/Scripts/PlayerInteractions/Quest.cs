@@ -30,7 +30,7 @@ public class Quest : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!completed && !triggered && other.CompareTag("Player"))
+        if(!completed && !triggered && other.GetComponentInParent<PlayerController>() != null)
         {
             ActivateQuest();
         }

@@ -21,9 +21,8 @@ public class InteractWithObjects : MonoBehaviour
     // Update is called once per frame
     public void InteractWithGameObject()
     {
-        if (objectToInteract != null /*&& 
-            ((!FindObjectOfType<PlayerController>().IsOnAMount() && !objectToInteract.CompareTag("Mount")) || (FindObjectOfType<PlayerController>().IsOnAMount() && objectToInteract.CompareTag("Mount"))) 
-            */&& objectToInteract.GetComponent<InteractableObject>().isInteractable() && canInteract && !FindObjectOfType<DialogueManager>().IsOnADialogue())
+        if (objectToInteract != null && objectToInteract.GetComponent<InteractableObject>().isInteractable() 
+            && canInteract && !FindObjectOfType<DialogueManager>().IsOnADialogue())
         {
             //Cogemos el objeto
             currentInteractionObject = objectToInteract;

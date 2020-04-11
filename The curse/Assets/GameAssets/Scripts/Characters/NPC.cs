@@ -76,7 +76,7 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.GetComponentInParent<PlayerController>() != null)
         {
             if (!detected)
             {
@@ -92,7 +92,7 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.GetComponentInParent<PlayerController>() != null)
         {
             detected = false;
             head.transform.rotation = this.transform.rotation;
@@ -106,8 +106,8 @@ public class NPC : MonoBehaviour
         {
             print("Empieza a hablar");
             isTalking = true;
-            anim.SetLayerWeight(0, 0f);
-            anim.SetLayerWeight(1, 1f);
+            anim.SetLayerWeight(0, 0.5f);
+            anim.SetLayerWeight(1, 0.5f);
             StartCoroutine(StopTalking());
         }
     }

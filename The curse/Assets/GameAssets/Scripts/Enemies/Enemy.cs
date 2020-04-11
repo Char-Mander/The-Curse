@@ -100,10 +100,12 @@ public class Enemy : MonoBehaviour
             switch (state)
             {
                 case EnemyStates.PATROL:
+                    print("Patrulla");
                     anim.SetFloat("Speed", patrolSpeed);
                     Patrol();
                     break;
                 case EnemyStates.ATTACK:
+                    print("Ataca");
                     anim.SetFloat("Speed", attackSpeed);
                     isAttacking = true;
                     Attack();
