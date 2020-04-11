@@ -27,7 +27,11 @@ public class ArmaClass
 
     public int GetCurrentAmmo() { return currentAmmo; }
 
-    public void SetCurrentAmmo(int ammo) { currentAmmo = ammo; }
+    public void SetCurrentAmmo(int ammo)
+    {
+        currentAmmo = ammo;
+        if (currentAmmo > maxAmmo) currentAmmo = maxAmmo;
+    }
 }
 
 public class WeaponController : MonoBehaviour

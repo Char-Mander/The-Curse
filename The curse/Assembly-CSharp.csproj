@@ -115,8 +115,9 @@
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\IWeapon.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\ParticleShoot.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\SimpleShoot.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\WeaponAmmo.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\WeaponBox.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Weapon Stuff\WeaponController.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\WeaponBox.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
