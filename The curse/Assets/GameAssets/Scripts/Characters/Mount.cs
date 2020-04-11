@@ -16,8 +16,6 @@ public class Mount : MonoBehaviour, ICharacter
     float mountJumpForce;
     [SerializeField]
     float mountRotationSpeed;
-    [SerializeField]
-    float timeAvoidingObstacles;
 
     GameObject player;
     CharacterController cController;
@@ -30,8 +28,8 @@ public class Mount : MonoBehaviour, ICharacter
     private float pitch;
     private float yaw;
     private bool hasSnorted = false;
-    private bool avoidObstacles = true;
     private bool isLocked;
+    Animator anim;
 
     private void Start()
     {
@@ -39,6 +37,7 @@ public class Mount : MonoBehaviour, ICharacter
         playerController = player.GetComponent<PlayerController>();
         playerSoundsManager = player.GetComponent<PlayerSoundsManager>();
         cController = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -49,6 +48,8 @@ public class Mount : MonoBehaviour, ICharacter
             JumpAndMoveCharacter();
             RotateCharacter();
         }
+        anim.SetBool("Locked", isLocked);
+        anim.SetFloat("Speed", cController.velocity.magnitude);
     }
 
     public void CharacterVelocity()
@@ -90,6 +91,7 @@ public class Mount : MonoBehaviour, ICharacter
                     }
                     dirPos.y = mountJumpForce;
                     playerSoundsManager.ManageJumpSound();
+                    anim.SetTrigger("Jump");
                 }
 
             }
@@ -102,6 +104,7 @@ public class Mount : MonoBehaviour, ICharacter
             this.transform.position = new Vector3(player.transform.position.x + 4, player.transform.position.y, player.transform.position.z + 4);
             playerController.SetMountWhistleCall(false);
             this.transform.LookAt(player.transform);
+            anim.SetTrigger("Call");
         }
     }
 
