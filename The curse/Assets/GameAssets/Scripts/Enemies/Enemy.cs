@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public int damage;
     public float attackSpeed;
     public float patrolSpeed;
+    public float viewOffset;
     [SerializeField]
     private Transform weapon;
     [SerializeField]
@@ -79,7 +80,6 @@ public class Enemy : MonoBehaviour
                     isMoving = false;
                     agent.speed = 0;
                     state = EnemyStates.ATTACK;
-                    print("Detecta al player");
                     anim.SetBool("PlayerDetected", true);
                 }
             }
@@ -92,7 +92,6 @@ public class Enemy : MonoBehaviour
                     agent.speed = patrolSpeed;
                     isAttacking = false;
                     state = EnemyStates.PATROL;
-                    print("Deja de detectar al player");
                     anim.SetBool("PlayerDetected", false);
                 }
             }
@@ -100,12 +99,10 @@ public class Enemy : MonoBehaviour
             switch (state)
             {
                 case EnemyStates.PATROL:
-                    print("Patrulla");
                     anim.SetFloat("Speed", patrolSpeed);
                     Patrol();
                     break;
                 case EnemyStates.ATTACK:
-                    print("Ataca");
                     anim.SetFloat("Speed", attackSpeed);
                     isAttacking = true;
                     Attack();
@@ -120,21 +117,23 @@ public class Enemy : MonoBehaviour
 
     public virtual bool DetectPlayer()
     {
-        direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
+        Vector3 playerPos = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y + 1.4f, GameObject.FindGameObjectWithTag("Player").transform.position.z);
+        Vector3 currentPos = new Vector3(this.transform.position.x, this.transform.position.y + viewOffset, this.transform.position.z);
+        direToPlayer = playerPos - currentPos;
         distToPlayer = direToPlayer.magnitude;
 
-        Debug.DrawRay(this.transform.position, direToPlayer.normalized, Color.white);
+        Debug.DrawRay(currentPos, direToPlayer.normalized, Color.white);
         //Si está dentro de los límites
         if (distToPlayer <= detectDist)
         {
-            Debug.DrawLine(this.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, Color.green);
+            Debug.DrawLine(currentPos, playerPos, Color.green);
             RaycastHit hit;
-            if (Physics.Raycast(this.transform.position, direToPlayer.normalized, out hit, detectDist, lm))
+            if (Physics.Raycast(currentPos, direToPlayer.normalized, out hit, detectDist, lm))
             {
-                Debug.DrawLine(this.transform.position, hit.transform.position, Color.blue);
-                if (hit.collider.gameObject.tag == "Player")
+                Debug.DrawLine(currentPos, hit.transform.position, Color.blue);
+                if (hit.collider.GetComponentInParent<PlayerController>() != null)
                 {
-                    Debug.DrawLine(this.transform.position, hit.transform.position, Color.red);
+                    Debug.DrawLine(currentPos, hit.transform.position, Color.red);
                     return true;
                 }
 
@@ -203,13 +202,13 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Terrain"))
+        if (hit.collider.GetComponentInParent<PlayerController>() == null && !hit.collider.CompareTag("Terrain"))
         {
             Vector3 direVec = hit.normal;
             direVec.y = 0;
             this.transform.rotation = Quaternion.LookRotation(direVec);
         }
-        if (hit.collider.CompareTag("Player") && canDealDamage)
+        if (hit.collider.GetComponentInParent<PlayerController>() != null && canDealDamage)
         {
             canDealDamage = false;
             hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);

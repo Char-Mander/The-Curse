@@ -57,7 +57,9 @@ public class CursedGirlEnemy : Enemy
     {
         if (!locked)
         {
-            direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
+            Vector3 playerPos = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y + 1.4f, GameObject.FindGameObjectWithTag("Player").transform.position.z);
+            Vector3 currentPos = new Vector3(this.transform.position.x, this.transform.position.y + viewOffset, this.transform.position.z);
+            direToPlayer = playerPos - currentPos;
             distToPlayer = direToPlayer.magnitude;
             if (distToPlayer < detectDist && !hasSpoken)
             {
@@ -213,14 +215,14 @@ public class CursedGirlEnemy : Enemy
 
     public override void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Terrain"))
+        if (hit.collider.GetComponentInParent<PlayerController>() == null && !hit.collider.CompareTag("Terrain"))
         {
             Vector3 direVec = hit.normal;
             direVec.y = 0;
             this.transform.rotation = Quaternion.LookRotation(direVec);
             //Mover hacia el player
         }
-        else if (hit.collider.CompareTag("Player") && (GetPhase() == 3 && canAttack))
+        else if (hit.collider.GetComponentInParent<PlayerController>() != null && (GetPhase() == 3 && canAttack))
         {
             canAttack = false;
             ChangeLayerWeight(true);

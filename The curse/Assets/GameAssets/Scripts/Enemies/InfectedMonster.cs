@@ -35,7 +35,7 @@ public class InfectedMonster : Enemy
                     explosion = StartCoroutine(Explosion());
                 }
                 direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-                base.EnemyMovement(attackSpeed, direToPlayer.normalized); // base.EnemyMovement(attackSpeed, direToPlayer);
+                base.EnemyMovement(attackSpeed, direToPlayer.normalized);
                 AimPlayer();
             }
         }
@@ -61,14 +61,14 @@ public class InfectedMonster : Enemy
 
     public override void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Terrain"))
+        if (hit.collider.GetComponentInParent<PlayerController>() == null && !hit.collider.CompareTag("Terrain"))
         {
             Vector3 direVec = hit.normal;
             direVec.y = 0;
             this.transform.rotation = Quaternion.LookRotation(direVec);
             //Mover hacia el player
         }
-        if (hit.collider.CompareTag("Player") && (canAttack || explosionActivated))
+        if (hit.collider.GetComponentInParent<PlayerController>() != null && (canAttack || explosionActivated))
         {
             if (explosionActivated && !hasExploded)
             {
@@ -99,7 +99,7 @@ public class InfectedMonster : Enemy
             RaycastHit hit;
             if (Physics.Raycast(this.transform.position, direToPlayer.normalized, out hit, detectDist, lm))
             {
-                if (hit.collider.gameObject.CompareTag("Player"))
+                if (hit.collider.GetComponentInParent<PlayerController>() != null)
                 {
                     hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage*2);
                 }

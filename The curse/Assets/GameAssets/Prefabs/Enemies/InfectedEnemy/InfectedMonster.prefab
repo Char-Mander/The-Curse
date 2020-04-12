@@ -272,7 +272,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 93881b36c5724ee4c8cf80834f46eb1a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -366,6 +366,7 @@ MonoBehaviour:
   damage: 20
   attackSpeed: 8
   patrolSpeed: 7
+  viewOffset: 2
   weapon: {fileID: 0}
   projectile: {fileID: 0}
   posDisp: {fileID: 0}
@@ -2210,7 +2211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739810696444274077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.5, y: 0, z: 5.9}
+  m_LocalPosition: {x: 6.5, y: 0, z: 8.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1739810695316564265}
@@ -2240,7 +2241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739810696603352920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.7, y: 0, z: 15.3}
+  m_LocalPosition: {x: -6.88, y: 0, z: 15.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1739810695316564265}

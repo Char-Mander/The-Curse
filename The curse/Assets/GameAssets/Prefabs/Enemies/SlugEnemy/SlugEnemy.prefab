@@ -210,6 +210,7 @@ MonoBehaviour:
   damage: 10
   attackSpeed: 9
   patrolSpeed: 7
+  viewOffset: 1
   weapon: {fileID: 0}
   projectile: {fileID: 6630457299727349818, guid: 3084021cab599f1499022197daafe9d5,
     type: 3}
@@ -231,6 +232,7 @@ MonoBehaviour:
   - {fileID: 5939803447576731000}
   - {fileID: 5939803447344022038}
   - {fileID: 5939803446405711934}
+  anim: {fileID: 0}
   iniAttackDist: 4.59
 --- !u!1 &617602863699630559
 GameObject:
@@ -592,7 +594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869948634248071733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.287, z: 0.653}
+  m_LocalPosition: {x: 0, y: 0.41, z: 0.653}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 619613805968717867}
@@ -941,12 +943,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 2886728432923501032, guid: 148a00e03bbebf64d8ed899c95d26dfc,
+    - target: {fileID: 2886728433205455143, guid: 148a00e03bbebf64d8ed899c95d26dfc,
         type: 3}
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 2886728433205455143, guid: 148a00e03bbebf64d8ed899c95d26dfc,
+    - target: {fileID: 2886728432923501032, guid: 148a00e03bbebf64d8ed899c95d26dfc,
         type: 3}
       propertyPath: m_Layer
       value: 12

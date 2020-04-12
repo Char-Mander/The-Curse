@@ -91,6 +91,7 @@
     <Compile Include="Assets\GameAssets\Scripts\PlayerInteractions\QuestController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\PoisonedZone.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Puddle.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\RagdollMode.cs" />
     <Compile Include="Assets\GameAssets\Scripts\SceneController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Sounds\PlayerSoundsManager.cs" />
     <Compile Include="Assets\GameAssets\Scripts\TeleportButton.cs" />
