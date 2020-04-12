@@ -1187,6 +1187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textPanel: {fileID: 2198937272959518506}
   savePanel: {fileID: 1114589504}
+  bulletPanel: {fileID: 354600707}
+  bulletText: {fileID: 1532334670}
   questText: {fileID: 1107834134}
   sentenceOptionsPanel: {fileID: 8938891303814387388}
   optionsContent: {fileID: 8938891304419107596}

@@ -10,6 +10,8 @@ public class Puddle : MonoBehaviour
     private float damage;
     [SerializeField]
     private float force;
+    [SerializeField]
+    private float offset = 1.5f;
 
     private ParticleSystem particles;
     private Rigidbody rb;
@@ -19,7 +21,8 @@ public class Puddle : MonoBehaviour
     {
         particles = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
-        dir = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
+        Vector3 playerPos = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y + offset, GameObject.FindGameObjectWithTag("Player").transform.position.z); ;
+        dir = playerPos - transform.position;
     }
 
     // Update is called once per frame
@@ -31,7 +34,7 @@ public class Puddle : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         print("Colisiona con: " + other.name);
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.GetComponentInParent<PlayerController>() != null)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().LoseHealth(damage);
             particles.Play();
