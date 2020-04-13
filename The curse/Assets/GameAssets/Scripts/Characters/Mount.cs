@@ -153,6 +153,8 @@ public class Mount : MonoBehaviour, ICharacter
         player.transform.position = new Vector3(playerGetOffMountPos.position.x, playerGetOffMountPos.position.y, playerGetOffMountPos.position.z);
         player.transform.rotation = Quaternion.Euler(playerGetOffMountPos.rotation.x, playerGetOffMountPos.rotation.y, playerGetOffMountPos.rotation.z);
         player.transform.parent = null;
+        cController.Move(Vector3.zero);
+        StartCoroutine(WaitForSnort());
     }
 
     public bool IsLocked() { return isLocked; }
@@ -160,5 +162,11 @@ public class Mount : MonoBehaviour, ICharacter
     public void SetIsLocked(bool value)
     {
         isLocked = value;
+    }
+
+    IEnumerator WaitForSnort()
+    {
+        yield return new WaitForSeconds(1f);
+        playerSoundsManager.ManageMountSnort();
     }
 }
