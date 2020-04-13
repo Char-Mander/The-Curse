@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class FixedElementCanvasController : MonoBehaviour
 {   [SerializeField]
@@ -12,7 +11,7 @@ public class FixedElementCanvasController : MonoBehaviour
     [SerializeField]
     GameObject bulletPanel;
     [SerializeField]
-    TextMeshProUGUI bulletText;
+    Text bulletText;
     [SerializeField]
     Text questText;
     [SerializeField]
