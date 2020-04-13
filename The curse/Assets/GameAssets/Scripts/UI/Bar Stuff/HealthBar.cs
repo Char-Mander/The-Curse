@@ -1,26 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
     private float maxObjectHealth;
     private float currentObjectHealth;
-    private SimpleHealthBar simpleHealthBar;
+    private float currentFillHealth;
+    [SerializeField]
+    Image fillImage;
 
     // Start is called before the first frame update
     void Start()
     {
-        simpleHealthBar = GetComponent<SimpleHealthBar>();
-        simpleHealthBar.UpdateBar(currentObjectHealth, maxObjectHealth);
         UpdateHealthBar();
     }
     
     // Update is called once per frame
     public void UpdateHealthBar()
     {
-        simpleHealthBar.UpdateBar(currentObjectHealth, maxObjectHealth);
+        currentFillHealth = currentObjectHealth/ maxObjectHealth;
+        fillImage.fillAmount = currentFillHealth;
         BarColorByHealth();
+        if (GetComponentInChildren<Text>() != null) GetComponentInChildren<Text>().text = ((int)currentObjectHealth).ToString() + "/" + maxObjectHealth.ToString();
     }
 
     void BarColorByHealth()
@@ -28,15 +31,15 @@ public class HealthBar : MonoBehaviour
         float percentHealthValue = currentObjectHealth * 100/ maxObjectHealth;
         if(percentHealthValue < 33)
         {
-            simpleHealthBar.UpdateColor(Color.red);
+            fillImage.color = Color.red;
         }
         else if(percentHealthValue < 66)
         {
-            simpleHealthBar.UpdateColor(Color.yellow);
+            fillImage.color = Color.yellow;
         }
         else
         {
-            simpleHealthBar.UpdateColor(Color.green);
+            fillImage.color = Color.green;
         }
     }
 

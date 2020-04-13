@@ -33,7 +33,6 @@ public class Puddle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Colisiona con: " + other.name);
         if (other.gameObject.GetComponentInParent<PlayerController>() != null)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().LoseHealth(damage);

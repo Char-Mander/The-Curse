@@ -9754,11 +9754,6 @@ PrefabInstance:
       propertyPath: mechanismObj
       value: 
       objectReference: {fileID: 5165014018146074723}
-    - target: {fileID: 7833065964369211816, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: viewOffset
-      value: 1.79
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
 --- !u!1001 &4678854041748802205

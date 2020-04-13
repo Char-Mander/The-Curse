@@ -3484,6 +3484,7 @@ MonoBehaviour:
   damage: 30
   attackSpeed: 12
   patrolSpeed: 0
+  viewOffset: 1.79
   weapon: {fileID: 0}
   projectile: {fileID: 6630457299727349818, guid: 5249ec8b0d7d6454ebbc81c38d65bf39,
     type: 3}
@@ -5647,6 +5648,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886728433205348163, guid: 148a00e03bbebf64d8ed899c95d26dfc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2886728433205455143, guid: 148a00e03bbebf64d8ed899c95d26dfc,
         type: 3}

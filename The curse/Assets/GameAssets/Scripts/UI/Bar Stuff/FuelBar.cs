@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FuelBar : MonoBehaviour
 {
@@ -8,19 +9,22 @@ public class FuelBar : MonoBehaviour
      private float currentObjectFuel;
      [SerializeField]
      private Color red, orange, yellow, blue;
-     private SimpleHealthBar simpleFuelBar;
+     private float currentFillFuel;
+     [SerializeField]
+     Image fillImage;
 
-     void Start()
+    void Start()
      {
-         simpleFuelBar = GetComponent<SimpleHealthBar>();
-         simpleFuelBar.UpdateBar(currentObjectFuel, maxObjectFuel);
+        UpdateFuelBar();
      }
 
      // Update is called once per frame
      public void UpdateFuelBar()
      {
-         simpleFuelBar.UpdateBar(currentObjectFuel, maxObjectFuel);
-         BarColorByAmount();
+        currentFillFuel = currentObjectFuel / maxObjectFuel;
+        fillImage.fillAmount = currentFillFuel;
+        BarColorByAmount();
+        if (GetComponentInChildren<Text>() != null) GetComponentInChildren<Text>().text = ((int)currentObjectFuel).ToString() + "/" + maxObjectFuel.ToString();
      }
 
      void BarColorByAmount()
@@ -28,19 +32,19 @@ public class FuelBar : MonoBehaviour
          float percentFuelValue = currentObjectFuel * 100 / maxObjectFuel;
          if (percentFuelValue < 10)
          {
-             simpleFuelBar.UpdateColor(blue);
+            fillImage.color = blue;
          }
          else if(percentFuelValue < 33)
          {
-             simpleFuelBar.UpdateColor(yellow);
+            fillImage.color = yellow;
          }
          else if (percentFuelValue < 66)
          {
-             simpleFuelBar.UpdateColor(orange);
+            fillImage.color = orange;
          }
          else
          {
-             simpleFuelBar.UpdateColor(red);
+            fillImage.color = red;
          }
      }
 

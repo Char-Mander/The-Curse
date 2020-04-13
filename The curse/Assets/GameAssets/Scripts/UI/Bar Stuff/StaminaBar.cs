@@ -1,23 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
     private float maxObjectStamina;
     private float currentObjectStamina;
-    private SimpleHealthBar simpleStaminaBar;
+    private float currentFillStamina;
+    [SerializeField]
+    Image fillImage;
 
     void Start()
     {
-        simpleStaminaBar = GetComponent<SimpleHealthBar>();
-        simpleStaminaBar.UpdateBar(currentObjectStamina, maxObjectStamina);
+        UpdateStaminaBar();
     }
 
     // Update is called once per frame
     public void UpdateStaminaBar()
     {
-        simpleStaminaBar.UpdateBar(currentObjectStamina, maxObjectStamina);
+        currentFillStamina = currentObjectStamina / maxObjectStamina;
+        fillImage.fillAmount = currentFillStamina;
+        if (GetComponentInChildren<Text>() != null) GetComponentInChildren<Text>().text = ((int)currentObjectStamina).ToString() + "/" + maxObjectStamina.ToString();
     }
 
     public void SetMaxStamina(float max)
