@@ -11,8 +11,9 @@ public class WorldSpaceCanvasController : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
+        // playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        // playerTransform.position = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y + offset, GameObject.FindGameObjectWithTag("Player").transform.position.z);
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        playerTransform.position = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y + offset, GameObject.FindGameObjectWithTag("Player").transform.position.z);
     }
 
 

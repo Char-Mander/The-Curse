@@ -28,6 +28,7 @@ public class InteractWithObjects : MonoBehaviour
             currentInteractionObject = objectToInteract;
             InteractableObject interactableObj = objectToInteract.GetComponent<InteractableObject>();
             Dialogue dialogue = interactableObj.GetDialogue();
+            print("interactableobj: " + interactableObj.gameObject.name);
             //Hacemos que se actualice el texto del objeto en el panel del canvas
             if (interactableObj.IsNpc() && interactableObj.IsComplexNpc() && !FindObjectOfType<PlayerController>().IsOnAMount())
             {
@@ -37,6 +38,12 @@ public class InteractWithObjects : MonoBehaviour
             {
                 if (!GetComponent<PlayerController>().IsOnAMount()) interactableObj.GetComponent<Mount>().PlayerClimbsOn();
                 else interactableObj.GetComponent<Mount>().PlayerGetsOff();
+            }
+            else if (!objectToInteract.CompareTag("Mount") && FindObjectOfType<PlayerController>().IsOnAMount())
+            {
+                print("Vuelve a dejar que el objeto con el que puede interaccionar es solo su montura");
+                CanInteractAgain();
+                objectToInteract = FindObjectOfType<Mount>().gameObject;
             }
             else if(!FindObjectOfType<PlayerController>().IsOnAMount())
             {
@@ -51,10 +58,14 @@ public class InteractWithObjects : MonoBehaviour
                     StartCoroutine(WaitForActivateQuest());
                 }
             }
-            else if (FindObjectOfType<PlayerController>().IsOnAMount() && !objectToInteract.CompareTag("Mount"))
+            else
             {
-                objectToInteract = FindObjectOfType<Mount>().gameObject;
+               CanInteractAgain();
             }
+        }
+        else if (FindObjectOfType<PlayerController>().IsOnAMount())
+        {
+            objectToInteract = FindObjectOfType<Mount>().gameObject;
         }
     }
 
@@ -74,6 +85,11 @@ public class InteractWithObjects : MonoBehaviour
         canInteract = false;
         currentInteractionObject.GetComponent<InteractableObject>().setInteractable(false);
         yield return new WaitForSeconds(currentInteractionObject.GetComponent<InteractableObject>().GetInteractionTime());
+        CanInteractAgain();
+    }
+
+    void CanInteractAgain()
+    {
         canInteract = true;
         currentInteractionObject.GetComponent<InteractableObject>().setInteractable(true);
         currentInteractionObject = null;
