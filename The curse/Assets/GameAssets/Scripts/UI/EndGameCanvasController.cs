@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class EndGameCanvasController : MonoBehaviour
 {
@@ -12,9 +12,9 @@ public class EndGameCanvasController : MonoBehaviour
     [SerializeField]
     private GameObject scorePanel;
     [SerializeField]
-    TextMeshProUGUI defeatedEnemiesText;
+    Text defeatedEnemiesText;
     [SerializeField]
-    TextMeshProUGUI deathsText;
+    Text deathsText;
     [SerializeField]
     private GameObject decisionPanel;
     [SerializeField]
@@ -49,7 +49,7 @@ public class EndGameCanvasController : MonoBehaviour
         if (decisionPanel.activeInHierarchy)
         {
             string decisionText = GameManager.instance.GetDecision() > 0 ? " salvar " : " matar ";
-            decisionPanel.GetComponentInChildren<TextMeshProUGUI>().text = "Decidiste" + decisionText + "a la chica maldita";
+            decisionPanel.GetComponentInChildren<Text>().text = "Decidiste" + decisionText + "a la chica maldita";
         }
         
         defeatedEnemiesText.text = "Enemigos derrotados:  " + GameManager.instance.GetDefeatedEnemies().ToString();
