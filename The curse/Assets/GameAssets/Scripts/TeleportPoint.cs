@@ -22,6 +22,7 @@ public class TeleportPoint : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && !usingTeleport)
             {
                 FindObjectOfType<TeleportController>().ShowTP();
+                if (FindObjectOfType<PlayerController>().IsOnAMount()) FindObjectOfType<Mount>().PlayerGetsOff();
                 usingTeleport = true;
             }
         }

@@ -64,11 +64,11 @@ public class TeleportController : MonoBehaviour
 
     public void Teleport(int index)
     {
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        print("Posición antes de teleportarlo: (" + player.transform.position.x + ", " + player.transform.position.y + ", " + player.transform.position.z + ")");
+        
         Vector3 finalPos = new Vector3(tpList[index].transform.position.x, tpList[index].transform.position.y, tpList[index].transform.position.z-2);
         player.transform.position = finalPos;
-        print("Posición después de teleportarlo: (" + player.transform.position.x + ", " + player.transform.position.y + ", " + player.transform.position.z + ")");
     }
 
     public int GetIndexOfTP(TeleportPoint tp)
