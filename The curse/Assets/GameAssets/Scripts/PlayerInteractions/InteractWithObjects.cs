@@ -10,68 +10,78 @@ public class InteractWithObjects : MonoBehaviour
     private GameObject currentInteractionObject;
     [SerializeField]
     private Transform interactionZone;
+    public List<GameObject> objectsToInteract = new List<GameObject>();
     //Tiempo de espera para volver a interaccionar con un objeto
     private bool canInteract=true;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     public void InteractWithGameObject()
     {
-        if (objectToInteract != null && objectToInteract.GetComponent<InteractableObject>().isInteractable() 
-            && canInteract && !FindObjectOfType<DialogueManager>().IsOnADialogue())
+        if(objectsToInteract.Count > 0)
         {
-            //Cogemos el objeto
-            currentInteractionObject = objectToInteract;
-            InteractableObject interactableObj = objectToInteract.GetComponent<InteractableObject>();
-            Dialogue dialogue = interactableObj.GetDialogue();
-            print("interactableobj: " + interactableObj.gameObject.name);
-            //Hacemos que se actualice el texto del objeto en el panel del canvas
-            if (interactableObj.IsNpc() && interactableObj.IsComplexNpc() && !FindObjectOfType<PlayerController>().IsOnAMount())
+            //Cogemos la referencia del objeto más cercano
+            GetNearest();
+            print("Nearest: " + objectToInteract.name);
+            if (objectToInteract != null && objectToInteract.GetComponent<InteractableObject>().isInteractable() 
+            && canInteract && !FindObjectOfType<DialogueManager>().IsOnADialogue())
             {
-                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
-            }
-            else if (interactableObj.CompareTag("Mount"))
-            {
-                if (!GetComponent<PlayerController>().IsOnAMount()) interactableObj.GetComponent<Mount>().PlayerClimbsOn();
-                else interactableObj.GetComponent<Mount>().PlayerGetsOff();
-            }
-            else if (!objectToInteract.CompareTag("Mount") && FindObjectOfType<PlayerController>().IsOnAMount())
-            {
-                print("Vuelve a dejar que el objeto con el que puede interaccionar es solo su montura");
-                CanInteractAgain();
-                objectToInteract = FindObjectOfType<Mount>().gameObject;
-            }
-            else if(!FindObjectOfType<PlayerController>().IsOnAMount())
-            {
-                string chosenText = (dialogue != null) ? dialogue.GetSentences()[(int)Random.Range(0, dialogue.GetSentences().Count)].sentence
+                currentInteractionObject = objectToInteract;
+                InteractableObject interactableObj = objectToInteract.GetComponent<InteractableObject>();
+                Dialogue dialogue = interactableObj.GetDialogue();
+                print("interactableobj: " + interactableObj.gameObject.name);
+                //Hacemos que se actualice el texto del objeto en el panel del canvas
+                if (interactableObj.IsNpc() && interactableObj.IsComplexNpc() && !FindObjectOfType<PlayerController>().IsOnAMount())
+                {
+                    FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                }
+                else if (interactableObj.CompareTag("Mount"))
+                {
+                    if (!FindObjectOfType<PickUpObjects>().IsPickingAnObject())
+                    {
+                        if (!GetComponent<PlayerController>().IsOnAMount()) interactableObj.GetComponent<Mount>().PlayerClimbsOn();
+                        else interactableObj.GetComponent<Mount>().PlayerGetsOff();
+                    }
+                }
+                else
+                {
+                    string chosenText = (dialogue != null) ? dialogue.GetSentences()[(int)Random.Range(0, dialogue.GetSentences().Count)].sentence
                                     : interactableObj.GetObjectText();
-                if (interactableObj.IsNpc()) interactableObj.GetComponent<NPC>().StartTalking();
-                FindObjectOfType<FixedElementCanvasController>().UpdateTextPanel(chosenText, interactableObj.IsNpc(),
+                    if (interactableObj.IsNpc()) interactableObj.GetComponent<NPC>().StartTalking();
+                    FindObjectOfType<FixedElementCanvasController>().UpdateTextPanel(chosenText, interactableObj.IsNpc(),
                     (dialogue!=null) ? dialogue.GetName() : null);
 
-                if (currentInteractionObject.GetComponentInChildren<Quest>() != null && !currentInteractionObject.GetComponentInChildren<Quest>().HasBeenTriggered())
-                {
-                    StartCoroutine(WaitForActivateQuest());
+                    if (currentInteractionObject.GetComponentInChildren<Quest>() != null && !currentInteractionObject.GetComponentInChildren<Quest>().HasBeenTriggered())
+                    {
+                        StartCoroutine(WaitForActivateQuest());
+                    }
                 }
             }
-            else
-            {
-               CanInteractAgain();
-            }
-        }
-        else if (FindObjectOfType<PlayerController>().IsOnAMount())
-        {
-            objectToInteract = FindObjectOfType<Mount>().gameObject;
         }
     }
 
-    public void SetGameObjectToInteract(GameObject obj)
+    public void GetNearest()
     {
-        this.objectToInteract = obj;
+        float minDistance = Vector3.Distance(interactionZone.position, objectsToInteract[0].transform.position);
+        objectToInteract = objectsToInteract[0];
+        if (objectsToInteract.Count > 1)
+            for(int i = 1; i<objectsToInteract.Count; i++)
+            {
+                if(Vector3.Distance(interactionZone.position, objectsToInteract[i].transform.position) < minDistance)
+                {
+                    minDistance = Vector3.Distance(interactionZone.position, objectsToInteract[i].transform.position);
+                    objectToInteract = objectsToInteract[i];
+                }
+            }
+    }
+
+    public void AddGameObjectToInteract(GameObject obj)
+    {
+        if(!objectsToInteract.Contains(obj))  objectsToInteract.Add(obj);
+    }
+
+    public void RemoveGameObjectToInteract(GameObject obj)
+    {
+        objectsToInteract.Remove(obj);
     }
 
     IEnumerator WaitForActivateQuest()

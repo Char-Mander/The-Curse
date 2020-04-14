@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb669f504e5088a42bf052e56a70bf4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 1.5
   interactionPanel: {fileID: 798824354}
 --- !u!1 &798824354
 GameObject:
@@ -6831,7 +6832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectText: 
-  interactionTime: 1
+  interactionTime: 0.5
   isNpc: 0
   complexNpc: 0
 --- !u!1 &1444026179322899540

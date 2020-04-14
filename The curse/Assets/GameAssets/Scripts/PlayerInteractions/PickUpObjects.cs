@@ -5,46 +5,48 @@ using UnityEngine;
 public class PickUpObjects : MonoBehaviour
 {
     [SerializeField]
-	private GameObject ObjectToPickup;
+	private GameObject objectToPickup;
     [SerializeField]
-    private GameObject PickedObject;
+    private GameObject pickedObject;
     [SerializeField]
     private Transform interactionZone;
     // Update is called once per frame
     public void PickOrDropObject()
     {
-        if(ObjectToPickup != null && ObjectToPickup.GetComponent<PickableObject>().isPickable())
+        if(objectToPickup != null && objectToPickup.GetComponent<PickableObject>().isPickable() && !FindObjectOfType<PlayerController>().IsOnAMount())
 		{
                 //Cogemos el objeto
-				PickedObject = ObjectToPickup;
+				pickedObject = objectToPickup;
 				//Decimos que ya no se puede coger (pues estamos cogiéndolo)
-				PickedObject.GetComponent<PickableObject>().setPickable(false);
+				pickedObject.GetComponent<PickableObject>().setPickable(false);
                 //Lo hacemos hijo de la interactionZone y le asignamos la posición
-				PickedObject.transform.SetParent(interactionZone);
-				PickedObject.transform.position = interactionZone.position;
+				pickedObject.transform.SetParent(interactionZone);
+				pickedObject.transform.position = interactionZone.position;
                 //Quitamos las físicas de objeto para que no caiga ni cambie de posición
-				PickedObject.GetComponent<Rigidbody>().useGravity = false;
-				PickedObject.GetComponent<Rigidbody>().isKinematic = true;
+				pickedObject.GetComponent<Rigidbody>().useGravity = false;
+				pickedObject.GetComponent<Rigidbody>().isKinematic = true;
                 GetComponent<PlayerController>().GetActiveWeaponAndCrossHair();
                 GetComponent<PlayerController>().EnableWeapon(false);
                 
 		}
-        else if(PickedObject != null)
+        else if(pickedObject != null && !FindObjectOfType<PlayerController>().IsOnAMount())
 		{
 				//Decimos que se puede volver a coger
-				PickedObject.GetComponent<PickableObject>().setPickable(true);
+				pickedObject.GetComponent<PickableObject>().setPickable(true);
 				//Le quitamos el padre
-				PickedObject.transform.SetParent(null);
+				pickedObject.transform.SetParent(null);
 				//Volvemos a poner las físicas por defecto
-				PickedObject.GetComponent<Rigidbody>().useGravity = true;
-				PickedObject.GetComponent<Rigidbody>().isKinematic = false;
-				PickedObject = null;
+				pickedObject.GetComponent<Rigidbody>().useGravity = true;
+				pickedObject.GetComponent<Rigidbody>().isKinematic = false;
+				pickedObject = null;
                 GetComponent<PlayerController>().EnableWeapon(true);
         }
     }
 
     public void SetObjectToPickUp(GameObject obj)
     {
-        this.ObjectToPickup = obj;
+        this.objectToPickup = obj;
     }
+
+    public bool IsPickingAnObject() { return pickedObject != null; }
 }
