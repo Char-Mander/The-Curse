@@ -352,4 +352,6 @@ public class CursedGirlEnemy : Enemy
         GetComponent<Health>().LoseHealth(1000);
     }
 
+    public bool HasBeenActivated() { return activation; }
+
 }

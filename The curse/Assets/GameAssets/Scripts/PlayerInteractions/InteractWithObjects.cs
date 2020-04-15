@@ -36,7 +36,7 @@ public class InteractWithObjects : MonoBehaviour
                 }
                 else if (interactableObj.CompareTag("Mount"))
                 {
-                    if (!FindObjectOfType<PickUpObjects>().IsPickingAnObject())
+                    if (!FindObjectOfType<PickUpObjects>().IsPickingAnObject() && FindObjectOfType<Mount>().IsUnlocked())
                     {
                         if (!GetComponent<PlayerController>().IsOnAMount()) interactableObj.GetComponent<Mount>().PlayerClimbsOn();
                         else interactableObj.GetComponent<Mount>().PlayerGetsOff();

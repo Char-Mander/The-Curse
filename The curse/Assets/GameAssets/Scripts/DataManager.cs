@@ -13,7 +13,9 @@ public class DataManager : MonoBehaviour
     private string decisionStateKey = "Decision State";
     private string teleportPointKey = "Teleport Point";
     private string weaponUnlockedKey = "Weapon";
-    private string weaponAmmo = "Ammo";
+    private string weaponAmmoKey = "Ammo";
+    private string tutorialKey = "Tutorial";
+    private string mountLockedKey = "Mount";
 
     public void LoadData()
     {
@@ -57,13 +59,25 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    public bool LoadTutorialPoint(int index)
+    {
+        if (PlayerPrefs.HasKey(tutorialKey + index.ToString())) return true;
+        else return false;
+    }
+
+    public bool LoadUnlockedMount()
+    {
+        if (PlayerPrefs.HasKey(mountLockedKey)) return true;
+        else return false;
+    }
+
     public void LoadWeaponsAmmo(int size)
     {
         for (int i = 0; i < size; i++)
         {
             if (FindObjectOfType<WeaponController>().HasAmmo(i))
             {
-                if (PlayerPrefs.HasKey(weaponAmmo + i.ToString())) FindObjectOfType<WeaponController>().SetWeaponAmmo(i, PlayerPrefs.GetInt(weaponAmmo + i.ToString()));
+                if (PlayerPrefs.HasKey(weaponAmmoKey + i.ToString())) FindObjectOfType<WeaponController>().SetWeaponAmmo(i, PlayerPrefs.GetInt(weaponAmmoKey + i.ToString()));
                 else FindObjectOfType<WeaponController>().SetWeaponAmmo(i, FindObjectOfType<WeaponController>().GetWeaponByIndex(i).GetMaxAmmo());
             }
         }
@@ -73,8 +87,21 @@ public class DataManager : MonoBehaviour
     {
         for (int i = 0; i < size; i++)
         {
-            if (FindObjectOfType<WeaponController>().HasAmmo(i)) PlayerPrefs.SetInt(weaponAmmo + i.ToString(), FindObjectOfType<WeaponController>().GetWeaponByIndex(i).GetCurrentAmmo());
+            if (FindObjectOfType<WeaponController>().HasAmmo(i)) PlayerPrefs.SetInt(weaponAmmoKey + i.ToString(), FindObjectOfType<WeaponController>().GetWeaponByIndex(i).GetCurrentAmmo());
         }
+    }
+
+    public void SaveTutorialPoint(int index)
+    {
+        //Guarda como clave el "Teleport Point + index"
+        PlayerPrefs.SetString(tutorialKey + (index).ToString(), "True");
+        PlayerPrefs.Save();
+    }
+
+    public void SaveUnlockedMount()
+    {
+        PlayerPrefs.SetString(mountLockedKey, "True");
+        PlayerPrefs.Save();
     }
 
     public void SaveHealth(float currentHealth)

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Mount : MonoBehaviour, ICharacter
-{       //TODO revisar por qué solo se puede bajar 1 vez de la montura
+{       
+
     private const float gravity = -9.8f;
 
     [SerializeField]
@@ -29,6 +30,7 @@ public class Mount : MonoBehaviour, ICharacter
     private float yaw;
     private bool hasSnorted = false;
     private bool isLocked;
+    private bool isUnlocked;
     Animator anim;
 
     private void Start()
@@ -38,6 +40,7 @@ public class Mount : MonoBehaviour, ICharacter
         playerSoundsManager = player.GetComponent<PlayerSoundsManager>();
         cController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        isUnlocked = GameManager.instance.data.LoadUnlockedMount();
     }
 
     private void Update()
@@ -169,4 +172,8 @@ public class Mount : MonoBehaviour, ICharacter
         yield return new WaitForSeconds(1f);
         playerSoundsManager.ManageMountSnort();
     }
+
+    public bool IsUnlocked() { return isUnlocked; }
+
+    public void SetUnlocked(bool value) { isUnlocked = value; }
 }

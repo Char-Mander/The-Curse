@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6427240254868108218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6427240254868108219}
+  - component: {fileID: 6427240254868108216}
+  - component: {fileID: 6427240254868108217}
+  - component: {fileID: 6427240254868108222}
+  m_Layer: 0
+  m_Name: Tutorial1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6427240254868108219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427240254868108218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -152.6, y: -8.7, z: -197.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6427240254868108216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427240254868108218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c014f8a4c73cbd14697c3d366e8bfac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Tutorial inicial
+  canPlayerChoose: 0
+  sentencesList:
+  - sentence: "Puedes mirar alrededor con el rat\xF3n."
+    options: []
+  - sentence: Para moverte, usa las flechas de movimiento, o, en su defecto, "ASDF"
+    options: []
+  - sentence: Para saltar, pulsa la tecla "Espacio".
+    options: []
+  - sentence: "Para correr, deja pulsado \"Shift\". Correr consume energ\xEDa. "
+    options: []
+  - sentence: "La cantidad de energ\xEDa que tienes se reflejar\xE1 en la barra amarilla
+      de arriba a la izquierda."
+    options: []
+  - sentence: Justo encima se muestra una barra verde, que indica la cantidad de vida
+      que tienes actualmente.
+    options: []
+  - sentence: "Es posible que, para ciertas armas especiales, se muestre una barra
+      de combustible debajo de la barra de energ\xEDa. se muestre una barra de "
+    options: []
+  - sentence: "Al lado de las barras se encuentra informaci\xF3n sobre la munici\xF3n
+      actual del arma que llevas equipada (en caso de que esta necesite munici\xF3n)."
+    options: []
+--- !u!135 &6427240254868108217
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427240254868108218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 24.4
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6427240254868108222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427240254868108218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f4117f1d70ab540a09755c35dec617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

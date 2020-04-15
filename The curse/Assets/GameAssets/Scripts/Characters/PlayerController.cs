@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour, ICharacter
 
     private void CallTheMount()
     {
-        if (Input.GetKeyDown(KeyCode.X) && canWhistleAgain)
+        if (Input.GetKeyDown(KeyCode.X) && canWhistleAgain && !FindObjectOfType<CursedGirlEnemy>().HasBeenActivated() && FindObjectOfType<Mount>().IsUnlocked())
         {
             soundsManager.ManageWhistleSound();
             mountWhistleCall = true;

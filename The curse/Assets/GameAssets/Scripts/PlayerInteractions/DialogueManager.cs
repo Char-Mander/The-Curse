@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
         if (!isOnADialogue)
         {
             FindObjectOfType<PlayerController>().SetIsLocked(true);
+            FindObjectOfType<Mount>().SetIsLocked(true);
             isOnADialogue = true;
             sentences.Clear();
             this.dialogue = dialogue;
@@ -61,6 +62,7 @@ public class DialogueManager : MonoBehaviour
     {
         isOnADialogue = false;
         FindObjectOfType<PlayerController>().SetIsLocked(false);
+        FindObjectOfType<Mount>().SetIsLocked(false);
         if (Cursor.lockState != CursorLockMode.Locked) Cursor.lockState = CursorLockMode.Locked;
 
         if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && !dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
