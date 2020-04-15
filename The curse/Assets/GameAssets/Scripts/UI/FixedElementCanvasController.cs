@@ -109,6 +109,7 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void TeleportPointsDeployment(TeleportPoint[] list)
     {
+        Cursor.visible = true;
         EnableOrDisableOptionsPanel(true);
         FindObjectOfType<TeleportController>().SetTeleportOptionsAvailable(true);
         for (int i = 0; i < list.Length; i++)
@@ -129,6 +130,7 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void TeleportOption(int index)
     {
+        Cursor.visible = false;
         EnableOrDisableOptionsPanel(false);
         Cursor.lockState = CursorLockMode.Locked;
         FindObjectOfType<TeleportController>().HideTP();
@@ -139,6 +141,7 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void UpdateSentenceOptionsPanel(Sentence s, int index)
     {
+        Cursor.visible = true;
         sAux = s;
         sentenceIndex = index;
         EnableOrDisableOptionsPanel(true);
@@ -154,6 +157,7 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void ChooseAnOption(int index)
     {
+        Cursor.visible = false;
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         FindObjectOfType<DecisionState>().AddOrSubtractToBalance(sAux.options[index].decisionBalance);
         EnableOrDisableOptionsPanel(false);
