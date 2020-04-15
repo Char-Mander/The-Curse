@@ -7498,7 +7498,7 @@ PrefabInstance:
     - target: {fileID: 6427240254868108216, guid: 381747386ab73c840a53f0a69711d807,
         type: 3}
       propertyPath: name
-      value: ', vida, y armas'
+      value: "Tutorial munici\xF3n, vida, y armas"
       objectReference: {fileID: 0}
     - target: {fileID: 6427240254868108217, guid: 381747386ab73c840a53f0a69711d807,
         type: 3}
@@ -9445,7 +9445,7 @@ PrefabInstance:
     - target: {fileID: 6427240254868108216, guid: 381747386ab73c840a53f0a69711d807,
         type: 3}
       propertyPath: sentencesList.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6427240254868108216, guid: 381747386ab73c840a53f0a69711d807,
         type: 3}
@@ -9502,6 +9502,11 @@ PrefabInstance:
         type: 3}
       propertyPath: name
       value: Tutorial movimiento y armas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427240254868108216, guid: 381747386ab73c840a53f0a69711d807,
+        type: 3}
+      propertyPath: sentencesList.Array.data[9].sentence
+      value: "Para disparar, pulsa el bot\xF3n izquierdo del rat\xF3n."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 381747386ab73c840a53f0a69711d807, type: 3}
