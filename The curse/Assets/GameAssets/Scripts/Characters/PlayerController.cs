@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour, ICharacter
     private float rotationSpeed;
     [SerializeField]
     private float jumpForce;
+    [SerializeField]
+    private GameObject FPSCamera;
 
 
     //Variables privadas
@@ -145,7 +147,7 @@ public class PlayerController : MonoBehaviour, ICharacter
 
             pitch = Mathf.Clamp(pitch, -60, 60);
 
-            Camera.main.transform.localRotation = Quaternion.Euler(pitch + iniMouseY, 0, 0);
+            FPSCamera.transform.localRotation = Quaternion.Euler(pitch + iniMouseY, 0, 0);
             transform.rotation = Quaternion.Euler(0, yaw + iniRotationY, 0);
         }
         else if (Input.GetAxis("Mouse Y") != 0)
