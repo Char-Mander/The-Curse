@@ -1447,8 +1447,7 @@ MonoBehaviour:
   moveSpeed: 0
   head: {fileID: 7370790730369098663}
   waitingTime: 0
-  wayPoints:
-  - {fileID: 7370790730369098661}
+  wayPoints: []
 --- !u!195 &141775829497299762
 NavMeshAgent:
   m_ObjectHideFlags: 0

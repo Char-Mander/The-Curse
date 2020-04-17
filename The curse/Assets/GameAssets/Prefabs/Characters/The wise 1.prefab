@@ -1260,8 +1260,7 @@ MonoBehaviour:
   moveSpeed: 0
   head: {fileID: 1485503993260671390}
   waitingTime: 0
-  wayPoints:
-  - {fileID: 1485503993260671410}
+  wayPoints: []
 --- !u!135 &1485503993393249400
 SphereCollider:
   m_ObjectHideFlags: 0

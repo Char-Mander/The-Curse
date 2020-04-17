@@ -17,8 +17,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     private float rotationSpeed;
     [SerializeField]
     private float jumpForce;
-    [SerializeField]
-    private GameObject FPSCamera;
+    public GameObject FPSCamera;
 
 
     //Variables privadas
@@ -98,7 +97,7 @@ public class PlayerController : MonoBehaviour, ICharacter
 
     private void CallTheMount()
     {
-        if (Input.GetKeyDown(KeyCode.X) && canWhistleAgain && !FindObjectOfType<CursedGirlEnemy>().HasBeenActivated() && FindObjectOfType<Mount>().IsUnlocked())
+        if (Input.GetKeyDown(KeyCode.X) && canWhistleAgain && !FindObjectOfType<CursedGirlEnemy>().activation && FindObjectOfType<Mount>().IsUnlocked())
         {
             soundsManager.ManageWhistleSound();
             mountWhistleCall = true;
@@ -172,6 +171,10 @@ public class PlayerController : MonoBehaviour, ICharacter
                 if (!transform.GetComponentInChildren<ParticleShoot>().IsShooting())
                     transform.GetComponentInChildren<ParticleShoot>().setShooting(true);
                 transform.GetComponentInChildren<ParticleShoot>().Shoot();
+            }
+            else if(FindObjectOfType<WeaponController>().currentWeapon.GetCurrentAmmo() == 0)
+            {
+                FindObjectOfType<FixedElementCanvasController>().ShowOutOfAmmoPanel();
             }
         }
         else if (Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.T))

@@ -9,6 +9,8 @@ public class FixedElementCanvasController : MonoBehaviour
     [SerializeField]
     GameObject savePanel;
     [SerializeField]
+    GameObject outOfAmmoPanel;
+    [SerializeField]
     GameObject bulletPanel;
     [SerializeField]
     Text bulletText;
@@ -56,6 +58,7 @@ public class FixedElementCanvasController : MonoBehaviour
         npcNamePanel.SetActive(false);
         textPanel.SetActive(false);
         savePanel.SetActive(false);
+        outOfAmmoPanel.SetActive(false);
         bulletPanel.SetActive(false);
         sentenceOptionsPanel.SetActive(false);
         fuelBarUI.SetActive(false);
@@ -99,7 +102,13 @@ public class FixedElementCanvasController : MonoBehaviour
     public void ShowSavePanel()
     {
         savePanel.SetActive(true);
-        StartCoroutine(HideSavePanel());
+        StartCoroutine(HideTemporaryPanel(savePanel));
+    }
+
+    public void ShowOutOfAmmoPanel()
+    {
+        outOfAmmoPanel.SetActive(true);
+        StartCoroutine(HideTemporaryPanel(outOfAmmoPanel));
     }
 
     public void UpdateQuestPanel(string text)
@@ -162,7 +171,7 @@ public class FixedElementCanvasController : MonoBehaviour
         FindObjectOfType<DecisionState>().AddOrSubtractToBalance(sAux.options[index].decisionBalance);
         EnableOrDisableOptionsPanel(false);
         FindObjectOfType<DialogueManager>().DisplayNextSentence(index + 1);
-        FindObjectOfType<CursedGirlEnemy>().ApplyDecisionState();
+        FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.DECISION;
     }
 
     public void EnableOrDisableOptionsPanel(bool value)
@@ -246,10 +255,10 @@ public class FixedElementCanvasController : MonoBehaviour
         }
     }
 
-    IEnumerator HideSavePanel()
+    IEnumerator HideTemporaryPanel(GameObject panel)
     {
         yield return new WaitForSeconds(0.5f);
-        savePanel.SetActive(false);
+        panel.SetActive(false);
     }
 
     public float GetTextTime()

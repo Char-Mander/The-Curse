@@ -71,7 +71,10 @@
     <Compile Include="Assets\GameAssets\Scripts\CheckPoint.cs" />
     <Compile Include="Assets\GameAssets\Scripts\CheckPointController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\DataManager.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Enemies\CursedGirlAttack.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Enemies\CursedGirlDecision.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Enemies\CursedGirlEnemy.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Enemies\CursedGirlTalk.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Enemies\InfectedMonster.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Enemies\SlugEnemy.cs" />

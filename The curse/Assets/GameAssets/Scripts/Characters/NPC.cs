@@ -30,16 +30,15 @@ public class NPC : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
-        StartCoroutine(WaitOnWP());
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        Init();
+        if (wayPoints.Count > 0) Init();
     }
     
     // Update is called once per frame
     void Update()
     {
-       Patrol();
+        if(wayPoints.Count > 0) Patrol();
     }
 
     public void Init()

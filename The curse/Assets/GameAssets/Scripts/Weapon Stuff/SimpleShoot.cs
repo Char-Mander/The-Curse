@@ -75,7 +75,7 @@ public class SimpleShoot : MonoBehaviour, IWeapon
             GameObject tempFlash;
             GameObject bullet = Instantiate(bulletPrefab, posDisp.position, posDisp.rotation);
             Vector3 dire = new Vector3();
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            Ray ray = new Ray(FindObjectOfType<PlayerController>().FPSCamera.transform.position, FindObjectOfType<PlayerController>().FPSCamera.transform.forward);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, lm))
             {
@@ -89,7 +89,7 @@ public class SimpleShoot : MonoBehaviour, IWeapon
             }
             else
             {
-                dire = Camera.main.transform.forward * 1000;
+                dire = FindObjectOfType<PlayerController>().FPSCamera.transform.forward * 1000;
             }
             bullet.transform.rotation = Quaternion.LookRotation(dire.normalized);
             bullet.GetComponent<Rigidbody>().AddForce(dire.normalized * shotPower, ForceMode.Impulse);
