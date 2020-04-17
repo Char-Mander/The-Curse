@@ -121,7 +121,7 @@ public class Mount : MonoBehaviour, ICharacter
                 yaw += mountRotationSpeed * Input.GetAxis("Mouse X");
                 pitch = Mathf.Clamp(pitch, -60, 60);
 
-                Camera.main.transform.localRotation = Quaternion.Euler(pitch + iniMouseY, 0, 0);
+                FindObjectOfType<PlayerController>().FPSCamera.transform.localRotation = Quaternion.Euler(pitch + iniMouseY, 0, 0);
                 transform.rotation = Quaternion.Euler(0, yaw + mountRotationSpeed, 0);
             }
             else if (Input.GetAxis("Mouse Y") != 0)

@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (!isOnADialogue)
         {
+            print("Empieza el diálogo");
             FindObjectOfType<PlayerController>().SetIsLocked(true);
             FindObjectOfType<Mount>().SetIsLocked(true);
             isOnADialogue = true;
@@ -33,13 +34,14 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence(int index)
     {
-        FindObjectOfType<NPC>().StartTalking();
+        dialogue.GetComponent<NPC>().StartTalking();
         StartCoroutine(WaitForDisplay(index));
     }
 
     IEnumerator WaitForDisplay(int index)
     {   if (index < dialogue.GetSentences().Count)
         {
+            print("Pone el display de la frase " + index);
             this.index = index;
             Sentence s = sentences.Dequeue();
             float textTime = s.sentence.Length > 30 ? (float)s.sentence.Length / 20 : 1f;
@@ -62,15 +64,20 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
+        print("Termina el diálogo");
         isOnADialogue = false;
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         FindObjectOfType<Mount>().SetIsLocked(false);
-        if (Cursor.lockState != CursorLockMode.Locked) Cursor.lockState = CursorLockMode.Locked;
+        if (FindObjectOfType<PlayerController>().IsOnAMount()) FindObjectOfType<Mount>().PlayerClimbsOn();
 
-       /* if (dialogue.gameObject.GetComponent<CursedGirlEnemy>() && !dialogue.gameObject.GetComponent<CursedGirlEnemy>().GetHasSpoken())
+        if (Cursor.lockState != CursorLockMode.Locked) Cursor.lockState = CursorLockMode.Locked;
+        
+        if (dialogue.gameObject.GetComponent<CursedGirlEnemy>())
         {
-            dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
-        }*/
+            print("Pone el modo ataque en el diálogo");
+            FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.ATTACKING;
+            //dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
+        }
         else if (dialogue.gameObject.GetComponentInChildren<Quest>() != null && !dialogue.gameObject.GetComponentInChildren<Quest>().HasBeenTriggered())
         {
             dialogue.gameObject.GetComponentInChildren<Quest>().ActivateQuest();

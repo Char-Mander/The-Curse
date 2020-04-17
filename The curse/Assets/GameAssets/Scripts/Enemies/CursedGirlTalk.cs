@@ -25,6 +25,7 @@ public class CursedGirlTalk : MonoBehaviour
         {
             dialogueQueue.Enqueue(dialogue);
         }
+        print("Dialogues: " + dialogueQueue.Count);
         foreach (PlayableAsset playable in playables)
         {
             playablesQueue.Enqueue(playable);
@@ -37,7 +38,8 @@ public class CursedGirlTalk : MonoBehaviour
     {
         if(!cursedGirl.locked && cursedGirl.activation && cursedGirl.cursedGirlState == CursedGirlStates.TALKING)
         {
-            if(cursedGirl.enemyCanvas.activeInHierarchy) cursedGirl.enemyCanvas.SetActive(false);
+            print("Está en el talk ahora");
+            if (cursedGirl.enemyCanvas.activeInHierarchy) cursedGirl.enemyCanvas.SetActive(false);
             FindObjectOfType<PlayerController>().SetIsLocked(true);
             FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(false);
             if (canTalk)
@@ -62,11 +64,11 @@ public class CursedGirlTalk : MonoBehaviour
     {
         director.stopped += OnPlayableDirectorStopped;
         director.Play();
-        if (dialogueQueue.Count > 0)
+       /* if (dialogueQueue.Count > 0)
         {
             currentDialogue = dialogueQueue.Dequeue();
             FindObjectOfType<DialogueManager>().StartDialogue(dialogueQueue.Dequeue());
-        }
+        }*/
     }
 
     void OnPlayableDirectorStopped(PlayableDirector aDirector)
@@ -74,6 +76,11 @@ public class CursedGirlTalk : MonoBehaviour
         if (director == aDirector)
         {
             director.Stop();
+            if (dialogueQueue.Count > 0)
+            {
+                currentDialogue = dialogueQueue.Dequeue();
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogueQueue.Dequeue());
+            }
             GetComponent<Health>().SetGodMode(false);
             if (!currentDialogue.CanPlayerChoose(0))
             {

@@ -21,14 +21,12 @@ public class InteractWithObjects : MonoBehaviour
         {
             //Cogemos la referencia del objeto más cercano
             GetNearest();
-            print("Nearest: " + objectToInteract.name);
             if (objectToInteract != null && objectToInteract.GetComponent<InteractableObject>().isInteractable() 
             && canInteract && !FindObjectOfType<DialogueManager>().IsOnADialogue())
             {
                 currentInteractionObject = objectToInteract;
                 InteractableObject interactableObj = objectToInteract.GetComponent<InteractableObject>();
                 Dialogue dialogue = interactableObj.GetDialogue();
-                print("interactableobj: " + interactableObj.gameObject.name);
                 //Hacemos que se actualice el texto del objeto en el panel del canvas
                 if (interactableObj.IsNpc() && interactableObj.IsComplexNpc() && !FindObjectOfType<PlayerController>().IsOnAMount())
                 {

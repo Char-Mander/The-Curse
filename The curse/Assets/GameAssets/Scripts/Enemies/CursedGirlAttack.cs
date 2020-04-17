@@ -35,6 +35,7 @@ public class CursedGirlAttack : MonoBehaviour
     {
        if(!cursedGirl.locked && cursedGirl.activation && cursedGirl.cursedGirlState == CursedGirlStates.ATTACKING)
         {
+            print("Está atacando ahora");
             if (!cursedGirl.enemyCanvas.activeInHierarchy) GetComponent<CursedGirlTalk>().SetDialogueMode(false);
 
             if (attackState == CursedGirlAttackStates.MOVING)

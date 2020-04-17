@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Clips:
   - m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: 114806520012362314}
+    m_Asset: {fileID: 114865610077653756}
     m_Duration: 5
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114236014153076364}
@@ -109,7 +109,7 @@ MonoBehaviour:
     m_DisplayName: CursedGirlFrontCamera
     m_Version: 1
   m_Version: 2
---- !u!114 &114806520012362314
+--- !u!114 &114865610077653756
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,5 +123,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: 
   VirtualCamera:
-    exposedName: 62cb2029bc21bcc40a060b4dfd195aa8
+    exposedName: 217a5d2e9d80b5d439c9bfd50f850876
     defaultValue: {fileID: 0}

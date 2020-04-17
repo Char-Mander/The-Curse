@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459986443}
-  m_LocalRotation: {x: 0.08167221, y: -0.00000008940697, z: 0.000000007450581, w: 0.9966593}
-  m_LocalPosition: {x: 0.0000009536743, y: 3.22, z: -10.000001}
+  m_LocalRotation: {x: -0.0000000070609776, y: -0.99663687, z: -0.08194516, w: -0.00000002979111}
+  m_LocalPosition: {x: 0, y: 0.57, z: 6.0400085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 714020115}
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 3.22, z: -10}
+  m_FollowOffset: {x: -0.000001912118, y: 0.57, z: 6.040008}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -358,8 +358,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619806672}
-  m_LocalRotation: {x: -0.021465136, y: -0, z: -0, w: 0.99976957}
-  m_LocalPosition: {x: 0.0000009536743, y: 1.28, z: -10.000001}
+  m_LocalRotation: {x: -0.021465138, y: -0.000000013054174, z: -0.0000000025002838,
+    w: 0.9997696}
+  m_LocalPosition: {x: 0, y: 1.28, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1240693071}
@@ -1556,7 +1557,7 @@ GameObject:
   - component: {fileID: 3654572692248718404}
   - component: {fileID: 3654572692248718402}
   - component: {fileID: 3654572692248718400}
-  - component: {fileID: 3654572692976188033}
+  - component: {fileID: 8854991323994809351}
   m_Layer: 0
   m_Name: CursedGirl Normal Model
   m_TagString: Untagged
@@ -1654,7 +1655,7 @@ MonoBehaviour:
   sentencesList:
   - sentence: Gracias...
     options: []
---- !u!195 &3654572692976188033
+--- !u!195 &8854991323994809351
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3772,6 +3773,7 @@ GameObject:
   - component: {fileID: 3654572692976188034}
   - component: {fileID: 3654572692976188036}
   - component: {fileID: 3654572692976188039}
+  - component: {fileID: 3654572692976188033}
   m_Layer: 13
   m_Name: CursedGirl Attack Model
   m_TagString: Enemy
@@ -4030,6 +4032,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6801d28e2eca444aa2113929b4dfd26, type: 2}
   - {fileID: 11400000, guid: adada3585f02e5e4c9417a8eac035032, type: 2}
   director: {fileID: 0}
+--- !u!320 &3654572692976188033
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7770690082721646106}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &7770690082721646108
 GameObject:
   m_ObjectHideFlags: 0
@@ -6079,15 +6098,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 148a00e03bbebf64d8ed899c95d26dfc, type: 3}
---- !u!224 &5100481496907085109 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2886728434409360999, guid: 148a00e03bbebf64d8ed899c95d26dfc,
-    type: 3}
-  m_PrefabInstance: {fileID: 7982406944061406034}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5100481496907085108 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2886728434409360998, guid: 148a00e03bbebf64d8ed899c95d26dfc,
+    type: 3}
+  m_PrefabInstance: {fileID: 7982406944061406034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &5100481496907085109 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2886728434409360999, guid: 148a00e03bbebf64d8ed899c95d26dfc,
     type: 3}
   m_PrefabInstance: {fileID: 7982406944061406034}
   m_PrefabAsset: {fileID: 0}

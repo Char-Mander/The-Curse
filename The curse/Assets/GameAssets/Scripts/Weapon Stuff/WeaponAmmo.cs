@@ -12,8 +12,6 @@ public class WeaponAmmo : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        print("Nombre: " + col.name + "   tag: " + col.tag);
-        print("El componente tiene el playercontroller: " + col.GetComponentInParent<PlayerController>() != null);
         if (col.GetComponentInParent<PlayerController>() != null)
         {
             if (FindObjectOfType<WeaponController>().GetWeaponByIndex(numWeapon).GetCurrentAmmo() < FindObjectOfType<WeaponController>().GetWeaponByIndex(numWeapon).GetMaxAmmo())

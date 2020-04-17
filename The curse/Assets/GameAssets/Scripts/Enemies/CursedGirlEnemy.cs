@@ -29,7 +29,6 @@ public class CursedGirlEnemy : Enemy
 
     public override void Update()
     {
-
         if (!locked)
         {
             direToPlayer = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;

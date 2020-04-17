@@ -26,7 +26,6 @@ public class InteractableObject : MonoBehaviour
     {
         if (other.CompareTag("PlayerInteractionZone"))
         {
-            print("El objeto " + this.gameObject.name + " es añadido a la lista de interactables");
             other.GetComponentInParent<InteractWithObjects>().AddGameObjectToInteract(this.gameObject);
             GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(true);
         }
@@ -36,7 +35,6 @@ public class InteractableObject : MonoBehaviour
     {
         if (other.CompareTag("PlayerInteractionZone"))
         {
-            print("El objeto " + this.gameObject.name + " es eliminado de la lista de interactables");
             other.GetComponentInParent<InteractWithObjects>().RemoveGameObjectToInteract(this.gameObject);
             GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(false);
         }

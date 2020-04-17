@@ -23,6 +23,7 @@ public class CursedGirlDecision : MonoBehaviour
     {
         if (!cursedGirl.locked && cursedGirl.activation && cursedGirlState == CursedGirlStates.DECISION && !end)
         {
+            print("Está en el decision ahora");
             end = true;
             GetComponent<CursedGirlTalk>().SetDialogueMode(true);
             cursedGirl.anim.SetFloat("Speed", 0);
