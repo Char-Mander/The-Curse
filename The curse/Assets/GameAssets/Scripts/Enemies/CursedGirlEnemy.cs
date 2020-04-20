@@ -17,12 +17,16 @@ public class CursedGirlEnemy : Enemy
     [HideInInspector]
     public bool activation = false;
 
+    [HideInInspector]
+    public float speed;
+
     public override void Start()
     {
         peacefulModel.SetActive(false);
         cController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        state = EnemyStates.PATROL;
         cursedGirlState = CursedGirlStates.TALKING;
         enemyCanvas.SetActive(false);
     }
@@ -39,6 +43,7 @@ public class CursedGirlEnemy : Enemy
         {
             activation = true;
             mechanismObj.GetComponent<BlockMecanism>().SetActivated(false);
+            state = EnemyStates.ATTACK;
         }
     }
     
@@ -47,11 +52,14 @@ public class CursedGirlEnemy : Enemy
         if (distToPlayer < iniAttackDist)
         {
             base.EnemyMovement(attackSpeed, -transform.forward);
+            speed = cController.velocity.magnitude;
         }
         else if (distToPlayer > endAttackDist)
         {
             base.EnemyMovement(attackSpeed, transform.forward);
+            speed = cController.velocity.magnitude;
         }
+        else speed = 0;
     }
 
     public override void OnControllerColliderHit(ControllerColliderHit hit)

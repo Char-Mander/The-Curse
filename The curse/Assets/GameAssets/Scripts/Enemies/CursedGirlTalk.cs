@@ -39,11 +39,11 @@ public class CursedGirlTalk : MonoBehaviour
         if(!cursedGirl.locked && cursedGirl.activation && cursedGirl.cursedGirlState == CursedGirlStates.TALKING)
         {
             print("Está en el talk ahora");
-            if (cursedGirl.enemyCanvas.activeInHierarchy) cursedGirl.enemyCanvas.SetActive(false);
-            FindObjectOfType<PlayerController>().SetIsLocked(true);
-            FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(false);
             if (canTalk)
             {
+                if (cursedGirl.enemyCanvas.activeInHierarchy) cursedGirl.enemyCanvas.SetActive(false);
+                FindObjectOfType<PlayerController>().SetIsLocked(true);
+                FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(false);
                 canTalk = false;
                 SetDialogueMode(true);
                 director.playableAsset = playablesQueue.Dequeue();
@@ -64,6 +64,8 @@ public class CursedGirlTalk : MonoBehaviour
     {
         director.stopped += OnPlayableDirectorStopped;
         director.Play();
+        cinematicIsPlaying = true;
+        print("Empieza la cinemática");
        /* if (dialogueQueue.Count > 0)
         {
             currentDialogue = dialogueQueue.Dequeue();
@@ -76,18 +78,27 @@ public class CursedGirlTalk : MonoBehaviour
         if (director == aDirector)
         {
             director.Stop();
-            if (dialogueQueue.Count > 0)
-            {
-                currentDialogue = dialogueQueue.Dequeue();
-                FindObjectOfType<DialogueManager>().StartDialogue(dialogueQueue.Dequeue());
-            }
-            GetComponent<Health>().SetGodMode(false);
-            if (!currentDialogue.CanPlayerChoose(0))
-            {
-                cursedGirl.enemyCanvas.SetActive(true);
-                FindObjectOfType<PlayerController>().SetIsLocked(false);
-                FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
-            }
+            cinematicIsPlaying = false;
+            print("Termina la cinemática");
+            /* if (dialogueQueue.Count > 0)
+             {
+                 currentDialogue = dialogueQueue.Dequeue();
+                 FindObjectOfType<DialogueManager>().StartDialogue(dialogueQueue.Dequeue());
+             }
+             GetComponent<Health>().SetGodMode(false);
+             if (!currentDialogue.CanPlayerChoose(0))
+             {
+                 cursedGirl.enemyCanvas.SetActive(true);
+                 FindObjectOfType<PlayerController>().SetIsLocked(false);
+                 FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
+             }*/
+            print("Activa la niña maldita");
+            //cursedGirl.enemyCanvas.SetActive(true);
+            print("Activa el player");
+            FindObjectOfType<PlayerController>().SetIsLocked(false);
+            print("Activa el cController del player");
+            FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
+            cursedGirl.cursedGirlState = CursedGirlStates.ATTACKING;
         }
     }
 
@@ -95,4 +106,6 @@ public class CursedGirlTalk : MonoBehaviour
     {
         director.stopped -= OnPlayableDirectorStopped;
     }
+
+    public bool IsCinematicPlaying() { return cinematicIsPlaying; }
 }

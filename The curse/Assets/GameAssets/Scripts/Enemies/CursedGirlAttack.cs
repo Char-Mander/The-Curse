@@ -27,7 +27,7 @@ public class CursedGirlAttack : MonoBehaviour
     void Start()
     {
         cursedGirl = GetComponent<CursedGirlEnemy>();
-        attackState = CursedGirlAttackStates.MOVING;
+        attackState = CursedGirlAttackStates.ATTACKING;
     }
 
     // Update is called once per frame
@@ -38,14 +38,17 @@ public class CursedGirlAttack : MonoBehaviour
             print("Está atacando ahora");
             if (!cursedGirl.enemyCanvas.activeInHierarchy) GetComponent<CursedGirlTalk>().SetDialogueMode(false);
 
+            if (!canAttack) attackState = CursedGirlAttackStates.MOVING;
+            else if (canAttack) attackState = CursedGirlAttackStates.ATTACKING;
+
             if (attackState == CursedGirlAttackStates.MOVING)
             {
-                cursedGirl.anim.SetFloat("Speed", cursedGirl.cController.velocity.magnitude);
+                cursedGirl.anim.SetFloat("Speed", cursedGirl.speed);
                 cursedGirl.DetectPlayerInArea();
             }
             else if (attackState == CursedGirlAttackStates.ATTACKING)
             {
-                cursedGirl.anim.SetFloat("Speed", 0);
+                //cursedGirl.anim.SetFloat("Speed", 0);
                 ManageAttackStates();
             }
         }
@@ -79,6 +82,7 @@ public class CursedGirlAttack : MonoBehaviour
     {
         if (canAttack && !attackInCurse)
         {
+            canAttack = false;
             attackInCurse = true;
             ChangeLayerWeight(true);
             StartCoroutine(WaitForSpellAttack());
@@ -148,6 +152,7 @@ public class CursedGirlAttack : MonoBehaviour
         cursedGirl.anim.SetInteger("AttackType", 0);
         yield return new WaitForSeconds(2.15f);
         attackInCurse = false;
+        canAttack = true;
         ChangeLayerWeight(false);
         cursedGirl.Action();
     }
@@ -157,6 +162,7 @@ public class CursedGirlAttack : MonoBehaviour
         cursedGirl.anim.SetInteger("AttackType", 1);
         yield return new WaitForSeconds(2f);
         attackInCurse = false;
+        canAttack = true;
         ChangeLayerWeight(false);
         Teleport();
         hit.collider.gameObject.GetComponent<Health>().LoseHealth(cursedGirl.damage);
@@ -168,6 +174,7 @@ public class CursedGirlAttack : MonoBehaviour
         cursedGirl.anim.SetInteger("AttackType", 2);
         yield return new WaitForSeconds(2f);
         attackInCurse = false;
+        canAttack = true;
         ChangeLayerWeight(false);
         GameObject monster = Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos[Random.Range(0, instantiateMonstersPos.Count)]);
         monster.transform.parent = null;
@@ -205,7 +212,7 @@ public class CursedGirlAttack : MonoBehaviour
         int phase = -1;
         if (GetComponent<Health>().GetCurrentHealth() > 2 * GetComponent<Health>().GetMaxHealth() / 3) phase = 1;
         else if (GetComponent<Health>().GetCurrentHealth() > GetComponent<Health>().GetMaxHealth() / 3) phase = 2;
-        else if (GetComponent<Health>().GetCurrentHealth() > 0.06 * GetComponent<Health>().GetMaxHealth()) phase = 3;
+        else if (GetComponent<Health>().GetCurrentHealth() > 0.1f * GetComponent<Health>().GetMaxHealth()) phase = 3;
         else phase = 4;
         return phase;
     }

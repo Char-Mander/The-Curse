@@ -328,6 +328,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     
     public void EnableOrDisableCharacterController(bool enable)
     {
+        print("entra al EnableOrDisableCharacterController del player con el enabled a " + enable);
         cController.enabled = enable;
     }
 
@@ -342,6 +343,7 @@ public class PlayerController : MonoBehaviour, ICharacter
 
     public void SetIsLocked(bool value)
     {
+        print("entra al setisLocked del player con el locked a " + value);
         locked = value;
         if (locked && !isOnAMount)
         {

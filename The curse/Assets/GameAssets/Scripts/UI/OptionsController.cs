@@ -36,7 +36,7 @@ public class OptionsController : MonoBehaviour
         if (isPaused)
         {
             if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
-            if (GameManager.instance.sceneC.IsALvlScene())
+            if (GameManager.instance.sceneC.IsALvlScene() && !FindObjectOfType<CursedGirlTalk>().IsCinematicPlaying())
             {
                 FindObjectOfType<PlayerController>().SetIsLocked(true);
                 FindObjectOfType<Mount>().SetIsLocked(true);
@@ -44,7 +44,7 @@ public class OptionsController : MonoBehaviour
         }
         else if (!isPaused)
         {
-            if (GameManager.instance.sceneC.IsALvlScene())
+            if (GameManager.instance.sceneC.IsALvlScene() && !FindObjectOfType<CursedGirlTalk>().IsCinematicPlaying())
             {
                 if (FindObjectOfType<CursedGirlEnemy>() != null) Cursor.lockState = CursorLockMode.Locked;
                 if (!FindObjectOfType<DialogueManager>().IsOnADialogue() && !FindObjectOfType<TeleportController>().GetTeleportOptionsAvailable())
