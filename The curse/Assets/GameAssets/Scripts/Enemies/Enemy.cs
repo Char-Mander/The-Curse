@@ -16,14 +16,11 @@ public class Enemy : MonoBehaviour
     public float attackSpeed;
     public float patrolSpeed;
     public float viewOffset;
-    [SerializeField]
-    private Transform weapon;
+    public Transform weapon;
     [SerializeField]
     private GameObject projectile;
-    [SerializeField]
-    private Transform posDisp;
-    [SerializeField]
-    private float rotationSpeed = 0.5f;
+    public Transform posDisp;
+    public float rotationSpeed = 0.5f;
     [HideInInspector]
     public CharacterController cController;
     [HideInInspector]
@@ -196,7 +193,7 @@ public class Enemy : MonoBehaviour
             if(weapon!=null) weapon.rotation = Quaternion.LookRotation(direToPlayer);
             Vector3 playerHead = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, player.transform.position.z);
             if(posDisp != null) posDisp.transform.LookAt(playerHead);
-            StartCoroutine(RotateAgain());
+            RotateCoroutine();
         }
     }
 
@@ -256,6 +253,11 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(wayPoints[wpIndex].position);
         wpIndex++;
         isMoving = true;
+    }
+
+    public void RotateCoroutine()
+    {
+        StartCoroutine(RotateAgain());
     }
 
     public virtual void OnDrawGizmos()

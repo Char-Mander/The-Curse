@@ -33,24 +33,27 @@ public class CursedGirlAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(!cursedGirl.locked && cursedGirl.activation && cursedGirl.cursedGirlState == CursedGirlStates.ATTACKING)
+        
+        if (!cursedGirl.locked && cursedGirl.activation && cursedGirl.cursedGirlState == CursedGirlStates.ATTACKING)
         {
-            print("Está atacando ahora");
-            if (!cursedGirl.enemyCanvas.activeInHierarchy) GetComponent<CursedGirlTalk>().SetDialogueMode(false);
+              cursedGirl.AimPlayer();
+              print("Está atacando ahora");
+              if (!cursedGirl.enemyCanvas.activeInHierarchy) GetComponent<CursedGirlTalk>().SetDialogueMode(false);
+                 
+             if (!canAttack && !attackInCurse) attackState = CursedGirlAttackStates.MOVING;
+             else if (canAttack) attackState = CursedGirlAttackStates.ATTACKING;
 
-            if (!canAttack) attackState = CursedGirlAttackStates.MOVING;
-            else if (canAttack) attackState = CursedGirlAttackStates.ATTACKING;
-
-            if (attackState == CursedGirlAttackStates.MOVING)
-            {
-                cursedGirl.anim.SetFloat("Speed", cursedGirl.speed);
-                cursedGirl.DetectPlayerInArea();
-            }
+             if (attackState == CursedGirlAttackStates.MOVING)
+             {
+                 cursedGirl.DetectPlayerInArea();
+             }
             else if (attackState == CursedGirlAttackStates.ATTACKING)
             {
-                //cursedGirl.anim.SetFloat("Speed", 0);
+                cursedGirl.anim.SetFloat("Speed", 0);
                 ManageAttackStates();
             }
+            cursedGirl.anim.SetFloat("Speed", cursedGirl.speed);
+            print("Velocity: " + cursedGirl.cController.velocity.magnitude);
         }
         else if (cursedGirl.enemyCanvas.activeInHierarchy) 
         {
@@ -71,6 +74,7 @@ public class CursedGirlAttack : MonoBehaviour
                 break;
             case 3:
                 Attack();
+                SpawnMonster();
                 break;
             case 4:
                 cursedGirl.cursedGirlState = CursedGirlStates.TALKING;
@@ -97,19 +101,6 @@ public class CursedGirlAttack : MonoBehaviour
             CreateMonster();
         }
     }
-
-    /*
-    public override void DetectPlayerInArea()
-    {
-        if (distToPlayer < iniAttackDist)
-        {
-            base.EnemyMovement(attackSpeed, -transform.forward);
-        }
-        else if (distToPlayer > endAttackDist)
-        {
-            base.EnemyMovement(attackSpeed, transform.forward);
-        }
-    }*/
 
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -152,7 +143,6 @@ public class CursedGirlAttack : MonoBehaviour
         cursedGirl.anim.SetInteger("AttackType", 0);
         yield return new WaitForSeconds(2.15f);
         attackInCurse = false;
-        canAttack = true;
         ChangeLayerWeight(false);
         cursedGirl.Action();
     }
@@ -162,7 +152,6 @@ public class CursedGirlAttack : MonoBehaviour
         cursedGirl.anim.SetInteger("AttackType", 1);
         yield return new WaitForSeconds(2f);
         attackInCurse = false;
-        canAttack = true;
         ChangeLayerWeight(false);
         Teleport();
         hit.collider.gameObject.GetComponent<Health>().LoseHealth(cursedGirl.damage);
@@ -174,7 +163,6 @@ public class CursedGirlAttack : MonoBehaviour
         cursedGirl.anim.SetInteger("AttackType", 2);
         yield return new WaitForSeconds(2f);
         attackInCurse = false;
-        canAttack = true;
         ChangeLayerWeight(false);
         GameObject monster = Instantiate(monsters[Random.Range(0, monsters.Count)], instantiateMonstersPos[Random.Range(0, instantiateMonstersPos.Count)]);
         monster.transform.parent = null;
@@ -198,12 +186,12 @@ public class CursedGirlAttack : MonoBehaviour
         if (isAttacking)
         {
             cursedGirl.anim.SetLayerWeight(0, 0);
-            cursedGirl.anim.SetLayerWeight(1, 1);
+            cursedGirl.anim.SetLayerWeight(2, 1);
         }
         else
         {
             cursedGirl.anim.SetLayerWeight(0, 1);
-            cursedGirl.anim.SetLayerWeight(1, 0);
+            cursedGirl.anim.SetLayerWeight(2, 0);
         }
     }
 

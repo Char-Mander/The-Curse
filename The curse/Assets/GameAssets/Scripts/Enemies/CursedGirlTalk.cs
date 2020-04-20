@@ -41,6 +41,7 @@ public class CursedGirlTalk : MonoBehaviour
             print("Está en el talk ahora");
             if (canTalk)
             {
+                cursedGirl.AimPlayer();
                 if (cursedGirl.enemyCanvas.activeInHierarchy) cursedGirl.enemyCanvas.SetActive(false);
                 FindObjectOfType<PlayerController>().SetIsLocked(true);
                 FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(false);
@@ -92,7 +93,6 @@ public class CursedGirlTalk : MonoBehaviour
                  FindObjectOfType<PlayerController>().SetIsLocked(false);
                  FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
              }*/
-            print("Activa la niña maldita");
             //cursedGirl.enemyCanvas.SetActive(true);
             print("Activa el player");
             FindObjectOfType<PlayerController>().SetIsLocked(false);
