@@ -133,4 +133,6 @@ public class CursedGirlTalk : MonoBehaviour
     }
 
     public bool IsCinematicPlaying() { return cinematicIsPlaying; }
+
+    public int DialogueCount() { return dialogueQueue.Count; }
 }

@@ -38,9 +38,15 @@ public class CursedGirlAttack : MonoBehaviour
               cursedGirl.AimPlayer();
               print("Está atacando ahora");
               if (!cursedGirl.enemyCanvas.activeInHierarchy) GetComponent<CursedGirlTalk>().SetDialogueMode(false);
-                 
-             if (!cursedGirl.canAttack && !attackInCurse) attackState = CursedGirlAttackStates.MOVING;
-             else if ((cursedGirl.canAttack || canTeleport || canCreateMonsters) || attackInCurse) attackState = CursedGirlAttackStates.ATTACKING;
+
+            if (GetPhase() == 4)
+            {
+                DestroyEnemies();
+                cursedGirl.anim.SetFloat("Speed", 0);
+                cursedGirl.cursedGirlState = CursedGirlStates.TALKING;
+            }
+            else if (!cursedGirl.canAttack && !attackInCurse) attackState = CursedGirlAttackStates.MOVING;
+            else if ((cursedGirl.canAttack || canTeleport || canCreateMonsters) || attackInCurse) attackState = CursedGirlAttackStates.ATTACKING;
 
              if (attackState == CursedGirlAttackStates.MOVING)
              {
@@ -78,7 +84,6 @@ public class CursedGirlAttack : MonoBehaviour
                 SpawnMonster();
                 break;
             case 4:
-                ChangeLayerWeight(true);
                 cursedGirl.anim.SetFloat("Speed", 0);
                 cursedGirl.cursedGirlState = CursedGirlStates.TALKING;
                 break;
@@ -227,6 +232,19 @@ public class CursedGirlAttack : MonoBehaviour
         else if (GetComponent<Health>().GetCurrentHealth() > 0.1f * GetComponent<Health>().GetMaxHealth()) phase = 3;
         else phase = 4; 
         return phase;
+    }
+
+    private void DestroyEnemies()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+
+            if (enemy.GetComponent<CursedGirlEnemy>() == null)
+            {
+                Destroy(enemy.GetComponentInParent<Transform>().gameObject);
+            }
+        }
     }
 
 }

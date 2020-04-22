@@ -81,7 +81,9 @@ public class DialogueManager : MonoBehaviour
         {
             FindObjectOfType<PlayerController>().SetIsLocked(false);
             FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
+            //if(FindObjectOfType<CursedGirlTalk>().DialogueCount()>0)
             FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.ATTACKING;
+
             //dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
         }
         else if (dialogue.gameObject.GetComponentInChildren<Quest>() != null && !dialogue.gameObject.GetComponentInChildren<Quest>().HasBeenTriggered())

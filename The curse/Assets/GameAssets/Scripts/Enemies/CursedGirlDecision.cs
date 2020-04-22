@@ -27,23 +27,11 @@ public class CursedGirlDecision : MonoBehaviour
             end = true;
             GetComponent<CursedGirlTalk>().SetDialogueMode(true);
             cursedGirl.anim.SetFloat("Speed", 0);
-            DestroyEnemies();
             ManageDecisionStates();
         }
     }
 
-    private void DestroyEnemies()
-    {
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-        foreach (Enemy enemy in enemies)
-        {
-
-            if (enemy.GetComponent<CursedGirlEnemy>() == null)
-            {
-                Destroy(enemy.GetComponentInParent<Transform>().gameObject);
-            }
-        }
-    }
+   
 
     private void ManageDecisionStates()
     {
