@@ -39,7 +39,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence(int index)
     {
-        dialogue.GetComponent<NPC>().StartTalking();
+        if(GetComponent<NPC>() != null) dialogue.GetComponent<NPC>().StartTalking();
         StartCoroutine(WaitForDisplay(index));
     }
 

@@ -9718,17 +9718,22 @@ PrefabInstance:
       propertyPath: patrolSpeed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7833065964369211816, guid: bebbe01c00fcd6b479a838597813c716,
+        type: 3}
+      propertyPath: endAttackDist
+      value: 19.5
+      objectReference: {fileID: 0}
     - target: {fileID: 732302509, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_ChildCameras.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -3.2078928e-10
+      value: 3.1780176e-10
       objectReference: {fileID: 0}
     - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0000000042898396
+      value: 0.0000000042896176
       objectReference: {fileID: 0}
     - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_LocalRotation.z
@@ -9772,6 +9777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 812835806316141076, guid: bebbe01c00fcd6b479a838597813c716,
+        type: 3}
+      propertyPath: maxHealth
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3654572692976188033, guid: bebbe01c00fcd6b479a838597813c716, type: 3}

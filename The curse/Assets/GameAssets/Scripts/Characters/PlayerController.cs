@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour, ICharacter
         pickobj = GetComponent<PickUpObjects>();
         interactobj = GetComponent<InteractWithObjects>();
         anim = GetComponent<Animator>();
+        GetActiveWeaponAndCrossHair();
     }
 
     // Update is called once per frame

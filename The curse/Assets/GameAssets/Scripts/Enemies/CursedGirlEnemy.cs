@@ -8,8 +8,7 @@ public class CursedGirlEnemy : Enemy
 {
     public GameObject peacefulModel;
     public GameObject enemyCanvas;
-    [SerializeField]
-    private float iniAttackDist;
+    public float iniAttackDist;
     [SerializeField]
     GameObject mechanismObj;
     [HideInInspector]

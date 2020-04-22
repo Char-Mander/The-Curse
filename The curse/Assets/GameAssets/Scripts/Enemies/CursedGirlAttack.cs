@@ -18,7 +18,6 @@ public class CursedGirlAttack : MonoBehaviour
     [SerializeField]
     List<Transform> instantiateMonstersPos = new List<Transform>();
     CursedGirlEnemy cursedGirl;
-    bool canAttack = true;
     bool attackInCurse = false;
     bool canTeleport = true;
     bool canCreateMonsters = true;
@@ -40,20 +39,18 @@ public class CursedGirlAttack : MonoBehaviour
               print("Está atacando ahora");
               if (!cursedGirl.enemyCanvas.activeInHierarchy) GetComponent<CursedGirlTalk>().SetDialogueMode(false);
                  
-             //if (!canAttack && !attackInCurse) attackState = CursedGirlAttackStates.MOVING;
-             //else if (canAttack) attackState = CursedGirlAttackStates.ATTACKING;
+             if (!cursedGirl.canAttack && !attackInCurse) attackState = CursedGirlAttackStates.MOVING;
+             else if ((cursedGirl.canAttack || canTeleport || canCreateMonsters) || attackInCurse) attackState = CursedGirlAttackStates.ATTACKING;
 
-            // if (attackState == CursedGirlAttackStates.MOVING)
-             //{
+             if (attackState == CursedGirlAttackStates.MOVING)
+             {
                  cursedGirl.DetectPlayerInArea();
-             //}
-           //else if (attackState == CursedGirlAttackStates.ATTACKING)
-           // {
-              //  cursedGirl.anim.SetFloat("Speed", 0);
+             }
+           else if (attackState == CursedGirlAttackStates.ATTACKING)
+            {
                 ManageAttackStates();
-           // }
+            }
             cursedGirl.anim.SetFloat("Speed", cursedGirl.speed);
-            print("Velocity: " + cursedGirl.cController.velocity.magnitude);
         }
         else if (cursedGirl.enemyCanvas.activeInHierarchy) 
         {
@@ -66,17 +63,23 @@ public class CursedGirlAttack : MonoBehaviour
         switch (GetPhase())
         {
             case 1:
+                ChangeLayerWeight(true);
+                cursedGirl.anim.SetFloat("Speed", 0);
                 Attack();
                 break;
             case 2:
+                ChangeLayerWeight(true);
+                cursedGirl.anim.SetFloat("Speed", 0);
                 Attack();
                 Teleport();
                 break;
             case 3:
-                Attack();
+                BodyAttack();
                 SpawnMonster();
                 break;
             case 4:
+                ChangeLayerWeight(true);
+                cursedGirl.anim.SetFloat("Speed", 0);
                 cursedGirl.cursedGirlState = CursedGirlStates.TALKING;
                 break;
         }
@@ -84,12 +87,26 @@ public class CursedGirlAttack : MonoBehaviour
 
     public void Attack()
     {
-        if (canAttack && !attackInCurse)
+        if (cursedGirl.canAttack && !attackInCurse)
         {
-            canAttack = false;
+            print("Lanza un chorro");
+            cursedGirl.canAttack = false;
             attackInCurse = true;
-            ChangeLayerWeight(true);
             StartCoroutine(WaitForSpellAttack());
+        }
+    }
+
+    public void BodyAttack()
+    {
+        if (cursedGirl.distToPlayer < cursedGirl.iniAttackDist && !cursedGirl.canAttack && !attackInCurse)
+        {
+            print("Fase 3: se aleja del player");
+            cursedGirl.EnemyMovement(cursedGirl.attackSpeed, -transform.forward);
+        }
+        else
+        {
+            print("Fase 3: se acerca al player");
+            cursedGirl.EnemyMovement(cursedGirl.attackSpeed, transform.forward);
         }
     }
 
@@ -97,6 +114,7 @@ public class CursedGirlAttack : MonoBehaviour
     {
         if (!attackInCurse && canCreateMonsters)
         {
+            print("Spawnea un monstruo");
             attackInCurse = true;
             CreateMonster();
         }
@@ -111,9 +129,10 @@ public class CursedGirlAttack : MonoBehaviour
             this.transform.rotation = Quaternion.LookRotation(direVec);
             //Mover hacia el player
         }
-        else if (hit.collider.CompareTag("Player") && (GetPhase() == 3 && canAttack))
+        else if (hit.collider.CompareTag("Player") && (GetPhase() == 3 && cursedGirl.canAttack))
         {
-            canAttack = false;
+            print("ataca cuerpo a cuerpo");
+            cursedGirl.canAttack = false;
             attackInCurse = true;
             ChangeLayerWeight(true);
             StartCoroutine(WaitForBodyAttack(hit));
@@ -134,16 +153,18 @@ public class CursedGirlAttack : MonoBehaviour
     private void CreateMonster()
     {
         canCreateMonsters = false;
-        ChangeLayerWeight(true);
         StartCoroutine(WaitForSpawnAttack());
     }
 
     IEnumerator WaitForSpellAttack()
     {
+        print("Empieza la coroutina del ataque");
         cursedGirl.anim.SetInteger("AttackType", 0);
         yield return new WaitForSeconds(2.15f);
+        print("Acaba de hacer la animación");
         attackInCurse = false;
         ChangeLayerWeight(false);
+        print("va a lanzarlo");
         cursedGirl.Action();
     }
 
@@ -183,14 +204,17 @@ public class CursedGirlAttack : MonoBehaviour
 
     void ChangeLayerWeight(bool isAttacking)
     {
+        print("Cambia el layer weight a " + isAttacking);
         if (isAttacking)
         {
             cursedGirl.anim.SetLayerWeight(0, 0);
+            cursedGirl.anim.SetLayerWeight(1, 0);
             cursedGirl.anim.SetLayerWeight(2, 1);
         }
         else
         {
             cursedGirl.anim.SetLayerWeight(0, 1);
+            cursedGirl.anim.SetLayerWeight(1, 0);
             cursedGirl.anim.SetLayerWeight(2, 0);
         }
     }
@@ -201,7 +225,7 @@ public class CursedGirlAttack : MonoBehaviour
         if (GetComponent<Health>().GetCurrentHealth() > 2 * GetComponent<Health>().GetMaxHealth() / 3) phase = 1;
         else if (GetComponent<Health>().GetCurrentHealth() > GetComponent<Health>().GetMaxHealth() / 3) phase = 2;
         else if (GetComponent<Health>().GetCurrentHealth() > 0.1f * GetComponent<Health>().GetMaxHealth()) phase = 3;
-        else phase = 4;
+        else phase = 4; 
         return phase;
     }
 

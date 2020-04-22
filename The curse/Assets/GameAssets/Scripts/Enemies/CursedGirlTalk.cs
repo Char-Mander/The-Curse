@@ -26,7 +26,7 @@ public class CursedGirlTalk : MonoBehaviour
         {
             dialogueQueue.Enqueue(dialogue);
         }
-        print("Dialogues: " + dialogueQueue.Count);
+        //print("Dialogues: " + dialogueQueue.Count);
         foreach (PlayableAsset playable in playables)
         {
             playablesQueue.Enqueue(playable);
@@ -42,6 +42,9 @@ public class CursedGirlTalk : MonoBehaviour
             if (canTalk)
             {
                 cursedGirl.AimPlayer();
+                cursedGirl.anim.SetLayerWeight(0, 0);
+                cursedGirl.anim.SetLayerWeight(1, 1);
+                cursedGirl.anim.SetLayerWeight(2, 0);
                 if (cursedGirl.enemyCanvas.activeInHierarchy) cursedGirl.enemyCanvas.SetActive(false);
                 /*FindObjectOfType<PlayerController>().SetIsLocked(true);
                 FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(false);*/
@@ -111,6 +114,22 @@ public class CursedGirlTalk : MonoBehaviour
     void OnDisable()
     {
         director.stopped -= OnPlayableDirectorStopped;
+    }
+
+    void ChangeTalkAnim(bool value)
+    {
+        if (value)
+        {
+            cursedGirl.anim.SetLayerWeight(0, 0);
+            cursedGirl.anim.SetLayerWeight(1, 1);
+            cursedGirl.anim.SetLayerWeight(2, 0);
+        }
+        else
+        {
+            cursedGirl.anim.SetLayerWeight(0, 1);
+            cursedGirl.anim.SetLayerWeight(1, 0);
+            cursedGirl.anim.SetLayerWeight(2, 0);
+        }
     }
 
     public bool IsCinematicPlaying() { return cinematicIsPlaying; }

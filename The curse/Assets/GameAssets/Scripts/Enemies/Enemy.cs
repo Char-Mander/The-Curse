@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     public Vector3 direToPlayer;
     [HideInInspector]
     public bool isAttacking = false;
-    [HideInInspector]
+    //[HideInInspector]
     public bool canAttack = true;
     public bool locked { get; set; }
     [HideInInspector]
@@ -215,7 +215,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Action()
     {
-        if (canAttack)
+        if (canAttack || GetComponent<CursedGirlEnemy>() != null)
         {
             canAttack = false;
             anim.SetTrigger("Attack");
@@ -231,6 +231,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Reload()
     {
+        print("Pone el canAttack a true");
         yield return new WaitForSeconds(cadency);
         canAttack = true;
     }
