@@ -21,6 +21,7 @@ public class CursedGirlTalk : MonoBehaviour
     void Start()
     {
         cursedGirl = GetComponent<CursedGirlEnemy>();
+        director = GetComponentInParent<PlayableDirector>();
         foreach (Dialogue dialogue in dialogues)
         {
             dialogueQueue.Enqueue(dialogue);
@@ -30,7 +31,6 @@ public class CursedGirlTalk : MonoBehaviour
         {
             playablesQueue.Enqueue(playable);
         }
-        director = GetComponent<PlayableDirector>();
     }
 
     // Update is called once per frame
@@ -43,12 +43,18 @@ public class CursedGirlTalk : MonoBehaviour
             {
                 cursedGirl.AimPlayer();
                 if (cursedGirl.enemyCanvas.activeInHierarchy) cursedGirl.enemyCanvas.SetActive(false);
-                FindObjectOfType<PlayerController>().SetIsLocked(true);
-                FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(false);
+                /*FindObjectOfType<PlayerController>().SetIsLocked(true);
+                FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(false);*/
                 canTalk = false;
                 SetDialogueMode(true);
-                director.playableAsset = playablesQueue.Dequeue();
-                PlayDirector();
+                if (dialogueQueue.Count > 0)
+                {
+                    currentDialogue = dialogueQueue.Dequeue();
+                    FindObjectOfType<DialogueManager>().StartDialogue(currentDialogue);
+                }
+                else { print("No hay más diálogos"); }
+                //director.playableAsset = playablesQueue.Dequeue();
+                //PlayDirector();
             }
             cursedGirl.anim.SetFloat("Speed", 0);
         }
@@ -85,14 +91,14 @@ public class CursedGirlTalk : MonoBehaviour
              {
                  currentDialogue = dialogueQueue.Dequeue();
                  FindObjectOfType<DialogueManager>().StartDialogue(dialogueQueue.Dequeue());
-             }
-             GetComponent<Health>().SetGodMode(false);
+             }*/
+            GetComponent<Health>().SetGodMode(false);
              if (!currentDialogue.CanPlayerChoose(0))
              {
                  cursedGirl.enemyCanvas.SetActive(true);
                  FindObjectOfType<PlayerController>().SetIsLocked(false);
                  FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
-             }*/
+             }
             //cursedGirl.enemyCanvas.SetActive(true);
             print("Activa el player");
             FindObjectOfType<PlayerController>().SetIsLocked(false);

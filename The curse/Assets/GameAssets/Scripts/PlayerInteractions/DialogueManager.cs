@@ -20,14 +20,19 @@ public class DialogueManager : MonoBehaviour
         {
             print("Empieza el diálogo");
             FindObjectOfType<PlayerController>().SetIsLocked(true);
+            print("Bloquea al player y la montura");
             FindObjectOfType<Mount>().SetIsLocked(true);
+            print("Pone el modo diálogo");
             isOnADialogue = true;
+            print("Limpia las frases");
             sentences.Clear();
             this.dialogue = dialogue;
+            print("Encola las frases");
             foreach (Sentence sentence in dialogue.GetSentences())
             {
                 sentences.Enqueue(sentence);
             }
+            print("Antes de entrar al displaynextSentence");
             DisplayNextSentence(0);
         }
     }
@@ -74,7 +79,8 @@ public class DialogueManager : MonoBehaviour
         
         if (dialogue.gameObject.GetComponent<CursedGirlEnemy>())
         {
-            print("Pone el modo ataque en el diálogo");
+            FindObjectOfType<PlayerController>().SetIsLocked(false);
+            FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
             FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.ATTACKING;
             //dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
         }

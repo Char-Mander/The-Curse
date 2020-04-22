@@ -9724,11 +9724,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 3.1780176e-10
+      value: -3.2078928e-10
       objectReference: {fileID: 0}
     - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0000000042896176
+      value: -0.0000000042898396
       objectReference: {fileID: 0}
     - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_LocalRotation.z
@@ -9753,6 +9753,11 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[3].value
       value: 
       objectReference: {fileID: 534669906}
+    - target: {fileID: 3654572692976188033, guid: bebbe01c00fcd6b479a838597813c716,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3654572692976188034, guid: bebbe01c00fcd6b479a838597813c716,
         type: 3}
       propertyPath: m_Enabled
@@ -9768,8 +9773,32 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3654572692976188033, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
+--- !u!1 &3654572692976188032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3654572692827017750, guid: bebbe01c00fcd6b479a838597813c716,
+    type: 3}
+  m_PrefabInstance: {fileID: 3654572692976188031}
+  m_PrefabAsset: {fileID: 0}
+--- !u!320 &3654572692976188033
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3654572692976188032}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []
 --- !u!1001 &3810651713962566248
 PrefabInstance:
   m_ObjectHideFlags: 0

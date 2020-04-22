@@ -40,18 +40,18 @@ public class CursedGirlAttack : MonoBehaviour
               print("Está atacando ahora");
               if (!cursedGirl.enemyCanvas.activeInHierarchy) GetComponent<CursedGirlTalk>().SetDialogueMode(false);
                  
-             if (!canAttack && !attackInCurse) attackState = CursedGirlAttackStates.MOVING;
-             else if (canAttack) attackState = CursedGirlAttackStates.ATTACKING;
+             //if (!canAttack && !attackInCurse) attackState = CursedGirlAttackStates.MOVING;
+             //else if (canAttack) attackState = CursedGirlAttackStates.ATTACKING;
 
-             if (attackState == CursedGirlAttackStates.MOVING)
-             {
+            // if (attackState == CursedGirlAttackStates.MOVING)
+             //{
                  cursedGirl.DetectPlayerInArea();
-             }
-            else if (attackState == CursedGirlAttackStates.ATTACKING)
-            {
-                cursedGirl.anim.SetFloat("Speed", 0);
+             //}
+           //else if (attackState == CursedGirlAttackStates.ATTACKING)
+           // {
+              //  cursedGirl.anim.SetFloat("Speed", 0);
                 ManageAttackStates();
-            }
+           // }
             cursedGirl.anim.SetFloat("Speed", cursedGirl.speed);
             print("Velocity: " + cursedGirl.cController.velocity.magnitude);
         }
