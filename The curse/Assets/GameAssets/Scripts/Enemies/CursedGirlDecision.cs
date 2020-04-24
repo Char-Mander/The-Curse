@@ -58,7 +58,8 @@ public class CursedGirlDecision : MonoBehaviour
         Instantiate(goal, goalPos);
         yield return new WaitForSeconds(0.2f);
         GetComponent<CursedGirlTalk>().SetDialogueMode(false);
-        GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+        // GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+        Destroy(this.gameObject);
     }
 
     IEnumerator WaitForDie()

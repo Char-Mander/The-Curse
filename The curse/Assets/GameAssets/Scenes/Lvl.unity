@@ -9418,7 +9418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 702923931, guid: 9c4a2108969384b418d0e998139f5f06, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.9999695
+      value: -1.999939
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c4a2108969384b418d0e998139f5f06, type: 3}
@@ -9717,102 +9717,20 @@ PrefabInstance:
       propertyPath: mechanismObj
       value: 
       objectReference: {fileID: 5165014018146074723}
-    - target: {fileID: 7833065964369211816, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: patrolSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7833065964369211816, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: endAttackDist
-      value: 19.5
-      objectReference: {fileID: 0}
     - target: {fileID: 732302509, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_ChildCameras.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -3.2078928e-10
+      value: 3.1780176e-10
       objectReference: {fileID: 0}
     - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0000000042898396
+      value: 0.0000000042896176
       objectReference: {fileID: 0}
-    - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.074227236
-      objectReference: {fileID: 0}
-    - target: {fileID: 1619806673, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.9799999
-      objectReference: {fileID: 0}
-    - target: {fileID: 3654572692976188033, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[0].value
-      value: 
-      objectReference: {fileID: 534669906}
-    - target: {fileID: 3654572692976188033, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[2].value
-      value: 
-      objectReference: {fileID: 534669906}
-    - target: {fileID: 3654572692976188033, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[3].value
-      value: 
-      objectReference: {fileID: 534669906}
-    - target: {fileID: 3654572692976188033, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3654572692976188034, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3654572692976188036, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3654572692976188039, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 812835806316141076, guid: bebbe01c00fcd6b479a838597813c716,
-        type: 3}
-      propertyPath: maxHealth
-      value: 500
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3654572692976188033, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bebbe01c00fcd6b479a838597813c716, type: 3}
---- !u!1 &3654572692976188032 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3654572692827017750, guid: bebbe01c00fcd6b479a838597813c716,
-    type: 3}
-  m_PrefabInstance: {fileID: 3654572692976188031}
-  m_PrefabAsset: {fileID: 0}
---- !u!320 &3654572692976188033
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3654572692976188032}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings: []
-  m_ExposedReferences:
-    m_References: []
 --- !u!1001 &3810651713962566248
 PrefabInstance:
   m_ObjectHideFlags: 0
