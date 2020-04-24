@@ -151,6 +151,7 @@ public class FixedElementCanvasController : MonoBehaviour
     public void UpdateSentenceOptionsPanel(Sentence s, int index)
     {
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         sAux = s;
         sentenceIndex = index;
         EnableOrDisableOptionsPanel(true);
@@ -166,12 +167,14 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void ChooseAnOption(int index)
     {
+        print("Elige una opción");
         Cursor.visible = false;
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         FindObjectOfType<DecisionState>().AddOrSubtractToBalance(sAux.options[index].decisionBalance);
         EnableOrDisableOptionsPanel(false);
         FindObjectOfType<DialogueManager>().DisplayNextSentence(index + 1);
-        FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.DECISION;
+        //FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.DECISION;
+        print("State de la cursed girl: " + FindObjectOfType<CursedGirlEnemy>().cursedGirlState);
     }
 
     public void EnableOrDisableOptionsPanel(bool value)

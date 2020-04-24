@@ -11,9 +11,9 @@ public class CursedGirlEnemy : Enemy
     public float iniAttackDist;
     [SerializeField]
     GameObject mechanismObj;
-    [HideInInspector]
-    public CursedGirlStates cursedGirlState;
     //[HideInInspector]
+    public CursedGirlStates cursedGirlState;
+    [HideInInspector]
     public bool activation = false;
 
     [HideInInspector]
@@ -32,7 +32,7 @@ public class CursedGirlEnemy : Enemy
 
     public override void Update()
     {
-        
+        print("cursedgirl state: " + cursedGirlState);
         if (!locked)
         {
             Vector3 playerPos = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y + 1.4f, GameObject.FindGameObjectWithTag("Player").transform.position.z);

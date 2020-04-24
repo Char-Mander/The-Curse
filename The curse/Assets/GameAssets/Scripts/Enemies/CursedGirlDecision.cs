@@ -10,25 +10,23 @@ public class CursedGirlDecision : MonoBehaviour
     Transform goalPos;
     bool end = false;
     CursedGirlEnemy cursedGirl;
-    CursedGirlStates cursedGirlState;
     // Start is called before the first frame update
     void Start()
     {
         cursedGirl = GetComponent<CursedGirlEnemy>();
-        cursedGirlState = cursedGirl.cursedGirlState;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!cursedGirl.locked && cursedGirl.activation && cursedGirlState == CursedGirlStates.DECISION && !end)
+        if (cursedGirl.cursedGirlState == CursedGirlStates.DECISION && !end)
         {
-            print("Está en el decision ahora");
-            end = true;
-            GetComponent<CursedGirlTalk>().SetDialogueMode(true);
-            cursedGirl.anim.SetFloat("Speed", 0);
-            ManageDecisionStates();
+                end = true;
+                GetComponent<CursedGirlTalk>().SetDialogueMode(true);
+                cursedGirl.anim.SetFloat("Speed", 0);
+                ManageDecisionStates();
         }
+            
     }
 
    
@@ -42,13 +40,12 @@ public class CursedGirlDecision : MonoBehaviour
                // FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
             GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
             StartCoroutine(Transformation());
-            cursedGirlState = CursedGirlStates.TALKING;
+            cursedGirl.cursedGirlState = CursedGirlStates.TALKING;
         }
         else
         {
             GetComponent<CursedGirlTalk>().SetDialogueMode(false);
             StartCoroutine(WaitForDie());
-            cursedGirl.cursedGirlState = CursedGirlStates.ATTACKING;
         }
     }
 
@@ -71,4 +68,6 @@ public class CursedGirlDecision : MonoBehaviour
         GetComponent<Health>().SetGodMode(false);
         GetComponent<Health>().LoseHealth(1000);
     }
+
+    public bool HasEnd() { return end; }
 }

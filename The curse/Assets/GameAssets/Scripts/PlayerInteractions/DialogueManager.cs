@@ -20,19 +20,14 @@ public class DialogueManager : MonoBehaviour
         {
             print("Empieza el diálogo");
             FindObjectOfType<PlayerController>().SetIsLocked(true);
-            print("Bloquea al player y la montura");
             FindObjectOfType<Mount>().SetIsLocked(true);
-            print("Pone el modo diálogo");
             isOnADialogue = true;
-            print("Limpia las frases");
             sentences.Clear();
             this.dialogue = dialogue;
-            print("Encola las frases");
             foreach (Sentence sentence in dialogue.GetSentences())
             {
                 sentences.Enqueue(sentence);
             }
-            print("Antes de entrar al displaynextSentence");
             DisplayNextSentence(0);
         }
     }
@@ -46,7 +41,6 @@ public class DialogueManager : MonoBehaviour
     IEnumerator WaitForDisplay(int index)
     {   if (index < dialogue.GetSentences().Count)
         {
-            print("Pone el display de la frase " + index);
             this.index = index;
             Sentence s = sentences.Dequeue();
             float textTime = s.sentence.Length > 30 ? (float)s.sentence.Length / 20 : 1f;
@@ -81,10 +75,9 @@ public class DialogueManager : MonoBehaviour
         {
             FindObjectOfType<PlayerController>().SetIsLocked(false);
             FindObjectOfType<PlayerController>().EnableOrDisableCharacterController(true);
-            //if(FindObjectOfType<CursedGirlTalk>().DialogueCount()>0)
-            FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.ATTACKING;
-
-            //dialogue.gameObject.GetComponent<CursedGirlEnemy>().StartAttackingMode();
+            FindObjectOfType<CursedGirlTalk>().SetCanTalk(true);
+            if (FindObjectOfType<CursedGirlTalk>().DialogueCount() == 1) FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.DECISION;
+            else FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.ATTACKING;
         }
         else if (dialogue.gameObject.GetComponentInChildren<Quest>() != null && !dialogue.gameObject.GetComponentInChildren<Quest>().HasBeenTriggered())
         {

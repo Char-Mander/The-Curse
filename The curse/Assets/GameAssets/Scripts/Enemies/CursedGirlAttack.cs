@@ -18,6 +18,8 @@ public class CursedGirlAttack : MonoBehaviour
     [SerializeField]
     List<Transform> instantiateMonstersPos = new List<Transform>();
     CursedGirlEnemy cursedGirl;
+    Coroutine spawnMonsterCoroutine;
+    Coroutine bodyAttackCoroutine;
     bool attackInCurse = false;
     bool canTeleport = true;
     bool canCreateMonsters = true;
@@ -39,14 +41,8 @@ public class CursedGirlAttack : MonoBehaviour
               print("Está atacando ahora");
               if (!cursedGirl.enemyCanvas.activeInHierarchy) GetComponent<CursedGirlTalk>().SetDialogueMode(false);
 
-            if (GetPhase() == 4)
-            {
-                DestroyEnemies();
-                cursedGirl.anim.SetFloat("Speed", 0);
-                cursedGirl.cursedGirlState = CursedGirlStates.TALKING;
-            }
-            else if (!cursedGirl.canAttack && !attackInCurse) attackState = CursedGirlAttackStates.MOVING;
-            else if ((cursedGirl.canAttack || canTeleport || canCreateMonsters) || attackInCurse) attackState = CursedGirlAttackStates.ATTACKING;
+            if ((!cursedGirl.canAttack && !attackInCurse) || cursedGirl.distToPlayer < cursedGirl.iniAttackDist || cursedGirl.distToPlayer > cursedGirl.endAttackDist) attackState = CursedGirlAttackStates.MOVING;
+            else if ((cursedGirl.canAttack || canTeleport || canCreateMonsters || GetPhase() == 4) || attackInCurse) attackState = CursedGirlAttackStates.ATTACKING;
 
              if (attackState == CursedGirlAttackStates.MOVING)
              {
@@ -84,6 +80,11 @@ public class CursedGirlAttack : MonoBehaviour
                 SpawnMonster();
                 break;
             case 4:
+                print("Phase 4");
+                if (spawnMonsterCoroutine != null) StopCoroutine(spawnMonsterCoroutine);
+                if (bodyAttackCoroutine != null) StopCoroutine(bodyAttackCoroutine);
+                DestroyEnemies();
+                FindObjectOfType<PlayerController>().GetComponent<Health>().StopReceivingConstantDamage();
                 cursedGirl.anim.SetFloat("Speed", 0);
                 cursedGirl.cursedGirlState = CursedGirlStates.TALKING;
                 break;
@@ -140,7 +141,7 @@ public class CursedGirlAttack : MonoBehaviour
             cursedGirl.canAttack = false;
             attackInCurse = true;
             ChangeLayerWeight(true);
-            StartCoroutine(WaitForBodyAttack(hit));
+            bodyAttackCoroutine = StartCoroutine(WaitForBodyAttack(hit));
         }
     }
 
@@ -158,7 +159,7 @@ public class CursedGirlAttack : MonoBehaviour
     private void CreateMonster()
     {
         canCreateMonsters = false;
-        StartCoroutine(WaitForSpawnAttack());
+        spawnMonsterCoroutine = StartCoroutine(WaitForSpawnAttack());
     }
 
     IEnumerator WaitForSpellAttack()
@@ -209,7 +210,6 @@ public class CursedGirlAttack : MonoBehaviour
 
     void ChangeLayerWeight(bool isAttacking)
     {
-        print("Cambia el layer weight a " + isAttacking);
         if (isAttacking)
         {
             cursedGirl.anim.SetLayerWeight(0, 0);

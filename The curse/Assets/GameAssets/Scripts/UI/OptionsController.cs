@@ -32,33 +32,33 @@ public class OptionsController : MonoBehaviour
 
     public void SwitchPause()
     {
-        isPaused = !isPaused;
-        if (isPaused)
-        {
-            if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
-            if (GameManager.instance.sceneC.IsALvlScene() && !FindObjectOfType<CursedGirlTalk>().IsCinematicPlaying())
+            isPaused = !isPaused;
+            if (isPaused)
             {
-                FindObjectOfType<PlayerController>().SetIsLocked(true);
-                FindObjectOfType<Mount>().SetIsLocked(true);
-            }
-        }
-        else if (!isPaused)
-        {
-            if (GameManager.instance.sceneC.IsALvlScene() && !FindObjectOfType<CursedGirlTalk>().IsCinematicPlaying())
-            {
-                if (FindObjectOfType<CursedGirlEnemy>() != null) Cursor.lockState = CursorLockMode.Locked;
-                if (!FindObjectOfType<DialogueManager>().IsOnADialogue() && !FindObjectOfType<TeleportController>().GetTeleportOptionsAvailable())
+                if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+                if (GameManager.instance.sceneC.IsALvlScene() && !FindObjectOfType<DialogueManager>().IsOnADialogue())
                 {
-                    FindObjectOfType<PlayerController>().SetIsLocked(false);
-                    FindObjectOfType<Mount>().SetIsLocked(false);
+                    FindObjectOfType<PlayerController>().SetIsLocked(true);
+                    FindObjectOfType<Mount>().SetIsLocked(true);
                 }
             }
-            else if(Cursor.lockState == CursorLockMode.Locked)
+            else if (!isPaused)
             {
-                Cursor.lockState = CursorLockMode.None;
+                if (GameManager.instance.sceneC.IsALvlScene() && !FindObjectOfType<DialogueManager>().IsOnADialogue())
+                {
+                    if (FindObjectOfType<CursedGirlEnemy>() != null) Cursor.lockState = CursorLockMode.Locked;
+                    if (!FindObjectOfType<DialogueManager>().IsOnADialogue() && !FindObjectOfType<TeleportController>().GetTeleportOptionsAvailable())
+                    {
+                        FindObjectOfType<PlayerController>().SetIsLocked(false);
+                        FindObjectOfType<Mount>().SetIsLocked(false);
+                    }
+                }
+                else if (Cursor.lockState == CursorLockMode.Locked)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
             }
-        }
-        optionPanel.SetActive(isPaused);
-        Time.timeScale = isPaused ? 0.000001f : 1;
+            optionPanel.SetActive(isPaused);
+            Time.timeScale = isPaused ? 0.000001f : 1;
     }
 }

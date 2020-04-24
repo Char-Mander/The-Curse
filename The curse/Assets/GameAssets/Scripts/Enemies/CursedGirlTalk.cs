@@ -54,6 +54,7 @@ public class CursedGirlTalk : MonoBehaviour
                 {
                     currentDialogue = dialogueQueue.Dequeue();
                     FindObjectOfType<DialogueManager>().StartDialogue(currentDialogue);
+                   // if (dialogueQueue.Count == 0) cursedGirl.cursedGirlState = CursedGirlStates.DECISION;
                 }
                 else { print("No hay más diálogos"); }
                 //director.playableAsset = playablesQueue.Dequeue();
@@ -135,4 +136,6 @@ public class CursedGirlTalk : MonoBehaviour
     public bool IsCinematicPlaying() { return cinematicIsPlaying; }
 
     public int DialogueCount() { return dialogueQueue.Count; }
+
+    public void SetCanTalk(bool value) { canTalk = value; }
 }
