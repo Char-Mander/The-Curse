@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour, ICharacter
 {
     private const float gravity = -9.8f;
 
-    //Variables de movimiento del player
-    //Variables accesibles desde Unity
+    //Variables accesibles desde el inspector
     [SerializeField]
     private float runSpeed;
     [SerializeField]
@@ -17,8 +17,13 @@ public class PlayerController : MonoBehaviour, ICharacter
     private float rotationSpeed;
     [SerializeField]
     private float jumpForce;
-    public GameObject FPSCamera;
-
+    [HideInInspector]
+    public CinemachineVirtualCamera FPSCamera;
+    public List<CinemachineVirtualCamera> cameras = new List<CinemachineVirtualCamera>();
+    [HideInInspector]
+    public CinemachineFollowZoom zoom;
+    [SerializeField]
+    Transform head;
 
     //Variables privadas
     private CharacterController cController;
@@ -39,13 +44,15 @@ public class PlayerController : MonoBehaviour, ICharacter
     private bool locked = false;
     private Stamina stamina;
 
-    private PlayerSoundsManager soundsManager;
+    [HideInInspector]
+    public PlayerSoundsManager soundsManager;
     private PickUpObjects pickobj;
     private InteractWithObjects interactobj;
     private GameObject weapon;
     private GameObject crossHair;
     private Mount mount;
     private Animator anim;
+    private bool isAlive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +63,9 @@ public class PlayerController : MonoBehaviour, ICharacter
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         iniRotationY = transform.rotation.eulerAngles.y;
+        FPSCamera = cameras[0];//GetComponentInChildren<CinemachineVirtualCamera>();
+        cameras[0].m_Priority = 10;
+        zoom = GetComponentInChildren<CinemachineFollowZoom>();
         soundsManager = GetComponent<PlayerSoundsManager>();
         pickobj = GetComponent<PickUpObjects>();
         interactobj = GetComponent<InteractWithObjects>();
@@ -112,7 +122,6 @@ public class PlayerController : MonoBehaviour, ICharacter
         if (cController.isGrounded)
         {
             dirPos = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if ((isRunning || isWalking) && cController.velocity.magnitude == 0)
@@ -161,7 +170,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     private void WeaponInputs()
     {
         
-        if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.T))
+        if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.T) && !isOnAMount)
         {
             if (checkTypeOfActiveWeapon() == 1 && FindObjectOfType<WeaponController>().currentWeapon.GetCurrentAmmo() > 0) 
             {
@@ -187,7 +196,7 @@ public class PlayerController : MonoBehaviour, ICharacter
             }
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Y))
         {
             if (checkTypeOfActiveWeapon() == 1)
             {
@@ -210,7 +219,6 @@ public class PlayerController : MonoBehaviour, ICharacter
             }
         }
     }
-
 
     //Funciones que modifican la stamina del player
     void ModifyStamina()
@@ -258,7 +266,7 @@ public class PlayerController : MonoBehaviour, ICharacter
                 else if (cController.velocity.magnitude != 0)
                 {
                     isWalking = false;
-                    soundsManager.StopSound();
+                soundsManager.StopSound();
                 }
                 isRunning = false;
             }
@@ -271,11 +279,11 @@ public class PlayerController : MonoBehaviour, ICharacter
                     soundsManager.ManageWalkSound();
                 }
                 //Cuando pasa de estar andando a estar completamente quieto
-                else if (cController.velocity.magnitude == 0 && isWalking)
+                else if (cController.velocity.magnitude == 0 && isWalking && !GetComponent<PickUpObjects>().IsPickingAnObject())
                 {
                     isWalking = false;
                     isRunning = false;
-                    soundsManager.StopSound();
+                soundsManager.StopSound();
                 }
             }
         
@@ -286,8 +294,8 @@ public class PlayerController : MonoBehaviour, ICharacter
     {
          int res = 0;
 
-         if (transform.GetComponentInChildren<SimpleShoot>()) res = 1;
-         else if (transform.GetComponentInChildren<ParticleShoot>()) res = 2;
+         if (transform.GetComponentInChildren<SimpleShoot>() != null) res = 1;
+         else if (transform.GetComponentInChildren<ParticleShoot>() != null) res = 2;
          return res;
     }
 
@@ -310,6 +318,34 @@ public class PlayerController : MonoBehaviour, ICharacter
         crossHair.SetActive(enable);
     }
 
+    public void Die()
+    {
+        if (isAlive)
+        {
+            isAlive = false;
+            GameManager.instance.SetDeaths(GameManager.instance.GetDeaths() + 1);
+            locked = true;
+            soundsManager.StopSound();
+            FindObjectOfType<GeneralSoundManager>().StopSound();
+            FindObjectOfType<GeneralSoundManager>().ManageLoseSound();
+            Enemy[] enemies = FindObjectsOfType<Enemy>();
+            foreach (Enemy e in enemies)
+                e.locked = true;
+            GetActiveWeaponAndCrossHair();
+            EnableWeapon(false);
+            FindObjectOfType<FixedElementCanvasController>().EnableOrDisableDeathPanel(true);
+            FindObjectOfType<PostProcessManager>().SetDeathProfile();
+            StartCoroutine(WaitForDie());
+        }
+        
+    }
+
+    IEnumerator WaitForDie()
+    {
+        yield return new WaitForSeconds(7);
+        GameManager.instance.sceneC.LoadGameOver();
+    }
+
     public bool CanRunAgain() { return this.canRunAgain; }
     
     public bool IsOnAMount() { return isOnAMount; }
@@ -322,9 +358,12 @@ public class PlayerController : MonoBehaviour, ICharacter
 
     public void GetActiveWeaponAndCrossHair()
     {
-        this.weapon = checkTypeOfActiveWeapon()==1 ? GetComponentInChildren<SimpleShoot>().gameObject 
-                                                   : GetComponentInChildren<ParticleShoot>().gameObject;
-        this.crossHair = GameObject.FindGameObjectWithTag("CrossHair");
+        if (GetComponentInChildren<SimpleShoot>()!=null || GetComponentInChildren<ParticleShoot>() != null)
+        {
+            this.weapon = checkTypeOfActiveWeapon() == 1 ? GetComponentInChildren<SimpleShoot>().gameObject
+                                                       : GetComponentInChildren<ParticleShoot>().gameObject;
+            this.crossHair = GameObject.FindGameObjectWithTag("CrossHair");
+        }
     }
     
     public void EnableOrDisableCharacterController(bool enable)
@@ -346,11 +385,8 @@ public class PlayerController : MonoBehaviour, ICharacter
         locked = value;
         if (locked && !isOnAMount)
         {
-            if (!locked)
-            {
                 GetActiveWeaponAndCrossHair();
                 soundsManager.StopSound();
-            }
         }
         if (!isOnAMount)
         {
@@ -369,4 +405,8 @@ public class PlayerController : MonoBehaviour, ICharacter
             }
         }
     }
+
+    public bool IsAlive() { return isAlive; }
+
+    public Transform GetPlayerHeadTransform() { return head; }
 }

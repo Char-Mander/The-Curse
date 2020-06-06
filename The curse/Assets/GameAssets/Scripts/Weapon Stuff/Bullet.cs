@@ -7,10 +7,6 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float damage;
     private AudioSource aSource;
-    /*[SerializeField]
-    private GameObject hitParticle;
-    [SerializeField]
-    private GameObject bloodParticle;*/
 
     void Start()
     {
@@ -26,23 +22,25 @@ public class Bullet : MonoBehaviour
     
     private void OnTriggerEnter(Collider col)
     {
+        print("impacta con: " + col.name + " con tag: " + col.tag);
         if (col.CompareTag("Player"))
         {
-            //CreateParticleAtPoint(bloodParticle, col.transform.position, Quaternion rotate)
             col.gameObject.GetComponent<Health>().LoseHealth((float)damage);
+            Destroy(this.gameObject);
         }
         else if (col.CompareTag("Enemy"))
         {
             aSource.PlayOneShot(aSource.clip);
-            //CreateParticleAtPoint(bloodParticle, col.transform.position, Quaternion rotate)
-            col.gameObject.GetComponentInParent<Health>().LoseHealth(damage);
+            FindObjectOfType<SimpleShoot>().CreateParticleAtPoint(FindObjectOfType<SimpleShoot>().enemyHitParticle,
+                FindObjectOfType<SimpleShoot>().bulletHit, false, FindObjectOfType<SimpleShoot>().impactRotation);
+            if (col.gameObject.GetComponent<Health>() != null) col.gameObject.GetComponent<Health>().LoseHealth(damage);
+            else if (col.gameObject.GetComponentInParent<Health>() != null) col.gameObject.GetComponentInParent<Health>().LoseHealth(damage);
             Destroy(this.gameObject);
         }
-        else
+        else if(col.CompareTag("Terrain") || col.CompareTag("Rocks"))
         {
-            //CreateParticleAtPoint(hitParticle, col.transform.position, Quaternion rotate)
+            Destroy(this.gameObject);
         }
 
-        //Destroy(Instantiate(hitParticle, transform.position, Quaternion.identity), 3);
     }
 }

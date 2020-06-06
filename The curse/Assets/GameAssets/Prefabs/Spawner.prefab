@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 7232755058083143787}
   - component: {fileID: 7232755058083143784}
   - component: {fileID: 7232755058083143786}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7232755058083143787
 Transform:
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6234c40af8fa0304190f2438a5354ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectDist: 35
-  minSpawnTime: 100
+  detectDist: 50
+  minSpawnTime: 5
   posSpawn: {fileID: 7232755059780939820}
   maxEnemies: 5
   enemyToSpawn:
@@ -74,12 +74,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7232755059780939820}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: posSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7232755059780939820
 Transform:

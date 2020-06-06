@@ -5,11 +5,14 @@ using UnityEngine;
 public class CursedGirlDecision : MonoBehaviour
 {
     [SerializeField]
-    GameObject goal;
+    GameObject smokeParticles;
     [SerializeField]
-    Transform goalPos;
+    GameObject fireworkParticles;
+    [SerializeField]
+    List<Transform> posSpawnEndParticles = new List<Transform>();
     bool end = false;
     CursedGirlEnemy cursedGirl;
+    bool hasSavedTheGirl;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,13 +37,12 @@ public class CursedGirlDecision : MonoBehaviour
     private void ManageDecisionStates()
     {
         GetComponent<CursedGirlEnemy>().AimPlayer();
-        if (FindObjectOfType<DecisionState>().CheckBalanceState() > 0)
+        hasSavedTheGirl = FindObjectOfType<DecisionState>().CheckBalanceState() > 0;
+        FindObjectOfType<GeneralSoundManager>().ManageWinSound();
+        if (hasSavedTheGirl)
         {
-                //lanza la cinemática del diálogo
-               // FindObjectOfType<DialogueManager>().StartDialogue(dialogues[2]);
             GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
             StartCoroutine(Transformation());
-            cursedGirl.cursedGirlState = CursedGirlStates.TALKING;
         }
         else
         {
@@ -51,23 +53,32 @@ public class CursedGirlDecision : MonoBehaviour
 
     IEnumerator Transformation()
     {
+        if (posSpawnEndParticles.Count > 0) Instantiate(fireworkParticles, posSpawnEndParticles[0]);
+        if (posSpawnEndParticles.Count > 1) Instantiate(fireworkParticles, posSpawnEndParticles[1]);
         yield return new WaitForSeconds(1);
+        Instantiate(smokeParticles, this.transform);
         cursedGirl.peacefulModel.SetActive(true);
         cursedGirl.peacefulModel.transform.position = this.transform.position;
         cursedGirl.peacefulModel.transform.rotation = this.transform.rotation;
-        Instantiate(goal, goalPos);
         yield return new WaitForSeconds(0.2f);
         GetComponent<CursedGirlTalk>().SetDialogueMode(false);
-        // GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
-        Destroy(this.gameObject);
+        GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+        StartCoroutine(WaitForLoadGameOver());
     }
 
     IEnumerator WaitForDie()
     {
-        Instantiate(goal, goalPos);
-        yield return new WaitForSeconds(1f);
-        GetComponent<Health>().SetGodMode(false);
+        if(posSpawnEndParticles.Count > 0) Instantiate(fireworkParticles, posSpawnEndParticles[0]);
+        if (posSpawnEndParticles.Count > 1) Instantiate(fireworkParticles, posSpawnEndParticles[1]);
         GetComponent<Health>().LoseHealth(1000);
+        yield return new WaitForSeconds(4f);
+        GetComponent<Health>().SetGodMode(false);
+    }
+
+    IEnumerator WaitForLoadGameOver()
+    {
+        yield return new WaitForSeconds(2f);
+        GameManager.instance.sceneC.LoadGameOver();
     }
 
     public bool HasEnd() { return end; }

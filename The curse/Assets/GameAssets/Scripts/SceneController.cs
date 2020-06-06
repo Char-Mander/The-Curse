@@ -6,23 +6,27 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [SerializeField]
-    float timeBetweenScene = 0.25f;
+    float timeBetweenScene = 1f;
     bool lockSelection = false;
 
     public void LoadSceneLvl()
     {
-        if(!lockSelection)
+        GameManager.instance.ShowOrHideLoadingPanel(true);
+        if (!lockSelection)
         StartCoroutine(LoadLvlWait());   
     }
 
     public void LoadMenu()
     {
+        GameManager.instance.ShowOrHideLoadingPanel(true);
         if(IsALvlScene()) GameManager.instance.data.SaveWeaponsAmmo(FindObjectOfType<WeaponController>().GetWeaponListLenght());
         SceneManager.LoadScene("MainMenu");
+        GameManager.instance.ShowOrHideLoadingPanel(false);
     }
 
     public void LoadGameOver()
     {
+        GameManager.instance.ShowOrHideLoadingPanel(true);
         if (!lockSelection)
         {
             //Guarda la información antes de cargar la pantalla del GameOver
@@ -45,15 +49,9 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenScene);
         SceneManager.LoadScene("Lvl");
         lockSelection = false;
+        GameManager.instance.ShowOrHideLoadingPanel(false);
     }
-
-    IEnumerator LoadMenuWait()
-    {
-        lockSelection = true;
-        yield return new WaitForSeconds(timeBetweenScene);
-        SceneManager.LoadScene("MainMenu");
-        lockSelection = false;
-    }
+    
 
 
     IEnumerator LoadGameOverWait()
@@ -62,6 +60,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenScene);
         SceneManager.LoadScene("GameOver");
         lockSelection = false;
+        GameManager.instance.ShowOrHideLoadingPanel(false);
     }
 
 

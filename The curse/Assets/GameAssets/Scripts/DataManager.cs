@@ -16,6 +16,15 @@ public class DataManager : MonoBehaviour
     private string weaponAmmoKey = "Ammo";
     private string tutorialKey = "Tutorial";
     private string mountLockedKey = "Mount";
+    private string initialCinematicKey = "Initial Cinematic";
+    private string dataKey = "Data";
+    bool hasPreviousData = false;
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey(dataKey))
+            hasPreviousData = true;
+    }
 
     public void LoadData()
     {
@@ -65,6 +74,12 @@ public class DataManager : MonoBehaviour
         else return false;
     }
 
+    public bool LoadInitialCinematic()
+    {
+        if (PlayerPrefs.HasKey(initialCinematicKey)) return true;
+        else return false;
+    }
+
     public bool LoadUnlockedMount()
     {
         if (PlayerPrefs.HasKey(mountLockedKey)) return true;
@@ -89,18 +104,28 @@ public class DataManager : MonoBehaviour
         {
             if (FindObjectOfType<WeaponController>().HasAmmo(i)) PlayerPrefs.SetInt(weaponAmmoKey + i.ToString(), FindObjectOfType<WeaponController>().GetWeaponByIndex(i).GetCurrentAmmo());
         }
+        SaveDataVariable();
     }
 
     public void SaveTutorialPoint(int index)
     {
         //Guarda como clave el "Teleport Point + index"
         PlayerPrefs.SetString(tutorialKey + (index).ToString(), "True");
+        SaveDataVariable();
+        PlayerPrefs.Save();
+    }
+
+    public void SaveInitialCinematic()
+    {
+        PlayerPrefs.SetString(initialCinematicKey, "True");
+        SaveDataVariable();
         PlayerPrefs.Save();
     }
 
     public void SaveUnlockedMount()
     {
         PlayerPrefs.SetString(mountLockedKey, "True");
+        SaveDataVariable();
         PlayerPrefs.Save();
     }
 
@@ -108,6 +133,7 @@ public class DataManager : MonoBehaviour
     {
         //Guarda la vida del player
         PlayerPrefs.SetFloat(currentPlayerHealthKey, currentHealth);
+        SaveDataVariable();
         PlayerPrefs.Save();
     }
 
@@ -115,6 +141,7 @@ public class DataManager : MonoBehaviour
     {
         //Guarda como clave el "Teleport Point + index"
         PlayerPrefs.SetInt(teleportPointKey + (index+1).ToString(), index);
+        SaveDataVariable();
         PlayerPrefs.Save();
     }
 
@@ -122,6 +149,7 @@ public class DataManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey(weaponUnlockedKey+index.ToString()))
             PlayerPrefs.SetInt(weaponUnlockedKey + (index).ToString(), index);
+        SaveDataVariable();
         PlayerPrefs.Save();
     }
 
@@ -140,24 +168,61 @@ public class DataManager : MonoBehaviour
         PlayerPrefs.SetInt(defeatedEnemiesKey, defeatedEnemies);
         //Guarda la decisión del player
         PlayerPrefs.SetInt(decisionStateKey, decisionState);
-
+        SaveDataVariable();
         PlayerPrefs.Save();
+    }
+
+    private void SaveDataVariable()
+    {
+        if (!PlayerPrefs.HasKey(dataKey))
+        {
+            PlayerPrefs.SetString(dataKey, "True");
+        }
     }
 
     public void ResetData()
     {
-        DeletePrefs();
-        GameManager.instance.ResetData();
+        if (hasPreviousData)
+        {
+            hasPreviousData = false;
+            if (PlayerPrefs.HasKey(currentCheckPointKey)) PlayerPrefs.DeleteKey(currentCheckPointKey);
+            if (PlayerPrefs.HasKey(currentQuestKey)) PlayerPrefs.DeleteKey(currentQuestKey);
+            if (PlayerPrefs.HasKey(currentPlayerHealthKey)) PlayerPrefs.DeleteKey(currentPlayerHealthKey);
+            if (PlayerPrefs.HasKey(deathsKey)) PlayerPrefs.DeleteKey(deathsKey);
+            if (PlayerPrefs.HasKey(defeatedEnemiesKey)) PlayerPrefs.DeleteKey(defeatedEnemiesKey);
+            if (PlayerPrefs.HasKey(decisionStateKey)) PlayerPrefs.DeleteKey(decisionStateKey);
+
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (PlayerPrefs.HasKey(teleportPointKey + (i + 1).ToString())) PlayerPrefs.DeleteKey(teleportPointKey + (i + 1).ToString());
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (PlayerPrefs.HasKey(weaponUnlockedKey + i.ToString())) PlayerPrefs.DeleteKey(weaponUnlockedKey + i.ToString());
+                if (PlayerPrefs.HasKey(weaponAmmoKey + i.ToString())) PlayerPrefs.DeleteKey(weaponAmmoKey + i.ToString());
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (PlayerPrefs.HasKey(tutorialKey + i.ToString())) PlayerPrefs.DeleteKey(tutorialKey + i.ToString());
+            }
+
+            if (PlayerPrefs.HasKey(mountLockedKey)) PlayerPrefs.DeleteKey(mountLockedKey);
+            if (PlayerPrefs.HasKey(initialCinematicKey)) PlayerPrefs.DeleteKey(initialCinematicKey);
+            if (PlayerPrefs.HasKey(dataKey)) PlayerPrefs.DeleteKey(dataKey);
+            GameManager.instance.ResetData();
+        }
     }
 
-    [MenuItem("Utilidades/DeletePlayerPrefs")]
-    public static void DeletePrefs()
+    public bool HasPlayerData()
     {
-        PlayerPrefs.DeleteAll();
+        return PlayerPrefs.HasKey(currentCheckPointKey) && PlayerPrefs.HasKey(currentQuestKey) && PlayerPrefs.HasKey(currentPlayerHealthKey);
     }
 
     public bool HasPreviousData()
     {
-        return PlayerPrefs.HasKey(currentCheckPointKey) && PlayerPrefs.HasKey(currentQuestKey) && PlayerPrefs.HasKey(currentPlayerHealthKey);
+        return hasPreviousData;
     }
 }

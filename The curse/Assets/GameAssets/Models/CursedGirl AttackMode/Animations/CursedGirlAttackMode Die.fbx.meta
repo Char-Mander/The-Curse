@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 86f0c4f5c4d2e1f42be2285747d0c9fd
+guid: 7bba03ce4d7ddec4f9ac4dccf305abec
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -135,7 +135,7 @@ ModelImporter:
     400126: Spine
     400128: Spine1
     400130: Spine2
-    7400000: CursedGirlAttackMode Die
+    7400000: CursedGirlAttackMode Dying Backwards
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -157,7 +157,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -166,10 +166,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: CursedGirlAttackMode Die
+      name: CursedGirlAttackMode Dying Backwards
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 117
+      lastFrame: 138
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -178,9 +178,9 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0

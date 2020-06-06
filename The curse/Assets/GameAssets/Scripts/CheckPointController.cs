@@ -11,7 +11,7 @@ public class CheckPointController : MonoBehaviour
     {
         cpList = FindObjectsOfType<CheckPoint>();
         OrderCheckPoints();
-        ActiveCP(GameManager.instance.data.HasPreviousData() ? cpList[GameManager.instance.GetCurrentCheckPoint()] : cpList[0]);
+        ActiveCP(GameManager.instance.data.HasPlayerData() ? cpList[GameManager.instance.GetCurrentCheckPoint()] : cpList[0]);
         Respawn();
     }
 

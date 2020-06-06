@@ -11,13 +11,13 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     Image fillImage;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         UpdateHealthBar();
     }
     
-    // Update is called once per frame
+
     public void UpdateHealthBar()
     {
         currentFillHealth = currentObjectHealth/ maxObjectHealth;

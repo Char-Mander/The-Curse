@@ -18,7 +18,7 @@ public class FuelBar : MonoBehaviour
         UpdateFuelBar();
      }
 
-     // Update is called once per frame
+
      public void UpdateFuelBar()
      {
         currentFillFuel = currentObjectFuel / maxObjectFuel;

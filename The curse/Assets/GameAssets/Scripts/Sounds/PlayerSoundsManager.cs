@@ -59,13 +59,33 @@ public class PlayerSoundsManager : MonoBehaviour
         aSource.PlayOneShot(generalAudioClips[4]);
     }
 
-    public void ManageMountSnort()
+    public void ManageMountRoar()
     {
         aSource.PlayOneShot(generalAudioClips[5]);
     }
 
+    public void ManageAmmoPickUp()
+    {
+        aSource.PlayOneShot(generalAudioClips[6]);
+    }
+
+    public void ManageObjectPickUp()
+    {
+        aSource.PlayOneShot(generalAudioClips[7]);
+    }
+
+    public void ManageChangeWeapon()
+    {
+        if(generalAudioClips[8] != null && GameObject.FindGameObjectWithTag("InitialCinematic").GetComponent<PlayGenericCinematic>().HasBeenPlayed()) aSource.PlayOneShot(generalAudioClips[8]);
+    }
+
+    public void ManageDamageSound()
+    {
+       aSource.PlayOneShot(generalAudioClips[9]);
+    }
+
     public void StopSound()
     {
-        aSource.Stop();
+        if(aSource.isPlaying) aSource.Stop();
     }
 }

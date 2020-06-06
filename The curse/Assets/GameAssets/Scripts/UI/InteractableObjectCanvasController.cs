@@ -7,9 +7,8 @@ public class InteractableObjectCanvasController : WorldSpaceCanvasController
     [SerializeField]
     GameObject interactionPanel;
 
-    public override void Start()
+    public void Start()
     {
-        base.Start();
         interactionPanel.SetActive(false);
     }
 

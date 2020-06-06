@@ -13,8 +13,8 @@ public class InteractWithObjects : MonoBehaviour
     public List<GameObject> objectsToInteract = new List<GameObject>();
     //Tiempo de espera para volver a interaccionar con un objeto
     private bool canInteract=true;
+    
 
-    // Update is called once per frame
     public void InteractWithGameObject()
     {
         if(objectsToInteract.Count > 0)

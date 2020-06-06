@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class TeleportController : MonoBehaviour
 {
     TeleportPoint[] tpList;
+    PostProcessVolume volume;
+    Vignette vLayerDV = null;
+
     bool teleportOptionsAvailable = false;
 
     private void Start()
@@ -19,6 +23,7 @@ public class TeleportController : MonoBehaviour
             int tpIndex = GameManager.instance.GetDiscoveredTeleportPointIndex(i);
             tpList[tpIndex].SetDiscovered(true);
         }
+        volume = GetComponent<PostProcessVolume>();
     }
 
     private void OrderTeleportPoints()
@@ -52,7 +57,6 @@ public class TeleportController : MonoBehaviour
     public void ShowTP()
     {
         FindObjectOfType<FixedElementCanvasController>().TeleportPointsDeployment(tpList);
-
     }
 
 
@@ -64,11 +68,34 @@ public class TeleportController : MonoBehaviour
 
     public void Teleport(int index)
     {
-
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        
-        Vector3 finalPos = new Vector3(tpList[index].transform.position.x, tpList[index].transform.position.y, tpList[index].transform.position.z-2);
-        player.transform.position = finalPos;
+        player.transform.position = tpList[index].tpPos.position;
+        SetFastTravelProfile();
+    }
+
+    void SetFastTravelProfile()
+    {
+         StartCoroutine(FastTravelEffect());
+    }
+
+    IEnumerator FastTravelEffect()
+    {
+        if (vLayerDV == null)
+        {
+            volume.profile.TryGetSettings(out vLayerDV);
+            vLayerDV.intensity.value = 1;
+        }
+        if (vLayerDV.intensity > 0)
+        {
+            vLayerDV.intensity.value -= 0.01f;
+            yield return new WaitForSeconds(0.01f);
+            StartCoroutine(FastTravelEffect());
+        }
+        else
+        {
+            vLayerDV = null;
+            FindObjectOfType<PostProcessManager>().SetGeneralProfile();
+        }
     }
 
     public int GetIndexOfTP(TeleportPoint tp)

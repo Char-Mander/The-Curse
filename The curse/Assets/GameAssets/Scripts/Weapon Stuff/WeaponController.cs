@@ -13,13 +13,13 @@ public class ArmaClass
     [SerializeField]
     private bool isUnlocked;
     
-    public void enableWeapon() { weapon.SetActive(true); }
+    public void EnableWeapon() { weapon.SetActive(true); }
 
-    public void disableWeapon() { weapon.SetActive(false); }
+    public void DisableWeapon() { weapon.SetActive(false); }
 
-    public bool getIsUnlocked() { return isUnlocked; }
+    public bool GetIsUnlocked() { return isUnlocked; }
 
-    public void setIsUnlocked(bool unlock) { isUnlocked = unlock; }
+    public void SetIsUnlocked(bool unlock) { isUnlocked = unlock; }
 
     public GameObject GetWeapon() { return weapon; }
 
@@ -48,18 +48,18 @@ public class WeaponController : MonoBehaviour
 
     //Variales privadas
     private bool canChangeWeapon = true;
+    
 
-    // Start is called before the first frame update
     void Start()
     {
         Init();
     }
 
-    private void Init()
+    public void Init()
     {
         GameManager.instance.data.LoadWeaponsUnlocked(weaponList.Count);
         GameManager.instance.data.LoadWeaponsAmmo(weaponList.Count);
-        if (!weaponList[0].getIsUnlocked()) UnlockWeapon(0);
+        if (!weaponList[0].GetIsUnlocked()) UnlockWeapon(0);
         Selectweapon(0);
     }
 
@@ -71,10 +71,10 @@ public class WeaponController : MonoBehaviour
         canChangeWeapon = true;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        if (canChangeWeapon && !FindObjectOfType<PlayerController>().IsLocked())
+        if (canChangeWeapon && !FindObjectOfType<PlayerController>().IsLocked() && !FindObjectOfType<PlayerController>().IsOnAMount())
         {
             DetectWeaponInput();
         }
@@ -86,7 +86,7 @@ public class WeaponController : MonoBehaviour
         {
             if (i < 9)
             {
-                if (weaponList[i].getIsUnlocked())
+                if (weaponList[i].GetIsUnlocked())
                 {
                     if (Input.GetKeyDown((i + 1).ToString()))
                     {
@@ -98,20 +98,20 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    void Selectweapon(int weaponIndex)
+    public void Selectweapon(int weaponIndex)
     {
         for (int i = 0; i < weaponList.Count; i++)
         {
-            weaponList[i].enableWeapon();
+            weaponList[i].EnableWeapon();
             if (weaponList[i].GetWeapon().GetComponent<ParticleShoot>() != null)
             {
                 weaponList[i].GetWeapon().GetComponent<ParticleShoot>().setShooting(false);
             }
-            weaponList[i].disableWeapon();
+            weaponList[i].DisableWeapon();
         }
         FixedElementCanvasController fixC = GameObject.FindGameObjectWithTag("FixedCanvas").GetComponent<FixedElementCanvasController>();
         fixC.EnableOrDisableFuelBar(false);
-        weaponList[weaponIndex].enableWeapon();
+        weaponList[weaponIndex].EnableWeapon();
         if(weaponList[weaponIndex].GetWeapon().GetComponent<SimpleShoot>() != null)
         {
             weaponList[weaponIndex].GetWeapon().GetComponent<SimpleShoot>().SetCanShoot(true);
@@ -124,13 +124,15 @@ public class WeaponController : MonoBehaviour
         currentWeaponIndex = weaponIndex;
         FindObjectOfType<FixedElementCanvasController>().EnableBulletPanel(currentWeapon.GetWeapon().GetComponent<SimpleShoot>() != null);
         FindObjectOfType<FixedElementCanvasController>().UpdateBulletPanel(currentWeapon.GetCurrentAmmo());
+        FindObjectOfType<PlayerSoundsManager>().ManageChangeWeapon();
     }
 
     public void UnlockWeapon(int weaponIndex)
     {
         if (weaponIndex >= 0 && weaponIndex < weaponList.Count)
         {
-            weaponList[weaponIndex].setIsUnlocked(true);
+            weaponList[weaponIndex].SetIsUnlocked(true);
+            //weaponList[weaponIndex].SetCurrentAmmo(weaponList[weaponIndex].GetMaxAmmo());
             GameManager.instance.data.SaveWeaponUnlocked(weaponIndex);
         }
     }

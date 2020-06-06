@@ -6,21 +6,21 @@ public class Health : MonoBehaviour
 {
     [SerializeField]
     private float maxHealth;
-    /* [SerializeField]
-     private GameObject enemyDeadParticle;*/
     private float currentHealth;
     private bool isSufferingConstantDamage = false;
     private bool isHealingConstantly = false;
     private float constantDamage;
     private float constantHeal;
     private bool godMode;
+    private bool damageSoundPlayed = false;
+    Coroutine dieCoroutine;
 
     private void Awake()
     {
-        if (this.gameObject.CompareTag("Player") && !GameManager.instance.data.HasPreviousData())
+        if (this.gameObject.CompareTag("Player") && !GameManager.instance.data.HasPlayerData())
             GameManager.instance.SetPlayerMaxHealth(maxHealth);
 
-        currentHealth = (this.gameObject.CompareTag("Player") && !GameManager.instance.data.HasPreviousData()) || !this.CompareTag("Player") ?
+        currentHealth = (this.gameObject.CompareTag("Player") && !GameManager.instance.data.HasPlayerData()) || !this.CompareTag("Player") ?
               maxHealth : GameManager.instance.GetCurrentPlayerHealth();
     }
 
@@ -58,18 +58,21 @@ public class Health : MonoBehaviour
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
-                if (this.gameObject.CompareTag("Enemy"))
+                if (this.gameObject.CompareTag("Enemy") && dieCoroutine == null)
                 {
-                    // Destroy(Instantiate(enemyDeadParticle, transform.position, Quaternion.identity), 3);
                     this.gameObject.GetComponent<Enemy>().locked = true;
                     GameManager.instance.SetDefeatedEnemies(GameManager.instance.GetDefeatedEnemies() + 1);
-                    StartCoroutine(WaitForDie(3.25f));
+                    dieCoroutine = StartCoroutine(WaitForDie(3.25f));
                 }
-                else if (this.gameObject.tag == "Player")
+                else if (this.gameObject.CompareTag("Player"))
                 {
-                    GameManager.instance.SetDeaths(GameManager.instance.GetDeaths() + 1);
-                    GameManager.instance.sceneC.LoadGameOver();
+                    FindObjectOfType<PlayerController>().Die();
                 }
+            }
+            if (this.gameObject.CompareTag("Player") && !damageSoundPlayed)
+            {
+                damageSoundPlayed = true;
+                StartCoroutine(PlayDamageSound());
             }
             if (GetComponentInChildren<EnemyCanvasController>() != null) GetComponentInChildren<EnemyCanvasController>().UpdateHealthBar();
             else FindObjectOfType<FixedElementCanvasController>().UpdateHealthBar();
@@ -123,10 +126,16 @@ public class Health : MonoBehaviour
     {
         GetComponent<Animator>().SetTrigger("Die");
         yield return new WaitForSeconds(time);
+        if(GetComponent<CursedGirlEnemy>()!=null) GameManager.instance.sceneC.LoadGameOver();
         Destroy(this.gameObject);
     }
 
-
+    IEnumerator PlayDamageSound()
+    {
+        FindObjectOfType<PlayerController>().soundsManager.ManageDamageSound();
+        yield return new WaitForSeconds(1.5f);
+        damageSoundPlayed = false;
+    }
 
     public bool GetGodMode() { return godMode; }
 
@@ -134,4 +143,6 @@ public class Health : MonoBehaviour
     {
         godMode = active;
     }
+
+    public bool IsReceivingConstantDamage() { return isSufferingConstantDamage; }
 }

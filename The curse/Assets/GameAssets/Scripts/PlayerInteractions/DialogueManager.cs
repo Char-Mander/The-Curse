@@ -18,12 +18,16 @@ public class DialogueManager : MonoBehaviour
     {
         if (!isOnADialogue)
         {
-            print("Empieza el diálogo");
+            FindObjectOfType<PlayerController>().soundsManager.StopSound();
+            if (FindObjectOfType<PickUpObjects>().IsPickingAnObject())
+                FindObjectOfType<PickUpObjects>().PickOrDropObject();
             FindObjectOfType<PlayerController>().SetIsLocked(true);
+            FindObjectOfType<PlayerController>().GetComponent<Health>().SetGodMode(true);
             FindObjectOfType<Mount>().SetIsLocked(true);
             isOnADialogue = true;
             sentences.Clear();
             this.dialogue = dialogue;
+            if (dialogue.gameObject.name == "Major") FindObjectOfType<GeneralSoundManager>().ManageSadSound();
             foreach (Sentence sentence in dialogue.GetSentences())
             {
                 sentences.Enqueue(sentence);
@@ -63,9 +67,10 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        print("Termina el diálogo");
+        if (dialogue.gameObject.name == "Major") FindObjectOfType<GeneralSoundManager>().ManageGeneralSound();
         isOnADialogue = false;
         FindObjectOfType<PlayerController>().SetIsLocked(false);
+        FindObjectOfType<PlayerController>().GetComponent<Health>().SetGodMode(false);
         FindObjectOfType<Mount>().SetIsLocked(false);
         if (FindObjectOfType<PlayerController>().IsOnAMount()) FindObjectOfType<Mount>().PlayerClimbsOn();
 

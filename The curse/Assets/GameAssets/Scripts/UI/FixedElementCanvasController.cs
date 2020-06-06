@@ -4,10 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class FixedElementCanvasController : MonoBehaviour
-{   [SerializeField]
+{
+    //Panels and text 
+    [SerializeField]
     GameObject textPanel;
     [SerializeField]
+    GameObject introTextPanel;
+    [SerializeField]
     GameObject savePanel;
+    [SerializeField]
+    GameObject unlockWeaponPanel;
+    [SerializeField]
+    GameObject deathPanel;
     [SerializeField]
     GameObject outOfAmmoPanel;
     [SerializeField]
@@ -29,6 +37,7 @@ public class FixedElementCanvasController : MonoBehaviour
     [SerializeField]
     GameObject fuelBarUI;
 
+
     GameObject player;
     Health playerHealth;
     HealthBar playerHealthBar;
@@ -40,7 +49,7 @@ public class FixedElementCanvasController : MonoBehaviour
     float textTime;
     int sentenceIndex;
     Sentence sAux;
-    // Start is called before the first frame update
+
     void Awake()
     {
         //Obtains the player
@@ -49,17 +58,20 @@ public class FixedElementCanvasController : MonoBehaviour
         playerHealth = player.GetComponent<Health>();
         playerHealthBar = GetComponentInChildren<HealthBar>();
         playerHealthBar.SetMaxHealth(playerHealth.GetMaxHealth());
-        playerHealthBar.SetCurrentHealth(GameManager.instance.data.HasPreviousData() ? GameManager.instance.GetCurrentPlayerHealth() : playerHealth.GetMaxHealth());
+        playerHealthBar.SetCurrentHealth(GameManager.instance.data.HasPlayerData() ? GameManager.instance.GetCurrentPlayerHealth() : playerHealth.GetMaxHealth());
         //Obtains the stamina atributes
         playerStamina = player.GetComponent<Stamina>();
         playerStaminaBar = GetComponentInChildren<StaminaBar>();
         playerStaminaBar.SetMaxStamina(playerStamina.GetMaxStamina());
         playerStaminaBar.SetCurrentStamina(playerStamina.GetMaxStamina());
+        //Disable the panels
         npcNamePanel.SetActive(false);
         textPanel.SetActive(false);
+        introTextPanel.SetActive(false);
         savePanel.SetActive(false);
+        unlockWeaponPanel.SetActive(false);
+        deathPanel.SetActive(false);
         outOfAmmoPanel.SetActive(false);
-        bulletPanel.SetActive(false);
         sentenceOptionsPanel.SetActive(false);
         fuelBarUI.SetActive(false);
     }
@@ -105,6 +117,18 @@ public class FixedElementCanvasController : MonoBehaviour
         StartCoroutine(HideTemporaryPanel(savePanel));
     }
 
+    public void ShowUnlockWeaponPanel(int weapon)
+    {
+        unlockWeaponPanel.SetActive(true);
+        unlockWeaponPanel.GetComponentInChildren<Text>().text = "¡Has desbloqueado el arma " + weapon + "!";
+        StartCoroutine(HideUnlockWeaponPanel());
+    }
+
+    public void EnableOrDisableDeathPanel(bool enable)
+    {
+        deathPanel.SetActive(enable);
+    }
+
     public void ShowOutOfAmmoPanel()
     {
         outOfAmmoPanel.SetActive(true);
@@ -135,6 +159,7 @@ public class FixedElementCanvasController : MonoBehaviour
         backBtn.GetComponentInChildren<Text>().text = "Atrás";
         Cursor.lockState = CursorLockMode.None;
         FindObjectOfType<PlayerController>().SetIsLocked(true);
+        FindObjectOfType<PlayerController>().GetComponent<CharacterController>().enabled = false;
     }
 
     public void TeleportOption(int index)
@@ -167,14 +192,11 @@ public class FixedElementCanvasController : MonoBehaviour
 
     public void ChooseAnOption(int index)
     {
-        print("Elige una opción");
         Cursor.visible = false;
         FindObjectOfType<PlayerController>().SetIsLocked(false);
         FindObjectOfType<DecisionState>().AddOrSubtractToBalance(sAux.options[index].decisionBalance);
         EnableOrDisableOptionsPanel(false);
         FindObjectOfType<DialogueManager>().DisplayNextSentence(index + 1);
-        //FindObjectOfType<CursedGirlEnemy>().cursedGirlState = CursedGirlStates.DECISION;
-        print("State de la cursed girl: " + FindObjectOfType<CursedGirlEnemy>().cursedGirlState);
     }
 
     public void EnableOrDisableOptionsPanel(bool value)
@@ -235,6 +257,13 @@ public class FixedElementCanvasController : MonoBehaviour
         textPanel.GetComponentInChildren<Text>().text = "";
     }
 
+    IEnumerator HideUnlockWeaponPanel()
+    {
+        yield return new WaitForSeconds(2f);
+        unlockWeaponPanel.GetComponentInChildren<Text>().text = "";
+        unlockWeaponPanel.SetActive(false);
+    }
+
     IEnumerator QuestChangeWait(string text)
     {
         if(questText.text.Length > 0) questText.text = "¡MISIÓN COMPLETADA!";
@@ -273,5 +302,6 @@ public class FixedElementCanvasController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         FindObjectOfType<PlayerController>().SetIsLocked(false);
+        FindObjectOfType<PlayerController>().GetComponent<CharacterController>().enabled = true;
     }
 }

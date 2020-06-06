@@ -15,7 +15,7 @@ public class BlockMecanism : MonoBehaviour
     {
         iniPos = this.transform.position;
     }
-    // Update is called once per frame
+
     void Update()
     {
         if(activated && (this.gameObject.transform.position - iniPos).magnitude >= 0)

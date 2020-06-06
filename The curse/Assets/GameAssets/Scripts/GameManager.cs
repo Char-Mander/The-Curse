@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     private int maxCheckPoints=6;
     [SerializeField]
     private int maxQuests = 5;
+    [SerializeField]
+    private GameObject loadingPanel;
 
     private int currentCheckPoint = 0;
     private int currentQuest = 0;
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
 
         //Init
         data.LoadData();
-        //InitData();
+        loadingPanel.SetActive(false);
     }
     
     public void ResetData()
@@ -108,6 +110,11 @@ public class GameManager : MonoBehaviour
     public void AddTeleportPoint(int index)
     {
         teleportPointsDiscovered.Add(index);
+    }
+
+    public void ShowOrHideLoadingPanel(bool value)
+    {
+        loadingPanel.SetActive(value);
     }
 
     public int GetDiscoveredTeleportPointIndex(int index) { return teleportPointsDiscovered[index]; }

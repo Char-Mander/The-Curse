@@ -59,7 +59,7 @@ public class Mount : MonoBehaviour, ICharacter
     {
         if (playerController.HasCallTheMount() && !hasSnorted)
         {
-            playerSoundsManager.ManageMountSnort();
+            playerSoundsManager.ManageMountRoar();
             hasSnorted = true;
         }
 
@@ -81,6 +81,7 @@ public class Mount : MonoBehaviour, ICharacter
     {
         if (playerController.IsOnAMount())
         {
+            FindObjectOfType<PlayerController>().gameObject.transform.position = playerMountPos.transform.position;
             if (cController.isGrounded)
             {
                 dirPos = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
@@ -104,7 +105,7 @@ public class Mount : MonoBehaviour, ICharacter
         else if (playerController.HasCallTheMount())
         {
             hasSnorted = false;
-            this.transform.position = new Vector3(player.transform.position.x + 4, player.transform.position.y, player.transform.position.z + 4);
+            this.transform.position = new Vector3(player.transform.position.x + 2, player.transform.position.y, player.transform.position.z + 2);
             playerController.SetMountWhistleCall(false);
             this.transform.LookAt(player.transform);
             anim.SetTrigger("Call");
@@ -144,6 +145,9 @@ public class Mount : MonoBehaviour, ICharacter
         playerSoundsManager.StopSound();
         playerSoundsManager.ManageJumpSound();
         playerController.EnableOrDisableCharacterController(false);
+        playerController.FPSCamera = playerController.cameras[1];
+        playerController.cameras[1].m_Priority = 11;
+        if (FindObjectOfType<ManageCameraCullingMask>().cm == CameraCullingMask.PLAYER) FindObjectOfType<ManageCameraCullingMask>().ChangeCullingMask();
     }
 
     public void PlayerGetsOff()
@@ -152,6 +156,9 @@ public class Mount : MonoBehaviour, ICharacter
         playerSoundsManager.ManageJumpSound();
         playerController.SetIsOnAMount(false);
         playerController.EnableWeapon(true);
+        playerController.FPSCamera = playerController.cameras[0];
+        playerController.cameras[1].m_Priority = 8;
+        if(FindObjectOfType<ManageCameraCullingMask>().cm == CameraCullingMask.EVERYTHING) FindObjectOfType<ManageCameraCullingMask>().ChangeCullingMask();
         playerController.EnableOrDisableCharacterController(true);
         player.transform.position = new Vector3(playerGetOffMountPos.position.x, playerGetOffMountPos.position.y, playerGetOffMountPos.position.z);
         player.transform.rotation = Quaternion.Euler(playerGetOffMountPos.rotation.x, playerGetOffMountPos.rotation.y, playerGetOffMountPos.rotation.z);
@@ -170,10 +177,54 @@ public class Mount : MonoBehaviour, ICharacter
     IEnumerator WaitForSnort()
     {
         yield return new WaitForSeconds(1f);
-        playerSoundsManager.ManageMountSnort();
+        playerSoundsManager.ManageMountRoar();
     }
 
     public bool IsUnlocked() { return isUnlocked; }
 
     public void SetUnlocked(bool value) { isUnlocked = value; }
+
+    private void OnTriggerStay(Collider other)
+    {
+        print("Choca con: " + other.name + " con tag: " + other.tag);
+        if (!FindObjectOfType<PlayerController>().IsOnAMount())
+        {
+            if (other.CompareTag("Terrain"))
+            {
+                isLocked = true;
+                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y+0.1f, this.transform.position.z);
+                isLocked = false;
+            }
+            else if (other.CompareTag("Rocks"))
+            {
+                isLocked = true;
+                this.transform.position = new Vector3(this.transform.position.x - 1.5f, this.transform.position.y, this.transform.position.z - 1.5f);
+                isLocked = false;
+            }
+        }
+    }
+    
+
+    /*
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("Choca con: " + collision.collider.name + " con tag: " + collision.collider.tag);
+        if (!FindObjectOfType<PlayerController>().IsOnAMount())
+        {
+            if (collision.gameObject.CompareTag("Terrain"))
+            {
+                isLocked = true;
+                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.2f, this.transform.position.z);
+                isLocked = false;
+            }
+            else if (collision.gameObject.CompareTag("Rocks") || !collision.gameObject.CompareTag("Player"))
+            {
+                isLocked = true;
+                this.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z + 1);
+                isLocked = false;
+            }
+        }
+    }*/
+
+
 }

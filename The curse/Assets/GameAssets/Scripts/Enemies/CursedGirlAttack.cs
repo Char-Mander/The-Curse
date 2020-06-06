@@ -38,17 +38,16 @@ public class CursedGirlAttack : MonoBehaviour
         if (!cursedGirl.locked && cursedGirl.activation && cursedGirl.cursedGirlState == CursedGirlStates.ATTACKING)
         {
               cursedGirl.AimPlayer();
-              print("Está atacando ahora");
               if (!cursedGirl.enemyCanvas.activeInHierarchy) GetComponent<CursedGirlTalk>().SetDialogueMode(false);
 
-            if ((!cursedGirl.canAttack && !attackInCurse) || cursedGirl.distToPlayer < cursedGirl.iniAttackDist || cursedGirl.distToPlayer > cursedGirl.endAttackDist) attackState = CursedGirlAttackStates.MOVING;
-            else if ((cursedGirl.canAttack || canTeleport || canCreateMonsters || GetPhase() == 4) || attackInCurse) attackState = CursedGirlAttackStates.ATTACKING;
+            if (((!cursedGirl.canAttack && !attackInCurse) || cursedGirl.distToPlayer < cursedGirl.iniAttackDist || cursedGirl.distToPlayer > cursedGirl.endAttackDist) && GetPhase() != 3) attackState = CursedGirlAttackStates.MOVING;
+            else if ((cursedGirl.canAttack || canTeleport || canCreateMonsters || GetPhase() == 4 || !FindObjectOfType<CheckBossPos>().IsInsideTheCrypt()) || attackInCurse) attackState = CursedGirlAttackStates.ATTACKING;
 
              if (attackState == CursedGirlAttackStates.MOVING)
-             {
-                 cursedGirl.DetectPlayerInArea();
-             }
-           else if (attackState == CursedGirlAttackStates.ATTACKING)
+            {
+                cursedGirl.DetectPlayerInArea();
+            }
+             else if (attackState == CursedGirlAttackStates.ATTACKING)
             {
                 ManageAttackStates();
             }
@@ -80,7 +79,7 @@ public class CursedGirlAttack : MonoBehaviour
                 SpawnMonster();
                 break;
             case 4:
-                print("Phase 4");
+                GetComponent<Health>().SetGodMode(true);
                 if (spawnMonsterCoroutine != null) StopCoroutine(spawnMonsterCoroutine);
                 if (bodyAttackCoroutine != null) StopCoroutine(bodyAttackCoroutine);
                 DestroyEnemies();
@@ -95,7 +94,6 @@ public class CursedGirlAttack : MonoBehaviour
     {
         if (cursedGirl.canAttack && !attackInCurse)
         {
-            print("Lanza un chorro");
             cursedGirl.canAttack = false;
             attackInCurse = true;
             StartCoroutine(WaitForSpellAttack());
@@ -104,23 +102,21 @@ public class CursedGirlAttack : MonoBehaviour
 
     public void BodyAttack()
     {
-        if (cursedGirl.distToPlayer < cursedGirl.iniAttackDist && !cursedGirl.canAttack && !attackInCurse)
+        if (cursedGirl.distToPlayer < cursedGirl.iniAttackDist && !cursedGirl.canAttack)
         {
-            print("Fase 3: se aleja del player");
             cursedGirl.EnemyMovement(cursedGirl.attackSpeed, -transform.forward);
         }
         else
         {
-            print("Fase 3: se acerca al player");
             cursedGirl.EnemyMovement(cursedGirl.attackSpeed, transform.forward);
         }
+        cursedGirl.speed = cursedGirl.cController.velocity.magnitude;
     }
 
     public void SpawnMonster()
     {
         if (!attackInCurse && canCreateMonsters)
         {
-            print("Spawnea un monstruo");
             attackInCurse = true;
             CreateMonster();
         }
@@ -137,7 +133,6 @@ public class CursedGirlAttack : MonoBehaviour
         }
         else if (hit.collider.CompareTag("Player") && (GetPhase() == 3 && cursedGirl.canAttack))
         {
-            print("ataca cuerpo a cuerpo");
             cursedGirl.canAttack = false;
             attackInCurse = true;
             ChangeLayerWeight(true);
@@ -147,7 +142,7 @@ public class CursedGirlAttack : MonoBehaviour
 
     private void Teleport()
     {
-        if (canTeleport)
+        if (canTeleport || !FindObjectOfType<CheckBossPos>().IsInsideTheCrypt())
         {
             canTeleport = false;
             Vector3 nextPos = new Vector3(cursedGirl.player.transform.position.x + teleportDistance, this.transform.position.y, cursedGirl.player.transform.position.z - teleportDistance);
@@ -164,13 +159,10 @@ public class CursedGirlAttack : MonoBehaviour
 
     IEnumerator WaitForSpellAttack()
     {
-        print("Empieza la coroutina del ataque");
         cursedGirl.anim.SetInteger("AttackType", 0);
         yield return new WaitForSeconds(2.15f);
-        print("Acaba de hacer la animación");
         attackInCurse = false;
         ChangeLayerWeight(false);
-        print("va a lanzarlo");
         cursedGirl.Action();
     }
 
@@ -181,7 +173,8 @@ public class CursedGirlAttack : MonoBehaviour
         attackInCurse = false;
         ChangeLayerWeight(false);
         Teleport();
-        hit.collider.gameObject.GetComponent<Health>().LoseHealth(cursedGirl.damage);
+        if(hit.collider.gameObject.GetComponent<Health>() !=null) hit.collider.gameObject.GetComponent<Health>().LoseHealth(cursedGirl.damage);
+        else if (hit.collider.gameObject.GetComponentInParent<Health>() != null) hit.collider.gameObject.GetComponentInParent<Health>().LoseHealth(cursedGirl.damage);
         cursedGirl.ReloadCoroutine();
     }
 

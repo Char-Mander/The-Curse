@@ -168,8 +168,6 @@ public class Enemy : MonoBehaviour
         DetectPlayerInArea();
         if (canAttack)
         {
-           // if(this.gameObject.GetComponent<SlugEnemy>() != null)
-            //Instancia balas en dirección al player con cadencia
             Action();
         }
     }
@@ -205,7 +203,7 @@ public class Enemy : MonoBehaviour
             direVec.y = 0;
             this.transform.rotation = Quaternion.LookRotation(direVec);
         }
-        if (hit.collider.GetComponentInParent<PlayerController>() != null && canDealDamage)
+        if (hit.collider.GetComponentInParent<PlayerController>() != null && FindObjectOfType<PlayerController>().IsAlive() && canDealDamage)
         {
             canDealDamage = false;
             hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
@@ -231,7 +229,6 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Reload()
     {
-        print("Pone el canAttack a true");
         yield return new WaitForSeconds(cadency);
         canAttack = true;
     }

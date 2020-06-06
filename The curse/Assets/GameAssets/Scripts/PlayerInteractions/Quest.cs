@@ -10,7 +10,7 @@ public class Quest : MonoBehaviour
     bool completed = false;
     bool triggered = false;
     QuestController questController;
-    // Start is called before the first frame update
+
     void Start()
     {
         questController = FindObjectOfType<QuestController>();

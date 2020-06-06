@@ -10,13 +10,14 @@ public class PickUpObjects : MonoBehaviour
     private GameObject pickedObject;
     [SerializeField]
     private Transform interactionZone;
-    // Update is called once per frame
+
     public void PickOrDropObject()
     {
-        if(objectToPickup != null && objectToPickup.GetComponent<PickableObject>().isPickable() && !FindObjectOfType<PlayerController>().IsOnAMount())
-		{
+        if(objectToPickup != null && pickedObject == null && objectToPickup.GetComponent<PickableObject>().isPickable() && !FindObjectOfType<PlayerController>().IsOnAMount())
+        {
+                FindObjectOfType<PlayerController>().soundsManager.ManageObjectPickUp();
                 //Cogemos el objeto
-				pickedObject = objectToPickup;
+                pickedObject = objectToPickup;
 				//Decimos que ya no se puede coger (pues estamos cogiéndolo)
 				pickedObject.GetComponent<PickableObject>().setPickable(false);
                 //Lo hacemos hijo de la interactionZone y le asignamos la posición
@@ -40,6 +41,7 @@ public class PickUpObjects : MonoBehaviour
 				pickedObject.GetComponent<Rigidbody>().isKinematic = false;
 				pickedObject = null;
                 GetComponent<PlayerController>().EnableWeapon(true);
+                FindObjectOfType<PlayerController>().soundsManager.ManageObjectPickUp();
         }
     }
 

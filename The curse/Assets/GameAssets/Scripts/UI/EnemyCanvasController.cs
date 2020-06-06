@@ -7,7 +7,7 @@ public class EnemyCanvasController : WorldSpaceCanvasController
     GameObject enemy;
     Health enemyHealth;
     HealthBar enemyHealthBar;
-    // Start is called before the first frame update
+
     void Awake()
     {
         enemyHealth = GetComponentInParent<Health>();

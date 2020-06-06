@@ -6,7 +6,7 @@ public class Tutorial : MonoBehaviour
 {
     bool unlocked = false;
     PlayerController player;
-    // Start is called before the first frame update
+
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
@@ -15,8 +15,10 @@ public class Tutorial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") && !unlocked){
+        if(other.CompareTag("Player") && !unlocked && GameObject.FindGameObjectWithTag("InitialCinematic").GetComponent<PlayGenericCinematic>().HasBeenPlayed())
+        {
             FindObjectOfType<TutorialManager>().UnlockTutorial(int.Parse(this.gameObject.name.Substring(this.gameObject.name.Length - 1)));
+            FindObjectOfType<PlayerController>().soundsManager.StopSound();
         }
     }
 

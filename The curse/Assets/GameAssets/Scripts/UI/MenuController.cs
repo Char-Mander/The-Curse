@@ -10,31 +10,41 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
-        btnLoadGame.enabled = GameManager.instance.data.HasPreviousData();
+        btnLoadGame.enabled = GameManager.instance.data.HasPlayerData();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
     public void BtnLoadMenu()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         GameManager.instance.sceneC.LoadMenu();
     }
 
     public void BtnStartNewGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         GameManager.instance.data.ResetData();
-        BtnLoadGame();
+        GameManager.instance.sceneC.LoadSceneLvl();
     }
 
     public void BtnLoadGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         GameManager.instance.data.LoadData();
         GameManager.instance.sceneC.LoadSceneLvl();
     }
 
+    public void BtnDeleteGame()
+    {
+        GameManager.instance.data.ResetData();
+    }
+
     public void BtnOptions()
     {
-        print("Entra por btnOptions");
         GameManager.instance.optionsC.SwitchPause();
     }
 

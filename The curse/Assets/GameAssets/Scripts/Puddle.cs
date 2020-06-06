@@ -25,7 +25,7 @@ public class Puddle : MonoBehaviour
         dir = playerPos - transform.position;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         rb.AddForce(dir * force * Time.deltaTime, ForceMode.Impulse);
@@ -33,7 +33,8 @@ public class Puddle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponentInParent<PlayerController>() != null)
+
+        if (other.GetComponentInParent<PlayerController>() != null ||other.GetComponent<PlayerController>() != null)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().LoseHealth(damage);
             particles.Play();

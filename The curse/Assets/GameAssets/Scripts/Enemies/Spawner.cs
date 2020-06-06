@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     private AudioSource aSource;
 
     Transform playerT;
-    // Start is called before the first frame update
+
     void Start()
     {
         playerT = GameObject.FindGameObjectWithTag("Player").transform;
@@ -42,7 +42,7 @@ public class Spawner : MonoBehaviour
     void spawn()
     {
 
-        if (canSpawn && enemyCount < maxEnemies)
+        if (canSpawn && enemyCount < maxEnemies && !FindObjectOfType<DialogueManager>().IsOnADialogue())
         {
             enemyCount++;
             canSpawn = false;

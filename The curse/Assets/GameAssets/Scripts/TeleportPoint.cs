@@ -6,6 +6,7 @@ public class TeleportPoint : MonoBehaviour
 {
     [SerializeField]
     string name;
+    public Transform tpPos;
     bool discovered = false;
     bool usingTeleport = false;
 
@@ -19,8 +20,9 @@ public class TeleportPoint : MonoBehaviour
 
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && !usingTeleport)
+            if (Input.GetKeyDown(KeyCode.E) && !usingTeleport && !FindObjectOfType<PlayerController>().IsOnAMount())
             {
+                FindObjectOfType<PlayerController>().soundsManager.StopSound();
                 FindObjectOfType<TeleportController>().ShowTP();
                 if (FindObjectOfType<PlayerController>().IsOnAMount()) FindObjectOfType<Mount>().PlayerGetsOff();
                 usingTeleport = true;

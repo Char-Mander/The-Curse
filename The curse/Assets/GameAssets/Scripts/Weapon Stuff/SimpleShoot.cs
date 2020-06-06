@@ -12,8 +12,7 @@ public class SimpleShoot : MonoBehaviour, IWeapon
     private GameObject muzzleFlashPrefab;
     [SerializeField]
     private Transform posDisp;
-    [SerializeField]
-    private GameObject enemyHitParticle;
+    public GameObject enemyHitParticle;
     [SerializeField]
     private Transform casingExitLocation;
     [SerializeField]
@@ -30,13 +29,19 @@ public class SimpleShoot : MonoBehaviour, IWeapon
     private List<AudioClip> shotAudioClips = new List<AudioClip>();
     [SerializeField]
     private Transform target;
+    [SerializeField]
+    private GameObject zoomEffect;
     private bool isZooming = false;
     private bool canShoot = true;
     private AudioSource aSource;
-
+    [HideInInspector]
+    public Vector3 bulletHit = Vector3.zero;
+    [HideInInspector]
+    public Quaternion impactRotation = Quaternion.Euler(Vector3.zero);
 
     void Start()
     {
+        if (zoomEffect != null) zoomEffect.SetActive(false);
         if (posDisp == null)
             posDisp = transform;
         aSource = GetComponent<AudioSource>();
@@ -47,20 +52,21 @@ public class SimpleShoot : MonoBehaviour, IWeapon
     {
         if (isZooming)
         {
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, zoomMaxValue, zoomSpeed);
+            FindObjectOfType<PlayerController>().zoom.m_MaxFOV = Mathf.Lerp(FindObjectOfType<PlayerController>().zoom.m_MaxFOV, zoomMaxValue, zoomSpeed);
+            if (zoomEffect != null) zoomEffect.SetActive(true);
         }
         else
         {
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, zoomSpeed * 2);
+            FindObjectOfType<PlayerController>().zoom.m_MaxFOV = Mathf.Lerp(FindObjectOfType<PlayerController>().zoom.m_MaxFOV, 60, zoomSpeed * 2);
+            if (zoomEffect != null) zoomEffect.SetActive(false);
         }
-        
+
     }
 
     public void StartShootAnimation()
     {
         if (canShoot)
         {
-            //GetComponent<Animator>().SetTrigger("Fire");
             canShoot = false;
             Shoot();
             StartCoroutine(Reload());
@@ -70,7 +76,6 @@ public class SimpleShoot : MonoBehaviour, IWeapon
 
     public void Shoot()
     {
-            aSource.volume = 0.25f;
             aSource.PlayOneShot(shotAudioClips[0]);
             GameObject tempFlash;
             GameObject bullet = Instantiate(bulletPrefab, posDisp.position, posDisp.rotation);
@@ -84,7 +89,9 @@ public class SimpleShoot : MonoBehaviour, IWeapon
                 if (hit.collider.CompareTag("Enemy"))
                 {
                     //Partículas de sangre
-                    CreateParticleAtPoint(enemyHitParticle, hit.point, false, Quaternion.LookRotation(hit.normal));
+                    bulletHit = hit.point;
+                    impactRotation = Quaternion.LookRotation(hit.normal);
+                    //CreateParticleAtPoint(enemyHitParticle, hit.point, false, Quaternion.LookRotation(hit.normal));
                 }
             }
             else
@@ -106,14 +113,13 @@ public class SimpleShoot : MonoBehaviour, IWeapon
             casing = Instantiate(casingPrefab, casingExitLocation.position, casingExitLocation.rotation) as GameObject;
             casing.GetComponent<Rigidbody>().AddExplosionForce(550f, (casingExitLocation.position - casingExitLocation.right * 0.3f - casingExitLocation.up * 0.6f), 1f);
             casing.GetComponent<Rigidbody>().AddTorque(new Vector3(0, Random.Range(100f, 500f), Random.Range(10f, 1000f)), ForceMode.Impulse);
-            aSource.volume = 0.4f;
             aSource.clip = shotAudioClips[1];
             aSource.PlayDelayed(0.65f);
             Destroy(casing, 5);
         
     }
 
-    void CreateParticleAtPoint(GameObject obj, Vector3 point, bool tint, Quaternion rotate)
+    public void CreateParticleAtPoint(GameObject obj, Vector3 point, bool tint, Quaternion rotate)
     {
         GameObject go = Instantiate(obj, point, rotate);
         Destroy(go, 2);

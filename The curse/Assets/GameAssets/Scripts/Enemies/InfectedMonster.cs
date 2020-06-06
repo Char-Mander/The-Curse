@@ -15,8 +15,6 @@ public class InfectedMonster : Enemy
     bool explosionActivated = false;
     bool hasExploded = false;
     Coroutine explosion;
-    // [SerializeField]
-    // private GameObject explosionParticle;
 
     public override void Update()
     {
@@ -77,8 +75,9 @@ public class InfectedMonster : Enemy
                 Explode();
             }
             else{
-                hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
-                base.ReloadCoroutine();
+               if(hit.collider.gameObject.GetComponent<Health>()!=null) hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage);
+               else if(hit.collider.gameObject.GetComponentInParent<Health>() != null) hit.collider.gameObject.GetComponentInParent<Health>().LoseHealth(damage);
+               base.ReloadCoroutine();
             }
             canAttack = false;
         }
@@ -99,9 +98,9 @@ public class InfectedMonster : Enemy
             RaycastHit hit;
             if (Physics.Raycast(this.transform.position, direToPlayer.normalized, out hit, detectDist, lm))
             {
-                if (hit.collider.GetComponentInParent<PlayerController>() != null)
+                if (hit.collider.GetComponentInParent<PlayerController>() != null || hit.collider.GetComponent<PlayerController>()!=null)
                 {
-                    hit.collider.gameObject.GetComponent<Health>().LoseHealth(damage*2);
+                    FindObjectOfType<PlayerController>().GetComponent<Health>().LoseHealth(damage*2);
                 }
 
             }

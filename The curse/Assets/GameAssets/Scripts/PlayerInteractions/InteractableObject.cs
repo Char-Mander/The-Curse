@@ -5,9 +5,7 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     private bool interactable = true;
-    //string objectText; 
     Dialogue dialogue;
-    //Se iría fuera con el dialogue
     [SerializeField]
     private string objectText;
     [SerializeField]
@@ -27,7 +25,8 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("PlayerInteractionZone"))
         {
             other.GetComponentInParent<InteractWithObjects>().AddGameObjectToInteract(this.gameObject);
-            GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(true);
+            if(GetComponentInChildren<InteractableObjectCanvasController>() != null 
+                && !(FindObjectOfType<PlayerController>().IsOnAMount() && this.GetComponent<Mount>() != null) ) GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(true);
         }
     }
 
@@ -36,7 +35,7 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("PlayerInteractionZone"))
         {
             other.GetComponentInParent<InteractWithObjects>().RemoveGameObjectToInteract(this.gameObject);
-            GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(false);
+            if(GetComponentInChildren<InteractableObjectCanvasController>() != null) GetComponentInChildren<InteractableObjectCanvasController>().ShowOrHidePanel(false);
         }
     }
 

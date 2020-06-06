@@ -7,13 +7,13 @@ public class Fuel : MonoBehaviour
     [SerializeField]
     private float maxFuel;
     private float currentFuel;
-    // Start is called before the first frame update
+
     void Start()
     {
         currentFuel = maxFuel;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
     }

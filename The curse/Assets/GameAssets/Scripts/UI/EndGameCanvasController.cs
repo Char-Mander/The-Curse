@@ -25,6 +25,8 @@ public class EndGameCanvasController : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         LoadWinLoseSetUp(GameManager.instance.GetCurrentPlayerHealth() > 0);
         if (GameManager.instance.GetCurrentPlayerHealth() <= 0)
         {

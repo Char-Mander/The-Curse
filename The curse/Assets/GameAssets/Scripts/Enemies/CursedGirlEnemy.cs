@@ -11,7 +11,7 @@ public class CursedGirlEnemy : Enemy
     public float iniAttackDist;
     [SerializeField]
     GameObject mechanismObj;
-    //[HideInInspector]
+    [HideInInspector]
     public CursedGirlStates cursedGirlState;
     [HideInInspector]
     public bool activation = false;
@@ -28,11 +28,11 @@ public class CursedGirlEnemy : Enemy
         state = EnemyStates.PATROL;
         cursedGirlState = CursedGirlStates.TALKING;
         enemyCanvas.SetActive(false);
+        GetComponent<Health>().SetGodMode(true);
     }
 
     public override void Update()
     {
-        print("cursedgirl state: " + cursedGirlState);
         if (!locked)
         {
             Vector3 playerPos = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y + 1.4f, GameObject.FindGameObjectWithTag("Player").transform.position.z);
@@ -44,7 +44,19 @@ public class CursedGirlEnemy : Enemy
         if (distToPlayer < detectDist && !activation)
         {
             activation = true;
-            mechanismObj.GetComponent<BlockMecanism>().SetActivated(false);
+            //Si está sobre una montura, se baja, se deshabilita, y desaparece del área
+            if (FindObjectOfType<PlayerController>().IsOnAMount())
+            {
+                FindObjectOfType<Mount>().PlayerGetsOff();
+                FindObjectOfType<Mount>().SetIsLocked(true);
+                FindObjectOfType<Mount>().transform.position = Vector3.zero;
+            }
+
+            //Si está cogiendo un objeto, lo suelta
+            if (FindObjectOfType<PickUpObjects>().IsPickingAnObject())
+                FindObjectOfType<PickUpObjects>().PickOrDropObject();
+
+            FindObjectOfType<GeneralSoundManager>().ManageActionSound();
             state = EnemyStates.ATTACK;
         }
     }
@@ -53,19 +65,16 @@ public class CursedGirlEnemy : Enemy
     {
         if (distToPlayer < iniAttackDist)
         {
-            print("Se mueve hacia atrás");
             base.EnemyMovement(attackSpeed, -transform.forward);
             speed = cController.velocity.magnitude;
         }
         else if (distToPlayer > endAttackDist)
         {
-            print("Se mueve hacia delante");
             base.EnemyMovement(attackSpeed, transform.forward);
             speed = cController.velocity.magnitude;
         }
         else
         {
-            print("No se mueve");
             speed = 0;
         }
     }
@@ -78,8 +87,6 @@ public class CursedGirlEnemy : Enemy
     public override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(this.transform.position, FindObjectOfType<PlayerController>().transform.position);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, detectDist);
         Gizmos.color = Color.cyan;

@@ -19,6 +19,7 @@ TagManager:
   - PlayerBullet
   - FxTemporaire
   - Rocks
+  - InitialCinematic
   layers:
   - Default
   - TransparentFX
@@ -40,7 +41,7 @@ TagManager:
   - Object
   - NPC
   - Mount
-  - 
+  - Camera
   - 
   - 
   - 

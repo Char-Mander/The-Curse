@@ -7,7 +7,7 @@ public class Stamina : MonoBehaviour
     [SerializeField]
     private float maxStamina;
     private float currentStamina;
-    // Start is called before the first frame update
+
     void Start()
     {
         currentStamina = maxStamina;

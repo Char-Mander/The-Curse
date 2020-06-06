@@ -13,9 +13,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
     private float constantDamage = 0.2f;
     [SerializeField]
     private LayerMask lm;
-    //Partículas
-    [SerializeField]
-    private GameObject enemyHitParticle;
+    public GameObject enemyHitParticle;
 
     //Variables privadas
     private bool isShooting = false;
@@ -24,8 +22,12 @@ public class ParticleShoot : MonoBehaviour, IWeapon
     private Fuel fuel;
     private ParticleSystem weaponParticle;
     private GameObject lastEnemy;
+    [HideInInspector]
+    public Vector3 bulletHit = Vector3.zero;
+    [HideInInspector]
+    public Quaternion impactRotation = Quaternion.Euler(Vector3.zero);
 
-    // Start is called before the first frame update
+
     void Start()
     {
         aSource = GetComponent<AudioSource>();
@@ -37,11 +39,11 @@ public class ParticleShoot : MonoBehaviour, IWeapon
     {
         if (isZooming)
         {
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, zoomMaxValue, zoomSpeed);
+            FindObjectOfType<PlayerController>().zoom.m_MaxFOV = Mathf.Lerp(FindObjectOfType<PlayerController>().zoom.m_MaxFOV, zoomMaxValue, zoomSpeed);
         }
         else
         {
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, zoomSpeed * 2);
+            FindObjectOfType<PlayerController>().zoom.m_MaxFOV = Mathf.Lerp(FindObjectOfType<PlayerController>().zoom.m_MaxFOV, 60, zoomSpeed * 2);
         }
         ModifyFuel();
     }
@@ -54,10 +56,11 @@ public class ParticleShoot : MonoBehaviour, IWeapon
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 1.3f, lm))
             {
-                if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Enemy Head"))
+                if (hit.collider.CompareTag("Enemy"))
                 {
-                    //Partículas de sangre
-                    CreateParticleAtPoint(enemyHitParticle, hit.point, Quaternion.LookRotation(hit.normal), 2);
+                    bulletHit = hit.point;
+                    impactRotation = Quaternion.LookRotation(hit.normal);
+                    //CreateParticleAtPoint(enemyHitParticle, hit.point, Quaternion.LookRotation(hit.normal), 2);
                 }
 
             }
@@ -110,7 +113,8 @@ public class ParticleShoot : MonoBehaviour, IWeapon
         {
             StopSound();
             StopParticles();
-            if(lastEnemy != null)
+            DisableDamage();
+            /*if(lastEnemy != null)
             {
                 if (lastEnemy.GetComponent<Health>() != null)
                 {
@@ -120,7 +124,7 @@ public class ParticleShoot : MonoBehaviour, IWeapon
                 {
                     lastEnemy.GetComponentInParent<Health>().StopReceivingConstantDamage();
                 }
-            }
+            }*/
         }
         isShooting = shoot;
     }
@@ -152,22 +156,34 @@ public class ParticleShoot : MonoBehaviour, IWeapon
 
     private void OnTriggerStay(Collider collision)
     {
-        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Enemy Head")) && IsShooting())
+        print("Colisiona con: " + collision.name + " con tag: " + collision.tag);
+        if (collision.gameObject.CompareTag("Enemy") && IsShooting())
         {
-            float auxConstantDamage = collision.gameObject.CompareTag("Enemy Head") ? constantDamage * 2 : constantDamage;
-            if (collision.gameObject.GetComponent<Health>() != null) collision.gameObject.GetComponent<Health>().ReceiveConstantDamage(auxConstantDamage);
-            else collision.gameObject.GetComponentInParent<Health>().ReceiveConstantDamage(auxConstantDamage);
+            CreateParticleAtPoint(enemyHitParticle, bulletHit, impactRotation, 2);
+            if (collision.gameObject.GetComponent<Health>() != null && !collision.gameObject.GetComponent<Health>().IsReceivingConstantDamage()) collision.gameObject.GetComponent<Health>().ReceiveConstantDamage(constantDamage);
+            else if(!collision.gameObject.GetComponentInParent<Health>().IsReceivingConstantDamage()) collision.gameObject.GetComponentInParent<Health>().ReceiveConstantDamage(constantDamage);
             lastEnemy = collision.gameObject;
         }
     }
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Enemy Head"))
+        print("Termina la colisión con: " + collision.name + " con tag: " + collision.tag);
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             if (collision.gameObject.GetComponent<Health>() != null) collision.gameObject.GetComponent<Health>().StopReceivingConstantDamage();
             else collision.gameObject.GetComponentInParent<Health>().StopReceivingConstantDamage();
+            
             lastEnemy = null;
+        }
+    }
+
+    private void DisableDamage()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach(Enemy e in enemies)
+        {
+            if (e.GetComponent<Health>().IsReceivingConstantDamage()) e.GetComponent<Health>().StopReceivingConstantDamage();
         }
     }
 }
